@@ -2,45 +2,60 @@
 
 import React, { useState } from 'react'
 import Image from 'next/image'
+import { Swiper, SwiperSlide } from 'swiper/react'
+import { Navigation } from 'swiper/modules'
+import 'swiper/css'
+import 'swiper/css/navigation'
 import GlobalArrowButton from '../general/global-arrow_button'
 import GlobalRedPlainButton from '../general/global-red_plain_button'
+import Stack from '../gsap/Stack'
 
 const Programs = () => {
   const [activeTab, setActiveTab] = useState('UG')
   const [query, setQuery] = useState('')
-  const [index, setIndex] = useState(1)
 
   const programs = [
-    { id: 1, title: 'Overview', type: 'Diploma', img: 'https://kalinga-university.s3.ap-south-1.amazonaws.com/common/student.jpg', summary: 'Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.' },
-    { id: 2, title: 'Overview', type: 'UG', img: 'https://kalinga-university.s3.ap-south-1.amazonaws.com/common/student.jpg', summary: 'Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.' },
-    { id: 3, title: 'Law', type: 'UG', img: 'https://kalinga-university.s3.ap-south-1.amazonaws.com/Home/about-kalinga.webp', summary: '' },
-    { id: 4, title: 'Information Technology', type: 'UG', img: 'https://kalinga-university.s3.ap-south-1.amazonaws.com/common/student.jpg', summary: '' },
+    { id: 1, title: 'Diploma in Computer Applications', type: 'Diploma', img: 'https://kalinga-university.s3.ap-south-1.amazonaws.com/common/student.jpg', summary: 'Build fundamentals in programming, networking, and databases for entry-level IT roles.' },
+    { id: 2, title: 'Diploma in Hospitality', type: 'Diploma', img: 'https://kalinga-university.s3.ap-south-1.amazonaws.com/common/student.jpg', summary: 'Front office, F&B and operations with hands-on hotel training.' },
+    { id: 3, title: 'Diploma in Graphic Design', type: 'Diploma', img: 'https://kalinga-university.s3.ap-south-1.amazonaws.com/common/student.jpg', summary: 'Visual communication, branding, and digital tools to craft compelling designs.' },
+    { id: 4, title: 'Diploma in Hotel Management', type: 'Diploma', img: 'https://kalinga-university.s3.ap-south-1.amazonaws.com/common/student.jpg', summary: 'Front office, F&B and operations with hands-on hotel training.' },
+
+    { id: 4, title: 'Law', type: 'UG', img: 'https://kalinga-university.s3.ap-south-1.amazonaws.com/common/programs/law.jpg', summary: 'Explore constitutional, corporate, and criminal law with moot courts and internships.' },
+    { id: 5, title: 'Information Technology', type: 'UG', img: 'https://kalinga-university.s3.ap-south-1.amazonaws.com/common/programs/it.jpg', summary: 'Software, data, and cloud fundamentals with project-based learning and labs.' },
+    { id: 6, title: 'Business Administration', type: 'UG', img: 'https://kalinga-university.s3.ap-south-1.amazonaws.com/common/programs/bba.jpg', summary: 'Managerial, marketing, and entrepreneurial skills through cases and projects.' },
+
+    { id: 7, title: 'MBA', type: 'PG', img: 'https://kalinga-university.s3.ap-south-1.amazonaws.com/common/programs/mba.jpg', summary: 'Leadership, strategy, finance, and analytics with industry mentors.' },
+    { id: 8, title: 'M.Sc Biotechnology', type: 'PG', img: 'https://kalinga-university.s3.ap-south-1.amazonaws.com/common/programs/biotech.jpg', summary: 'Advanced genetics, molecular biology, and lab techniques for research roles.' },
+    { id: 9, title: 'MCA', type: 'PG', img: 'https://kalinga-university.s3.ap-south-1.amazonaws.com/common/programs/mca.jpg', summary: 'Advanced programming, data structures, and application architecture.' },
+
+    { id: 10, title: 'Ph.D in Management', type: 'Ph.D', img: 'https://kalinga-university.s3.ap-south-1.amazonaws.com/common/programs/phd-management.jpg', summary: 'Research on leadership, strategy, and organizational behavior with faculty guidance.' },
+    { id: 11, title: 'Ph.D in Computer Science', type: 'Ph.D', img: 'https://kalinga-university.s3.ap-south-1.amazonaws.com/common/programs/phd-cs.jpg', summary: 'AI, data science, and systems research with publications and lab residencies.' },
+    { id: 12, title: 'Ph.D in Biotechnology', type: 'Ph.D', img: 'https://kalinga-university.s3.ap-south-1.amazonaws.com/common/programs/phd-biotech.jpg', summary: 'Genomics, proteomics, and bioinformatics research with advanced lab work.' },
   ]
 
   const visiblePrograms = programs.filter(p => p.type === activeTab)
 
-  const prev = () => setIndex((i) => Math.max(0, i - 1))
-  const next = () => setIndex((i) => Math.min(visiblePrograms.length - 1, i + 1))
 
   return (
-    <section className="py-16 bg-[var(--light-gray)]">
-      <div className="container mx-auto px-4 lg:px-6">
+    <section className="py-12 sm:py-16">
+      <div className="container mx-auto px-4 sm:px-6 lg:px-8 max-w-[1400px]">
         {/* Two column layout */}
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-4 sm:gap-6 lg:gap-8 mb-4 sm:mb-6 lg:mb-8">
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 sm:gap-8 lg:gap-10 mb-6 sm:mb-8 lg:mb-10">
           {/* Left column: Text and Tabs */}
-          <div className="flex flex-col">
+          <div className="flex flex-col justify-end">
             {/* Header text */}
-            <div className="mb-3 sm:mb-4 lg:mb-6">
-              <div className="text-[var(--button-red)] text-base sm:text-lg md:text-xl lg:text-[25px] pt-3 sm:pt-5 md:pt-8 lg:pt-[50px] font-plus-jakarta-sans font-medium leading-tight sm:leading-[25px]">
+            <div className="mb-4 sm:mb-5 lg:mb-6">
+              <div className="text-[var(--button-red)] text-base sm:text-lg md:text-xl lg:text-[25px] pt-2 sm:pt-4 md:pt-6 lg:pt-8 font-plus-jakarta-sans font-medium leading-tight sm:leading-[25px]">
                 Explore Our Programs
               </div>
-              <h2 className="font-stix text-xl sm:text-2xl md:text-3xl lg:text-4xl xl:text-[50px] leading-tight pt-3 sm:pt-5 md:pt-8 lg:pt-[50px] text-[var(--foreground)]">
-                Lorem ipsum dolor sit amet, consectetur
+              <h2 className="font-stix text-xl sm:text-2xl md:text-3xl lg:text-4xl xl:text-[50px] leading-tight pt-2 sm:pt-4 md:pt-6 lg:pt-8 text-[var(--foreground)]">
+              Learn Without Limits. Grow Without Boundaries.
               </h2>
+              <p className="text-[var(--light-text-gray)] text-sm md:text-base max-w-3xl mx-auto">Explore future-focused programs that combine academic excellence with hands-on industry exposure, preparing you for success in a connected, global world.</p>
             </div>
 
             {/* Tabs */}
-            <div className="flex flex-wrap items-center gap-2 sm:gap-3 lg:gap-4 pt-4 sm:pt-6 md:pt-8 lg:pt-[70px]">
+            <div className="flex flex-wrap items-center gap-2 sm:gap-3 lg:gap-2 pt-4 sm:pt-6 md:pt-8 lg:pt-10">
               <button
                 onClick={() => setActiveTab('Diploma')}
                 className={`font-stix px-3 sm:px-4 md:px-6 lg:px-8 py-1.5 sm:py-2 md:py-2.5 lg:py-3 rounded-lg transition-all text-[clamp(20px,4vw,37px)] leading-tight ${activeTab === 'Diploma' ? 'bg-[var(--button-red)] text-white shadow-md' : 'text-[var(--dark-blue)] hover:bg-gray-100'}`}
@@ -69,22 +84,24 @@ const Programs = () => {
           </div>
 
           {/* Right column: Blue card and Search */}
-          <div className="flex flex-col gap-3 sm:gap-4 lg:gap-6 items-start lg:items-end w-full lg:w-auto">
+          <div className="flex flex-col gap-4 sm:gap-5 lg:gap-6 items-start lg:items-end w-full lg:w-auto">
             {/* Blue card */}
-            <div className="bg-[var(--dark-blue)] p-3 sm:p-4 lg:p-6 shadow-xl w-full lg:w-[560px] h-auto min-h-[180px] sm:min-h-[200px] lg:h-[257px] rounded-[10px]">
-              <div className="bg-white/90 rounded-lg h-[100px] sm:h-[120px] lg:h-[150px] mb-2 sm:mb-3 lg:mb-4 px-2 sm:px-3 lg:px-4 flex items-center justify-center">
+            <div className="bg-[var(--dark-blue)] p-4 sm:p-5 lg:p-6 shadow-xl w-full lg:w-full max-w-[560px] h-auto min-h-[180px] sm:min-h-[200px] lg:h-[257px] rounded-[10px]">
+              <div className="bg-white/90 rounded-lg h-[100px] sm:h-[120px] lg:h-[150px] mb-3 sm:mb-4 lg:mb-4 px-3 sm:px-4 lg:px-4 flex items-center justify-center">
                 <span className="text-gray-400 text-xs sm:text-sm">Program Preview</span>
               </div>
               <div className="flex justify-center">
-                <GlobalArrowButton className="!bg-white !text-[var(--button-red)] !w-auto text-xs sm:text-sm">
-                  Find Your Right Programs
-                </GlobalArrowButton>
+              <GlobalArrowButton className="!bg-white !text-black"
+                arrowClassName="!bg-[var(--button-red)]"
+                arrowIconClassName="!text-white"
+                textClassName="!text-black"
+                >Discover Your Program</GlobalArrowButton>
               </div>
             </div>
 
             {/* Search input */}
-            <div className="w-full lg:w-[586px] mt-10 py-1 sm:py-2 h-auto lg:h-[73px]">
-              <div className="flex items-center bg-[#F1F1F1] rounded-lg px-2 sm:px-3 lg:px-4 py-2 sm:py-3 md:py-4 lg:py-5 shadow-sm border border-gray-200">
+            <div className="w-full lg:w-full max-w-[560px] mt-6 sm:mt-8 lg:mt-10 py-1 sm:py-2 h-auto">
+              <div className="flex items-center bg-[var(--light-gray)] rounded-lg px-3 sm:px-4 lg:px-5 py-3 sm:py-3.5 shadow-sm border border-gray-200">
                 <input
                   value={query}
                   onChange={(e) => setQuery(e.target.value)}
@@ -101,155 +118,161 @@ const Programs = () => {
           </div>
         </div>
 
-        {/* Cards row */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3 sm:gap-4 lg:gap-6 mb-4 sm:mb-6 lg:mb-8">
-          {/* Overview card */}
-          <div className="relative w-full max-w-[320px] sm:max-w-[345px] h-[320px] sm:h-[340px] lg:h-[360px] mx-auto sm:max-w-none sm:mx-0" >
-            {/* Behind image preview - Law program */}
-            {visiblePrograms[1] && (
-              <div
-                className="absolute overflow-hidden shadow-2xl z-0 hidden sm:block relative"
-                style={{
-                  top: '-15px',
-                  left: '-15px',
-                  width: 'calc(100% + 30px)',
-                  height: 'calc(100% + 30px)',
-                  transform: 'rotate(-5deg) scale(0.93)',
-                  transformOrigin: 'center center',
-                  opacity: 0.5,
-                  borderRadius: '10px',
-                  transition: 'all 0.3s ease'
-                }}
+        {/* Cards row using Stack inside Swiper */}
+        <div className="relative">
+          <Swiper
+            modules={[Navigation]}
+            navigation={{
+              prevEl: '.programs-btn-prev',
+              nextEl: '.programs-btn-next',
+              enabled: true,
+            }}
+            slidesPerView={1.05}
+            spaceBetween={16}
+            breakpoints={{
+              640: { slidesPerView: 1.2, spaceBetween: 18 },
+              768: { slidesPerView: 2, spaceBetween: 20 },
+              1024: { slidesPerView: 3, spaceBetween: 24 },
+            }}
+            className="programs-swiper"
+          >
+            {visiblePrograms.map((p, idx) => {
+              const imageCard = (
+                <div className="relative w-full h-full rounded-xl overflow-hidden shadow-xl">
+                  <Image src={p.img} alt={p.title} fill className="object-cover" />
+                  <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/30 to-transparent" />
+                  <div className="absolute bottom-3 left-3 right-3 text-white">
+                    <h3 className="font-stix text-lg sm:text-xl leading-snug drop-shadow">{p.title}</h3>
+
+                  </div>
+                </div>
+              )
+
+              const overviewCard = (
+                <div className="w-full h-full rounded-xl overflow-hidden shadow-xl p-5 sm:p-6 lg:p-8 flex flex-col gap-6 sm:gap-8" style={{ backgroundColor: 'rgba(254, 192, 113, 1)' }}>
+                  <div>
+                  <h3 className="font-stix !text-[25px] leading-tight mb-3 sm:mb-4">Overview</h3>
+                  <p className="font-plus-jakarta-sans text-sm sm:text-base leading-relaxed mb-3 sm:mb-4 !text-gray-800">
+                    {p.summary || 'Learn more about this program and its opportunities.'}
+                  </p>
+                  </div>
+                  <ul className="text-sm sm:text-base font-plus-jakarta-sans space-y-2.5 sm:space-y-3 mb-4 sm:mb-5">
+                    <li className="flex items-start gap-2">
+                      <Image
+                        src="https://kalinga-university.s3.ap-south-1.amazonaws.com/logos/hand-graduation-icon.png"
+                        alt="Scholarships icon"
+                        width={20}
+                        height={20}
+                        className="mt-0.5"
+                      />
+                      <span className="text-gray-800"><span className="font-stix text-[20px] text-black">Scholarships :</span> Check eligibility</span>
+                    </li>
+                    <li className="flex items-start gap-2">
+                      <Image
+                        src="https://kalinga-university.s3.ap-south-1.amazonaws.com/logos/hand-graduation-icon.png"
+                        alt="Qualification icon"
+                        width={20}
+                        height={20}
+                        className="mt-0.5"
+                      />
+                      <span className="text-gray-800"><span className="font-stix text-[20px] text-black">Qualification :</span> Pass in Higher Secondary Examinations of (10+2)</span>
+                    </li>
+                  </ul>
+
+                  <div className="mt-auto flex items-center justify-between gap-2 sm:gap-3">
+                    <div className="flex items-center gap-2 sm:gap-3">
+                      <GlobalArrowButton className="!bg-transparent !shadow-none !text-[#1a1a1a] !px-0 !py-0 !h-auto text-sm sm:text-base" arrowClassName="!bg-transparent" arrowIconClassName="!text-[#1a1a1a]">
+                        Know More
+                      </GlobalArrowButton>
+                      <GlobalArrowButton className="!bg-white !text-black"
+                arrowClassName="!bg-[var(--button-red)]"
+                arrowIconClassName="!text-white"
+                textClassName="!text-black"
+                >Apply More</GlobalArrowButton>
+                    </div>
+                  </div>
+                </div>
+              )
+
+              // Keep image on top initially: place overview first, image last in the stack array
+              const cards = [overviewCard, imageCard]
+
+              return (
+                <SwiperSlide key={idx} className="py-2 sm:py-3">
+                  <div className="flex justify-center">
+                    <div className="h-[340px] sm:h-[380px] md:h-[400px] lg:h-[420px] w-[300px] sm:w-[340px] md:w-[360px] lg:w-[380px]">
+                      <Stack
+                        cards={cards} // image card first, overview second
+                        randomRotation
+                        sendToBackOnClick
+                        pauseOnHover
+                        autoplay={false}
+                        mobileClickOnly
+                      />
+                    </div>
+                  </div>
+                </SwiperSlide>
+              )
+            })}
+          </Swiper>
+
+          {/* Navigation Buttons (matching leadership style) */}
+          <div className="flex justify-end items-center gap-3 mt-4 pr-2 sm:pr-0">
+            <button className="programs-btn-prev w-11 h-11 sm:w-12 sm:h-12 rounded-lg bg-[var(--button-red)] hover:bg-[#A2A2A2] flex items-center justify-center hover:opacity-90 transition-opacity shadow-md">
+              <svg
+                width="20"
+                height="20"
+                viewBox="0 0 16 16"
+                fill="none"
+                xmlns="http://www.w3.org/2000/svg"
+                className="text-white hover:text-[var(--button-red)] transition-colors"
               >
-                <Image
-                  src={visiblePrograms[1].img}
-                  alt={visiblePrograms[1].title}
-                  fill
-                  className="object-cover"
+                <path
+                  d="M10 12L6 8L10 4"
+                  stroke="currentColor"
+                  strokeWidth="1"
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
                 />
-                <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/20 to-transparent" />
-                <div className="absolute left-3 sm:left-5 bottom-3 sm:bottom-5 text-white text-base sm:text-lg md:text-xl font-bold drop-shadow-lg">{visiblePrograms[1].title}</div>
-              </div>
-            )}
-            {/* Front Overview card */}
-            <div className="md:col-span-1 md:translate-y-10 px-2 sm:px-0 mt-[-60px] ">
-              <div className="bg-[#F9C88B] rounded-xl p-6 sm:p-8 shadow-xl h-[375px] flex flex-col relative z-10">
-                <h3 className="font-stix text-[28px] sm:text-[32px] leading-tight mb-4 text-[#1a1a1a]">Overview</h3>
-                <p className="text-sm sm:text-[15px] text-[#1a1a1a] mb-6 leading-relaxed font-plus-jakarta-sans opacity-90">
-                  Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. tempor incididunt ut labore
-                </p>
-
-                <ul className="text-sm text-[#1a1a1a] mb-8 space-y-4 font-plus-jakarta-sans">
-                  <li className="flex items-start gap-3">
-                    <span className="text-[#B22222] text-lg mt-0.5">🎓</span>
-                    <span><span className="font-semibold">Scholarships :</span> Check eligibility</span>
-                  </li>
-                  <li className="flex items-start gap-3">
-                    <span className="text-[#B22222] text-lg mt-0.5">📜</span>
-                    <span><span className="font-semibold">Qualification :</span> Pass in Higher Secondary Examinations of (10+2)</span>
-                  </li>
-                </ul>
-
-                <div className="flex items-center justify-between mt-auto pt-2">
-                  <GlobalArrowButton
-                    className="!bg-transparent !shadow-none hover:!shadow-none !h-auto !px-0 !py-0"
-                    textClassName="!text-[#1a1a1a] hover:!text-[#B22222] !font-plus-jakarta-sans !text-base !px-0"
-                    arrowClassName="!bg-transparent !p-0 !px-0"
-                    arrowIconClassName="!text-[#1a1a1a] hover:!text-[#B22222]"
-                    arrowSize={14}
-                  >
-                    Know More
-                  </GlobalArrowButton>
-
-                  <div className="flex items-center gap-1">
-                    <GlobalArrowButton
-                      className="!bg-white !text-[#1a1a1a] !px-5 !py-2.5 !rounded-lg !font-bold !shadow-sm hover:!bg-gray-50 !font-plus-jakarta-sans !text-sm !h-auto !w-auto"
-                      textClassName="!text-[#1a1a1a] !font-plus-jakarta-sans !text-sm !px-0"
-                      arrowClassName="!bg-[var(--button-red)]"
-                      arrowIconClassName="!text-white"
-                      arrowSize={16}
-                    >
-                      Apply Now
-                    </GlobalArrowButton>
-                    <button className="bg-[var(--button-red)] text-white w-[42px] h-[42px] rounded-lg flex items-center justify-center shadow-sm hover:opacity-90 transition-colors">
-                      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                        <path d="M7 17L17 7" />
-                        <path d="M7 7h10v10" />
-                      </svg>
-                    </button>
-                  </div>
-                </div>
-              </div>
-            </div>
+              </svg>
+            </button>
+            <button className="programs-btn-next w-11 h-11 sm:w-12 sm:h-12 rounded-lg bg-[var(--button-red)] hover:bg-[#A2A2A2] flex items-center justify-center hover:opacity-90 transition-opacity shadow-md">
+              <svg
+                width="20"
+                height="20"
+                viewBox="0 0 16 16"
+                fill="none"
+                xmlns="http://www.w3.org/2000/svg"
+                className="text-white hover:text-[var(--button-red)] transition-colors"
+              >
+                <path
+                  d="M6 4L10 8L6 12"
+                  stroke="currentColor"
+                  strokeWidth="1"
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                />
+              </svg>
+            </button>
           </div>
-
-          {/* Program cards with decorative accents */}
-          {visiblePrograms.slice(1).map((p, i) => {
-            const slicedPrograms = visiblePrograms.slice(1);
-            // Cycle back to first program if no next program exists
-            const nextProgram = slicedPrograms[i + 1] || slicedPrograms[0];
-            return (
-              <div key={p.id} className="relative w-full max-w-[345px] h-[360px] mx-auto sm:max-w-none sm:mx-0" >
-                {/* Next image preview - tilted behind with same style */}
-                <div
-                  className="absolute overflow-hidden shadow-2xl z-0 hidden sm:block relative"
-                  style={{
-                    top: '-15px',
-                    left: '-15px',
-                    width: 'calc(100% + 30px)',
-                    height: 'calc(100% + 30px)',
-                    transform: 'rotate(4deg) scale(0.92)',
-                    transformOrigin: 'center center',
-                    opacity: 0.5,
-                    borderRadius: '10px',
-                    transition: 'all 0.3s ease'
-                  }}
-                >
-                  <Image
-                    src={nextProgram.img}
-                    alt={nextProgram.title}
-                    fill
-                    className="object-cover"
-                  />
-                  <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/20 to-transparent" />
-                  <div className="absolute left-3 sm:left-5 bottom-3 sm:bottom-5 text-white text-base sm:text-lg md:text-xl font-bold drop-shadow-lg">{nextProgram.title}</div>
-                </div>
-                <div
-                  className="relative overflow-hidden shadow-xl z-10 w-full h-full"
-                  style={{
-                    borderRadius: '10px',
-                    opacity: 1
-                  }}
-                >
-                  <Image
-                    src={p.img}
-                    alt={p.title}
-                    fill
-                    className="object-cover"
-                  />
-                  <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/20 to-transparent" />
-                  <div className="absolute left-3 sm:left-8 bottom-3 sm:bottom-5 text-white text-base sm:text-lg md:text-xl drop-shadow-lg font-stix text-[25px] leading-[30px]">
-                    {p.title}
-                  </div>
-                </div>
-              </div>
-            );
-          })}
         </div>
+
+        <style jsx global>{`
+          /* Hide default Swiper arrows, we use custom buttons */
+          .programs-swiper .swiper-button-prev,
+          .programs-swiper .swiper-button-next {
+            display: none !important;
+          }
+        `}</style>
 
 
         {/* Explore Programs button - centered */}
-        <div className="flex justify-center mt-8 sm:mt-12 md:mt-[60px] mb-6 sm:mb-8 md:mb-10">
-          <GlobalArrowButton className="w-full sm:w-[224px] mb-[50px]">
-            Explore Programs
-          </GlobalArrowButton>
-        </div>
-        {/* Footer controls */}
-        <div className="flex items-center justify-center sm:justify-end gap-4 sm:gap-6 mt-4 sm:mt-6 pr-0 sm:pr-4 md:pr-[60px]">
-          <div className="flex items-center gap-2 sm:gap-3 -mt-45 ml-[90px] mb-[50px]">
-            <button onClick={prev} className="w-9 h-9 sm:w-10 sm:h-10 rounded-md bg-[var(--button-red)] text-white shadow-md hover:opacity-90 transition-colors flex items-center justify-center text-lg sm:text-xl">‹</button>
-            <button onClick={next} className="w-9 h-9 sm:w-10 sm:h-10 rounded-md bg-gray-300 text-gray-700 shadow-md hover:bg-gray-400 transition-colors flex items-center justify-center text-lg sm:text-xl">›</button>
-          </div>
+        <div className="flex justify-center">
+        <GlobalArrowButton className="!bg-white !text-black shadow-none"
+                arrowClassName="!bg-[var(--button-red)]"
+                arrowIconClassName="!text-white"
+                textClassName="!text-black"
+                >Explore Programs</GlobalArrowButton>
         </div>
       </div>
     </section>

@@ -10,7 +10,7 @@ const AdmissionCareer = () => {
         {/* Left Panel - Admission */}
         <div className="w-full bg-[var(--dark-orange-red)] rounded-[10px] p-5 sm:p-6 md:p-10 text-white flex flex-col items-center justify-center">
 
-        <h3 className="text-sm sm:text-base md:text-lg lg:text-xl xl:text-[31px] mt-6 sm:mt-10 md:mt-14 leading-tight sm:leading-normal font-stix leading-[32px] sm:leading-[40px] pr-4 sm:pr-8 md:pr-15">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do</h3>
+        <h3 className="text-sm sm:text-base md:text-lg lg:text-xl xl:text-[31px] mt-6 sm:mt-10 md:mt-14 leading-tight sm:leading-normal font-stix leading-[32px] sm:leading-[40px] pr-4 sm:pr-8 md:pr-15">Discover 130+ career-driven programs and world-class learning at Kalinga University. Your journey to success starts today</h3>
           <div className="mt-3 sm:mt-4 w-full sm:w-[211px] self-start">
           <GlobalArrowButton className="!bg-white !text-black"
                 arrowClassName="!bg-[var(--button-red)]"
@@ -45,7 +45,7 @@ const AdmissionCareer = () => {
         {/* Right Panel - Career */}
         <div className="w-full bg-[var(--button-red)] rounded-[10px] p-5 sm:p-6 md:p-10 text-white flex flex-col items-center justify-center">
 
-<h3 className="text-sm sm:text-base md:text-lg lg:text-xl xl:text-[31px] mt-6 sm:mt-10 md:mt-14 leading-tight sm:leading-normal font-stix text-left sm:text-right leading-[32px] sm:leading-[40px] md:pl-4 sm:pl-8 md:pl-15">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do</h3>
+<h3 className="text-sm sm:text-base md:text-lg lg:text-xl xl:text-[31px] mt-6 sm:mt-10 md:mt-14 leading-tight sm:leading-normal font-stix text-left sm:text-right leading-[32px] sm:leading-[40px] md:pl-8 sm:pl-8 md:pl-20">Kalinga University offers a collaborative environment for educators and professionals to grow and make an impact.</h3>
  <div className="mt-3 sm:mt-4 w-full flex justify-start sm:justify-end">
  <GlobalArrowButton className="!bg-white !text-black"
                 arrowClassName="!bg-[var(--button-red)]"

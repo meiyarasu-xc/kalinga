@@ -8,43 +8,145 @@ import 'swiper/css'
 import 'swiper/css/navigation'
 
 export default function FeatureCards({ 
-  isSlider = false,
+  isSlider = true,
   cards = [
     { 
       id: 1, 
-      title: 'Academic Excellence', 
-      body: 'Kalinga University offers world-class education with experienced faculty, modern curriculum, and industry-aligned programs designed to prepare students for successful careers.', 
+      title: 'Global Exposure', 
+      body: 'Students from 29+ nationalities create a truly global learning environment. Collaborate, connect, and grow through multi-cultural programs and diverse perspectives.', 
       variant: 'amber' 
     },
     { 
       id: 2, 
-      title: 'State-of-the-Art Infrastructure', 
-      body: 'Our campus features modern laboratories, well-equipped classrooms, advanced research facilities, and cutting-edge technology to support comprehensive learning experiences.', 
+      title: 'Vibrant Campus Life', 
+      body: 'Experience an unforgettable college life filled with green spaces, lively events, and a dynamic student community.', 
       variant: 'gray' 
     },
     { 
       id: 3, 
-      title: 'Industry Partnerships', 
-      body: 'Strong collaborations with leading industries provide students with internship opportunities, live projects, and placement assistance to bridge the gap between academia and industry.', 
+      title: 'Career Counseling', 
+      body: 'Get personalized guidance and support at every stage of your academic journey — from choosing the right path to landing your dream job.', 
       variant: 'amber' 
     },
     { 
       id: 4, 
-      title: 'Student Support Services', 
-      body: 'Comprehensive support including career counseling, mentorship programs, scholarship opportunities, and extracurricular activities to ensure holistic development of every student.', 
+      title: 'Wide Range of Programs', 
+      body: 'Choose from 130+ industry-relevant programs across disciplines — from Computer Science to Pharmacy — and unlock limitless career opportunities.', 
+      variant: 'gray' 
+    },
+    { 
+      id: 5, 
+      title: 'Abundant Scholarships', 
+      body: 'Avail up to 100% scholarships through merit, sports, cultural, and achiever categories — rewarding talent and ambition.', 
+      variant: 'amber' 
+    },
+    { 
+      id: 6, 
+      title: 'Industry-Relevant Curriculum', 
+      body: 'Aligned with the New Education Policy 2020, our curriculum bridges classroom learning with real-world industry needs.', 
+      variant: 'gray' 
+    },
+    { 
+      id: 7, 
+      title: 'Holistic Development', 
+      body: 'We focus on nurturing confident, well-rounded individuals ready to make informed life and career decisions.', 
+      variant: 'amber' 
+    },
+    { 
+      id: 8, 
+      title: 'Extensive Research Facilities', 
+      body: 'With 90+ advanced labs, including IT and CIF labs, Kalinga University leads in innovation and research excellence.', 
+      variant: 'gray' 
+    },
+    { 
+      id: 9, 
+      title: 'Experienced Faculties', 
+      body: 'Learn from highly qualified professors from India and abroad who inspire and guide students toward leadership and success.', 
+      variant: 'amber' 
+    },
+    { 
+      id: 10, 
+      title: 'Flagship Events', 
+      body: 'Celebrate creativity and achievement through exciting events like Hackathons, Kalinga Utsav, Sports Fest, Moot Courts, and Convocation Ceremonies.', 
+      variant: 'gray' 
+    },
+    { 
+      id: 11, 
+      title: 'Internships & Industrial Visits', 
+      body: 'Gain real-world exposure with internship opportunities and industrial visits that build practical skills and confidence.', 
+      variant: 'amber' 
+    },
+    { 
+      id: 12, 
+      title: 'Improve Employability', 
+      body: 'Develop skills employers value — communication, leadership, teamwork, problem-solving, and critical thinking — beyond academics.', 
+      variant: 'gray' 
+    },
+    { 
+      id: 13, 
+      title: 'Campus Placement Drives', 
+      body: 'With 400+ recruitment partners, students secure placements across top industries and leading organizations.', 
+      variant: 'amber' 
+    },
+    { 
+      id: 14, 
+      title: 'Networking Opportunities', 
+      body: 'Engage with industry leaders, alumni, and professionals through workshops, seminars, and conferences that strengthen your career network.', 
+      variant: 'gray' 
+    },
+    { 
+      id: 15, 
+      title: 'Cultural Celebrations', 
+      body: 'Enjoy a vibrant campus culture through festivals, concerts, talent shows, and open mic events that unite students from all backgrounds.', 
+      variant: 'amber' 
+    },
+    { 
+      id: 16, 
+      title: 'Community Services', 
+      body: 'Join NCC and NSS initiatives and become a socially responsible citizen contributing to meaningful community work.', 
+      variant: 'gray' 
+    },
+    { 
+      id: 17, 
+      title: 'Educational Tours', 
+      body: 'Experience learning beyond classrooms through national and international educational tours, including visits to top industries and destinations like Dubai.', 
+      variant: 'amber' 
+    },
+    { 
+      id: 18, 
+      title: 'Mentor-Mentee System', 
+      body: 'Benefit from personalized guidance through one-on-one mentoring that supports your academic and personal growth.', 
+      variant: 'gray' 
+    },
+    { 
+      id: 19, 
+      title: 'Emotional Well-Being', 
+      body: 'Participate in wellness programs designed to support mental health, reduce stress, and promote a positive learning environment.', 
+      variant: 'amber' 
+    },
+    { 
+      id: 20, 
+      title: '100% Automation', 
+      body: 'Access everything digitally through our student ERP system — from admissions and academics to results, schedules, and notifications.', 
       variant: 'gray' 
     },
   ],
-  title = "Lorem ipsum dolor sit amet, consectetur",
-  fullText = "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incid Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incid",
-  truncatedText = "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incid",
-  hiddenText = " Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incid",
+  title = "Why is Kalinga University the Right Choice?",
+  fullText = "Spread across 50+ Acres of Land, the University offers fully equipped infrastructure with the most advanced curriculum that prepares students to compete in global opportunities. Every space on our campus generates curiosity and encourages motivation among young minds. We just don't focus on classroom-based learning, but our primary focus is to provide a holistic learning experience to our students so that they can become all-rounders in their personal and professional lives. With a supportive and inclusive learning environment, our students have achieved remarkable success and transformed their DREAMS into REALITY.",
   imageUrl = "https://kalinga-university.s3.ap-south-1.amazonaws.com/common/student.jpg",
   imageAlt = "Kalinga students celebrating"
 }) {
   const [isExpanded, setIsExpanded] = useState(false)
+  const [cardExpanded, setCardExpanded] = useState({})
   const swiperRef = useRef(null)
   
+  const truncate = (text, limit = 80) => (text?.length > limit ? text.slice(0, limit) + '...' : text)
+  const toggleCard = (id) => setCardExpanded((prev) => ({ ...prev, [id]: !prev[id] }))
+
+  // Dynamically calculate truncated and hidden text from fullText
+  const truncateLimit = 200
+  const truncatedText = fullText?.length > truncateLimit ? fullText.slice(0, truncateLimit) : fullText
+  const hiddenText = fullText?.length > truncateLimit ? fullText.slice(truncateLimit) : ''
   const displayText = isExpanded ? fullText : truncatedText
  
   return (
@@ -124,14 +226,24 @@ export default function FeatureCards({
                 className="feature-cards-swiper"
               >
                 {cards.map((c) => (
-                  <SwiperSlide key={c.id}>
+                  <SwiperSlide key={c.id} className="h-auto">
                     <div className="px-2 sm:px-3 h-full">
-                      <div className={`relative rounded-lg p-4 sm:p-5 md:p-5 lg:p-6 shadow-xl h-full ${c.variant === 'amber' ? 'bg-[var(--card-sandal)] text-black' : 'bg-[var(--card-gray)] text-gray-800'}`}>
-                        <div className="flex flex-col gap-3 sm:gap-4">
+                      <div className={`relative rounded-lg p-4 sm:p-5 md:p-5 lg:p-6 shadow-xl h-full flex ${c.variant === 'amber' ? 'bg-[var(--card-sandal)] text-black' : 'bg-[var(--card-gray)] text-gray-800'}`} style={{ minHeight: cardExpanded[c.id] ? 'auto' : '200px' }}>
+                        <div className="flex flex-col gap-3 sm:gap-4 w-full h-full">
                           <div className="w-10 h-10 sm:w-11 sm:h-11 md:w-12 md:h-12 rounded-full bg-white/60 flex-shrink-0" />
-                          <div>
+                          <div className="flex-1 flex flex-col">
                             <h4 className="font-semibold !text-base mb-1.5 sm:mb-2">{c.title}</h4>
-                            <p className="text-xs sm:text-sm leading-relaxed text-[0.75rem] sm:text-[0.8rem] md:text-[0.85rem]">{c.body}</p>
+                            <p className="text-xs sm:text-sm leading-relaxed text-[0.75rem] sm:text-[0.8rem] md:text-[0.85rem] flex-1">
+                              {cardExpanded[c.id] ? c.body : truncate(c.body, 60)}
+                            </p>
+                            {c.body && c.body.length > 50 && (
+                              <button
+                                onClick={() => toggleCard(c.id)}
+                                className="mt-2 text-[var(--button-red)] text-xs sm:text-sm font-semibold hover:opacity-80 transition-opacity self-start"
+                              >
+                                {cardExpanded[c.id] ? 'Read Less' : 'Read More'}
+                              </button>
+                            )}
                           </div>
                         </div>
                       </div>
@@ -166,12 +278,22 @@ export default function FeatureCards({
               {cards.map((c) => (
                 <div
                   key={c.id}
-                  className={`relative rounded-lg p-4 sm:p-5 md:p-5 lg:p-6 shadow-xl ${c.variant === 'amber' ? 'bg-[var(--card-sandal)] text-black' : 'bg-[var(--card-gray)] text-gray-800'}`}>
-                  <div className="flex flex-col gap-3 sm:gap-4">
+                  className={`relative rounded-lg p-4 sm:p-5 md:p-5 lg:p-6 shadow-xl flex ${c.variant === 'amber' ? 'bg-[var(--card-sandal)] text-black' : 'bg-[var(--card-gray)] text-gray-800'}`} style={{ minHeight: cardExpanded[c.id] ? 'auto' : '200px' }}>
+                  <div className="flex flex-col gap-3 sm:gap-4 w-full h-full">
                     <div className="w-10 h-10 sm:w-11 sm:h-11 md:w-12 md:h-12 rounded-full bg-white/60 flex-shrink-0" />
-                    <div>
+                    <div className="flex-1 flex flex-col">
                       <h4 className="font-semibold !text-base mb-1.5 sm:mb-2">{c.title}</h4>
-                      <p className="text-xs sm:text-sm leading-relaxed text-[0.75rem] sm:text-[0.8rem] md:text-[0.85rem]">{c.body}</p>
+                      <p className="text-xs sm:text-sm leading-relaxed text-[0.75rem] sm:text-[0.8rem] md:text-[0.85rem] flex-1">
+                        {cardExpanded[c.id] ? c.body : truncate(c.body, 50)}
+                      </p>
+                      {c.body && c.body.length > 50 && (
+                        <button
+                          onClick={() => toggleCard(c.id)}
+                          className="mt-2 text-[var(--button-red)] text-xs sm:text-sm font-semibold hover:opacity-80 transition-opacity self-start"
+                        >
+                          {cardExpanded[c.id] ? 'Read Less' : 'Read More'}
+                        </button>
+                      )}
                     </div>
                   </div>
                 </div>

@@ -8,7 +8,7 @@ export default function CampusTour() {
     <section className="py-16">
       <div className="container mx-auto px-4 lg:px-6">
         <div className="relative bg-cover bg-center rounded-2xl overflow-hidden shadow-xl mx-auto w-full max-w-[1243px] h-[500px] sm:h-[500px] md:h-[600px] lg:h-[653px]" style={{
-          backgroundImage: `url('https://kalinga-university.s3.ap-south-1.amazonaws.com/common/student.jpg')`,
+          backgroundImage: `url('https://kalinga-university.s3.ap-south-1.amazonaws.com/Home/college-ful-image.png')`,
           backgroundPosition: 'center',
           backgroundSize: 'cover'
         }}>
@@ -46,10 +46,10 @@ export default function CampusTour() {
               {/* Left: Title and Description */}
               <div className="flex-1 space-y-2 sm:space-y-3">
                 <h2 className="font-stix font-medium text-white leading-tight">
-                  Campus Tour
+                Step Into the Heart of Our Campus
                 </h2>
                 <p className="text-white leading-relaxed max-w-md">
-                  Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed
+                Take a 360° virtual tour of Kalinga University’s lush 50-acre green campus — explore our world-class infrastructure, academic blocks, research labs, hostels, and vibrant student spaces from anywhere in the world.
                 </p>
               </div>
 

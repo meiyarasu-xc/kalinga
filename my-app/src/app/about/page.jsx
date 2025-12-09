@@ -13,35 +13,23 @@ import FeatureCards from "../components/home/featurecard";
 import GlobalPresence from "../components/home/global_presence";
 
 const aboutFeatureCards = [
-  { 
-    id: 1, 
-    title: 'Academic Excellence', 
-    body: 'Kalinga University offers world-class education with experienced faculty, modern curriculum, and industry-aligned programs designed to prepare students for successful careers.', 
-    variant: 'amber' 
+  {
+    id: 1,
+    title: 'Global Exposure & Campus Life',
+    body: 'Students from 29+ nationalities, vibrant events, green campus, cultural fests, NCC/NSS, educational tours (incl. Dubai), and 100% ERP-driven automation.',
+    variant: 'gray',
   },
-  { 
-    id: 2, 
-    title: 'State-of-the-Art Infrastructure', 
-    body: 'Our campus features modern laboratories, well-equipped classrooms, advanced research facilities, and cutting-edge technology to support comprehensive learning experiences.', 
-    variant: 'gray' 
+  {
+    id: 2,
+    title: 'Career & Curriculum Edge',
+    body: '130+ industry-relevant programs, NEP 2020-aligned curriculum, internships & industrial visits, career counseling, mentor-mentee support, 90+ labs and research excellence.',
+    variant: 'amber',
   },
-  { 
-    id: 3, 
-    title: 'Industry Partnerships', 
-    body: 'Strong collaborations with leading industries provide students with internship opportunities, live projects, and placement assistance to bridge the gap between academia and industry.', 
-    variant: 'amber' 
-  },
-  { 
-    id: 4, 
-    title: 'Student Support Services', 
-    body: 'Comprehensive support including career counseling, mentorship programs, scholarship opportunities, and extracurricular activities to ensure holistic development of every student.', 
-    variant: 'gray' 
-  },
-  { 
-    id: 5, 
-    title: 'Student Support Services', 
-    body: 'Comprehensive support including career counseling, mentorship programs, scholarship opportunities, and extracurricular activities to ensure holistic development of every student.', 
-    variant: 'gray' 
+  {
+    id: 3,
+    title: 'Scholarships & Placements',
+    body: 'Up to 100% scholarships (merit, sports, cultural), 400+ recruitment partners, employability skills, networking, flagship hackathons, and strong placement drives.',
+    variant: 'gray',
   },
 ];
 

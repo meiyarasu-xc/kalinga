@@ -2,11 +2,12 @@ import { motion, useMotionValue, useTransform } from 'motion/react';
 import { useState, useEffect, useRef, useImperativeHandle, forwardRef } from 'react';
 import './Stack.css';
 
-const CardRotate = forwardRef(({ children, onSendToBack, sensitivity, disableDrag = false, isTopCard = false }, ref) => {
+const CardRotate = forwardRef(({ children, onSendToBack, sensitivity, disableDrag = false, isTopCard = false, isMobile = false }, ref) => {
   const x = useMotionValue(0);
   const y = useMotionValue(0);
-  const rotateX = useTransform(y, [-100, 100], [60, -60]);
-  const rotateY = useTransform(x, [-100, 100], [-60, 60]);
+  const maxRotation = isMobile ? 20 : 60;
+  const rotateX = useTransform(y, [-100, 100], [maxRotation, -maxRotation]);
+  const rotateY = useTransform(x, [-100, 100], [-maxRotation, maxRotation]);
 
   useImperativeHandle(ref, () => ({
     triggerDrag: async (direction = 'right') => {
@@ -195,20 +196,23 @@ const Stack = forwardRef(({
         if (!isTopCard && stackIndex > 0) {
           // Alternate direction: even stackIndex goes left, odd goes right
           direction = stackIndex % 2 === 0 ? -1 : 1;
-          // Increase offset for cards further back
-          horizontalOffset = direction * (15 + stackIndex * 8);
+          // Reduce offsets on mobile for better visibility
+          const baseOffset = isMobile ? 8 : 15;
+          const increment = isMobile ? 4 : 8;
+          horizontalOffset = direction * (baseOffset + stackIndex * increment);
         }
         
-        const verticalOffset = isTopCard ? 0 : stackIndex * 6;
+        const verticalOffset = isTopCard ? 0 : (isMobile ? stackIndex * 3 : stackIndex * 6);
         
         return (
           <CardRotate 
             key={card.id}
             ref={isTopCard ? topCardRef : null}
             onSendToBack={() => sendToBack(card.id)} 
-            sensitivity={sensitivity}
+            sensitivity={isMobile ? sensitivity * 0.6 : sensitivity}
             disableDrag={shouldDisableDrag}
             isTopCard={isTopCard}
+            isMobile={isMobile}
           >
             <motion.div
               className="card"
@@ -216,15 +220,15 @@ const Stack = forwardRef(({
               animate={{
                 x: horizontalOffset,
                 y: verticalOffset,
-                rotateZ: isTopCard ? 0 : (direction !== 0 ? direction * (stackIndex * 2.5) + randomRotate : randomRotate),
-                scale: 1 + index * 0.05 - stack.length * 0.05,
+                rotateZ: isTopCard ? 0 : (direction !== 0 ? direction * (stackIndex * (isMobile ? 1.5 : 2.5)) + (isMobile ? randomRotate * 0.5 : randomRotate) : (isMobile ? randomRotate * 0.5 : randomRotate)),
+                scale: isMobile ? (1 + index * 0.03 - stack.length * 0.03) : (1 + index * 0.05 - stack.length * 0.05),
                 transformOrigin: isTopCard ? 'center center' : 'center center',
               }}
               initial={false}
               transition={{
                 type: 'spring',
-                stiffness: animationConfig.stiffness,
-                damping: animationConfig.damping,
+                stiffness: isMobile ? animationConfig.stiffness * 0.8 : animationConfig.stiffness,
+                damping: isMobile ? animationConfig.damping * 1.2 : animationConfig.damping,
               }}
             >
               {card.content}

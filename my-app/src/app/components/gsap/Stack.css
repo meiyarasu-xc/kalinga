@@ -5,11 +5,28 @@
     perspective: 600px;
   }
   
+  @media (max-width: 768px) {
+    .stack-container {
+      perspective: 400px;
+    }
+    
+    .card {
+      -webkit-tap-highlight-color: transparent;
+      -webkit-touch-callout: none;
+    }
+    
+    .card-rotate,
+    .card-rotate-disabled {
+      -webkit-tap-highlight-color: transparent;
+    }
+  }
+  
   .card-rotate {
     position: absolute;
     width: 100%;
     height: 100%;
     cursor: grab;
+    touch-action: pan-y pan-x;
   }
   
   .card-rotate-disabled {
@@ -17,6 +34,7 @@
     width: 100%;
     height: 100%;
     cursor: pointer;
+    touch-action: manipulation;
   }
   
   .card {

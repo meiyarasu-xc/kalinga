@@ -5,8 +5,16 @@ import LogoLoop from '../gsap/LogoLoop'
 
 const AccreditationRanking = () => {
   const accreditations = [
-    { id: 1, name: 'NAAC Grade B', logo: 'https://kalinga-university.s3.ap-south-1.amazonaws.com/Home/naac.png' },
-    { id: 4, name: 'NAAC Grade B', logo: 'https://kalinga-university.s3.ap-south-1.amazonaws.com/Home/naac.png' },
+    { id: 1, name: 'Best Practices', logo: 'https://kalinga-university.s3.ap-south-1.amazonaws.com/logos/best-prac.webp' },
+    { id: 2, name: 'Best Research', logo: 'https://kalinga-university.s3.ap-south-1.amazonaws.com/logos/best-res.webp' },
+    { id: 3, name: 'Competition Success', logo: 'https://kalinga-university.s3.ap-south-1.amazonaws.com/logos/comp-top.webp' },
+    { id: 4, name: 'Outlook', logo: 'https://kalinga-university.s3.ap-south-1.amazonaws.com/logos/outlook.webp' },
+    { id: 5, name: 'Competition 3', logo: 'https://kalinga-university.s3.ap-south-1.amazonaws.com/logos/comp-3.webp' },
+    { id: 6, name: 'UGC Grant', logo: 'https://kalinga-university.s3.ap-south-1.amazonaws.com/logos/ugc-gra.webp' },
+    { id: 7, name: 'Competition', logo: 'https://kalinga-university.s3.ap-south-1.amazonaws.com/logos/comp.webp' },
+    { id: 8, name: 'India Today', logo: 'https://kalinga-university.s3.ap-south-1.amazonaws.com/logos/india-today.webp' },
+    { id: 9, name: 'Global', logo: 'https://kalinga-university.s3.ap-south-1.amazonaws.com/logos/global.webp' },
+    { id: 10, name: 'NIRF', logo: 'https://kalinga-university.s3.ap-south-1.amazonaws.com/logos/nirf.png' },
   ]
 
   // Convert to LogoLoop format
@@ -33,19 +41,19 @@ const AccreditationRanking = () => {
           <div className="flex-1 w-full justify-center items-center md:w-auto md:ml-[-130px] overflow-hidden relative">
             <LogoLoop
               logos={logoLoopItems}
-              speed={120}
+              speed={60}
               direction="left"
-              logoHeight={181}
+              logoHeight={120}
               gap={24}
               pauseOnHover={true}
               ariaLabel="Accreditation and ranking logos"
               renderItem={(item, key) => (
                 <div className="flex-shrink-0 bg-[var(--light-gray)] rounded-[15px] sm:rounded-[20px] w-[180px] h-[140px] sm:w-[200px] sm:h-[160px] md:w-[231px] md:h-[181px] flex items-center justify-center shadow-sm overflow-hidden">
-                  <div className="relative px-5">
+                  <div className="relative px-5 ">
                     <img
                       src={item.src}
                       alt={item.alt}
-                      className="object-contain w-full h-full"
+                      className="object-contain w-[30px] h-[30px]"
                       loading="lazy"
                       decoding="async"
                       draggable={false}

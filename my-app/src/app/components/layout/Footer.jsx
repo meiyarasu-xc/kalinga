@@ -1,106 +1,181 @@
-'use client';
+import React from 'react'
+import Image from 'next/image'
+import { getLogoSrc, getLogoAlt } from '../../config/contact-info'
 
-import Link from 'next/link';
-import Image from 'next/image';
-import { contactInfo, getPhone, getEmail, getAddress } from '../../config/contact-info';
-
-const Footer = () => {
+export default function Footer() {
   return (
-    <footer className="bg-[#1a1a2e] text-white mt-16">
-      {/* Main Footer */}
-      <div className="container mx-auto px-4 py-12">
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
-          {/* About Section */}
-          <div>
-            <h3 className="text-lg font-bold mb-4">Kalinga University</h3>
-            <p className="text-sm text-gray-300 mb-4">
-              Transforming futures with knowledge & innovation. Leading institution for quality education.
-            </p>
-            <div className="flex gap-3">
-              <a href={contactInfo.social.facebook} className="w-8 h-8 bg-white/10 hover:bg-red-600 rounded flex items-center justify-center transition" aria-label="Facebook">
-                <svg className="w-4 h-4" fill="currentColor" viewBox="0 0 24 24"><path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/></svg>
-              </a>
-              <a href={contactInfo.social.twitter} className="w-8 h-8 bg-white/10 hover:bg-red-600 rounded flex items-center justify-center transition" aria-label="Twitter">
-                <svg className="w-4 h-4" fill="currentColor" viewBox="0 0 24 24"><path d="M23.953 4.57a10 10 0 01-2.825.775 4.958 4.958 0 002.163-2.723c-.951.555-2.005.959-3.127 1.184a4.92 4.92 0 00-8.384 4.482C7.69 8.095 4.067 6.13 1.64 3.162a4.822 4.822 0 00-.666 2.475c0 1.71.87 3.213 2.188 4.096a4.904 4.904 0 01-2.228-.616v.06a4.923 4.923 0 003.946 4.827 4.996 4.996 0 01-2.212.085 4.936 4.936 0 004.604 3.417 9.867 9.867 0 01-6.102 2.105c-.39 0-.779-.023-1.17-.067a13.995 13.995 0 007.557 2.209c9.053 0 13.998-7.496 13.998-13.985 0-.21 0-.42-.015-.63A9.935 9.935 0 0024 4.59z"/></svg>
-              </a>
-              <a href={contactInfo.social.linkedin} className="w-8 h-8 bg-white/10 hover:bg-red-600 rounded flex items-center justify-center transition" aria-label="LinkedIn">
-                <svg className="w-4 h-4" fill="currentColor" viewBox="0 0 24 24"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg>
-              </a>
-              <a href={contactInfo.social.instagram} className="w-8 h-8 bg-white/10 hover:bg-red-600 rounded flex items-center justify-center transition" aria-label="Instagram">
-                <svg className="w-4 h-4" fill="currentColor" viewBox="0 0 24 24"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/></svg>
-              </a>
+    <>
+      <style dangerouslySetInnerHTML={{__html: `
+        .footer-decorative-text {
+          font-size: clamp(30px, 8vw, 40px);
+          max-width: 100%;
+          line-height: 1.1;
+        }
+        @media (min-width: 640px) {
+          .footer-decorative-text {
+            font-size: clamp(40px, 10vw, 80px);
+          }
+        }
+        @media (min-width: 768px) {
+          .footer-decorative-text {
+            font-size: clamp(80px, 12vw, 120px);
+            white-space: nowrap;
+          }
+        }
+      `}} />
+    <footer className="container mx-auto text-white mt-5">
+      <div className="relative bg-[var(--dark-blue)] rounded-[10px] sm:rounded-[15px]">
+          <div className="px-4 sm:px-4 md:px-6 lg:px-12 py-6 sm:py-6 md:py-8 lg:py-10 relative z-10">
+        {/* Top Row: Logo and Follow Us */}
+        <div className="flex flex-col sm:flex-row justify-between items-center sm:items-start gap-4 sm:gap-4 md:gap-0 mb-6 sm:mb-6 md:mb-8 lg:mb-10">
+          {/* Logo Section - Left */}
+          <div className="flex items-center gap-2 sm:gap-2.5 lg:gap-3">
+            <div className="relative h-[40px] sm:h-[45px] md:h-[49px] lg:h-12 w-[120px] sm:w-[140px] md:w-[200px]">
+              <Image 
+                src={getLogoSrc('primary')}
+                alt={getLogoAlt('primary')}
+                fill
+                className="object-contain"
+              />
+            </div>
+          </div>
+        </div>
+
+        {/* Main Content: Three Columns */}
+        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-12 gap-6 sm:gap-6 md:gap-8 lg:gap-10">
+          {/* Quick Link - 2 columns */}
+          <div className="sm:col-span-1 md:col-span-4 mb-6 sm:mb-0">
+            <h4 className="text-sm sm:text-base lg:text-lg font-stix mb-4 sm:mb-4 lg:mb-6 flex items-center gap-2">
+              <span className="text-white font-stix">Quick link</span>
+              <span className="flex-1 border-t border-thick border-white/40"></span>
+            </h4>
+            <div className="grid grid-cols-2 gap-x-4 sm:gap-x-12 gap-y-2.5 sm:gap-y-3 font-plus-jakarta-sans text-xs sm:text-[14px] leading-relaxed sm:leading-[25px] font-normal">
+              <ul className="text-white/80 space-y-2 sm:space-y-3">
+                <li><a className="hover:text-white transition-colors" href="#">Lorem ipsum</a></li>
+                <li><a className="hover:text-white transition-colors" href="#">Lorem ipsum</a></li>
+                <li><a className="hover:text-white transition-colors" href="#">Lorem ipsum</a></li>
+                <li><a className="hover:text-white transition-colors" href="#">Lorem ipsum</a></li>
+                <li><a className="hover:text-white transition-colors" href="#">Lorem ipsum</a></li>
+              </ul>
+              <ul className="text-white/80 space-y-2 sm:space-y-3">
+                <li><a className="hover:text-white transition-colors" href="#">Lorem ipsum</a></li>
+                <li><a className="hover:text-white transition-colors" href="#">Lorem ipsum</a></li>
+                <li><a className="hover:text-white transition-colors" href="#">Lorem ipsum</a></li>
+                <li><a className="hover:text-white transition-colors" href="#">Lorem ipsum</a></li>
+                <li><a className="hover:text-white transition-colors" href="#">Lorem ipsum</a></li>
+              </ul>
             </div>
           </div>
 
-          {/* Quick Links */}
-          <div>
-            <h3 className="text-lg font-bold mb-4">Quick Links</h3>
-            <ul className="space-y-2 text-sm">
-              <li><Link href="/about" className="text-gray-300 hover:text-white transition">About Us</Link></li>
-              <li><Link href="/academics" className="text-gray-300 hover:text-white transition">Academics</Link></li>
-              <li><Link href="/admissions" className="text-gray-300 hover:text-white transition">Admissions</Link></li>
-              <li><Link href="/placements" className="text-gray-300 hover:text-white transition">Placements</Link></li>
-              <li><Link href="/research" className="text-gray-300 hover:text-white transition">Research</Link></li>
-            </ul>
+          {/* Academics - 2 columns */}
+          <div className="sm:col-span-1 md:col-span-4 mb-6 sm:mb-0">
+            <h4 className="text-sm sm:text-base lg:text-lg font-normal mb-4 sm:mb-6 flex items-center gap-2">
+              <span className="text-white font-stix">Academics</span>
+              <span className="flex-1 border-t border-white/40"></span>
+            </h4>
+            <div className="grid grid-cols-2 gap-x-4 sm:gap-x-12 gap-y-2.5 sm:gap-y-3 font-plus-jakarta-sans text-xs sm:text-[14px] leading-relaxed sm:leading-[25px] font-normal">
+              <ul className="text-white/80 space-y-2 sm:space-y-3">
+                <li><a className="hover:text-white transition-colors" href="#">Lorem ipsum</a></li>
+                <li><a className="hover:text-white transition-colors" href="#">Lorem ipsum</a></li>
+                <li><a className="hover:text-white transition-colors" href="#">Lorem ipsum</a></li>
+                <li><a className="hover:text-white transition-colors" href="#">Lorem ipsum</a></li>
+                <li><a className="hover:text-white transition-colors" href="#">Lorem ipsum</a></li>
+              </ul>
+              <ul className="text-white/80 space-y-2 sm:space-y-3">
+                <li><a className="hover:text-white transition-colors" href="#">Lorem ipsum</a></li>
+                <li><a className="hover:text-white transition-colors" href="#">Lorem ipsum</a></li>
+                <li><a className="hover:text-white transition-colors" href="#">Lorem ipsum</a></li>
+                <li><a className="hover:text-white transition-colors" href="#">Lorem ipsum</a></li>
+                <li><a className="hover:text-white transition-colors" href="#">Lorem ipsum</a></li>
+              </ul>
+            </div>
           </div>
 
-          {/* Resources */}
-          <div>
-            <h3 className="text-lg font-bold mb-4">Resources</h3>
-            <ul className="space-y-2 text-sm">
-              <li><Link href="/students/portal" className="text-gray-300 hover:text-white transition">Student Portal</Link></li>
-              <li><Link href="/library" className="text-gray-300 hover:text-white transition">Library</Link></li>
-              <li><Link href="/downloads" className="text-gray-300 hover:text-white transition">Downloads</Link></li>
-              <li><Link href="/contact" className="text-gray-300 hover:text-white transition">Contact Us</Link></li>
-              <li><Link href="/careers" className="text-gray-300 hover:text-white transition">Careers</Link></li>
-            </ul>
-          </div>
+          {/* Contact Us */}
+            <div className="sm:col-span-2 md:col-span-4 mt-0 md:mt-[-100px]">
+            <div className="grid grid-cols-1 gap-4 sm:gap-6 lg:gap-8">
+              {/* Follow Us Section */}
+              <div className="text-left">
+                <div className="grid grid-cols-1 gap-3 sm:gap-4 lg:gap-8">
+                  <span className="text-sm sm:text-base font-normal font-stix">
+                    Follow Us
+                  </span>
+                  <div className="flex items-center justify-start gap-2.5 sm:gap-2.5 lg:gap-3">
+                    <a href="#" aria-label="facebook" className="text-white hover:text-orange-400 transition-colors"><svg className="w-5 h-5" viewBox="0 0 24 24" fill="currentColor"><path d="M9.198 21.5h4v-8.01h3.604l.396-3.98h-4V7.5a1 1 0 011-1h3v-4h-3a5 5 0 00-5 5v2.01h-2l-.396 3.98h2.396v8.01z"/></svg></a>
+                    <a href="#" aria-label="twitter" className="text-white hover:text-orange-400 transition-colors"><svg className="w-5 h-5" viewBox="0 0 24 24" fill="currentColor"><path d="M19.633 7.997c.013.175.013.349.013.523 0 5.325-4.053 11.461-11.46 11.461-2.282 0-4.402-.661-6.186-1.809.324.037.636.05.973.05a8.07 8.07 0 005.001-1.721 4.036 4.036 0 01-3.767-2.793c.249.037.499.062.761.062.361 0 .724-.05 1.061-.137a4.027 4.027 0 01-3.23-3.953v-.05c.537.299 1.16.486 1.82.511a4.022 4.022 0 01-1.796-3.354c0-.748.199-1.434.548-2.032a11.457 11.457 0 008.306 4.215c-.062-.3-.1-.611-.1-.923a4.026 4.026 0 016.968-2.756 7.936 7.936 0 002.556-.973 4.02 4.02 0 01-1.771 2.22 8.073 8.073 0 002.319-.624 8.645 8.645 0 01-2.019 2.083z"/></svg></a>
+                    <a href="#" aria-label="youtube" className="text-white hover:text-orange-400 transition-colors"><svg className="w-5 h-5" viewBox="0 0 24 24" fill="currentColor"><path d="M21.593 7.203a2.506 2.506 0 00-1.762-1.766C18.265 5.007 12 5 12 5s-6.264-.007-7.831.404a2.56 2.56 0 00-1.766 1.778c-.413 1.566-.417 4.814-.417 4.814s-.004 3.264.406 4.814c.23.857.905 1.534 1.763 1.765 1.582.43 7.83.437 7.83.437s6.265.007 7.831-.403a2.515 2.515 0 001.767-1.763c.414-1.565.417-4.812.417-4.812s.02-3.265-.407-4.831zM9.996 15.005l.005-6 5.207 3.005-5.212 2.995z"/></svg></a>
+                    <a href="#" aria-label="linkedin" className="text-white hover:text-orange-400 transition-colors"><svg className="w-5 h-5" viewBox="0 0 24 24" fill="currentColor"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 01-2.063-2.065 2.064 2.064 0 112.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg></a>
+                    <a href="#" aria-label="instagram" className="text-white hover:text-orange-400 transition-colors"><svg className="w-5 h-5" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/></svg></a>
+                  </div>
+                </div>
+              </div>
 
-          {/* Contact Info */}
-          <div>
-            <h3 className="text-lg font-bold mb-4">Contact Us</h3>
-            <div className="space-y-3 text-sm text-gray-300">
-              <div className="flex items-start gap-2">
-                <svg className="w-5 h-5 flex-shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" />
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" />
-                </svg>
-                <p>{getAddress('full')}</p>
+              {/* Contact Us Section */}
+              <div className="grid grid-cols-1 gap-3 sm:gap-4 lg:gap-6">
+                <h4 className="text-sm sm:text-base lg:text-lg font-normal text-white font-stix">Contact us</h4>
+                <div className="grid grid-cols-1 gap-3 sm:gap-4 md:gap-6 lg:gap-8 text-xs sm:text-xs lg:text-sm text-white/80">
+              <div>
+                <div className="flex items-start gap-2.5 sm:gap-3">
+                  <svg className="w-4 h-4 sm:w-5 sm:h-5 mt-0.5 text-yellow-400 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20"><path fillRule="evenodd" d="M5.05 4.05a7 7 0 119.9 9.9L10 18.9l-4.95-4.95a7 7 0 010-9.9zM10 11a2 2 0 100-4 2 2 0 000 4z" clipRule="evenodd"></path></svg>
+                  <div>
+                    <p className="font-medium text-white text-xs sm:text-sm">Kalinga University</p>
+                    <p className="text-[10px] sm:text-xs leading-relaxed">Kotni, Near Mantralaya,<br/>Naya Raipur - 492101, Chhattisgarh, India</p>
+                  </div>
+                </div>
               </div>
-              <div className="flex items-center gap-2">
-                <svg className="w-5 h-5 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
-                  <path d="M2 3a1 1 0 011-1h2.153a1 1 0 01.986.836l.74 4.435a1 1 0 01-.54 1.06l-1.548.773a11.037 11.037 0 006.105 6.105l.774-1.548a1 1 0 011.059-.54l4.435.74a1 1 0 01.836.986V17a1 1 0 01-1 1h-2C7.82 18 2 12.18 2 5V3z" />
-                </svg>
-                <a href={getPhone('general').href} className="hover:text-white transition">{getPhone('general').display}</a>
+              <div className="flex items-center gap-2.5 sm:gap-3">
+                <svg className="w-4 h-4 sm:w-5 sm:h-5 text-yellow-400 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z"/></svg>
+                <a href="tel:+91-9907252100" className="text-[10px] sm:text-xs break-all">+91-9907252100</a>
               </div>
-              <div className="flex items-center gap-2">
-                <svg className="w-5 h-5 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
-                  <path d="M2.003 5.884L10 9.882l7.997-3.998A2 2 0 0016 4H4a2 2 0 00-1.997 1.884z" />
-                  <path d="M18 8.118l-8 4-8-4V14a2 2 0 002 2h12a2 2 0 002-2V8.118z" />
-                </svg>
-                <a href={getEmail('general').href} className="hover:text-white transition break-all">{getEmail('general').display}</a>
+              <div className="flex items-center gap-2.5 sm:gap-3">
+                <svg className="w-4 h-4 sm:w-5 sm:h-5 text-yellow-400 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"/></svg>
+                <a href="mailto:registrar@kalingauniversity.ac.in" className="text-[10px] sm:text-xs break-all">registrar@kalingauniversity.ac.in</a>
+              </div>
+              <div className="flex justify-start sm:justify-end">
+                <a href="#" className="inline-flex items-center gap-2 text-xs sm:text-sm text-white hover:text-white/80 transition-colors">
+                  Get Direction 
+                  <span className="inline-flex items-center justify-center bg-white text-[#972B28] rounded w-4 h-4 sm:w-5 sm:h-5 text-[10px] sm:text-xs">
+                    <svg width="10" height="10" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" className="w-3 h-3 sm:w-3 sm:h-3">
+                      <path d="M7 17L17 7" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
+                      <path d="M8 7H17V16" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
+                    </svg>
+                  </span>
+                </a>
+                </div>
               </div>
             </div>
           </div>
         </div>
-      </div>
-
-      {/* Bottom Bar */}
-      <div className="border-t border-gray-700">
-        <div className="container mx-auto px-4 py-4">
-          <div className="flex flex-col md:flex-row justify-between items-center gap-2 text-sm text-gray-400">
-            <p>&copy; {new Date().getFullYear()} Kalinga University. All rights reserved.</p>
-            <div className="flex gap-4">
-              <Link href="/privacy-policy" className="hover:text-white transition">Privacy Policy</Link>
-              <Link href="/terms" className="hover:text-white transition">Terms & Conditions</Link>
-              <Link href="/sitemap" className="hover:text-white transition">Sitemap</Link>
-            </div>
-          </div>
         </div>
+
+        {/* Copyright */}
+        {/* <div className="mt-12 pt-6 border-t border-white/10 text-center text-sm text-gray-400">
+          © 2015 Kalinga University
+        </div> */}
+          </div>
+          <div
+            aria-hidden="true"
+            className="pointer-events-none pt-6 sm:pt-6 pb-4 sm:pb-8 lg:pb-0 overflow-x-hidden px-4 sm:px-0"
+          >   
+            <h2
+              className="footer-decorative-text leading-none pb-4 sm:pb-8 lg:pb-0 text-center max-w-full"
+               style={{
+                    color: 'transparent',
+                    WebkitTextStroke: '1.57px #FFFFFF',
+                    fontFamily: 'STIX Two Math, serif',
+                    fontWeight: 400,
+                    fontStyle: 'normal',
+                    transform: 'scale(1)',
+                    transformOrigin: 'center',
+                    wordBreak: 'break-word',
+                    overflowWrap: 'break-word'
+                  }}
+            >
+              Kalinga University
+            </h2>
+          </div>
       </div>
     </footer>
-  );
-};
-
-export default Footer;
-
+    </>
+  )
+}

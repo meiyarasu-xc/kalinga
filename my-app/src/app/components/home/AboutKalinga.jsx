@@ -1,8 +1,16 @@
-import React from 'react'
+"use client"
+import React, { useState } from 'react'
 import Image from 'next/image'
 import GlobalArrowButton from '../general/global-arrow_button'
-
+import Link from 'next/link'
 const AboutKalinga = () => {
+  const [isExpanded, setIsExpanded] = useState(false)
+  
+  const fullText = "Established in 2013, Kalinga University, Raipur stands as one of the best private universities in Chhattisgarh, strategically located in the Smart City of New Raipur.With a 50-acre green campus, Centres of Excellence, and strong industry placement partnerships, Kalinga University is dedicated to nurturing global leaders through innovation, inclusivity, and excellence.Home to students from over 29+countries, the University offers state-of-the-art education in Arts & Humanities, Commerce & Management,Education,IT mention full form of this, Law, Pharmacy,Science and Technology supported by global collaborations with IBM, Cisco, Bosch, and more."
+  
+  const truncateLimit = 200
+  const truncatedText = fullText.length > truncateLimit ? fullText.slice(0, truncateLimit) + '...' : fullText
+  const hiddenText = fullText.length > truncateLimit ? fullText.slice(truncateLimit) : ''
   return (
     <>
       <style dangerouslySetInnerHTML={{__html: `
@@ -23,26 +31,41 @@ const AboutKalinga = () => {
       <section className="py-16 ">
         <div className="container mx-auto px-5 flex justify-center relative">
           {/* Single dark blue panel with overlapping image */}
-          <div className="relative bg-[var(--dark-blue)] rounded-2xl p-8 md:p-12 lg:p-16 text-white overflow-visible shadow-2xl w-full max-w-[1254px] h-auto md:min-h-[561px]">
-            <div className="grid md:grid-cols-2 gap-8 items-start relative z-1">
+          <div className={`relative bg-[var(--dark-blue)] rounded-2xl p-8 md:p-12 lg:p-16 text-white overflow-visible shadow-2xl w-full max-w-[1254px] transition-all duration-300 ${isExpanded ? 'min-h-[700px] md:min-h-[800px] pb-40 md:pb-48' : 'min-h-[500px] md:min-h-[600px] pb-28 md:pb-36'}`}>
+            <div className={`grid md:grid-cols-2 gap-8 items-start relative z-1 transition-all duration-300 ${isExpanded ? 'mb-16 md:mb-20' : 'mb-12 md:mb-16'}`}>
               {/* Left: Title and button */}
               <div className="space-y-6">
                 <h2 className="font-stix text-3xl md:text-4xl lg:text-5xl leading-tight">
-                  Lorem ipsum dolor sit amet, consectetur adipiscing eli
+                Kalinga University — The Pride of Central India
                 </h2>
                 <div className="mt-6">
+                <Link href="/about-us" passHref legacyBehavior>
+                <a className="inline-flex">
                 <GlobalArrowButton className="!bg-white !text-black"
                 arrowClassName="!bg-[var(--button-red)]"
                 arrowIconClassName="!text-white"
                 textClassName="!text-black"
-                >Admissions</GlobalArrowButton>
+                >Learn More</GlobalArrowButton>
+                </a>
+                </Link>
                 </div>
               </div>
 
               {/* Right: Body text */}
               <div className="text-sm md:text-base text-white/90 leading-relaxed space-y-3">
                 <p>
-                  Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et do
+                  {isExpanded ? fullText : truncatedText}
+                  {fullText.length > truncateLimit && (
+                    <>
+                      {' '}
+                      <button
+                        onClick={() => setIsExpanded(!isExpanded)}
+                        className="text-orange-400 hover:text-orange-300 font-medium text-sm transition-colors cursor-pointer underline underline-offset-2"
+                      >
+                        {isExpanded ? 'Read Less' : 'Read More'}
+                      </button>
+                    </>
+                  )}
                 </p>
               </div>
             </div>
@@ -63,7 +86,7 @@ const AboutKalinga = () => {
             </div>
 
           {/* Overlapping student image on the right side */}
-          <div className="absolute right-8 md:right-16 lg:right-15 top-1/2 -translate-y-27 z-1 hidden md:block">
+          <div className={`absolute right-8 md:right-16 lg:right-15 z-1 hidden md:block transition-all duration-300 ${isExpanded ? 'top-[70%] -translate-y-[40%]' : 'top-1/2 -translate-y-[15%]'}`}>
             <div className="relative w-[555px] h-[452px] rounded-[10px] overflow-hidden shadow-2xl">
               <Image
                 src="https://kalinga-university.s3.ap-south-1.amazonaws.com/Home/about-kalinga.webp"

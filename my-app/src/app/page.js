@@ -16,6 +16,7 @@ import AdmissionCareer from "./components/general/admission_cta";
 import Achievements from "./components/home/achievements";
 import Testimonials from "./components/home/Testimonials";
 import Scroll from "./components/home/Scroll";
+import AwardsScrollbar from "./components/home/awards-scrollbar";
 
 const quickLinks = [
   {
@@ -86,7 +87,7 @@ export default function Home() {
       <Achievements />
       <AccreditationRanking />
       <AboutKalinga />
-      {/* <Programs /> */}
+      <Programs />
       <FeatureCards />
       <Facilities />
       <Placements />
@@ -100,6 +101,7 @@ export default function Home() {
 />
       <ResearchInnovation />
       <CampusTour />
+      <AwardsScrollbar />
       <NewsEvents />
       <SocialThumbs />
       <AdmissionCareer />

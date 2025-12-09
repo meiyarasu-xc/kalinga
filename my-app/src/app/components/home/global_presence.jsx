@@ -3,8 +3,8 @@ import Image from 'next/image'
 
 const GlobalPresence = ({ 
   subtitle = "Global Presence",
-  title = "Lorem ipsum dolor sit amet, consectetur",
-  description = "Home to students from 50+ countries, Kalinga University fosters global learning through exchange programs, international collaborations, and a culturally rich campus environment.",
+  title = "Supporting Global Students at Every Step",
+  description = "Your home away from home ,Our International Students Cell guides you from admission to graduation. From visa support to cultural integration, we ensure a smooth transition.Learn, grow, and thrive in a truly global community at Kalinga University.",
   logos = ['Infosys','Citi','Microsoft','Adobe','Cognizant'],
   imageUrl = "https://kalinga-university.s3.ap-south-1.amazonaws.com/Home/globe-skin-color.png",
   imageAlt = "Global map",
@@ -18,13 +18,13 @@ const GlobalPresence = ({
       <div className="container mx-auto px-4 lg:px-6">
         <div className={`mx-auto ${backgroundColor} rounded-xl px-4 py-8 sm:p-6 md:p-12 text-center text-white relative w-full h-auto min-h-[500px] sm:min-h-[550px] md:h-[571px]`}>
         <div className="max-w-4xl mx-auto">
-          <h5 className={`text-base font-plus-jakarta-sans !sm:text-lg md:text-xl !lg:text-[25px] ${subtitleColor} mb-2 sm:mb-3 font-medium leading-[25px] text-center`}>
+          <h5 className={`text-base font-plus-jakarta-sans !sm:text-lg md:text-xl !lg:text-[25px] ${subtitleColor} mb-2 sm:mb-3 font-medium leading-[25px] text-left md:text-center`}>
             {subtitle}
           </h5>
           <h2 className={`font-stix text-2xl sm:text-3xl md:text-4xl lg:text-[50px] my-3 sm:my-4 leading-tight px-2 ${titleColor}`}>
             {title}
           </h2>
-          <p className={`text-xs sm:text-sm md:text-[16px] ${descriptionColor} leading-relaxed px-2 sm:px-4 font-plus-jakarta-sans text-center`}>
+          <p className={`text-xs sm:text-sm md:text-[16px] ${descriptionColor} leading-relaxed px-2 sm:px-4 font-plus-jakarta-sans text-left md:text-center text-center`}>
             {description}
           </p>
         </div>

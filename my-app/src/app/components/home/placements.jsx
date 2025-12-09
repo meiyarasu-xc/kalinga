@@ -25,7 +25,7 @@ const Placements = () => {
   
   return (
     <>
-    <section className="pt-20 sm:py-20 md:py-16 md:pt-0 bg-white overflow-x-hidden">
+    <section className="pt-20 sm:py-20 md:py-16 bg-white overflow-x-hidden">
       <div className="container mx-auto px-3 md:px-16 ">
         <div className="grid md:grid-cols-2 gap-4 sm:gap-6 lg:gap-10 items-center md:items-center">
           {/* Left: title + stats */}
@@ -34,10 +34,10 @@ const Placements = () => {
               Placements
             </h5>
             <h2 className="font-stix text-lg sm:text-xl md:text-2xl lg:text-3xl xl:text-4xl 2xl:text-[50px] mb-2 sm:mb-3 lg:mb-4 leading-tight text-[var(--foreground)]">
-              Lorem ipsum dolor sit amet, consectetur
+            Empowering Careers, One Success Story at a Time
             </h2>
             <p className="text-xs sm:text-sm md:text-[15px] text-gray-600 max-w-xl mb-4 sm:mb-5 lg:mb-6 font-plus-jakarta-sans leading-relaxed sm:leading-normal lg:leading-[25px]">
-              Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed
+            Kalinga University has a strong placement ecosystem that bridges academic excellence with real-world opportunities. With over 400+ corporate recruiters, 8000+ students placed, and 1300+ internships offered, our graduates are shaping successful careers across industries worldwide.Our dedicated Training & Placement Cell ensures every student is career-ready through resume-building sessions, mock interviews, aptitude training, and industry exposure.
             </p>
 
             <div className="flex flex-col sm:flex-row items-start sm:items-start gap-4 sm:gap-3 lg:gap-6 text-gray-800">
@@ -110,7 +110,7 @@ const Placements = () => {
       </div>
 
         {/* Logos strip */}
-        <div className="mt-6 sm:mt-8 lg:mt-8 px-3 sm:px-4 lg:px-6">
+        <div className="mt-20 lg:mt-8 px-3 sm:px-4 lg:px-6 ">
           <div className="bg-[var(--dark-blue)] py-4 sm:py-5 md:py-6 lg:py-8 items-center justify-center overflow-hidden relative w-full h-auto min-h-[140px] sm:min-h-[160px] md:min-h-[180px] lg:h-[200px] rounded-xl">
             {/* Text stacked above logos */}
             <div className="flex flex-col items-center text-left gap-2 sm:gap-3 md:gap-4 lg:gap-5 w-full">

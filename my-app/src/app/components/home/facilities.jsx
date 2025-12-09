@@ -166,7 +166,7 @@ export default function Facilities() {
             <div className="sm:-mt-6 md:-mt-8 lg:-mt-10 xl:-mt-12">
               {/* <div className="w-12 h-1 bg-orange-500 mb-4"></div> */}
               <h6 className="text-white mb-3 sm:mb-5 md:mb-7 !text-lg sm:!text-xl md:!text-[25px] font-plus-jakarta-sans">Facilities</h6>
-              <h2 className="font-stix text-lg sm:text-xl md:text-2xl lg:text-3xl xl:text-4xl 2xl:text-[50px] leading-tight">Lorem ipsum dolor sit amet, consectetur</h2>
+              <h2 className="font-stix text-lg sm:text-xl md:text-2xl lg:text-3xl xl:text-4xl 2xl:text-[50px] leading-tight">Life at Kalinga — Beyond Classrooms</h2>
             </div>
 
             <div className="flex flex-col justify-around flex-grow pb-4 sm:pb-6 md:pb-8 lg:pb-12">

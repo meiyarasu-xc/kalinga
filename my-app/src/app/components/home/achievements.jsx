@@ -1,6 +1,7 @@
 'use client'
 
 import React from 'react'
+import Link from 'next/link'
 import { Swiper, SwiperSlide } from 'swiper/react'
 import { Navigation } from 'swiper/modules'
 import 'swiper/css'
@@ -10,27 +11,75 @@ import GlobalArrowButton from '../general/global-arrow_button'
 const achievements = [
   {
     id: 1,
-    title: 'Student',
-    number: '3300 +',
-    description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed',
+    title: 'Students',
+    number: '8000+',
+    description: 'Learners across diverse disciplines.',
   },
   {
     id: 2,
-    title: 'Research Center',
-    number: '100 +',
-    description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed',
+    title: 'International Students',
+    number: '600+',
+    description: 'From 29+ countries.',
   },
   {
     id: 3,
-    title: 'Faculty',
-    number: '500 +',
-    description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed',
+    title: 'Scholarships Distributed',
+    number: 'INR 3 Cr+',
+    description: 'Enabling access and excellence.',
   },
   {
     id: 4,
     title: 'Programs',
-    number: '150 +',
-    description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed',
+    number: '130+',
+    description: 'Undergraduate, postgraduate, and doctoral.',
+  },
+  {
+    id: 5,
+    title: 'Recruitment Partners',
+    number: '400+',
+    description: 'Leading organizations and firms.',
+  },
+  {
+    id: 6,
+    title: 'Research Publications',
+    number: '3360+',
+    description: 'Peer-reviewed contributions.',
+  },
+  {
+    id: 7,
+    title: 'Patents',
+    number: '510+',
+    description: 'Innovations protected.',
+  },
+  {
+    id: 8,
+    title: 'Sponsored Research Projects',
+    number: '160+',
+    description: 'Industry and government funded.',
+  },
+  {
+    id: 9,
+    title: 'Consultancy Projects',
+    number: '130+',
+    description: 'Applied solutions for partners.',
+  },
+  {
+    id: 10,
+    title: 'MoUs Signed',
+    number: '200+',
+    description: 'Strategic academic collaborations.',
+  },
+  {
+    id: 11,
+    title: 'Centres of Excellence',
+    number: '7',
+    description: 'Specialized research and innovation hubs.',
+  },
+  {
+    id: 12,
+    title: 'Laboratories',
+    number: '90+',
+    description: 'State-of-the-art lab facilities.',
   },
 ]
 
@@ -101,23 +150,27 @@ export default function Achievements() {
             {/* Left Side - Heading and Button */}
             <div className="flex flex-col justify-center">
               <h2 className="font-stix text-2xl sm:text-3xl md:text-4xl lg:text-5xl text-[var(--foreground)] mb-6 lg:mb-8 leading-tight">
-                Lorem ipsum dolor sit amet, consectetur
+              Our Growth Story in Numbers
               </h2>
               <div>
-                <GlobalArrowButton className="w-full sm:w-[173px] h-[44px]">
-                  Learn More
-                </GlobalArrowButton>
+                <Link href="/about-us" passHref legacyBehavior>
+                  <a className="inline-flex">
+                    <GlobalArrowButton className="w-full sm:w-[173px] h-[44px]">
+                      Learn More
+                    </GlobalArrowButton>
+                  </a>
+                </Link>
               </div>
             </div>
 
             {/* Right Side - Swiper Slider */}
             <div className="relative">
               {/* Navigation Buttons - Positioned below 2nd card, aligned to left */}
-              <div className="achievements-nav-buttons flex items-center gap-3 justify-center sm:justify-start pointer-events-auto">
+              <div className="achievements-nav-buttons flex items-center gap-3 justify-center sm:justify-start pointer-events-auto !z-[9]">
                 <div className="bg-white p-[2px] shadow-lg rounded-lg pointer-events-none">
                   <button
                     type="button"
-                    className="achievements-swiper-button-prev w-10 h-10 sm:w-12 sm:h-12 rounded-lg bg-[var(--button-red)] hover:bg-[#A2A2A2] text-white flex items-center justify-center hover:opacity-90 transition-opacity cursor-pointer pointer-events-auto relative"
+                    className="achievements-swiper-button-prev w-10 h-10 sm:w-12 sm:h-12 rounded-lg bg-[var(--button-red)] hover:bg-[#A2A2A2] text-white flex items-center justify-center hover:opacity-90 transition-opacity cursor-pointer pointer-events-auto relative z-20"
                   >
                     <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                       <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" />
@@ -158,7 +211,7 @@ export default function Achievements() {
               >
                 {achievements.map((achievement) => (
                   <SwiperSlide key={achievement.id} className="!h-auto">
-                    <div className="bg-[var(--light-gray)] rounded-xl p-6 sm:p-8 flex flex-col justify-between">
+                    <div className="bg-[var(--light-gray)] rounded-xl p-6 sm:p-6 flex flex-col justify-between">
                       <div>
                         <h3 className="text-lg sm:text-xl font-stix font-semibold text-[var(--foreground)] mb-4">
                           {achievement.title}

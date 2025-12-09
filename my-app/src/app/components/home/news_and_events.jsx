@@ -1,11 +1,12 @@
 'use client'
-import React, { useState } from 'react'
+import React, { useState, useRef } from 'react'
 import Image from 'next/image'
 import GlobalArrowButton from '../general/global-arrow_button'
 import FeaturedNewsCard from '../general/featured_news_card'
 
 export default function NewsEvents() {
-  const [selectedDay, setSelectedDay] = useState(28)
+  const [selectedIdx, setSelectedIdx] = useState(0)
+  const datesScrollRef = useRef(null)
 
   const newsItems = [
     {
@@ -26,6 +27,24 @@ export default function NewsEvents() {
       title: 'Lorem ipsum dolor sit amet, consectetur',
       image: 'https://kalinga-university.s3.ap-south-1.amazonaws.com/common/student.jpg',
     },
+    {
+      id: 4,
+      date: '27 July 2023',
+      title: 'Lorem ipsum dolor sit amet, consectetur',
+      image: 'https://kalinga-university.s3.ap-south-1.amazonaws.com/common/student.jpg',
+    },
+    {
+      id: 5,
+      date: '27 July 2023',
+      title: 'Lorem ipsum dolor sit amet, consectetur',
+      image: 'https://kalinga-university.s3.ap-south-1.amazonaws.com/common/student.jpg',
+    },
+    {
+      id: 6,
+      date: '27 July 2023',
+      title: 'Lorem ipsum dolor sit amet, consectetur',
+      image: 'https://kalinga-university.s3.ap-south-1.amazonaws.com/common/student.jpg',
+    },
   ]
 
   const events = [
@@ -33,6 +52,28 @@ export default function NewsEvents() {
     { title: 'Lorem Ipsum Dolor Sit Amet', description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.' },
     { title: 'Lorem Ipsum Dolor Sit Amet', description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.' },
   ]
+
+  // Extract day and month from newsItems dates
+  const dateItems = newsItems.map((item) => {
+    const parts = item.date.split(' ')
+    const day = parts[0]
+    const month = parts[1] || ''
+    return { day, month }
+  })
+
+  const handlePrevDay = () => {
+    setSelectedIdx((prev) => (prev - 1 + dateItems.length) % dateItems.length)
+    if (datesScrollRef.current) {
+      datesScrollRef.current.scrollBy({ left: -120, behavior: 'smooth' })
+    }
+  }
+
+  const handleNextDay = () => {
+    setSelectedIdx((prev) => (prev + 1) % dateItems.length)
+    if (datesScrollRef.current) {
+      datesScrollRef.current.scrollBy({ left: 120, behavior: 'smooth' })
+    }
+  }
 
   return (
     <>
@@ -125,31 +166,39 @@ export default function NewsEvents() {
 
                 {/* Day selector */}
                 <div className="flex items-center justify-center gap-2 sm:gap-4 mb-4 sm:mt-[-30px] pt-3">
-                  <button className="w-8 h-8 sm:w-10 sm:h-10 rounded-full bg-[var(--dark-blue)] flex items-center justify-center text-white   transition-colors flex-shrink-0">
-                    <svg className="w-3 h-3 sm:w-4 sm:h-4" fill="currentColor" viewBox="0 0 24 24">
-                      <polygon points="15,5 9,12 15,19" fill="currentColor"/>
-                    </svg>
+                  <button
+                    onClick={handlePrevDay}
+                    className="w-8 h-8 sm:w-10 sm:h-10 rounded-full bg-[var(--dark-blue)] flex items-center justify-center transition-colors flex-shrink-0 hover:bg-orange-500"
+                    aria-label="Previous day"
+                  >
+                    <img
+                      src="https://kalinga-university.s3.ap-south-1.amazonaws.com/common/arrow.png"
+                      alt="Previous"
+                      className="sm:w-10 sm:h-10 object-contain rotate-0"
+                    />
                   </button>
 
-                  <div className="flex items-center gap-2 sm:gap-4 md:gap-6 overflow-x-auto date-scrollbar-hide flex-1 justify-center px-2">
-                    {[28, 29, 30, 1, 2, 3].map((day, idx) => {
-                      const months = ['October', 'October', 'October', 'November', 'November', 'November']
-                      const isActive = selectedDay === day
+                  <div
+                    ref={datesScrollRef}
+                    className="flex items-center gap-2 sm:gap-4 md:gap-6 overflow-x-auto date-scrollbar-hide flex-1 justify-center px-4 sm:px-6 first:ml-4"
+                  >
+                    {dateItems.map((item, idx) => {
+                      const isActive = selectedIdx === idx
                       return (
                         <button
                           key={idx}
-                          onClick={() => setSelectedDay(day)}
-                          className={`flex-shrink-0 flex flex-col items-center transition-all duration-200 ${isActive ? '' : 'text-white/70 hover:text-white'}`}
+                          onClick={() => setSelectedIdx(idx)}
+                          className={`flex-shrink-0 flex flex-col items-center transition-all duration-200 first:ml-15 last:mr-2 ${isActive ? '' : 'text-white/70 hover:text-white'}`}
                         >
                           {isActive ? (
                             <div className={`bg-orange-500 text-white rounded-md w-12 h-12 sm:w-14 sm:h-14 md:w-16 md:h-16 flex flex-col items-center justify-center font-bold shadow-md`}>
-                              <span className="text-xl sm:text-2xl md:text-3xl">{day}</span>
-                              <span className="text-[8px] sm:text-[10px] md:text-xs font-medium">{months[idx]}</span>
+                              <span className="text-xl sm:text-2xl md:text-3xl">{item.day}</span>
+                              <span className="text-[8px] sm:text-[10px] md:text-xs font-medium">{item.month}</span>
                             </div>
                           ) : (
                             <div className="flex flex-col items-center gap-0.5">
-                              <span className="text-sm sm:text-base md:text-lg font-semibold">{day}</span>
-                              <span className="text-[10px] sm:text-xs text-white/60">{months[idx]}</span>
+                              <span className="text-sm sm:text-base md:text-lg font-semibold">{item.day}</span>
+                              <span className="text-[10px] sm:text-xs text-white/60">{item.month}</span>
                             </div>
                           )}
                         </button>
@@ -157,10 +206,16 @@ export default function NewsEvents() {
                     })}
                   </div>
 
-                  <button className="w-8 h-8 sm:w-10 sm:h-10 rounded-full bg-[var(--dark-blue)] flex items-center justify-center text-white shadow-sm hover:bg-orange-500 transition-colors flex-shrink-0">
-                    <svg className="w-3 h-3 sm:w-4 sm:h-4" fill="currentColor" viewBox="0 0 24 24">
-                      <polygon points="9,5 15,12 9,19" fill="currentColor"/>
-                    </svg>
+                  <button
+                    onClick={handleNextDay}
+                    className="w-8 h-8 sm:w-10 sm:h-10 rounded-full bg-[var(--dark-blue)] flex items-center justify-center shadow-sm hover:bg-orange-500 transition-colors flex-shrink-0"
+                    aria-label="Next day"
+                  >
+                    <img
+                      src="https://kalinga-university.s3.ap-south-1.amazonaws.com/common/arrow.png"
+                      alt="Next"
+                      className="sm:w-10 sm:h-10 object-contain rotate-180"
+                    />
                   </button>
                 </div>
 
