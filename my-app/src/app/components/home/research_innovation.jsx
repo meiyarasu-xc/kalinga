@@ -24,7 +24,7 @@ export default function ResearchInnovation() {
               Lorem ipsum dolor sit amet, consectetur
             </h2>
             <div className="mt-4 sm:mt-6">
-              <GlobalArrowButton className="w-full sm:w-[173px] h-[40px] sm:h-[44px]">
+              <GlobalArrowButton >
                 Learn More
               </GlobalArrowButton>
             </div>

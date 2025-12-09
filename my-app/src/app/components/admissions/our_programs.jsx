@@ -231,7 +231,7 @@ export default function OurPrograms() {
                   <div className="flex flex-col sm:flex-row gap-2 md:gap-3">
                     {/* Check Eligibility Button - Dark Red with white arrow in white square */}
                     <GlobalArrowButton
-                      className="!bg-[var(--dark-orange-red)] !text-[var(--background)] !w-full whitespace-nowrap text-xs md:text-sm lg:text-base !h-[38px] md:!h-[40px] !rounded-lg !px-1"
+                      className="!bg-[var(--dark-orange-red)] !text-[var(--background)] whitespace-nowrap text-xs md:text-sm lg:text-base !h-[38px] md:!h-[40px] !rounded-lg !px-1"
                       arrowClassName="!bg-[var(--background)] !px-1"
                       arrowIconClassName="!text-[var(--button-red)]"
                       textClassName="!text-[12px] md:!text-[14px] !px-2 md:!px-3"
@@ -241,7 +241,7 @@ export default function OurPrograms() {
 
                     {/* Apply Now Button - Dark Red with white arrow in white square */}
                     <GlobalArrowButton
-                      className="!bg-[var(--button-red)] !text-[var(--background)] !w-full whitespace-nowrap !text-xs md:!text-sm lg:!text-base !h-[38px] md:!h-[40px] !rounded-lg !px-1"
+                      className="!bg-[var(--button-red)] !text-[var(--background)] whitespace-nowrap !text-xs md:!text-sm lg:!text-base !h-[38px] md:!h-[40px] !rounded-lg !px-1"
                       arrowClassName="!bg-[var(--background)] !px-1 !text-white"
                       arrowIconClassName="!text-[var(--button-red)]"
                       textClassName="!text-[12px] md:!text-[14px] !px-2 md:!px-3"

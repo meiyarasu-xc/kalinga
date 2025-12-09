@@ -172,6 +172,8 @@ export default function Testimonials() {
                 {/* Section Heading */}
                 <div className="w-full pt-8">
                     <SectionHeading 
+                        subtitleClassName="text-center"
+                        titleClassName="text-center"
                         subtitle="What Our Students Say"
                         title="Lorem ipsum dolor sit amet, consectetur"
                     />
@@ -207,14 +209,14 @@ export default function Testimonials() {
                                     ref={(el) => {
                                         if (el) cardRefs.current[`card-${item.id}`] = { current: el };
                                     }}
-                                    className="w-full rounded-xl sm:rounded-2xl overflow-hidden relative transition-colors duration-500 border"
+                                    className="w-full overflow-hidden relative transition-colors duration-500  rounded-xl sm:rounded-2xl"
                                     style={{
                                         backgroundColor: styles.bgColor,
                                         borderColor: isActive ? '#f1f5f9' : 'transparent',
                                     }}
                                 >
                                     <div
-                                        className="flex flex-col md:flex-row gap-4 sm:gap-6 md:gap-12 p-4 sm:p-6 md:p-10 pb-12 sm:pb-16 md:pb-10 transition-opacity duration-500"
+                                        className="flex flex-col md:flex-row gap-4 sm:gap-6 md:gap-12 p-4 sm:p-6 md:p-10 pb-12 sm:pb-16 md:pb-10 transition-opacity  rounded-xl sm:rounded-2xl duration-500 border-2 border-gray-300"
                                         style={{ opacity: styles.contentOpacity }}
                                     >
                                         {/* Image */}

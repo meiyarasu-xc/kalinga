@@ -49,7 +49,7 @@ export default function ScholarshipsSlider() {
             </p>
           </div>
           <div className="flex-shrink-0">
-            <GlobalArrowButton className="!w-full md:!w-auto">
+            <GlobalArrowButton >
               Explore Now
             </GlobalArrowButton>
           </div>

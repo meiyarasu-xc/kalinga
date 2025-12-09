@@ -4,7 +4,7 @@ import Link from 'next/link';
 import GlobalArrowButton from '../general/global-arrow_button';
 const HeroSection = () => {
   return (
-    <section className="-mt-[92px] relative h-[500px] md:h-[600px] lg:h-[700px]">
+    <section className="-mt-[92px] relative h-[500px] md:h-[600px] lg:h-[700px] md:mx-5 mx-0">
       {/* Background Image */}
       <div 
         className="absolute inset-0 bg-cover bg-center bg-no-repeat  rounded-xl sm:rounded-4xl h-full w-full"

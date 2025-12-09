@@ -97,7 +97,7 @@ export default function Home() {
   texts={['Admission Open 2026']} 
   velocity={100}
   numCopies={6}
-  className="font-stix"
+  className="font-stix stroke-1 !text-var(--button-red)"
 />
       <ResearchInnovation />
       <CampusTour />

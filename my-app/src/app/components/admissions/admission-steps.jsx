@@ -98,7 +98,7 @@ export default function AdmissionSteps() {
             </h2>
           </div>
           <div className="flex-shrink-0">
-            <GlobalArrowButton className="!w-full md:!w-auto">
+            <GlobalArrowButton >
               Explore Now
             </GlobalArrowButton>
           </div>
