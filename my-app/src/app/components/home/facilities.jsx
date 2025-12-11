@@ -2,6 +2,7 @@
 
 import React, { useState, useEffect, useRef } from 'react'
 import Image from 'next/image'
+import SectionHeading from '../../components/general/SectionHeading'
 
 export default function Facilities() {
   const SLIDE_DURATION = 4000
@@ -159,8 +160,8 @@ export default function Facilities() {
           <div className="text-white pt-2 sm:pt-4 md:pt-6 lg:pt-8 space-y-3 sm:space-y-4 md:space-y-6 relative flex flex-col h-full">
             <div className="sm:-mt-6 md:-mt-8 lg:-mt-10 xl:-mt-12">
               {/* <div className="w-12 h-1 bg-orange-500 mb-4"></div> */}
-              <h6 className="text-white mb-3 sm:mb-5 md:mb-7 !text-lg sm:!text-xl md:!text-[25px] font-plus-jakarta-sans">Facilities</h6>
-              <h2 className="font-stix text-lg sm:text-xl md:text-2xl lg:text-3xl xl:text-4xl 2xl:text-[50px] leading-tight">Life at Kalinga — Beyond Classrooms</h2>
+              
+              <SectionHeading title="Facilities" subtitle="Life at Kalinga — Beyond Classrooms" titleClassName="text-white" subtitleClassName="text-white" />
             </div>
           </div>
         </div>

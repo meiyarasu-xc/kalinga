@@ -87,12 +87,12 @@ export default function ResearchInnovation() {
           <div className="pt-4 sm:pt-6 md:pt-12">
             <SectionHeading
               subtitle="Research At Kalinga"
-              title="Lorem ipsum dolor sit amet, consectetur"
+              title="At KU, students go beyond classroom learning, transforming ideas into real-world solutions"
               titleClassName="text-[var(--foreground)]"
             />
             <div className="mt-4 sm:mt-6">
               <GlobalArrowButton >
-                Learn More
+              Explore More
               </GlobalArrowButton>
             </div>
           </div>

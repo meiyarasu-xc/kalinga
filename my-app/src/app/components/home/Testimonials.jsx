@@ -166,7 +166,7 @@ export default function Testimonials() {
                     <SectionHeading 
                         subtitleClassName="text-center"
                         titleClassName="text-center"
-                        subtitle="What Our Students Say"
+                        subtitle="Real Stories. Real Success."
                         title="Lorem ipsum dolor sit amet, consectetur"
                     />
                 </h5>

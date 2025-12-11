@@ -2,75 +2,163 @@
 
 import React from "react"
 import Image from "next/image"
+import SectionHeading from "../general/SectionHeading"
 
 const defaultAwards = [
   {
     id: 1,
-    title: "Walk-a-cause Award",
-    subtitle: "By Pratigya Foundation",
-    year: "2018-2019",
-    active: true,
+    year: "2024",
+    title: "Appreciation Certificate as delegate in International Conference on 'Impact of Artificial intelligence in revolutionizing pharmaceutical education and Research'",
+    subtitle: "Kalinga University, Raipur (Chhattisgarh) by Association of Pharmacy Professionals Chhattisgarh Branch",
+    active: false,
   },
   {
     id: 2,
-    title: "Excellence Work In Educational Sector",
-    subtitle: "By National Glory Awards",
-    year: "2018-2019",
-    active: false,
+    year: "2024",
+    title: "Appreciation award",
+    subtitle: "City Center & Lion's club of Raipur",
+    active: true,
   },
   {
     id: 3,
-    title: "Best Research And Innovation University",
-    subtitle: "By Global Leaders Award",
-    year: "2018-2019",
-    active: false,
+    year: "2024",
+    title: "Appreciation award",
+    subtitle: "Choice Consultancy Services Pvt. Ltd.",
+    active: true,
   },
   {
     id: 4,
-    title: "Best Private University",
-    subtitle: "By Education Summit Awards",
-    year: "2019-2020",
-    active: false,
+    year: "2024",
+    title: "Appreciation award",
+    subtitle: "Inter Departmental Lead Agency",
+    active: true,
   },
   {
     id: 5,
-    title: "Best Private University",
-    subtitle: "By Education Summit Awards",
-    year: "2019-2020",
-    active: false,
+    year: "2023-24",
+    title: "Appreciation award",
+    subtitle: "Sambhav Doot Foundation (Ayra)",
+    active: true,
   },
   {
     id: 6,
-    title: "Excellence in Student Support",
-    subtitle: "By National Education Forum",
-    year: "2019-2020",
-    active: false,
+    year: "2022-23",
+    title: "हिंदी महोत्सव",
+    subtitle: "श्री नाथ विश्वविद्यालय, आदित्यपुर, जमशेदपुर (झारखण्ड)",
+    active: true,
   },
   {
     id: 7,
-    title: "Innovation in Research",
-    subtitle: "By Global Innovation Council",
-    year: "2020-2021",
-    active: false,
+    year: "2022-23",
+    title: "Yuva Utsav 2022",
+    subtitle: "Yi Young India",
+    active: true,
   },
-]
+  {
+    id: 8,
+    year: "2020-21",
+    title: "Walk-a-cause Award by",
+    subtitle: "Raipur Police, Chhattishgarh",
+    active: true,
+  },
+  {
+    id: 9,
+    year: "2020-21",
+    title: "Chhattishgarh Youth by",
+    subtitle: "Chhattishgarh Youth",
+    active: true,
+  },
+  {
+    id: 10,
+    year: "2020-21",
+    title: "Jan Shikshan Sansthan",
+    subtitle: "Jan Shikshan Sansthan",
+    active: true,
+  },
+  {
+    id: 11,
+    year: "2020-21",
+    title: "Youth Development for Contributuing works and pre-career guidance",
+    subtitle: "OCBOS",
+    active: true,
+  },
+  {
+    id: 12,
+    year: "2020-21",
+    title: "Best in Social and Community services Award by",
+    subtitle: "Auropath",
+    active: true,
+  },
+  {
+    id: 13,
+    year: "2020-21",
+    title: "Surakshya Sandhan Award by",
+    subtitle: "International Academic and Management Association",
+    active: true,
+  },
+  {
+    id: 14,
+    year: "2020-21",
+    title: "National Education Award 2020 by",
+    subtitle: "ASSOCHAM",
+    active: true,
+  },
+  {
+    id: 15,
+    year: "2019-20",
+    title: "Knowledge Partner in",
+    subtitle: "Chhattisgarh Youth Parliament -II",
+    active: true,
+  },
+  {
+    id: 16,
+    year: "2019-20",
+    title: "Shiksha Bandhan",
+    subtitle: "IAMA",
+    active: true,
+  },
+  {
+    id: 17,
+    year: "2019-20",
+    title: "Best Private University Award by",
+    subtitle: "ASSOCHAM National Educational Awards 2020",
+    active: true,
+  },
+  {
+    id: 18,
+    year: "2018-19",
+    title: "Best Research And Innovation University Award by",
+    subtitle: "Globel Leaders Award",
+    active: true,
+  },
+  {
+    id: 19,
+    year: "2018-19",
+    title: "Excellence Work In Educational Sector by",
+    subtitle: "National Majesty Awards",
+    active: true,
+  },
+  {
+    id: 20,
+    year: "2018-19",
+    title: "Educational Inculcation Award by",
+    subtitle: "Prayag Foundation",
+    active: true,
+  },
+];
 
 export default function AwardsScrollbar({
   awards = defaultAwards,
-  title = "Awards and Accolades",
-  description = "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
+  title = "A Legacy of Achievements",
+  subtitle = " Awards and Accolades",
 }) {
   return (
     <section className="py-10 sm:py-14 bg-white px-4 lg:px-5">
       <div className="">
         {/* Header */}
          <div className="text-left md:text-center mb-6 sm:mb-8">
-          <h2 className="font-stix text-2xl sm:text-3xl md:text-4xl text-[var(--foreground)] mb-3">
-            {title}
-          </h2>
-          <p className="text-[var(--light-text-gray)] text-xs sm:text-sm max-w-3xl mx-auto leading-relaxed">
-            {description}
-          </p>
+          <SectionHeading title={title} subtitle={subtitle} titleClassName="!py-2" />
+         
         </div>
 
         {/* Scrollable timeline */}
@@ -79,7 +167,7 @@ export default function AwardsScrollbar({
             <div className="absolute top-[62px] sm:top-[138px] left-[260px] right-[260px] border-b border-dashed border-gray-500 pointer-events-none z-0" />
 
             <div className="flex gap-6 sm:gap-10 overflow-x-auto pb-6 pt-4 px-8 scrollbar-hide relative z-10 awards-scrollbar">
-             {awards.map((award) => (
+             {awards.map((award) => award.active && (
                <div key={award.id} className="flex flex-col items-center flex-shrink-0 min-w-[200px] sm:min-w-[220px]">
                  {/* Icon + texts with leaf images */}
                  <div className="flex items-center justify-center gap-2 mb-2">

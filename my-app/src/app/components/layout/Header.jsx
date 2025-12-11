@@ -276,8 +276,8 @@ const Header = () => {
 
     },
     {
-      label: 'CTC',
-      href: '/ctc',
+      label: 'CCRC',
+      href: '/career-and-corporate-resource-centre',
     },
     {
       label: 'KIF',
