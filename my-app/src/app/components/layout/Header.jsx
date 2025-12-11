@@ -284,8 +284,8 @@ const Header = () => {
       href: '/kif',
     },
     {
-      label: 'CIF',
-      href: '/cif',
+      label: 'CSR',
+      href: '/csr',
     },
     {
       label: 'ERP Login',
