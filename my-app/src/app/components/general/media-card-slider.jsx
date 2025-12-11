@@ -37,7 +37,7 @@ export default function MediaCardSlider({
         </div>
 
         {/* Slider Section */}
-        <div className="relative py-8">
+        <div className="relative pt-8">
           <Swiper
             modules={[Navigation]}
             spaceBetween={24}

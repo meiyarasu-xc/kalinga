@@ -3,6 +3,8 @@
 import Link from 'next/link';
 import Image from 'next/image';
 import { usePathname } from 'next/navigation';
+import { useBreadcrumb } from './BreadcrumbContext';
+import { useEffect } from 'react';
 
 const routeHeroImages = [
   {
@@ -11,16 +13,34 @@ const routeHeroImages = [
   },
 ];
 
-const Breadcrumb = ({ customBreadcrumbs = null, heroImage = null, pageTitle = null }) => {
+const Breadcrumb = ({ customBreadcrumbs, heroImage, pageTitle }) => {
   const pathname = usePathname();
+  const breadcrumbContext = useBreadcrumb();
+  const { breadcrumbData: contextData } = breadcrumbContext || {};
 
   // Don't show breadcrumb on homepage
   if (pathname === '/') return null;
 
+  // Check global window.__breadcrumbData (for pages that don't want to import anything)
+  useEffect(() => {
+    if (typeof window !== 'undefined' && window.__breadcrumbData && breadcrumbContext?.setBreadcrumbData) {
+      breadcrumbContext.setBreadcrumbData(window.__breadcrumbData);
+      // Clear it after use to avoid stale data
+      delete window.__breadcrumbData;
+    }
+  }, [pathname, breadcrumbContext]);
+
+  // Use context data if available, otherwise use props
+  const finalHeroImage = contextData?.heroImage ?? heroImage;
+  const finalPageTitle = contextData?.pageTitle ?? pageTitle;
+  const finalCustomBreadcrumbs = contextData?.customBreadcrumbs ?? customBreadcrumbs;
+
   // Generate breadcrumbs from path or use custom ones
   const generateBreadcrumbs = () => {
-    if (customBreadcrumbs) return customBreadcrumbs;
+    // If customBreadcrumbs is explicitly provided (even if empty array), use it
+    if (finalCustomBreadcrumbs !== undefined) return finalCustomBreadcrumbs;
 
+    // Otherwise, auto-generate from pathname
     const paths = pathname.split('/').filter(Boolean);
     const breadcrumbs = [{ label: 'Home', href: '/' }];
 
@@ -38,11 +58,18 @@ const Breadcrumb = ({ customBreadcrumbs = null, heroImage = null, pageTitle = nu
   };
 
   const breadcrumbs = generateBreadcrumbs();
-  const resolvedHeroImage =
-    heroImage ||
-    routeHeroImages.find(route => route.match.test(pathname))?.image ||
-    null;
-  const currentPageTitle = pageTitle || breadcrumbs[breadcrumbs.length - 1]?.label || '';
+  
+  // If heroImage is explicitly provided, use it directly (no fallback)
+  // If not provided, check routeHeroImages, otherwise null
+  const resolvedHeroImage = finalHeroImage !== undefined
+    ? finalHeroImage
+    : (routeHeroImages.find(route => route.match.test(pathname))?.image || null);
+  
+  // If pageTitle is explicitly provided, use it directly (no fallback)
+  // If not provided, use last breadcrumb label or empty string
+  const currentPageTitle = finalPageTitle !== undefined
+    ? finalPageTitle
+    : (breadcrumbs[breadcrumbs.length - 1]?.label || '');
 
   return (
     <div className="relative px-5  ">

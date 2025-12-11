@@ -322,20 +322,22 @@ const videoItems = [
   },
 ]
 
-const CCRCHeadIntro = [
+const MentorIntroProps = [
   {
-    name: "Name",
-    designation: "Designation",
-    description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.",
-    imageSrc: "https://kalinga-university.s3.ap-south-1.amazonaws.com/ccrc/ccrclogo.webp",
-    imageAlt: "CCRC Logo",
-  }
+    cardClassName: "",
+    imageSrc: "https://kalinga-university.s3.ap-south-1.amazonaws.com/ccrc/kif/Mr.+Pankaj+Tiwari.webp",
+    title: "Mr. Pankaj Tiwari",
+    subtitle: "Career & Corporate Resource Centre",
+    department: "Director, Kalinga University",
+    message: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
+    quote: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
+   }
 ]
 export default function CCRCPage() {
   return <>
     <ImageContent imageSrc="https://kalinga-university.s3.ap-south-1.amazonaws.com/ccrc/ccrclogo.webp" />
     <ImageListItem items={Items} imageSrc="https://kalinga-university.s3.ap-south-1.amazonaws.com/ccrc/ccrc.webp" title="Benefits for Organisations"  />
-    <DeptHeadIntro items={CCRCHeadIntro} />
+    <DeptHeadIntro items={MentorIntroProps} />
 
     <Cards cards={cards} />
     <Hearfrom items={sliderItems  } title="Hear From Our Clients" />

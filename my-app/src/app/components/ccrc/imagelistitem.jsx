@@ -50,7 +50,7 @@ export default function ImageListItem({
         `}
       </style>
       <div className="container mx-auto ">
-        <div className="grid md:grid-cols-12 grid-cols-6 items-center gap-10">
+        <div className="grid md:grid-cols-12 grid-cols-6 items-center gap-12 justify-between">
           <Image
             src={imageSrc}
             alt={imageAlt}
@@ -59,13 +59,13 @@ export default function ImageListItem({
             className="col-span-6 "
           />
 
-          <div className="col-span-6 gap-5 items-center min-h-[500px] flex flex-col">
+          <div className="col-span-6 gap-5 items-center items-start min-h-[500px] flex flex-col">
             {/* Heading not scrollable */}
             <SectionHeading title={title} titleClassName="!py-2 text-white" />
 
             {/* Scrollable items only */}
             {items && Array.isArray(items) && items.length > 0 && (
-              <ul className="space-y-3 py-2 w-full overflow-y-auto max-h-[180px] ccrc-scrollbar pr-2">
+              <ul className="space-y-3 py-2 w-full overflow-y-auto max-h-inherit ccrc-scrollbar pr-2">
                 {items.map((item, idx) => (
                   <li
                     key={idx}

@@ -74,14 +74,14 @@ const FAQ = ({
                 {/* Question Header */}
                 <button
                   onClick={() => toggleItem(item.id)}
-                  className={`w-full flex items-center justify-between p-4 sm:p-5 md:p-6 transition-colors ${
+                  className={`w-full flex items-center justify-between p-4  transition-colors ${
                     isOpen 
                       ? 'bg-[var(--button-red)] text-white' 
                       : 'bg-gray-100 text-gray-600 hover:bg-gray-200        '
                   }`}
                   aria-expanded={isOpen}
                 >
-                  <h3 className="font-semibold text-left text-sm sm:text-base md:text-lg pr-4 !text-[22px] font-plus-jakarta-sans">
+                  <h3 className=" text-left text-xl  pr-4  font-plus-jakarta-sans">
                     {item.question}
                   </h3>
                   <div className="flex-shrink-0">
@@ -114,7 +114,7 @@ const FAQ = ({
                   }`}
                 >
                   <div className="p-4 sm:p-5 md:p-6 bg-[var(--lite-sand)]">
-                    <p className="text-gray-700 text-sm sm:text-base leading-relaxed font-plus-jakarta-sans">
+                    <p className="text-gray-700 text-sm leading-relaxed font-plus-jakarta-sans">
                       {item.answer}
                     </p>
                   </div>

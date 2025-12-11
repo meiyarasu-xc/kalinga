@@ -155,7 +155,7 @@ export default function Testimonials({ testimonials = [] }) {
     };
 
     return (
-        <div className="md:min-h-screen flex flex-col items-center justify-center overflow-x-hidden selection:bg-orange-100 selection:text-orange-900 py-16 md:py-0">
+        <div className=" flex flex-col items-center justify-center overflow-x-hidden selection:bg-orange-100 selection:text-orange-900 py-16">
             <style jsx>{`
                 ::-webkit-scrollbar { display: none; }
             `}</style>

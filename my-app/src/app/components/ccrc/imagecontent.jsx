@@ -18,47 +18,55 @@ export default function ImageContent({
   description = "The Career and Corporate Resource Centre (CCRC) of Kalinga University bridges academic learning and industrial knowledge through collaborations and customised solutions. Our services include: Corporate Trainings & Psychometric Analysis, Consultancy Services: 360 Degree PMS & HRIS, Corporate Social Responsibility, Training and Placements, and Incubation support. ",
   buttonText = "Read More",
   className = "",
+  hasImage = true,
+  subtitleclassName = "",
 }) {
   const [isExpanded, setIsExpanded] = useState(false);
 
   const toggleExpand = () => {
     setIsExpanded(!isExpanded);
   };
+
+  // grid-cols-6 if hasImage, grid-cols-12 if no image
+  const gridColsClass = hasImage ? "grid-cols-6" : "grid-cols-6";
+  // Main content col-span - 8 if image, 12 if no image, both centered horizontally
+  const mainContentColSpan = hasImage ? "md:col-span-8 text-start" : "md:col-span-12  items-center justify-center text-center";
+
   return (
     <section className={`container rounded-xl mx-auto bg-[var(--light-gray)] my-16  md:p-12 p-6 py-10 ${className}`}>
-      <div className="grid items-center md:grid-cols-12 grid-cols-6  gap-6 ">
-        
-        <Image 
-          src={imageSrc} 
-          alt={imageAlt} 
-          width={imageWidth} 
-          height={imageHeight}
-          className="md:col-span-4 col-span-6 w-9/12 md:w-4/5"
-        />
- 
-        <div className="md:col-span-8 col-span-6 gap-5">
-            <SectionHeading title={title} subtitle={subtitle} titleClassName="!py-2" subtitleClassName="!py-2" />
-            <div className="text-sm pb-4 space-y-3">
-              <p>{description}</p>
-              {isExpanded && (
-                <div className="space-y-3 mt-3">
-                  {additionalContent.map((item, index) => (
-                    <p key={index} className="text-sm">{item}</p>
-                  ))}
-                </div>
-              )}
-            </div>
-            <GlobalArrowButton 
-              variant="transparent" 
-              onClick={toggleExpand}
-              className={isExpanded ? '' : ''}
-            >
-              {isExpanded ? 'Read Less' : buttonText}
-            </GlobalArrowButton>
+      <div className={`grid items-center md:grid-cols-12  ${gridColsClass} gap-6`}>
+        {hasImage && (
+          <Image
+            src={imageSrc}
+            alt={imageAlt}
+            width={imageWidth}
+            height={imageHeight}
+            className="md:col-span-4 col-span-6 w-9/12 md:w-4/5"
+          />
+        )}
+        <div
+          className={`col-span-6 gap-2 flex flex-col  ${mainContentColSpan} md:mx-auto`}
+        >
+          <SectionHeading title={title} subtitle={subtitle} titleClassName="!py-2" subtitleClassName={`!py-2 ${subtitleclassName}`} />
+          <div className="text-sm pb-4 space-y-3">
+            <p>{description}</p>
+            {isExpanded && (
+              <div className="space-y-3 mt-3">
+                {additionalContent.map((item, index) => (
+                  <p key={index} className="text-sm">{item}</p>
+                ))}
+              </div>
+            )}
+          </div>
+          <GlobalArrowButton
+            variant="transparent"
+            onClick={toggleExpand}
+            className={isExpanded ? '' : ''}
+          >
+            {isExpanded ? 'Read Less' : buttonText}
+          </GlobalArrowButton>
         </div>
       </div>
-     
     </section>
   );
 }
-

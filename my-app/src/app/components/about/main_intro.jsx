@@ -24,6 +24,8 @@ export default function MainIntro({
   buttonLabel = defaultContent.buttonLabel,
   showButton = true,
   initialVisibleParagraphs = 2,
+  showImage = true,
+  showKnowMore = true,
   knowMoreLabel = "Know More",
   knowMoreHref = null,
   onKnowMore = null,
@@ -63,7 +65,7 @@ export default function MainIntro({
                 );
               })}
 
-              {knowMoreLabel && (
+              {showKnowMore && (
                 <div className="pt-2">
                   {knowMoreHref ? (
                     <Link href={knowMoreHref} className="inline-flex">
@@ -93,7 +95,8 @@ export default function MainIntro({
           </div>
 
           {/* Right Section - Image */}
-          <div className="order-1 lg:order-2 lg:pl-4 lg:pr-8">
+          {showImage && (
+            <div className="order-1 lg:order-2 lg:pl-4 lg:pr-8">
             <div className="relative w-full overflow-visible">
               <Image
                 src={imageUrl}
@@ -105,6 +108,7 @@ export default function MainIntro({
               />
             </div>
           </div>
+          )}
         </div>
       </div>
     </section>

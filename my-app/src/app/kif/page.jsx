@@ -4,6 +4,10 @@ import ImageListItem from "@/app/components/ccrc/imagelistitem";
 import Testimonials from "@/app/components/home/Testimonials";
 import QuickLinks from "@/app/components/general/quick_links";
 import AdmissionSteps from "@/app/components/admissions/admission-steps";
+import OrganogramOfKalinga from "@/app/components/about/organogram_of_kalinga";
+import CenterOfExcellence from "@/app/components/about/center_of_excellence";
+import StudentActivities from "@/app/components/department/student_activities";
+import AdmissionCareer from "@/app/components/general/admission_cta";
 
 export default function KIFPage({
     visionMissionData: visionMissionDataProp,
@@ -11,6 +15,8 @@ export default function KIFPage({
     testimonials: testimonialsProp,
     links: linksProp,
     kifSteps: kifStepsProp,
+    organogram: organogramProp,
+    centres: centresProp,
 } = {}) {
     const visionMissionData = visionMissionDataProp ?? [{
         visionTitle: "Vision",
@@ -19,6 +25,7 @@ export default function KIFPage({
         missionText: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
         imageAlt: "Vision and Mission",
         className: "",
+        showImage: false,
     }];
     const boxItems = boxItemsProp ?? [{
         title: "Startup Incubation",
@@ -163,16 +170,78 @@ export default function KIFPage({
           description: "Lorem ipsum is simply dummy text of the printing and typesetting industry.",
         },
       ]
+
+    const organogram = organogramProp ?? {
+        title: "Join Us on Your Entrepreneurial Journey",
+        description: [
+            "Unlock resources, mentorship, and structured support to turn your ideas into reality."
+        ],
+        buttonLabel: "Download PTS Application Form",
+        readMoreLabel: "Read More",
+        readLessLabel: "Show Less",
+    };
+
+    const centres = centresProp ?? [
+        {
+            id: 1,
+            name: "Startup Incubation Lab",
+            title: "Rapid prototyping & mentoring",
+            image: "https://kalinga-university.s3.ap-south-1.amazonaws.com/logos/godawari.png",
+        },
+        {
+            id: 2,
+            name: "Innovation Garage",
+            title: "Hands-on builds with tooling support",
+            image: "https://kalinga-university.s3.ap-south-1.amazonaws.com/logos/godawari.png",
+        },
+        {
+            id: 3,
+            name: "Pitch Studio",
+            title: "Investor-ready decks and mock pitches",
+            image: "https://kalinga-university.s3.ap-south-1.amazonaws.com/logos/godawari.png",
+        },
+        {
+            id: 4,
+            name: "Pitch Studio",
+            title: "Investor-ready decks and mock pitches",
+            image: "https://kalinga-university.s3.ap-south-1.amazonaws.com/logos/godawari.png",
+        },
+    ];
+    const activities = [
+        {
+          id: 1,
+          imageSrc: "https://kalinga-university.s3.ap-south-1.amazonaws.com/departments/image+15.png",
+          imageAlt: "Student Activities",
+          title: "Lorem ipsum dolor sit amet, consectetur",
+          buttonText: "Read More",
+          date: "August 25 - 2025",
+        },
+        {
+          id: 2,
+          imageSrc: "https://kalinga-university.s3.ap-south-1.amazonaws.com/departments/image+15.png",
+          imageAlt: "Student Activities",
+          title: "Lorem ipsum dolor sit amet, consectetur",
+            buttonText: "Read More",
+          date: "August 25 - 2025",
+        },
+        {
+          id: 3,
+          imageSrc: "https://kalinga-university.s3.ap-south-1.amazonaws.com/departments/image+15.png",
+          imageAlt: "Student Activities",
+          title: "Lorem ipsum dolor sit amet, consectetur",
+           buttonText: "Read More",
+          date: "August 25 - 2025",
+        },
+    ];
       
   return (
     <div>
       <ImageContent title="Kalinga Incubation Foundation" subtitle="About KIF" description="Kalinga Incubation Foundation (KIF) is a platform for students to incubate their ideas and turn them into reality." />
-      <VisionMission data={visionMissionData} showImage={false} />
+      <VisionMission data={visionMissionData} showImg={false} />
       <ImageListItem imageSrc="https://kalinga-university.s3.ap-south-1.amazonaws.com/ccrc/kif/kif.webp" boxItems={boxItems} title="Our Key Offerings " subtitle="About KIF" description="Kalinga Incubation Foundation (KIF) is a platform for students to incubate their ideas and turn them into reality." />
       <QuickLinks links={links} title="What Awaits You At KIF?" description="Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incid"
        backgroundColor="bg-white" textColorClassName="text-black" showReadMore={false} />
       <ImageContent title="Kalinga Incubation Foundation" subtitle="About CCRC" description="Kalinga Incubation Foundation (KIF) is a platform for students to incubate their ideas and turn them into reality." />
-      <Testimonials testimonials={testimonials} />
       <AdmissionSteps
         steps={kifSteps}
      subtitleClassName="hidden"
@@ -183,6 +252,23 @@ export default function KIFPage({
         showIcon={false}
         showImage={false}
       />
+      <Testimonials testimonials={testimonials} />
+
+      <OrganogramOfKalinga
+        title={organogram.title}
+        description={organogram.description}
+        buttonLabel={organogram.buttonLabel}
+        readMoreLabel={organogram.readMoreLabel}
+        readLessLabel={organogram.readLessLabel}
+      />
+      <CenterOfExcellence
+        centres={centres}
+        title="Startup Partners"
+        description="Explore the spaces and partnerships that power the Kalinga Incubation Foundation."
+      />
+      <StudentActivities activities={activities} title="" subtitle="KIF  Glimpse" />
+      <AdmissionCareer />
+
      
     </div>
   );

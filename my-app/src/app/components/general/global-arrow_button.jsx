@@ -32,7 +32,7 @@ export default function GlobalArrowButton({
     transparent: "text-white group-hover:text-[var(--button-red)] transition-transform duration-300 group-hover:rotate-45",
   }
   const textclassname = variant === "transparent" ? "px-0 pr-2" : "px-2";
-  
+
   // Reusable Arrow SVG component
   const ArrowIcon = () => (
     <svg
@@ -56,9 +56,9 @@ export default function GlobalArrowButton({
   return (
     <button
       onClick={onClick}
-      className={`${baseButtonClasses} ${variantButtonClasses[variant] || variantButtonClasses.default} ${showArrow ? 'justify-between' : 'justify-center'} ${className}`}
+      className={`${baseButtonClasses} ${variantButtonClasses[variant] || variantButtonClasses.default} ${showArrow ? '' : ''} ${className}`}
     >
-      <p className={`whitespace-nowrap  !font-medium w-fit ${textclassname} ${textClassName}`}>{children}</p>
+      <p className={`whitespace-nowrap  !font-medium max-w-fit ${textclassname} ${textClassName}`}>{children}</p>
       {showArrow && (
         <span className={`${arrowContainerClasses[variant] || arrowContainerClasses.default} ${arrowClassName}`}>
           <ArrowIcon />
