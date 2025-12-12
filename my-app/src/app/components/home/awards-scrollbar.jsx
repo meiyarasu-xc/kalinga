@@ -1,8 +1,14 @@
 "use client"
 
-import React from "react"
+import React, { useRef } from "react"
+import { Swiper, SwiperSlide } from "swiper/react"
+import { Autoplay, Scrollbar, FreeMode } from "swiper/modules"
+import "swiper/css"
+import "swiper/css/scrollbar"
+import "swiper/css/free-mode"
 import Image from "next/image"
 import SectionHeading from "../general/SectionHeading"
+import GlobalArrowButton from "../general/global-arrow_button"
 
 const defaultAwards = [
   {
@@ -149,81 +155,172 @@ const defaultAwards = [
 
 export default function AwardsScrollbar({
   awards = defaultAwards,
-  title = "Awards and Accolades ",
+  title = "Awards and Accolades ",
   subtitle = "",
+  showButton = false,
+  buttonLabel = "View Details",
+  onButtonClick,
+  autoScroll = true,
+  scrollSpeed = 1,
+  hideTitle = false,
+  headerButtonLabel = "View All Awards",
+  onHeaderButtonClick,
 }) {
+  const swiperRef = useRef(null);
+
   return (
     <section className="py-10 sm:py-14 bg-white px-4 lg:px-5">
       <div className="">
-        {/* Header */}
-         <div className="text-left md:text-center mb-6 sm:mb-8">
-          <SectionHeading title={title} subtitle={subtitle} titleClassName="!py-2" />
-         
-        </div>
+        {/* Header - Show button with leaves if hideTitle is true, otherwise show title */}
+        {hideTitle ? (
+          <></>
+        ) : (
+          <div className="text-left md:text-center mb-6 sm:mb-8">
+            <SectionHeading title={title} subtitle={subtitle} titleClassName="!py-2" />
+          </div>
+        )}
 
         {/* Scrollable timeline */}
-          <div className="relative overflow-hidden">
+        <div className="relative overflow-hidden">
           {/* dashed connector line */}
-            <div className="absolute top-[62px] sm:top-[138px] left-[260px] right-[260px] border-b border-dashed border-gray-500 pointer-events-none z-0" />
+          <div className={`absolute  ${hideTitle ? 'top-[60px] ' : 'top-[62px] sm:top-[138px]'} left-[260px] right-[260px] border-b border-dashed border-gray-500 pointer-events-none z-0`} />
 
-            <div className="flex gap-6 sm:gap-10 overflow-x-auto pb-6 pt-4 px-8 scrollbar-hide relative z-10 awards-scrollbar">
-             {awards.map((award) => award.active && (
-               <div key={award.id} className="flex flex-col items-center flex-shrink-0 min-w-[200px] sm:min-w-[220px]">
-                 {/* Icon + texts with leaf images */}
+          <Swiper
+            ref={swiperRef}
+            modules={[Autoplay, Scrollbar, FreeMode]}
+            spaceBetween={70}
+            slidesPerView="auto"
+            grabCursor={true}
+            freeMode={true}
+           loop={false}
+            autoplay={autoScroll ? {
+              delay: 1,
+              disableOnInteraction: false,
+              pauseOnMouseEnter: true,
+            } : false}
+            speed={3000}
+            className="awards-scrollbar !pb-6 !pt-4 !px-8"
+            scrollbar={{
+              hide: false,
+              draggable: true,
+            }}
+          >
+            {awards.map((award) => award.active && (
+              <SwiperSlide key={award.id} className="!w-auto">
+                <div className="flex flex-col items-center flex-shrink-0 min-w-[200px] sm:min-w-[220px]">
+                  {/* Icon + texts/button with leaf images */}
+                {hideTitle ? ( 
+                 <>
                  <div className="flex items-center justify-center gap-2 mb-2">
-                   <Image
-                     src="https://kalinga-university.s3.ap-south-1.amazonaws.com/common/awards-leaf.png"
-                     alt="Award leaf left"
-                     width={50}
-                     height={50}
-                     className="object-contain"
-                   />
-                  <div className="flex flex-col items-center text-[var(--foreground)] text-center max-w-[200px]">
-                    <h3 className="!text-[18px] font-stix break-words leading-tight">
-                      {award.title}
-                    </h3>
-                    <p className="!text-[12px] sm:text-xs text-gray-500 font-plus-jakarta-sans">{award.subtitle}</p>
+                  <Image
+                    src="https://kalinga-university.s3.ap-south-1.amazonaws.com/common/awards-leaf.png"
+                    alt="Award leaf left"
+                    width={50}
+                    height={50}
+                    className="object-contain"
+                  />
+                  
+                   
+                
+                    <div
+                  className={`mt-2 rounded-md px-5 py-3 text-xs sm:text-sm font-stix ${
+                    award.active
+                      ? "bg-[var(--button-red)] text-white shadow-md"
+                      : "bg-[#e6e6e6] text-[var(--foreground)]"
+                  }`}
+                >
+                    {award.year}
                   </div>
-                   <Image
-                     src="https://kalinga-university.s3.ap-south-1.amazonaws.com/common/awards-leaf.png"
-                     alt="Award leaf right"
-                     width={50}
-                     height={50}
+                 
+                  <Image
+                    src="https://kalinga-university.s3.ap-south-1.amazonaws.com/common/awards-leaf.png"
+                    alt="Award leaf right"
+                    width={50}
+                    height={50}
                     className="object-contain -scale-x-100"
-                   />
-                 </div>
+                  />
+                </div>
+                
+                </>  
+                  
+                  
+                ) : (
+                  <>
+                  <div className="flex items-center justify-center gap-2 mb-2">
+                    <Image
+                      src="https://kalinga-university.s3.ap-south-1.amazonaws.com/common/awards-leaf.png"
+                      alt="Award leaf left"
+                      width={50}
+                      height={50}
+                      className="object-contain"
+                    />
+                      
+                      <div className="flex flex-col items-center text-[var(--foreground)] text-center max-w-[200px]">
+                        <h3 className="!text-[18px] font-stix break-words leading-tight">
+                          {award.title}
+                        </h3>
+                        <p className="!text-[12px] sm:text-xs text-gray-500 font-plus-jakarta-sans">{award.subtitle}</p>
+                       
+                          
+                      
+                      </div>
+          
+                    <Image
+                      src="https://kalinga-university.s3.ap-south-1.amazonaws.com/common/awards-leaf.png"
+                      alt="Award leaf right"
+                      width={50}
+                      height={50}
+                      className="object-contain -scale-x-100"
+                    />
+                  </div>
 
-                 {/* Year pill */}
-                 <div
-                   className={`mt-2 rounded-md px-5 py-3 text-xs sm:text-sm font-stix ${
-                     award.active
-                       ? "bg-[var(--button-red)] text-white shadow-md"
-                       : "bg-[#e6e6e6] text-[var(--foreground)]"
-                   }`}
-                 >
-                   {award.year}
-                 </div>
-               </div>
-             ))}
-           </div>
-         </div>
+                  {/* Year pill */}
+                  <div className="flex items-center justify-center gap-2 mb-2">
+                   
+                  
+                      <div
+                    className={`mt-2 rounded-md px-5 py-3 text-xs sm:text-sm font-stix ${
+                      award.active
+                        ? "bg-[var(--button-red)] text-white shadow-md"
+                        : "bg-[#e6e6e6] text-[var(--foreground)]"
+                    }`}
+                  >
+                      {award.year}
+                    </div>
+              
+                 
+                  </div>
+                  </> 
+                )}
+            
+                    
+                  
+                </div>
+              </SwiperSlide>
+            ))}
+          </Swiper>
+        </div>
 
         {/* scrollbar styling */}
         <style jsx global>{`
-          .awards-scrollbar::-webkit-scrollbar {
-            height: 4px;
-          }
-          .awards-scrollbar::-webkit-scrollbar-track {
+          .awards-scrollbar .swiper-scrollbar {
+            height: 10px;
             background: #f5f5f5;
             border-radius: 9999px;
+            position: relative;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            margin-top: 15px;
+            cursor: grab;
           }
-          .awards-scrollbar::-webkit-scrollbar-thumb {
+          .awards-scrollbar .swiper-scrollbar-drag {
             background: var(--dark-orange-red);
             border-radius: 9999px;
+            height: 100%;
           }
           .awards-scrollbar {
-            scrollbar-color: var(--dark-orange-red) #f5f5f5;
-            scrollbar-width: thin;
+            user-select: none;
           }
         `}</style>
       </div>

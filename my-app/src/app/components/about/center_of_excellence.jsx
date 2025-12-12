@@ -103,6 +103,7 @@ export default function CenterOfExcellence({
             modules={[Navigation]}
             spaceBetween={24}
             slidesPerView={1}
+            grabCursor={true}
             breakpoints={{
               640: {
                 slidesPerView: 1.5,

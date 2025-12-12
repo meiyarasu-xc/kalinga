@@ -34,7 +34,7 @@ export default function UGCLogo() {
   ];
 
   return (
-    <div className="container mx-auto pt-12 pb-16 px-6">
+    <div className="container mx-auto py-16 px-6">
       {/* Mobile & Tablet Slider View */}
       <div className="lg:hidden">
         <Swiper
@@ -55,7 +55,7 @@ export default function UGCLogo() {
                 <div
                   className={`relative ${
                     activeIndex === index
-                      ? "ring-1 shadow-[0_0_25px_8px_rgba(59,130,246,0.4)]"
+                      ? " shadow-md "
                       : ""
                   } rounded-full overflow-hidden transition-all duration-300 bg-white`}
                 >

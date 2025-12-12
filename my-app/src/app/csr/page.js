@@ -12,6 +12,7 @@ import StudentActivities from "@/app/components/department/student_activities";
 import AdmissionCareer from "@/app/components/general/admission_cta";
 import MainIntro from "@/app/components/about/main_intro";
 import FAQ from "@/app/components/general/faq";
+import DataTable from "@/app/components/general/data-table";
 import { useLayoutEffect } from "react";
 
 
@@ -198,7 +199,37 @@ export default function KIFPage({
         description="Explore the spaces and partnerships that power the Kalinga Incubation Foundation."
       />
       <StudentActivities activities={activities} title="KIF  Glimpse" subtitle="" />
-      <FAQ items={FAQItems}     />
+      
+      {/* DataTable Example */}
+      <section className="py-16 bg-white">
+        <div className="container mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="max-w-6xl mx-auto">
+            <h2 className="text-3xl font-bold text-center mb-8 font-plus-jakarta-sans">Committee Members</h2>
+            <DataTable
+              columns={[
+                { key: "slNo", label: "Sl. No", width: "w-20" },
+                { key: "name", label: "Name of member", width: "w-48" },
+                { key: "designation", label: "Designation", width: "flex-1" },
+                { key: "category", label: "Category", width: "w-40" }
+              ]}
+              data={[
+                { slNo: 1, name: "Name", designation: "Professor/ECE", category: "Chairperson" },
+                { slNo: 2, name: "Name", designation: "Professor/Mechanical", category: "Member" },
+                { slNo: 3, name: "Name", designation: "Assistant professor", category: "Member" },
+                { slNo: 4, name: "Name", designation: "Non-Teaching Staff", category: "Member" },
+                { slNo: 5, name: "Name", designation: "Student/ECE", category: "Member" },
+                { slNo: 6, name: "Name", designation: "Student/Mechanical", category: "Member" },
+                { slNo: 7, name: "Name", designation: "Advocate", category: "Asso. Committed" },
+                { slNo: 8, name: "Name", designation: "Professor/ECE", category: "Member" },
+                { slNo: 9, name: "Name", designation: "Professor/Mechanical", category: "Member" }
+              ]}
+              overflowX={false}
+            />
+          </div>
+        </div>
+      </section>
+
+      <FAQ items={FAQItems} noSection={true} />
       <AdmissionCareer />
      
     </div>

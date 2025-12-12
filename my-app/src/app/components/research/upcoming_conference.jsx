@@ -57,6 +57,7 @@ export default function UpcomingConference({
           modules={[Pagination]}
           spaceBetween={24}
           slidesPerView={1}
+          grabCursor={true}
           pagination={{
             clickable: true,
             el: ".conference-pagination",
@@ -82,10 +83,10 @@ export default function UpcomingConference({
                   />
                 </div>
 
-                <div className="w-full md:w-3/5 flex flex-col gap-6 md:px-0 px-5 py-4 md:py-0">
+                <div className="w-full md:w-3/5 flex flex-col gap-6 md:px-0 px-5 py-10">
                   {/* Badges positioned at top right */}
                   {(showDate || showCategory) && (
-                    <div className="flex justify-end gap-5 items-center mr-4 md:mt-10 mt-5">
+                    <div className="flex justify-end gap-5 items-center mr-4">
                       {showDate && (
                         <p className="inline-flex font-light font-plus-jakarta-sans  items-center px-2 md:px-3 py-1 rounded-lg bg-[var(--dark-green)] text-white text-xs whitespace-nowrap">
                           {conf.date}

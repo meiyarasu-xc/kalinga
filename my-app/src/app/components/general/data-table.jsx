@@ -1,0 +1,124 @@
+"use client"
+import React from 'react'
+
+/**
+ * DataTable Component
+ * A reusable table component with customizable columns, rows, widths, and optional horizontal scroll
+ * 
+ * @param {Array} columns - Array of column definitions: 
+ *   [{ key: string, label: string, width?: string (Tailwind class), widthPx?: number (pixel width) }]
+ * @param {Array} data - Array of row data objects matching the column keys
+ * @param {boolean} overflowX - Enable horizontal scroll when content overflows (default: false)
+ * @param {string} className - Additional CSS classes for the table container
+ * @param {string} headerBgColor - Background color for header row (default: "bg-[#1e3a8a]")
+ * @param {string} headerTextColor - Text color for header row (default: "text-white")
+ * @param {string} evenRowBg - Background color for even rows (default: "bg-gray-50")
+ * @param {string} oddRowBg - Background color for odd rows (default: "bg-white")
+ * @param {string} borderColor - Border color class (default: "border-gray-300")
+ * 
+ * @example
+ * <DataTable
+ *   columns={[
+ *     { key: "slNo", label: "Sl. No", width: "w-20" },
+ *     { key: "name", label: "Name", widthPx: 200 },
+ *     { key: "designation", label: "Designation", width: "flex-1" }
+ *   ]}
+ *   data={[
+ *     { slNo: 1, name: "John", designation: "Professor" },
+ *     { slNo: 2, name: "Jane", designation: "Assistant" }
+ *   ]}
+ *   overflowX={true}
+ * />
+ */
+const DataTable = ({
+  columns = [],
+  data = [],
+  overflowX = false,
+  className = "",
+  headerBgColor = "bg-[#1e3a8a]",
+  headerTextColor = "text-white",
+  evenRowBg = "bg-gray-50",
+  oddRowBg = "bg-white",
+  borderColor = "border-gray-300"
+}) => {
+  // If no columns provided, create default structure
+  const tableColumns = columns.length > 0 
+    ? columns 
+    : [
+        { key: "slNo", label: "Sl. No", width: "w-20" },
+        { key: "name", label: "Name of member", width: "w-48" },
+        { key: "designation", label: "Designation", width: "flex-1" },
+        { key: "category", label: "Category", width: "w-40" }
+      ]
+
+  // If no data provided, use empty array
+  const tableData = data || []
+
+  return (
+    <div className={`rounded-lg overflow-hidden shadow-md bg-white ${className}`}>
+      <div className={overflowX ? "overflow-x-auto" : ""}>
+        <table className="w-full border-collapse">
+          <thead>
+            <tr className={headerBgColor}>
+              {tableColumns.map((column, idx) => (
+                <th
+                  key={column.key || idx}
+                  className={`
+                    ${borderColor} border p-3 text-left font-plus-jakarta-sans font-semibold text-sm
+                    ${headerTextColor}
+                    ${column.widthPx ? "" : (column.width || "")}
+                    ${idx === 0 ? "rounded-tl-lg" : ""}
+                    ${idx === tableColumns.length - 1 ? "rounded-tr-lg" : ""}
+                  `}
+                  style={column.widthPx ? { width: `${column.widthPx}px` } : {}}
+                >
+                  {column.label}
+                </th>
+              ))}
+            </tr>
+          </thead>
+          <tbody>
+            {tableData.length === 0 ? (
+              <tr>
+                <td
+                  colSpan={tableColumns.length}
+                  className={`${borderColor} border p-8 text-center text-gray-500 font-plus-jakarta-sans`}
+                >
+                  No data available
+                </td>
+              </tr>
+            ) : (
+              tableData.map((row, rowIdx) => (
+                <tr
+                  key={rowIdx}
+                  className={rowIdx % 2 === 0 ? oddRowBg : evenRowBg}
+                >
+                  {tableColumns.map((column, colIdx) => {
+                    const cellValue = row[column.key] !== undefined 
+                      ? row[column.key] 
+                      : (column.key === "slNo" ? rowIdx + 1 : "-")
+                    
+                    return (
+                      <td
+                        key={column.key || colIdx}
+                        className={`
+                          ${borderColor} border p-3 text-gray-700 font-plus-jakarta-sans text-sm
+                          ${column.widthPx ? "" : (column.width || "")}
+                        `}
+                        style={column.widthPx ? { width: `${column.widthPx}px` } : {}}
+                      >
+                        {cellValue}
+                      </td>
+                    )
+                  })}
+                </tr>
+              ))
+            )}
+          </tbody>
+        </table>
+      </div>
+    </div>
+  )
+}
+
+export default DataTable
