@@ -4,10 +4,10 @@ import { useState, useEffect } from "react";
 
 export default function Page() {
   const imageSets = [
-    ["./student.jpg", "/img2.jpg", "/img3.jpg"],
-    ["/img4.jpg", "/img5.jpg", "/img6.jpg"],
-    ["./student.jpg", "/img2.jpg", "/img3.jpg"],
-    ["/img4.jpg", "/img5.jpg", "/img6.jpg"],
+    ["https://kalinga-university.s3.ap-south-1.amazonaws.com/campus-life/Class-room.jpg", "https://kalinga-university.s3.ap-south-1.amazonaws.com/campus-life/Rectangle+574056814.png", "https://kalinga-university.s3.ap-south-1.amazonaws.com/campus-life/Rectangle+574056814+(1).png"],
+    ["https://kalinga-university.s3.ap-south-1.amazonaws.com/campus-life/Transportation.webp", "https://kalinga-university.s3.ap-south-1.amazonaws.com/campus-life/transport.webp", "https://kalinga-university.s3.ap-south-1.amazonaws.com/campus-life/Transport1-1024x683.png"],
+    ["https://kalinga-university.s3.ap-south-1.amazonaws.com/campus-life/reliance-market-poonamallee-chennai-grocery-stores-7y0lkgvzc9.webp", "https://kalinga-university.s3.ap-south-1.amazonaws.com/campus-life/Micro%2Bmarket%2Bsquare-01-640w.webp", "https://kalinga-university.s3.ap-south-1.amazonaws.com/campus-life/reliance-market-poonamallee-chennai-grocery-stores-5j3kv0y5q5.jpg"],
+    ["https://kalinga-university.s3.ap-south-1.amazonaws.com/campus-life/elderly-man-hospital-reception-wearing-face-mask-taking-with-nurse-while-waiting-coronavirus-examination+(2).png", "https://kalinga-university.s3.ap-south-1.amazonaws.com/campus-life/clipboard-face-mask-non-profit-with-doctor-community-center-healthcare-checkup-consulting-documents-volunteer-with-medical-professional-outreach-event-charity-medicare.jpg", "https://kalinga-university.s3.ap-south-1.amazonaws.com/campus-life/elderly-man-hospital-reception-wearing-face-mask-taking-with-nurse-while-waiting-coronavirus-examination+(3).png"],
     ["./student.jpg", "/img2.jpg", "/img3.jpg"],
     ["/img4.jpg", "/img5.jpg", "/img6.jpg"],
   ];
@@ -62,11 +62,11 @@ export default function Page() {
 
       {[
         { type: "sandal", title: "Academic Infrastructure", desc: "Kalinga University offers state-of-the-art academic infrastructure with smart classrooms, digital learning tools, and well-equipped labs that promote innovation and practical learning." },
-        { type: "red", title: "Transportation", desc: "Our fully furnished hostels for boys and girls provide a safe and comfortable environment with all essential amenities. We ensure our residents enjoy a homely atmosphere with round-the-clock security." },
-        { type: "sandal", title: "Mess", desc: "In collaboration with Sodexo Food Solutions India Pvt. Ltd., our mess facilities for boys and girls serve four nutritious, hygienic meals daily — breakfast, lunch, high tea, and dinner." },
-        { type: "red", title: "Canteen & Cafeteria", desc: "Partnered with Sodexo Food Solutions India Pvt. Ltd., our canteen and cafés serve a variety of delicious meals, snacks, and beverages, giving students multiple dining choices at affordable prices." },
-        { type: "sandal", title: "Transportation", desc: "With 30+ buses and 4-wheelers, our transport service offers convenient, safe, and affordable pick-up and drop facilities across Raipur, covering up to 70 km each way." },
-        { type: "red", title: "Hostel & Facilities", desc: "Lorem ipsum…" },
+        { type: "red", title: "Transportation", desc: "With 30+ buses and 4-wheelers, our transport service offers convenient, safe, and affordable pick-up and drop facilities across Raipur, covering up to 70 km each way." },
+        { type: "sandal", title: "Mini Market", desc: "The on-campus mini market includes an ATM, stationery shop, salon, juice and snack counters, and a chemist — ensuring students have access to essentials without leaving campus." },
+        { type: "red", title: "Health Clinic", desc: "Our on-campus health clinic, staffed by qualified doctors and nurses, provides consultation, counseling, and emergency medical support for students and staff." },
+        { type: "sandal", title: "Banking & ATM", desc: "With tie-ups with the Central Bank of India and Canara Bank, students can avail of education loans easily. Two 24×7 ATMs (ICICI & OBC Bank) are also available on campus, supporting all major digital payment methods."},
+        { type: "red", title: "Safety & Security", desc: "The entire campus, including hostels and academic areas, is under continuous CCTV surveillance and managed by a trained in-house security team for complete safety." },
       ].map((sec, index) => (
         
         <div
