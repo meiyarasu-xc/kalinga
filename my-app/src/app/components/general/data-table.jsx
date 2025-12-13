@@ -57,7 +57,7 @@ const DataTable = ({
   return (
     <div className={`rounded-lg overflow-hidden shadow-md bg-white ${className}`}>
       <div className={overflowX ? "overflow-x-auto" : ""}>
-        <table className="w-full border-collapse">
+        <table className={`border-collapse ${overflowX ? "min-w-full" : "w-full"}`}>
           <thead>
             <tr className={headerBgColor}>
               {tableColumns.map((column, idx) => (
@@ -98,6 +98,9 @@ const DataTable = ({
                       ? row[column.key] 
                       : (column.key === "slNo" ? rowIdx + 1 : "-")
                     
+                    // Check if this row has listItems and we're rendering the description column
+                    const hasListItems = row.listItems && Array.isArray(row.listItems) && column.key === 'description'
+                    
                     return (
                       <td
                         key={column.key || colIdx}
@@ -107,7 +110,18 @@ const DataTable = ({
                         `}
                         style={column.widthPx ? { width: `${column.widthPx}px` } : {}}
                       >
-                        {cellValue}
+                        {hasListItems ? (
+                          <div>
+                            <p className="mb-2">{cellValue}</p>
+                            <ul className="list-disc list-inside space-y-1 ml-2">
+                              {row.listItems.map((item, idx) => (
+                                <li key={idx} className="text-sm">{item}</li>
+                              ))}
+                            </ul>
+                          </div>
+                        ) : (
+                          cellValue
+                        )}
                       </td>
                     )
                   })}

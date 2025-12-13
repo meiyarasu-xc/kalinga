@@ -173,21 +173,25 @@ const FAQ = ({
 
   // Render Table Display Variant (like first image)
   if (variant === "table-display") {
-    // If tableSections is provided, use it; otherwise create sections from tableData or items
-    const sections = tableSections.length > 0
+    // Separate items into table sections and regular FAQ items
+    const tableSectionsList = tableSections.length > 0
       ? tableSections
-      : tableData.length > 0 
-        ? [{ id: 1, title: title || "2023-2024", data: tableData }]
-        : items.map((item, index) => ({
-            id: item.id || index,
-            title: item.question || `${title || "Section"} ${index + 1}`,
-            data: item.tableData || [{
-              slNo: 1,
-              name: item.question || "Name",
-              designation: item.answer || "Designation",
-              category: "Member"
-            }]
+      : items
+          .filter(item => item.answer && typeof item.answer === 'object' && item.answer.type === 'table')
+          .map(item => ({
+            id: item.id,
+            title: item.question,
+            data: item.answer.rows,
+            columns: item.answer.headers ? [
+              { key: "id", label: item.answer.headers[0] || "S.No", width: "w-20" },
+              { key: "name", label: item.answer.headers[1] || "Name", width: "flex-1" }
+            ] : undefined
           }))
+    
+    // Regular FAQ items (non-table)
+    const regularItems = items.filter(item => 
+      !(item.answer && typeof item.answer === 'object' && item.answer.type === 'table')
+    )
     
     return (
       <Wrapper className={`${backgroundColor} py-16`}>
@@ -200,13 +204,67 @@ const FAQ = ({
               subtitleClassName={`text-center ${subtitleClassName}`}
             />
           )}
-          {sections.map((section, index) => {
+          
+          {/* Regular FAQ Items (lists, etc.) */}
+          {regularItems.length > 0 && (
+            <div className="w-full max-w-6xl mx-auto space-y-4 mb-8">
+              {regularItems.map((item) => {
+                const isOpen = openItems.has(item.id)
+                return (
+                  <div
+                    key={item.id}
+                    className="border border-gray-200 rounded-lg overflow-hidden shadow-sm"
+                  >
+                    <button
+                      onClick={() => toggleItem(item.id)}
+                      className="w-full flex items-center justify-between p-4 bg-gray-50 hover:bg-gray-100 transition-colors"
+                    >
+                      <h3 className="text-left text-lg font-plus-jakarta-sans font-semibold text-gray-800">
+                        {item.question}
+                      </h3>
+                      <svg
+                        className={`w-5 h-5 text-gray-600 transition-transform duration-300 ${
+                          isOpen ? 'rotate-180' : ''
+                        }`}
+                        fill="none"
+                        stroke="currentColor"
+                        viewBox="0 0 24 24"
+                      >
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
+                      </svg>
+                    </button>
+                    <div
+                      className={`overflow-hidden transition-all duration-300 ${
+                        isOpen ? 'max-h-[1000px] opacity-100' : 'max-h-0 opacity-0'
+                      }`}
+                    >
+                      <div className="p-4 sm:p-5 md:p-6 bg-[var(--lite-sand)]">
+                        {Array.isArray(item.answer) ? (
+                          <ul className="list-disc list-inside space-y-2 text-gray-700 text-sm leading-relaxed font-plus-jakarta-sans">
+                            {item.answer.map((listItem, idx) => (
+                              <li key={idx}>{listItem}</li>
+                            ))}
+                          </ul>
+                        ) : (
+                          <p className="text-gray-700 text-sm leading-relaxed font-plus-jakarta-sans">
+                            {item.answer}
+                          </p>
+                        )}
+                      </div>
+                    </div>
+                  </div>
+                )
+              })}
+            </div>
+          )}
+          
+          {/* Table Sections */}
+          {tableSectionsList.map((section, index) => {
             const sectionId = `section-${section.id || index}`
             const isCollapsed = collapsedSections.has(sectionId)
             
             return (
-              <div key={section.id || index} className="max-w-6xl mx-auto mb-6 rounded-lg overflow-hidden shadow-md">
-                {/* Header - Entire header is clickable */}
+              <div key={section.id || index} className="w-full max-w-6xl mx-auto mb-6 rounded-lg overflow-hidden shadow-md">
                 <button
                   onClick={() => toggleSection(sectionId)}
                   className={`w-full flex items-center justify-between p-4 rounded-t-lg transition-colors ${
@@ -236,17 +294,16 @@ const FAQ = ({
                   </div>
                 </button>
                 
-                {/* Table Content */}
                 <div
                   className={`overflow-hidden transition-all duration-300 ${
-                    isCollapsed ? 'max-h-0' : 'max-h-[2000px]'
+                    isCollapsed ? 'max-h-0' : 'max-h-[600px]'
                   }`}
                 >
-                  <div className="bg-[var(--lite-sand)] p-4">
+                  <div className="bg-[var(--lite-sand)] p-4 max-h-[600px] overflow-y-auto overflow-x-auto">
                     <DataTable
-                      columns={tableColumns}
+                      columns={section.columns || tableColumns}
                       data={section.data}
-                      overflowX={overflowX}
+                      overflowX={true}
                       className="shadow-none"
                     />
                   </div>
@@ -585,7 +642,7 @@ const FAQ = ({
                 {/* Answer Content */}
                 <div
                   className={`overflow-hidden transition-all duration-300 ${
-                    isOpen ? 'max-h-[1000px] opacity-100' : 'max-h-0 opacity-0'
+                    isOpen ? 'max-h-[2000px] opacity-100' : 'max-h-0 opacity-0'
                   }`}
                 >
                   <div className="p-4 sm:p-5 md:p-6 bg-[var(--lite-sand)]">
@@ -596,6 +653,34 @@ const FAQ = ({
                         className="w-full text-gray-700 text-sm leading-relaxed font-plus-jakarta-sans bg-transparent border border-gray-300 rounded p-2 min-h-[100px]"
                         placeholder="Enter answer"
                       />
+                    ) : item.answer && typeof item.answer === 'object' && item.answer.type === 'table' ? (
+                      <div className="overflow-x-auto max-h-[600px] overflow-y-auto">
+                        <DataTable
+                          columns={
+                            item.answer.headers && item.answer.headers.length === 3
+                              ? [
+                                  { key: "id", label: item.answer.headers[0] || "S.No", width: "w-20" },
+                                  { key: "program", label: item.answer.headers[1] || "Program Name", width: "w-48" },
+                                  { key: "description", label: item.answer.headers[2] || "CSR Initiatives", width: "flex-1" }
+                                ]
+                              : item.answer.headers
+                                ? [
+                                    { key: "id", label: item.answer.headers[0] || "S.No", width: "w-20" },
+                                    { key: "name", label: item.answer.headers[1] || "Name", width: "flex-1" }
+                                  ]
+                                : tableColumns
+                          }
+                          data={item.answer.rows}
+                          overflowX={true}
+                          className="shadow-none"
+                        />
+                      </div>
+                    ) : Array.isArray(item.answer) ? (
+                      <ul className="list-disc list-inside space-y-2 text-gray-700 text-sm leading-relaxed font-plus-jakarta-sans">
+                        {item.answer.map((listItem, idx) => (
+                          <li key={idx}>{listItem}</li>
+                        ))}
+                      </ul>
                     ) : (
                       <p className="text-gray-700 text-sm leading-relaxed font-plus-jakarta-sans">
                         {item.answer}

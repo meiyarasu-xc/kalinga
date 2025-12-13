@@ -133,7 +133,7 @@ export default function KIFPage({
             'Women',
             'Underprivileged Communities',
             'School Students',
-            'Industry Partners '
+            'Industry Partners'
           ],
         },
         {
@@ -163,11 +163,28 @@ export default function KIFPage({
               { id: 6, program: 'Encouragement of Sports in Rural Areas', description: 'To bring out the talent of the youth of rural areas, we will establish sports centres, provide training, and even organise local tournaments in economically backward areas and create opportunities for their growth too.' },
               { id: 7, program: 'Health Sector', description: 'Under this CSR initiative, we will establish medical institutions, organise healthcare camps and awareness programs, and vaccination drives to provide quality healthcare services to underserved communities of our nation.' },
               { id: 8, program: 'Sanitation', description: 'We support corporates in undertaking sanitation initiatives by promoting cleanliness and hygiene. Our programs will include campaigns on personal hygiene, public health, menstrual health for women, and waste management practices. We will also organise clean-up projects for rivers and ponds.' },
-              { id: 9, program: 'Environment', description: 'Environmental pollution is growing at a fast rate as more companies are emitting heavy chemicals into the atmosphere, which makes it imperative for companies to invest their CSR funds in the same. We help companies with the following CSR activities:' },
+              { id: 9, program: 'Environment', description: 'Environmental pollution is growing at a fast rate as more companies are emitting heavy chemicals into the atmosphere, which makes it imperative for companies to invest their CSR funds in the same. We help companies with the following CSR activities:',
+                listItems: [
+                  'Recycling',
+                  'Waste Reduction',
+                  'Reduce Energy Use, water, and plastic consumption',
+                  'Use renewable energy sources',
+                  'Adopt sustainable solutions',
+                  'Follow the strict guidelines and ethical practices of the government',
+                ]
+               },
               { id: 10, program: 'Cultural Preservation', description: 'Documenting and promoting local culture' },
               { id: 11, program: 'Disaster Relief', description: 'Emergency response and rehabilitation' },
               { id: 12, program: 'Elderly Care', description: 'Support for senior citizens' },
-              { id: 13, program: 'Youth Development', description: 'Leadership and career guidance' }
+              { id: 13, program: 'Youth Development', description: 'Leadership and career guidance',
+                listItems: [
+                  'Plan and implement safe drinking water supply projects in rural areas',
+                  'Conduct awareness campaigns on water hygiene and conservation',
+                  'Promote rainwater harvesting and sustainable solutions',
+                  'Focus on water accessibility in remote areas',
+                  'Setting up testing labs to monitor the water quality of different areas',
+                ]
+               },
             ]
           }
         }
@@ -213,19 +230,6 @@ export default function KIFPage({
         items={FAQItems} 
         title="" 
         subtitle=""
-        variant="table-display"
-        tableColumns={[
-          { key: "id", label: "S.No", width: "w-20" },
-          { key: "program", label: "Program Name", width: "w-48" },
-          { key: "description", label: "CSR Initiatives", width: "flex-1" }
-        ]}
-          tableSections={FAQItems
-            .filter(item => item.answer && typeof item.answer === 'object' && item.answer.type === 'table')
-            .map(item => ({
-          id: item.id,
-          title: item.question,
-          data: item.answer.rows
-        }))}
       />
       <CenterOfExcellence centres={centres} title="Startup Partners" description="Explore the spaces and partnerships that power the Kalinga Incubation Foundation." />
       <StudentActivities activities={activities} title="KIF  Glimpse" subtitle="" />
