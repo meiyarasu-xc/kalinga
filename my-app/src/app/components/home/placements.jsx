@@ -108,7 +108,7 @@ const Placements = () => {
   
   return (
     <>
-    <section ref={sectionRef} className="pt-20 sm:py-20 md:py-16 bg-white overflow-x-hidden">
+    <section ref={sectionRef} className="py-16 bg-white overflow-x-hidden">
       <div className="container mx-auto px-4 md:px-5 ">
         <div className="grid md:grid-cols-2 gap-4 sm:gap-6 lg:gap-10 items-center md:items-center">
           {/* Left: title + stats */}

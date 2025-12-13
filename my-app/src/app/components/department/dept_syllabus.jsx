@@ -21,13 +21,13 @@ export default function DeptSyllabus() {
               {/* Left Card - Program & Syllabus */}
               <div className="bg-[var(--dark-orange-red)] rounded-xl p-4 md:p-6 lg:p-8 flex flex-col justify-around min-h-[160px] md:min-h-[180px] lg:min-h-[200px]">
                 <div>
-                  <h3 className="text-white !text-[35px]">
+                  <h3 className="text-white md:!text-[35px] text-[28px]">
                     Program & Syllabus
                   </h3>
                 </div>
-                <div>
+                <div className="w-full">
                   <GlobalArrowButton
-                    className="!bg-white !text-[#000] !w-full md:!w-auto whitespace-nowrap text-sm md:text-base w-fit"
+                    className="!bg-white !text-[#000] !w-full md:!w-auto !justify-center md:!justify-start text-sm md:text-base !px-4 !py-3 md:!py-2"
                     arrowClassName="!bg-[var(--button-red)]"
                     arrowIconClassName="!text-white"
                     textClassName="!font-bold"
@@ -40,13 +40,13 @@ export default function DeptSyllabus() {
               {/* Right Card - Course Materials */}
               <div className="bg-[var(--button-red)] rounded-xl p-4 md:p-6 lg:p-8 flex flex-col justify-around min-h-[160px] md:min-h-[180px] lg:min-h-[200px]">
                 <div>
-                  <h3 className="text-white !text-[35px]">
+                  <h3 className="text-white md:!text-[35px] text-[28px]">
                     Course Materials
                   </h3>
                 </div>
-                <div>
+                <div className="w-full">
                   <GlobalArrowButton
-                    className="!bg-white !text-[#000] !w-full md:!w-auto whitespace-nowrap text-sm md:text-base"
+                    className="!bg-white !text-[#000] !w-full md:!w-auto !justify-center md:!justify-start text-sm md:text-base !px-4 !py-3 md:!py-2"
                     arrowClassName="!bg-[var(--dark-orange-red)]"
                     arrowIconClassName="!text-white"
                     textClassName="!font-bold"

@@ -46,7 +46,10 @@ export default function UpcomingConference({
   backgroundColor = "bg-[var(--light-gray)]",
   backgroundColorcard = "bg-white",
   showCategory = true,
-  showDate = true
+  showDate = true,
+  imageWidth = 420,
+  imageHeight = 230,
+  imageContainerClass = "w-full md:w-2/5"
 }) {
   return (
     <section className={`${backgroundColor} pt-16 pb-16`}>
@@ -73,13 +76,14 @@ export default function UpcomingConference({
           {conferences.map((conf) => (
             <SwiperSlide key={conf.id}>
               <div className={`${backgroundColorcard} rounded-2xl shadow-sm  flex flex-col md:flex-row gap-4 md:gap-8 items-center`}>
-                <div className="w-full md:w-2/5">
+                <div className={imageContainerClass}>
                   <Image
                     src={conf.image}
                     alt={conf.title}
-                    width={420}
-                    height={230}
+                    width={imageWidth}
+                    height={imageHeight}
                     className="rounded-xl object-cover w-full h-full"
+                    style={{ maxWidth: `${imageWidth}px`, maxHeight: `${imageHeight}px` }}
                   />
                 </div>
 

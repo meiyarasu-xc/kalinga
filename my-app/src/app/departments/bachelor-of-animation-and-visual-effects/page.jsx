@@ -17,10 +17,11 @@ import QuickLinks from "@/app/components/general/quick_links";
 function Courses() {
   // MainIntro content
   const mainIntroContent = {
-    title: "Transforming futures with knowledge & innovations",
+    title: "Have you ever wondered how impossible visuals are used in movies and games?",
+    subtitle: "About The Program",
     description: [
-      "Kalinga University blends rigorous academics with hands-on learning, ensuring students are industry-ready from day one. Our curriculum aligns with NEP 2020, supported by experienced faculty, modern labs, and strong industry partnerships.",
-      "With students from 50+ countries, a green smart campus, and vibrant clubs, we nurture global citizens who thrive in research, entrepreneurship, and community impact.",
+      "A Bachelor of Animation & Visual Effects (B.An & VFX) program is a magical career option for individuals interested in bringing their unique ideas to the screen. The program focuses on creating moving images and visuals for the entertainment industry, utilising various artistic and technical skills for games, films, television, and other digital platforms.",
+      "Students will learn 2D and 3D animation techniques, character design, VFX simulations, storyboarding, and the tools and software used in the industry.",
     ],
     imageUrl: "https://kalinga-university.s3.ap-south-1.amazonaws.com/common/student.jpg",
     imageAlt: "Kalinga University campus",
@@ -58,9 +59,9 @@ function Courses() {
     title: "Eligibility Criteria",
     criteria: [
       "The candidate should be a 12th pass with 45% aggregate marks.",
-      'Take the Entrance Test: <a href="#" class="text-[var(--dark-orange-red)] hover:underline inline-flex items-center gap-1">KALSEE<svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg" class="text-[var(--dark-orange-red)]"><path d="M4 12L12 4M12 4H6M12 4V10" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" /></svg></a>',
+      'Take the Entrance Test: <a href="#" class="text-white hover:underline inline-flex items-center gap-1">KALSEE<svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg" class="text-[var(--dark-orange-red)]"><path d="M4 12L12 4M12 4H6M12 4V10" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" /></svg></a>.',
     ],
-    admissionTitle: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do",
+    admissionTitle: "Start Your Creative Journey in Animation & Visual Effects Today",
     admissionButtonLabel: "Admission Open",
   };
 
@@ -71,28 +72,57 @@ function Courses() {
     careers: [
       {
         id: 1,
-        title: "3D Animators",
+        title: "3D Animator",
         description: "Create 3D space, characters, and objects using advanced animation techniques.",
+        imageUrl: "https://kalinga-university.s3.ap-south-1.amazonaws.com/logos/check-icon.png",
       },
       {
         id: 2,
         title: "VFX Artist",
         description: "Create realistic effects like a transformation or an explosion by combining footage.",
+        imageUrl: "https://kalinga-university.s3.ap-south-1.amazonaws.com/logos/check-icon.png",
       },
       {
         id: 3,
         title: "Storyboard Artist",
         description: "Plan camera angles, shots, and scenes before production begins.",
+        imageUrl: "https://kalinga-university.s3.ap-south-1.amazonaws.com/logos/check-icon.png",
       },
       {
         id: 4,
-        title: "Motion Graphics Artist",
-        description: "Create engaging visual content and animated graphics for various media platforms.",
+        title: "Motion Graphics Designer",
+        description: "Create animated visuals by combining animation, graphic design, and storytelling.",
+        imageUrl: "https://kalinga-university.s3.ap-south-1.amazonaws.com/logos/check-icon.png",
       },
       {
         id: 5,
-        title: "Game Developer",
-        description: "Create engaging games and interactive experiences for various platforms.",
+        title: "Character Designer",
+        description: "Bring characters to life through sketches, digital arts, and 3D models.",
+        imageUrl: "https://kalinga-university.s3.ap-south-1.amazonaws.com/logos/check-icon.png",
+      },
+      {
+        id: 6,
+        title: "Video Editor",
+        description: "Convert raw footage into a final polished video using different editing software.",
+        imageUrl: "https://kalinga-university.s3.ap-south-1.amazonaws.com/logos/check-icon.png",
+      },
+      {
+        id: 7,
+        title: "Game Animator",
+        description: "Use animation software to develop characters, objects, and creatures.",
+        imageUrl: "https://kalinga-university.s3.ap-south-1.amazonaws.com/logos/check-icon.png",
+      },
+      {
+        id: 8,
+        title: "Compositing Artist",
+        description: "Combine multiple visual elements and create a realistic final image.",
+        imageUrl: "https://kalinga-university.s3.ap-south-1.amazonaws.com/logos/check-icon.png",
+      },
+      {
+        id: 9,
+        title: "Texturing Artist",
+        description: "Create and apply textures to 3D models in games, movies, and animations.",
+        imageUrl: "https://kalinga-university.s3.ap-south-1.amazonaws.com/logos/check-icon.png",
       },
     ],
   };
@@ -184,18 +214,48 @@ function Courses() {
     ],
   };
 
+  // Course Navigation Tabs
+  const navigationTabs = [
+    { id: 'about', label: 'About The Program' },
+    { id: 'specialization', label: 'Specialisations' },
+    { id: 'career', label: 'Career Pathways' },
+    { id: 'eligibility', label: 'Eligibility Criteria' },
+    { id: 'duration', label: 'Duration' },
+    { id: 'fees', label: 'Fees' },
+    { id: 'syllabus', label: 'Syllabus' },
+    { id: 'learning-outcomes', label: 'Learning Outcomes' },
+    { id: 'hiring-partners', label: 'Hiring Partners' },
+    { id: 'beyond-curriculum', label: 'Beyond The Curriculum' },
+    { id: 'activities', label: 'Activities & Events' },
+  ];
+
   return (
     <div>
-      <CourseNavigation />
+      <CourseNavigation tabs={navigationTabs} />
       <div id="about">
         <MainIntro 
           title={mainIntroContent.title}
+          subtitle={mainIntroContent.subtitle}
           description={mainIntroContent.description}
           imageUrl={mainIntroContent.imageUrl}
           imageAlt={mainIntroContent.imageAlt}
         />
       </div>
       <PublicationGrid stats={publicationStats} />
+      <div id="specialization">
+        <WhyStudy 
+          sectionTitle={whyStudyContent.sectionTitle}
+          backgroundImage={whyStudyContent.backgroundImage}
+          items={whyStudyContent.items}
+        />
+      </div>
+      <div id="career">
+        <CareerPath 
+          title={careerPathContent.title}
+          description={careerPathContent.description}
+          careers={careerPathContent.careers}
+        />
+      </div>
       <div id="eligibility">
         <EligibilityCriteria 
           imageUrl={eligibilityContent.imageUrl}
@@ -207,19 +267,23 @@ function Courses() {
           admissionButtonLabel={eligibilityContent.admissionButtonLabel}
         />
       </div>
-      <div id="career">
-        <CareerPath 
-          title={careerPathContent.title}
-          description={careerPathContent.description}
-          careers={careerPathContent.careers}
-        />
+      <div id="duration">
+        {/* Duration section - content to be added */}
       </div>
-      <div id="specialization">
-        <WhyStudy 
-          sectionTitle={whyStudyContent.sectionTitle}
-          backgroundImage={whyStudyContent.backgroundImage}
-          items={whyStudyContent.items}
-        />
+      <div id="fees">
+        {/* Fees section - content to be added */}
+      </div>
+      <div id="syllabus">
+        <DeptSyllabus />
+      </div>
+      <div id="learning-outcomes">
+        {/* Learning Outcomes section - content to be added */}
+      </div>
+      <div id="hiring-partners">
+        {/* Hiring Partners section - content to be added */}
+      </div>
+      <div id="beyond-curriculum">
+        {/* Beyond the Curriculum section - content to be added */}
       </div>
       <OrganogramOfKalinga
         title="Organogram of Kalinga University"

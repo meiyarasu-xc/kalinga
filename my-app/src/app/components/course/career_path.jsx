@@ -50,7 +50,7 @@ export default function CareerPath({
         </div>
 
         {/* Slider Section */}
-        <div className="relative">
+        <div className="relative px-5">
           <Swiper
             modules={[Navigation]}
             spaceBetween={24}
@@ -83,6 +83,7 @@ export default function CareerPath({
                   <CareerCard
                     title={career.title}
                     description={career.description}
+                    imageUrl={career.imageUrl}
                   />
                 </div>
               </SwiperSlide>

@@ -24,7 +24,7 @@ export default function EligibilityCriteria({
   admissionButtonLabel = defaultContent.admissionButtonLabel,
 }) {
   return (
-    <section className="bg-[var(--dark-blue)] py-16 rounded-2xl">
+    <section className="bg-[var(--dark-blue)] py-16 rounded-2xl md:mx-5">
       <div className="container mx-auto px-6">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 items-center">
           {/* Left Column - Image */}

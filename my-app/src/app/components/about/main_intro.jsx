@@ -4,6 +4,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { useState } from "react";
 import GlobalArrowButton from "../general/global-arrow_button";
+import SectionHeading from "../general/SectionHeading";
 
 const defaultContent = {
   title: "Transforming futures with knowledge & innovation",
@@ -18,6 +19,7 @@ const defaultContent = {
 
 export default function MainIntro({
   title = defaultContent.title,
+  subtitle = null,
   description = defaultContent.description,
   imageUrl = defaultContent.imageUrl,
   imageAlt = defaultContent.imageAlt,
@@ -42,9 +44,11 @@ export default function MainIntro({
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-12 items-center">
           {/* Left Section - Text Content */}
           <div className="flex flex-col gap-6 order-2 lg:order-1 lg:pl-0 lg:pr-4">
-            <h2 className="font-stix text-[var(--foreground)] leading-tight">
-              {title}
-            </h2>
+            <SectionHeading 
+              title={title}
+              subtitle={subtitle}
+              titleClassName="leading-tight"
+            />
             
             <div className="space-y-4">
               {visibleParagraphs.map((paragraph, idx) => {

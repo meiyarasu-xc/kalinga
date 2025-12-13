@@ -19,6 +19,7 @@ function MentorCard({
   message = "",
 }) {
   const [isPopupOpen, setIsPopupOpen] = useState(false);
+  const [isQuoteExpanded, setIsQuoteExpanded] = useState(false);
 
   return (
     <>
@@ -81,9 +82,26 @@ function MentorCard({
             </div>
           </div>
 
-          <p className="text-white text-base leading-relaxed pt-10 pb-12 relative z-10">
-            {quote}
-          </p>
+          <div className="relative z-10">
+            <p 
+              className="text-white text-base leading-relaxed pt-10 pb-4"
+              style={!isQuoteExpanded ? {
+                display: '-webkit-box',
+                WebkitLineClamp: 4,
+                WebkitBoxOrient: 'vertical',
+                overflow: 'hidden',
+                textOverflow: 'ellipsis',
+              } : {}}
+            >
+              {quote}
+            </p>
+            <button
+              onClick={() => setIsQuoteExpanded(!isQuoteExpanded)}
+              className="text-white/80 hover:text-white text-sm font-plus-jakarta-sans mt-2 transition-colors underline"
+            >
+              {isQuoteExpanded ? 'Read Less' : 'Read More'}
+            </button>
+          </div>
 
           <div className="flex items-end justify-end relative z-10">
             <div className="absolute bottom-0">

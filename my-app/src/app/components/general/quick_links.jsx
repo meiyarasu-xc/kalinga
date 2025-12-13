@@ -53,7 +53,7 @@ const QuickLinks = ({
   titleClassName = "",
 }) => {
   return (
-    <section className={`${backgroundColor} py-16`}>
+    <section className={`${backgroundColor} py-16 rounded-xl md:mx-5`}>
       <div className="container mx-auto px-4 sm:px-6 lg:px-8">
         {/* Header */}
         <div className="text-center mb-8 md:mb-12">

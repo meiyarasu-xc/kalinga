@@ -16,7 +16,7 @@ const routeHeroImages = [
     image: "https://kalinga-university.s3.ap-south-1.amazonaws.com/departments/student-gathered.webp",
   },
   {
-    match: /^\/departments\/courses/,
+    match: /^\/departments\/bachelor-of-animation-and-visual-effects/,
     image: "https://kalinga-university.s3.ap-south-1.amazonaws.com/course/student-computer.webp",
   },
   {

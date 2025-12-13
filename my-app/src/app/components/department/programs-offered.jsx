@@ -2,7 +2,7 @@
 import Image from "next/image";
 import { useState } from "react";
 
-const programs = [
+const defaultPrograms = [
   {
     id: 1,
     title: "Bachelor of Computer Application (BCA)",
@@ -53,7 +53,11 @@ const programs = [
   },
 ];
 
-export default function ProgramsOffered() {
+export default function ProgramsOffered({ 
+  programs = defaultPrograms,
+  title = "Programs Offered",
+  description = "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incidi"
+}) {
   const [searchQuery, setSearchQuery] = useState("");
 
   const filteredPrograms = programs.filter((program) =>
@@ -61,18 +65,15 @@ export default function ProgramsOffered() {
   );
 
   return (
-    <section className="bg-[var(--dark-blue)] relative">
+    <section className="bg-[var(--dark-blue)] relative md:mx-5 rounded-xl">
       <div className="container mx-auto px-6">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
           {/* Left Column */}
           <div className="flex flex-col gap-6 order-2 lg:order-1">
             <div className="pt-20">
-              <h2 className="text-white mb-4">Programs Offered</h2>
+              <h2 className="text-white mb-4">{title}</h2>
               <p className="text-white leading-relaxed pr-10">
-                Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
-                eiusmod tempor incididunt ut labore et dolore magna aliqua.
-                Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
-                eiusmod tempor incidi
+                {description}
               </p>
             </div>
             <div className="mt-auto">

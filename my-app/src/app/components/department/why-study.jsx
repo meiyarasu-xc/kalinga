@@ -64,7 +64,7 @@ export default function WhyStudy({
           {/* Slider Cards Overlaying the Image at Bottom */}
           <div className="absolute bottom-0 left-0 right-0 px-4 md:px-6 lg:px-10 pb-4 md:pb-6">
             <div className="text-center">   
-            <h2 className="mb-8  text-white">{sectionTitle}</h2>
+            <h2 className="mb-8  text-white text-left md:text-center">{sectionTitle}</h2>
             </div>
             <div className="relative">
               <Swiper

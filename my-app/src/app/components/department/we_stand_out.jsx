@@ -1,3 +1,4 @@
+'use client';
 import Image from "next/image";
 
 const defaultCards = [
@@ -21,6 +22,8 @@ export default function WeStandOut({
   avatarImage = null,
   avatarInitial = "J",
 }) {
+  const useMarquee = cards.length > 3;
+
   return (
     <section className="py-16 bg-white">
       <div className="container mx-auto px-4 lg:px-6">
@@ -29,22 +32,46 @@ export default function WeStandOut({
           {title}
         </h2>
 
-        {/* Cards Grid */}
+        {/* Cards - Grid or Marquee */}
         <div className="relative">
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-4 md:gap-6">
-            {cards.map((card) => (
-            <div className="bg-[var(--card-sandal)] rounded-xl p-2">
-              <div
-                key={card.id}
-                className="bg-[var(--button-red)] rounded-xl p-6 md:p-8 lg:p-10 text-white min-h-[180px] md:min-h-[200px] flex items-center h-full text-center"
-              >
-                <p className="leading-relaxed font-plus-jakarta-sans">
-                  {card.text}
-                </p>
+          {useMarquee ? (
+            <div className="overflow-hidden w-full">
+              <div className="flex animate-marquee gap-4 md:gap-6 w-max">
+                {/* First set */}
+                {cards.map((card) => (
+                  <div key={card.id} className="bg-[var(--card-sandal)] rounded-xl p-2 flex-shrink-0 w-[280px] sm:w-[300px] md:w-[350px]">
+                    <div className="bg-[var(--button-red)] rounded-xl p-6 md:p-8 lg:p-10 text-white min-h-[180px] md:min-h-[200px] flex items-center h-full text-center">
+                      <p className="leading-relaxed font-plus-jakarta-sans">
+                        {card.text}
+                      </p>
+                    </div>
+                  </div>
+                ))}
+                {/* Duplicate set for seamless loop */}
+                {cards.map((card) => (
+                  <div key={`duplicate-${card.id}`} className="bg-[var(--card-sandal)] rounded-xl p-2 flex-shrink-0 w-[280px] sm:w-[300px] md:w-[350px]">
+                    <div className="bg-[var(--button-red)] rounded-xl p-6 md:p-8 lg:p-10 text-white min-h-[180px] md:min-h-[200px] flex items-center h-full text-center">
+                      <p className="leading-relaxed font-plus-jakarta-sans">
+                        {card.text}
+                      </p>
+                    </div>
+                  </div>
+                ))}
               </div>
             </div>
-            ))}
-          </div>
+          ) : (
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-4 md:gap-6">
+              {cards.map((card) => (
+                <div key={card.id} className="bg-[var(--card-sandal)] rounded-xl p-2">
+                  <div className="bg-[var(--button-red)] rounded-xl p-6 md:p-8 lg:p-10 text-white min-h-[180px] md:min-h-[200px] flex items-center h-full text-center">
+                    <p className="leading-relaxed font-plus-jakarta-sans">
+                      {card.text}
+                    </p>
+                  </div>
+                </div>
+              ))}
+            </div>
+          )}
         </div>
       </div>
     </section>
