@@ -80,27 +80,21 @@ export default function KIFPage({
     const centres = centresProp ?? [
         {
             id: 1,
-            name: "Startup Incubation Lab",
-            title: "Rapid prototyping & mentoring",
-            image: "https://kalinga-university.s3.ap-south-1.amazonaws.com/logos/godawari.png",
+            name: "Insight Catalyst India Private Limited",
+            title: "",
+            image: "https://kalinga-university.s3.ap-south-1.amazonaws.com/about/our-patners.webp",
         },
         {
             id: 2,
-            name: "Innovation Garage",
-            title: "Hands-on builds with tooling support",
-            image: "https://kalinga-university.s3.ap-south-1.amazonaws.com/logos/godawari.png",
+            name: "WANFENG Aluminium Wheel (INDIA) Pvt. Ltd.",
+            title: "",
+            image: "https://kalinga-university.s3.ap-south-1.amazonaws.com/about/our-patners-2.webp",
         },
         {
             id: 3,
-            name: "Pitch Studio",
-            title: "Investor-ready decks and mock pitches",
-            image: "https://kalinga-university.s3.ap-south-1.amazonaws.com/logos/godawari.png",
-        },
-        {
-            id: 4,
-            name: "Pitch Studio",
-            title: "Investor-ready decks and mock pitches",
-            image: "https://kalinga-university.s3.ap-south-1.amazonaws.com/logos/godawari.png",
+            name: "Rajasthan Global Security Pvt. Ltd.",
+            title: "",
+            image: "https://kalinga-university.s3.ap-south-1.amazonaws.com/about/our-clients-3.webp",
         },
     ];
     const activities = [
@@ -215,7 +209,24 @@ export default function KIFPage({
       <ImageListItem items={Items} imageSrc="https://kalinga-university.s3.ap-south-1.amazonaws.com/ccrc/ccrc.webp" title="Objectives of the Organisation"  />
 
       <ImageContent hasImage={false}  className="items-center justify-center" title="Career and Corporate Resource Centre" subtitleclassName="hidden" description="It is a philanthropic organisation that is primarily involved in education and social welfare activities. The society works towards uplifting the underprivileged communities by offering them inclusive educational opportunities, healthcare facilities, and engaging in charitable activities. The society operates educational institutions, healthcare camps, scholarship programs, and other social welfare initiatives." />
-      <FAQ  />
+      <FAQ 
+        items={FAQItems} 
+        title="" 
+        subtitle=""
+        variant="table-display"
+        tableColumns={[
+          { key: "id", label: "S.No", width: "w-20" },
+          { key: "program", label: "Program Name", width: "w-48" },
+          { key: "description", label: "CSR Initiatives", width: "flex-1" }
+        ]}
+          tableSections={FAQItems
+            .filter(item => item.answer && typeof item.answer === 'object' && item.answer.type === 'table')
+            .map(item => ({
+          id: item.id,
+          title: item.question,
+          data: item.answer.rows
+        }))}
+      />
       <CenterOfExcellence centres={centres} title="Startup Partners" description="Explore the spaces and partnerships that power the Kalinga Incubation Foundation." />
       <StudentActivities activities={activities} title="KIF  Glimpse" subtitle="" />
       
