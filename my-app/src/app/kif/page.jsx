@@ -151,12 +151,30 @@ export default function KIFPage({
         ),
     },];
     const testimonials = testimonialsProp ?? [{
-        name: "John De",
-        description: "Kalinga Incubation Centre gave me a perfect platform where I turned my business idea into a successful startup, apart from my course curriculum. I have received an outstanding mentorship from them until I execute my plan. I am extremely grateful for their guidance and support. ",
-        imageSrc: "https://kalinga-university.s3.ap-south-1.amazonaws.com/common/person-standing-1.png",
-        imageAlt: "Vision and Mission",
-        className: "",
+        id: 1,
+        name: "",
+        role: "",
+        quote: "Kalinga Incubation Centre gave me a perfect platform where I turned my business idea into a successful startup, apart from my course curriculum. I have received an outstanding mentorship from them until I execute my plan. I am extremely grateful for their guidance and support. ",
+        image: "https://kalinga-university.s3.ap-south-1.amazonaws.com/Home/program/diploma.webp",
+        theme: "red"
+    },
+    {
+        id: 2,
+        name: "",
+        role: "",
+        quote: "I am running a successful startup business just because of the guidance of experts at Kalinga University. From idea generation to its execution, I have received great support from them. They also conducted workshops, seminars, and guest lectures from time to time, which gave me a broader perspective and detailed knowledge about my business. Their personalised mentorship was truly a game-changer for me.",
+        image: "https://kalinga-university.s3.ap-south-1.amazonaws.com/Home/students-say-2.webp",
+        theme: "red"
+    },
+    {
+        id: 3,
+        name: "",
+        role: "",
+        quote: "I sincerely thank KIF team members, as they have helped me in establishing my startup business by working with me in planning and providing me with valuable industry insights. Their resources were extremely helpful for me in refining my business strategies.",
+        image: "https://kalinga-university.s3.ap-south-1.amazonaws.com/Home/student-say-3.webp",
+        theme: "red"
     }
+
 ];
 
     const kifSteps = kifStepsProp ?? [
