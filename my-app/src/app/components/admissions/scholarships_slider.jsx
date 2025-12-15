@@ -18,19 +18,13 @@ const scholarships = [
     id: 2,
     title: "Merit Scholarships",
     description: "Lorem ipsum is simply dummy text of the printing and typesetting industry.",
-    icon: "https://kalinga-university.s3.ap-south-1.amazonaws.com/logos/book-logo.png",
+    icon: "https://kalinga-university.s3.ap-south-1.amazonaws.com/admission/merit.svg",
   },
   {
     id: 3,
     title: "Social Scholarships",
     description: "Lorem ipsum is simply dummy text of the printing and typesetting industry.",
-    icon: "https://kalinga-university.s3.ap-south-1.amazonaws.com/logos/book-logo.png",
-  },
-  {
-    id: 3,
-    title: "Social Scholarships",
-    description: "Lorem ipsum is simply dummy text of the printing and typesetting industry.",
-    icon: "https://kalinga-university.s3.ap-south-1.amazonaws.com/logos/book-logo.png",
+    icon: "https://kalinga-university.s3.ap-south-1.amazonaws.com/admission/social.svg",
   },
 ];
 

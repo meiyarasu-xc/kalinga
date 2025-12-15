@@ -65,7 +65,7 @@ export default function OurPrograms() {
         <div className="text-center mb-5">
           <SectionHeading
             subtitle="Explore Our Programs"
-            title="Explore Our Programs"
+            title="Discover a World of Learning Opportunities"
             subtitleClassName="text-center text-[var(--button-red)]"
             titleClassName="text-center"
             subtitleTextColor="text-center"
