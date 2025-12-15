@@ -26,7 +26,7 @@ export default function Page() {
 
 
   return (
-    <div className="max-w-[1200px] mx-auto px-6 py-8 flex flex-col gap-24 items-stretch">
+    <div className="container mx-auto px-6 py-8 flex flex-col md:gap-24 gap-10 items-stretch">
 
       {[
         { type: "sandal", title: "Academic Infrastructure", desc: "Kalinga University offers state-of-the-art academic infrastructure with smart classrooms, digital learning tools, and well-equipped labs that promote innovation and practical learning." },
@@ -49,7 +49,7 @@ export default function Page() {
             // IMAGE RIGHT
             <div
               className="
-                absolute md:bottom-[100px] md:left-[550px] md:w-[40%]
+                absolute md:bottom-[100px] md:right-[0px] md:w-[55%]
                 w-full static md:absolute 
               "
             >
@@ -78,7 +78,7 @@ export default function Page() {
             // IMAGE LEFT
             <div
               className="
-                absolute md:top-0 md:left-[190px] md:w-[40%] z-20
+                absolute md:top-0 md:left-[0px] md:w-[55%] z-20
                 w-full static md:absolute
               "
             >
@@ -109,29 +109,29 @@ export default function Page() {
           {sec.type === "sandal" ? (
             <div
               className="
-              bg-[var(--card-sandal)] rounded-2xl p-8 shadow-md w-full md:w-[45%] 
+              bg-[var(--card-sandal)] rounded-2xl p-8 shadow-md w-full md:w-[55%] 
               min-h-[280px] md:min-h-[280px]
-              md:absolute md:left-[180px] md:top-[100px]
+              md:absolute md:left-[0] md:top-[100px]
               mt-6 md:mt-0
             "
             >
               <h1 className="text-2xl font-regular mt-[40px] mb-3">{sec.title}</h1>
-              <p className="text-sm text-[var(--foreground)]/70 leading-relaxed mb-4 w-[280px] mb:w-[338px]">{sec.desc}</p>
+              <p className="text-sm text-[var(--foreground)]/70 leading-relaxed mb-4 md:w-3/4 w-full">{sec.desc}</p>
               <GlobalArrowButton>Know More</GlobalArrowButton>
             </div>
           ) : (
             <div
               className="
               bg-[var(--button-red)] text-white rounded-2xl p-8 shadow-md 
-              w-full md:w-[45%] min-h-[280px]
-              md:absolute md:right-[138px] md:top-[100px]
+              w-full md:w-[55%] min-h-[280px]
+              md:absolute md:right-[0px] md:top-[100px]
               mt-6 md:mt-0
             "
             >
               <h2 className="text-2xl font-regular mb-3 mt-8 md:pl-[140px]">
                 {sec.title}
               </h2>
-              <p className="text-sm leading-relaxed mb-4 md:pl-[140px]">
+              <p className="text-sm leading-relaxed mb-4 md:pl-[140px] md:w-3/4 w-full">
                 {sec.desc}
               </p>
               <div className={`md:pl-[140px] flex ${index === 1 ? 'gap-4' : ''} flex-wrap`}>

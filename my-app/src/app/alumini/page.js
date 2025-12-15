@@ -22,6 +22,7 @@ import SectionHeading from "@/app/components/general/SectionHeading";
 import CareerApplicationForm from "../components/careers/CareerApplicationForm";
 
 
+
 export default function Alumini() {
   const videoItems = [
     {
