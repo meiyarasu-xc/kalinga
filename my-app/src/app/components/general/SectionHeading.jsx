@@ -3,7 +3,7 @@ export default function SectionHeading({
   title,
   subtitleClassName = "",
   titleClassName = "",
-  subtitleTextColor = "!text-[var(--button-red)]"
+  subtitleTextColor = "text-[var(--button-red)]"
 }) {
   return (
     <>
