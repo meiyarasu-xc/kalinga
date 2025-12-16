@@ -50,7 +50,7 @@ const IQACPage = () => {
     <>
     <MainIntro 
     title="IQAC"
-    description="IQAC is a self-regulatory body for academic standards and quality assurance in higher education. It is responsible for ensuring that the academic standards and quality of the institution are maintained and improved."
+    description="In pursuance of the National Action Plan of the National Assessment and Accreditation Council (NAAC) for performance evaluation, assessment and accreditation, and quality upgradation of institutions of higher education, NAAC proposes that every accredited institution should have an Internal Quality Assurance Cell (IQAC) as a post-accreditation quality sustenance measure. With this aim, Kalinga University established its internal quality assurance cell on 5th July 2016."
     imageUrl="https://kalinga-university.s3.ap-south-1.amazonaws.com/about/about-banner.webp"
     imageAlt="IQAC"
     />
