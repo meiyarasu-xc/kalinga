@@ -122,6 +122,9 @@ export default function OurJourney() {
             gap: 120px !important;
             overflow: visible !important;
           }
+          .swiper-slide-next .journey-card-content , .swiper-slide-prev .journey-card-content {
+            background-color: var(--lite-sand) !important;
+          }
           .journey-swiper {
             overflow: visible !important;
           }
@@ -141,7 +144,7 @@ export default function OurJourney() {
           transition: background-color 0.3s ease;
         }
         .timeline-segment.active {
-          background-color: #F5A623;
+          background-color: var(--dark-orange-red);
         }
         @media (max-width: 767px) {
           .timeline-segment {
@@ -163,7 +166,7 @@ export default function OurJourney() {
           top: 8px;
           left: 8px;
           height: 2px;
-          background-color: #F5A623;
+          background-color: var(--dark-orange-red);
           z-index: 1;
           transition: width 0.5s ease-in-out;
         }
