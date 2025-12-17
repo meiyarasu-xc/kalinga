@@ -27,12 +27,27 @@ export default function Page() {
       ]}
         imageUrl="https://kalinga-university.s3.ap-south-1.amazonaws.com/campus-life/lifeofku.webp"
         imageAlt="Life at KU"
+        showButton ={false}
+        showKnowMore ={false}
       />
       <Facilities/>
       <FeaturesSection />
       <CampusLife/>
       <GalleryAll className="mt-10 mb-10" />
-      <UpcomingConferences/>
+      <UpcomingConferences
+        conferences={[
+          {
+            id: 1,
+            title: "Scopus Workshop: Research Impact",
+            date: "Nov 28, 2025 · 10:00 A.M.",
+            category: "Academic Event",
+            description: "Hybrid workshop on Scopus analytics and publishing insights with experts.",
+            image: "https://kalinga-university.s3.ap-south-1.amazonaws.com/campus-life/Pic1+(1).jpeg"
+          }
+        ]}
+       
+        title="Upcoming Campus Events"
+      />
       <Gallery/>
       <AdmissionCareer/>
     </>
