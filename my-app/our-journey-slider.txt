@@ -119,8 +119,8 @@ export default function OurJourney() {
           }
           .journey-swiper .swiper-wrapper {
             align-items: stretch;
+            gap: 120px !important;
             overflow: visible !important;
-            padding-right: 33.333%;
           }
           .swiper-slide-next .journey-card-content , .swiper-slide-prev .journey-card-content {
             background-color: var(--lite-sand) !important;
@@ -244,7 +244,7 @@ export default function OurJourney() {
             spaceBetween={16}
             slidesPerView={1}
             centeredSlides={true}
-            loop={true}
+            loop={false}
             speed={1000}
             
             autoplay={{
@@ -259,13 +259,13 @@ export default function OurJourney() {
               },
               768: {
                 slidesPerView: 1,
-                spaceBetween: 200,
+                spaceBetween: 60,
                 centeredSlides: true,
               },
               1024: {
-                slidesPerView: 1.5,
-                spaceBetween: 200,
-                centeredSlides: false,
+                slidesPerView: "auto",
+                spaceBetween: 60,
+                centeredSlides: true,
               },
             }}
             navigation={{
@@ -305,10 +305,9 @@ export default function OurJourney() {
                       <div 
                         className="text-[var(--button-red)] font-stix text-3xl md:text-6xl font-bold mb-2 md:mb-4"
                         style={{
-                          WebkitTextStroke: '1px var(--button-red)',
+                          WebkitTextStroke: '0.0001px var(--button-red)',
                           WebkitTextFillColor: 'transparent',
                           color: 'transparent',
-                          fontWeight: '500',
                         }}
                       >
                         {item.year}

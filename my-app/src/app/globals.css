@@ -71,17 +71,8 @@ body {
   }
   
   h2 {
-     @apply md:text-[40px] text-3xl ;
-    font-size: 1.875rem !important;
-    line-height: 40px !important;
+    @apply md:text-[40px] text-3xl;
     font-family: 'STIX Two Math', serif;
-  }
-  
-  @media (min-width: 768px) {
-    h2 {
-      font-size: 40px !important;
-      line-height: 55px;
-    }
   }
   
   h3 {

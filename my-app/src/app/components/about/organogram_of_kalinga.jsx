@@ -55,6 +55,8 @@ const OrganogramOfKalinga = ({
               <SectionHeading
                 title={title}
                 titleClassName="text-white"
+                subtitleClassName="!text-left"
+                titleClassName="!text-left text-white"
               />
 
               {/* Description */}

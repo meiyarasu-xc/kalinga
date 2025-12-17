@@ -68,16 +68,18 @@ export default function WhoWeAre() {
               {[...stats, ...stats].map((stat, index) => (
                 <div
                   key={`${stat.label}-${index}`}
-                  className="bg-[var(--light-gray)] rounded-xl p-6 lg:p-8 shadow-lg min-w-[240px] sm:min-w-[260px]"
+                  className="bg-[var(--light-gray)] rounded-xl p-6 lg:p-8 shadow-lg w-[240px] sm:w-[260px] flex-shrink-0 flex flex-col items-center justify-center text-left"
                 >
-                  <h2 className="text-[var(--button-red)] !font-stix mb-2">
+                  <div className="flex flex-col gap-2 w-full">
+                  <h2 className="text-[var(--button-red)] !font-stix mb-2 break-words text-left">
                     {stat.number}
                   </h2>
-                  <h3 className="text-[var(--foreground)] !font-stix mb-3">
+                  <h3 className="text-[var(--foreground)] !text-[18px] !leading-relaxed !font-stix mb-3 break-words text-left">
                     {stat.label}
                   </h3>
+                  </div>
                   {stat.description && (
-                    <p className="text-[var(--light-text-gray)] text-sm leading-relaxed">
+                    <p className="text-[var(--light-text-gray)] text-sm leading-relaxed break-words text-left">
                       {stat.description}
                     </p>
                   )}

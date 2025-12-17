@@ -12,6 +12,8 @@ import AdmissionCareer from "../components/general/admission_cta";
 import FeatureCards from "../components/home/featurecard";
 import GlobalPresence from "../components/home/global_presence";
 import AwardsScrollbar from "../components/home/awards-scrollbar";
+import Map from "../components/home/global_presence-new";
+import CoreValues from "../components/about/core_values";
 
 const aboutFeatureCards = [
   {
@@ -185,16 +187,15 @@ export default function About() {
     
       imageUrl="https://kalinga-university.s3.ap-south-1.amazonaws.com/common/student.jpg"
       imageAlt="Kalinga University campus"
-      showKnowMore={false}
+      showKnowMore={true}
       initialVisibleParagraphs={1}
-      showButton={true}
-      buttonLabel="Read More"
       />
       <AccreditationRanking 
         heading="Accreditations & Rankings"
         secondHeading=""
         accreditations={aboutAccreditations}
       />
+      <CoreValues />
       <VisionMission />
       <WhoWeAre />
       <Leadership />
@@ -218,6 +219,7 @@ export default function About() {
     arrowIconClassName="!text-white"
     textClassName="!text-black"
     cardBackgroundColor="bg-[var(--button-red)]"
+    useContainer={true}
     />
     <AwardsScrollbar />
     <FeatureCards 
@@ -230,7 +232,7 @@ export default function About() {
     subtitleClassName="!text-left"
     />
     <Facility />
-    <GlobalPresence
+    {/* <GlobalPresence
       subtitle="Global Presence"
       title="Expanding Horizons Through Global Partnerships"
       description="Kalinga University is home to students from 29+ countries, fostering a truly international learning environment. Through academic exchange programs, research collaborations, and strategic global alliances, the University prepares students to become globally competent professionals and leaders."
@@ -245,7 +247,8 @@ export default function About() {
       titleClassName="text-center"
       subtitleTextColor="!text-[var(--button-red)]"
       sectionClassName="py-0 pb-16"
-    />
+    /> */}
+    <Map />
     <AdmissionCareer />
     </div>
   );
