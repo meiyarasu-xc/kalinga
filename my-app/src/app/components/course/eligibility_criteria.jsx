@@ -77,7 +77,7 @@ export default function EligibilityCriteria({
             
             {/* Red Box with Admission Open Button */}
             <div className="bg-[var(--button-red)] rounded-lg p-6 md:p-8 lg:p-11">
-              <h3 className="text-white mb-6 text-2xl md:text-3xl lg:text-[36px] leading-tight">
+              <h3 className="text-white mb-6 text-2xl md:text-3xl lg:text-[30px] leading-tight">
                 {admissionTitle}
               </h3>
               <GlobalArrowButton

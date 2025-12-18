@@ -14,11 +14,12 @@ export default function OpenPositions() {
       title: "Non–Teaching Positions",
       description:
         "Be a part of Kalinga University’s dynamic administrative and operational teams. We value professionals who bring expertise, efficiency, and integrity to support our academic mission."
-    },{
-      title: "Internships & Training",
-      description:
-        "Kickstart your career with hands-on experience in a vibrant academic environment. Our internship and training programs provide practical exposure, mentorship, and real-world learning opportunities."
-    }
+    },
+    // {
+    //   title: "Internships & Training",
+    //   description:
+    //     "Kickstart your career with hands-on experience in a vibrant academic environment. Our internship and training programs provide practical exposure, mentorship, and real-world learning opportunities."
+    // }
   ];
 
   return (

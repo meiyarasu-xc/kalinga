@@ -1,6 +1,6 @@
 "use client";
 
-import { useRef, useEffect } from "react";
+import { useRef, useEffect, useState } from "react";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Navigation } from "swiper/modules";
 import "swiper/css";
@@ -78,21 +78,49 @@ export default function PublicationGrid({
     };
   }, [stats]);
 
-  const StatCard = ({ stat, index }) => (
-    <div
-      key={index}
-      className="bg-[var(--light-gray)] h-[320px] hover:bg-[var(--dark-skin)] rounded-lg p-4 text-left transition-colors flex flex-col justify-between"
-    >
-      <div>
-        <h3 className="mb-2">{stat.title}</h3>
-        <div className="w-full h-px bg-black mb-4"></div>
+  const StatCard = ({ stat, index }) => {
+    const [isExpanded, setIsExpanded] = useState(false);
+    const [showButton, setShowButton] = useState(false);
+    const textRef = useRef(null);
+
+    useEffect(() => {
+      if (textRef.current) {
+        const lineHeight = parseInt(window.getComputedStyle(textRef.current).lineHeight);
+        const height = textRef.current.scrollHeight;
+        const lines = Math.round(height / lineHeight);
+        setShowButton(lines > 2);
+      }
+    }, [stat.description]);
+
+    return (
+      <div
+        key={index}
+        className="bg-[var(--light-gray)] min-h-[320px] hover:bg-[var(--dark-skin)] rounded-lg p-4 text-left transition-colors flex flex-col justify-between"
+      >
+        <div>
+          <h3 className="mb-2">{stat.title}</h3>
+          <div className="w-full h-px bg-black mb-4"></div>
+        </div>
+        <div>
+          <h3 className="!text-6xl mb-3">{stat.value}</h3>
+          <p 
+            ref={textRef}
+            className={`text-[var(--light-text-gray)] ${!isExpanded ? 'line-clamp-2' : ''}`}
+          >
+            {stat.description}
+          </p>
+          {showButton && (
+            <button
+              onClick={() => setIsExpanded(!isExpanded)}
+              className="text-[var(--button-red)] text-sm font-semibold mt-2 hover:underline transition-all"
+            >
+              {isExpanded ? 'Show Less' : 'Read More'}
+            </button>
+          )}
+        </div>
       </div>
-      <div>
-        <h3 className="!text-6xl mb-3">{stat.value}</h3>
-        <p className="text-[var(--light-text-gray)]">{stat.description}</p>
-      </div>
-    </div>
-  );
+    );
+  };
 
   return (
     <div className="container mx-auto p-2 py-16">

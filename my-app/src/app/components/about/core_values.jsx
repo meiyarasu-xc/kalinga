@@ -89,7 +89,7 @@ export default function CoreValues() {
               alt={value.title}
               width={32}
               height={32}
-              className="object-contain lg:w-20 lg:h-20 w-16 h-16"
+              className="object-contain lg:w-20 lg:h-20 md:w-16 md:h-16 w-10 h-10"
             />
           </div>
           <div className="flex flex-col text-black core-value-title">

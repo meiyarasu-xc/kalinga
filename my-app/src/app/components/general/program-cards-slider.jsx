@@ -38,16 +38,16 @@ export const renderProgramCard = (program) => {
             <span className="text-gray-800"><span className="font-stix text-[20px] text-black">Scholarships :</span> {program.scholarships}</span>
           </li>
         )}
-        {program.qualification && (
+        {program.programs && (
           <li className="flex items-start gap-2">
             <Image
               src="https://kalinga-university.s3.ap-south-1.amazonaws.com/logos/hand-graduation-icon.png"
-              alt="Qualification icon"
+              alt="Programs icon"
               width={20}
               height={20}
               className="mt-0.5"
             />
-            <span className="text-gray-800"><span className="font-stix text-[20px] text-black">Qualification :</span> {program.qualification}</span>
+            <span className="text-gray-800"><span className="font-stix text-[20px] text-black">Programs :</span> {program.programs}</span>
           </li>
         )}
       </ul>

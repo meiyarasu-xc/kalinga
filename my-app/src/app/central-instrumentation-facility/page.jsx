@@ -140,7 +140,7 @@ const CentralInstrumentationFacilityPage = () => {
     />
     <ImageListItem
       items={items}
-      imageSrc="https://kalinga-university.s3.ap-south-1.amazonaws.com/common/student.jpg"
+      imageSrc="https://kalinga-university.s3.ap-south-1.amazonaws.com/CIF/cif-objectives+(1).webp"
       title="Central Instrumentation Facility"
       description="Explore state-of-the-art instruments that support advanced research across disciplines."
       buttonText="Read More"

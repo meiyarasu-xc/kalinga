@@ -235,8 +235,7 @@ export default function About() {
     <OrganogramOfKalinga 
     title="Organogram of Kalinga University" 
     description={[
-      "Kalinga University follows a well-defined governance structure that ensures smooth administration, transparency, and institutional excellence.The framework begins with the Chancellor, followed by the Vice-Chancellor and Director General, who oversee the academic, administrative, and strategic functions of the University.",
-      "Each department operates under clearly defined roles and responsibilities, enabling effective coordination, accountability, and efficient decision-making across all levels of the institution."
+      "Kalinga University follows a well-defined governance structure that ensures smooth administration, transparency, and institutional excellence.The framework begins with the Chancellor, followed by the Vice-Chancellor and Director General, who oversee the academic, administrative, and strategic functions of the University.", 
     ]}
     buttonLabel="Explore Now"
     href="/about-us"

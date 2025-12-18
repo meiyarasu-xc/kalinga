@@ -3,9 +3,7 @@
 import { useState, useEffect, useRef } from 'react';
 import Image from "next/image";
 import SectionHeading from "../general/SectionHeading";
-import { Swiper, SwiperSlide } from 'swiper/react';
-import { Autoplay } from 'swiper/modules';
-import 'swiper/css';
+import LogoLoop from "../gsap/LogoLoop";
 
 const locations = [ 
   {
@@ -257,6 +255,7 @@ function GlowingBox({ children, borderColor = "var(--dark-blue)", style = {}, cl
           opacity: 0;
           transition: 0.5s ease;
           z-index: 10;
+          pointer-events: none;
         }
         
         .glowing-box:hover::before {
@@ -267,7 +266,7 @@ function GlowingBox({ children, borderColor = "var(--dark-blue)", style = {}, cl
   );
 }
 
-export default function Map({ backgroundColor = "", textColor = "" }) {
+export default function Map({ backgroundColor = "", textColor = "", subtitleTextColor = "!text-[var(--button-red)]", textColorClass="text-[var(--dark-orange-red)]" }) {
   const [activeLocation, setActiveLocation] = useState(null);
 
   return (
@@ -278,12 +277,12 @@ export default function Map({ backgroundColor = "", textColor = "" }) {
           title="Expanding Horizons Through Global Partnerships"
           subtitleClassName="mb-2 text-center"
           titleClassName={`mb-8 text-center ${textColor}`}
-          subtitleTextColor="!text-[var(--button-red)]"
+          subtitleTextColor={subtitleTextColor}
         />
         <p className={`text-center ${textColor}`}>Kalinga University is home to students from 29+ countries, fostering a truly international learning environment. Through academic exchange programs, research collaborations, and strategic global alliances, the University prepares students to become globally competent professionals and leaders.</p>
         <div className="relative">
           <Image 
-            src="https://kalinga-university.s3.ap-south-1.amazonaws.com/Home/globe-skin-color.png"
+            src="https://kalinga-university.s3.ap-south-1.amazonaws.com/about/globe-new.png"
             alt="Global Presence Map" 
             width={1000} 
             height={500} 
@@ -306,7 +305,7 @@ export default function Map({ backgroundColor = "", textColor = "" }) {
               }}
             >
               <svg 
-                className="text-[var(--dark-orange-red)] text-4xl animate-bounce w-10 h-10" 
+                className={`${textColorClass} text-4xl animate-bounce w-10 h-10`} 
                 fill="currentColor" 
                 viewBox="0 0 24 24"
                 xmlns="http://www.w3.org/2000/svg"
@@ -321,65 +320,38 @@ export default function Map({ backgroundColor = "", textColor = "" }) {
         </div>
         
         {/* Legend - Horizontal under image */}
-        <div className="w-full rounded-[20px] bg-[#D9D9D975] backdrop-blur-md">
+        <div className="w-full rounded-[20px] bg-[#D9D9D975] backdrop-blur-md overflow-hidden">
           <GlowingBox borderColor="var(--button-red)" className="p-6 rounded-[20px]">
-            {/* Desktop: Flex Layout */}
-            <ul className={`hidden md:flex flex-wrap items-center justify-center gap-4 md:gap-6 z-20 relative text-sm ${textColor}`}>
-              {locations.map((location) => (
-                <li 
-                  key={location.id} 
-                  className={`flex items-center gap-2 md:gap-3 cursor-pointer transition-colors whitespace-nowrap ${
-                    activeLocation === location.id ? 'underline underline-offset-4' : ''
-                  }`}
-                  onClick={() => setActiveLocation(
-                    activeLocation === location.id ? null : location.id
-                  )}
-                >
-                  <Image src={location.flag} alt={location.name} width={30} height={30} />
-                  <span>{location.name}</span>
-                </li>
-              ))}
-            </ul>
-
-            {/* Mobile: Swiper Slider */}
-            <div className="md:hidden relative global-presence-swiper">
-              <Swiper
-                modules={[Autoplay]}
-                slidesPerView={2}
-                spaceBetween={10}
-                loop={true}
-                autoplay={{
-                  delay: 2500,
-                  disableOnInteraction: false,
-                }}
-                breakpoints={{
-                  480: {
-                    slidesPerView: 3,
-                    spaceBetween: 12,
-                  },
-                  640: {
-                    slidesPerView: 4,
-                    spaceBetween: 16,
-                  },
-                }}
-                className="z-20 relative"
-              >
-                {locations.map((location) => (
-                  <SwiperSlide key={location.id}>
-                    <div
-                      className={`flex flex-col items-center gap-2 cursor-pointer transition-colors py-2 ${
-                        activeLocation === location.id ? 'underline underline-offset-4' : ''
-                      } ${textColor}`}
-                      onClick={() => setActiveLocation(
-                        activeLocation === location.id ? null : location.id
-                      )}
-                    >
-                      <Image src={location.flag} alt={location.name} width={30} height={30} />
-                      <span className="text-xs text-center">{location.name}</span>
-                    </div>
-                  </SwiperSlide>
-                ))}
-              </Swiper>
+            {/* Marquee Slider using LogoLoop */}
+            <div className="relative z-20" style={{ pointerEvents: 'auto' }}>
+              <LogoLoop
+                logos={locations.map(location => ({
+                  src: location.flag,
+                  alt: location.name,
+                  title: location.name,
+                  id: location.id
+                }))}
+                speed={60}
+                direction="left"
+                logoHeight={40}
+                gap={32}
+                pauseOnHover={true}
+                hoverSpeed={0}
+                ariaLabel="Global presence locations"
+                renderItem={(item, key) => (
+                  <div
+                    className={`flex flex-col md:flex-row items-center gap-2 md:gap-3 cursor-pointer transition-colors py-2 px-2 ${
+                      activeLocation === item.id ? 'underline underline-offset-4' : ''
+                    } ${textColor}`}
+                    onClick={() => setActiveLocation(
+                      activeLocation === item.id ? null : item.id
+                    )}
+                  >
+                    <Image src={item.src} alt={item.alt} width={30} height={30} />
+                    {/* <span className="text-xs md:text-sm text-center whitespace-nowrap">{item.title}</span> */}
+                  </div>
+                )}
+              />
             </div>
           </GlowingBox>
         </div>

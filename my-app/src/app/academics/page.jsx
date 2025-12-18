@@ -35,7 +35,7 @@ export default function Academics() {
         img: "https://kalinga-university.s3.ap-south-1.amazonaws.com/academics/arts.webp",
         summary: "The Faculty of Arts and Humanities at Kalinga University is a vibrant community of students studying language, culture, history, media, politics, sociology, and psychology, learning to raise their voices and make a difference in society.",
         scholarships: "Check eligibility",
-        qualification: "Pass in Higher Secondary Examinations of (10+2)",
+        programs: "11",
       },
       {
         id: 2,
@@ -43,7 +43,7 @@ export default function Academics() {
         img: "https://kalinga-university.s3.ap-south-1.amazonaws.com/academics/commerce-management.webp",
         summary: "The Department of Commerce focuses on imparting the highest quality of education and exposure related to the economy and business to produce next-gen leaders.",
         scholarships: "Check eligibility",
-        qualification: "Pass in Higher Secondary Examinations of (10+2).",
+        programs: "11",
       },
       {
         id: 3,
@@ -51,15 +51,15 @@ export default function Academics() {
         img: "https://kalinga-university.s3.ap-south-1.amazonaws.com/academics/education.webp",
         summary: "Teachers are the guiding light behind every success story as they encourage students to learn, grow, and develop into better individuals.",
         scholarships: "Check eligibility",
-        qualification: "Pass in Higher Secondary Examinations of (10+2)",
+        programs: "2",
       },
       {
         id: 4,
         title: "Faculty Of Information Technology",
         img: "https://kalinga-university.s3.ap-south-1.amazonaws.com/Home/program/computer.webp",
-        summary: "Tech is running the world, and the demand for coders is increasing at lightning speed. Whether it’s Artificial Intelligence, Machine Learning, Cybersecurity, Data Science, Gaming, or Cloud Computing, careers in IT are booming.",
+        summary: "Tech is running the world, and the demand for coders is increasing at lightning speed. Whether it's Artificial Intelligence, Machine Learning, Cybersecurity, Data Science, Gaming, or Cloud Computing, careers in IT are booming.",
         scholarships: "Check eligibility",
-        qualification: "Pass in Higher Secondary Examinations of (10+2)",
+        programs: "9",
       },
       {
         id: 7,
@@ -67,7 +67,7 @@ export default function Academics() {
         img: "https://kalinga-university.s3.ap-south-1.amazonaws.com/Home/program/law.png",
         summary: "The faculty of law at Kalinga University is a time-tested department offering excellence in the field of legal education and fulfilling the demands of young aspirants by making them employable in the legal sector.",
         scholarships: "Check eligibility",
-        qualification: "Pass in Higher Secondary Examinations of (10+2)",
+        programs: "4",
       },
       {
         id: 5,
@@ -75,7 +75,7 @@ export default function Academics() {
         img: "https://kalinga-university.s3.ap-south-1.amazonaws.com/Home/program/phd-bio.webp",
         summary: "Do you know that pharmacists are equally important as doctors? The pharmaceutical industry is growing as more people look for affordable and effective medicines.",
         scholarships: "Check eligibility",
-        qualification: "Pass in Higher Secondary Examinations of (10+2)",
+        programs: "5",
       },
       {
         id: 9,
@@ -83,15 +83,15 @@ export default function Academics() {
         img: "https://kalinga-university.s3.ap-south-1.amazonaws.com/Home/program/MBA.webp",
         summary: "Pursue advanced research and doctoral studies across various disciplines. Work with renowned faculty on groundbreaking research projects and contribute to academic knowledge.",
         scholarships: "Check eligibility",
-        qualification: "Pass in Higher Secondary Examinations of (10+2)",
+        programs: "-",
       },
       {
         id: 6,
         title: "Faculty Of Science",
         img: "https://kalinga-university.s3.ap-south-1.amazonaws.com/academics/science.webp",
-        summary: "Do you think Science is only about wearing lab coats or solving equations? Well, think again; it goes far beyond your imagination. The Faculty of Science at Kalinga University not only focuses on classroom knowledge, but it will also make you question “WHY” and “HOW” through every fieldwork and experimentation.",
+        summary: "Do you think Science is only about wearing lab coats or solving equations? Well, think again; it goes far beyond your imagination. The Faculty of Science at Kalinga University not only focuses on classroom knowledge, but it will also make you question WHY and HOW through every fieldwork and experimentation.",
         scholarships: "Check eligibility",
-        qualification: "Pass in Higher Secondary Examinations of (10+2)",
+        programs: "15",
       },
       {
         id: 7,
@@ -99,7 +99,7 @@ export default function Academics() {
         img: "https://kalinga-university.s3.ap-south-1.amazonaws.com/Home/program/information.png",
         summary: "Explore engineering disciplines including computer science, electronics, mechanical, and civil engineering. Gain hands-on experience with modern technology and innovation.",
         scholarships: "Check eligibility",
-        qualification: "Pass in Higher Secondary Examinations of (10+2)",
+        programs: "5",
       },
       
     ],

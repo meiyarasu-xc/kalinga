@@ -1,4 +1,5 @@
 "use client";
+import Image from "next/image";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Pagination } from "swiper/modules";
 import "swiper/css";
@@ -75,17 +76,15 @@ export default function UpcomingConference({
           {conferences.map((conf) => (
             <SwiperSlide key={conf.id}>
               <div className={`${backgroundColorcard} rounded-2xl shadow-sm  flex flex-col md:flex-row gap-4 md:gap-8 justify-center items-center`}>
-                <div 
-                  className={`${imageContainerClass} rounded-xl h-[350px] md:h-[${imageHeight}px]`}
-                  style={{
-                    backgroundImage: `url(${conf.image})`,
-                    backgroundSize: 'cover',
-                    backgroundPosition: 'center',
-                    backgroundRepeat: 'no-repeat'
-                  }}
-                  role="img"
-                  aria-label={conf.title}
-                />
+                <div className={`${imageContainerClass} rounded-xl overflow-hidden relative h-[350px] md:h-[${imageHeight}px]`}>
+                  <Image
+                    src={conf.image}
+                    alt={conf.title}
+                    fill
+                    className="rounded-xl object-cover"
+                    unoptimized
+                  />
+                </div>
 
                 <div className="w-full md:w-3/5 flex flex-col gap-6 md:px-0 px-5 h-full justify-around pb-5">
                   {/* Badges positioned at top right */}
@@ -104,7 +103,7 @@ export default function UpcomingConference({
                     </div>
                   )}
 
-                  <div>
+                  <div className="px-3">
                     <h3 className="text-2xl md:text-4xl  mb-3">
                       {conf.title}
                     </h3>

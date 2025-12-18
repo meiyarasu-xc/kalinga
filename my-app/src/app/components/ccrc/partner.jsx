@@ -36,7 +36,7 @@ export default function Partner({
                     alt={item.imageAlt || item.text || `Partner logo ${idx + 1}`}
                     width={isBlue ? 140 : 120}
                     height={isBlue ? 140 : 48}
-                    className="object-contain h-12 max-w-full"
+                    className="object-contain h-16 max-w-full"
                     loading="lazy"
                   />
                 )}
@@ -56,7 +56,7 @@ export default function Partner({
                     alt={item.imageAlt || item.text || `Partner logo ${idx + 1}`}
                     width={isBlue ? 140 : 120}
                     height={isBlue ? 140 : 48}
-                    className="object-contain h-12 max-w-full"
+                    className="object-contain h-16 max-w-full"
                     loading="lazy"
                   />
                 )}

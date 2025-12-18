@@ -67,7 +67,7 @@ export default function ProgramsOffered({
   return (
     <section className="bg-[var(--dark-blue)] relative mx-2 rounded-xl pt-16">
       <div className="container mx-auto">
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-15">
           {/* Left Column */}
           <div className="flex flex-col gap-6 order-2 lg:order-1">
             <div className="md:pt-20 pt-10">
@@ -88,7 +88,7 @@ export default function ProgramsOffered({
           </div>
 
           {/* Right Column */}
-          <div className="flex flex-col justify-center order-1 lg:order-2">
+          <div className="flex flex-col justify-start order-1 lg:order-2">
             {/* Search Bar */}
             <div className="relative p-4 md:px-4">
               <input
@@ -114,7 +114,7 @@ export default function ProgramsOffered({
             </div>
 
             {/* Program List */}
-            <div className="max-h-[620px] overflow-y-auto custom-scrollbar">
+            <div className="max-h-[620px] overflow-y-auto custom-scrollbar pr-2">
               {filteredPrograms.map((program) => (
                 <div
                   key={program.id}

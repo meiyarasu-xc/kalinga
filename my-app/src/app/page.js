@@ -99,7 +99,7 @@ export default function Home() {
       <Facilities />
       <Placements />
       <Testimonials />
-      <Map backgroundColor="bg-[var(--dark-blue)]" textColor="text-white" />
+      <Map backgroundColor="bg-[var(--dark-blue)]" textColor="text-white" subtitleTextColor="!text-white" textColorClass="text-white" />
       <Scroll
         texts={['Admission Open 2026']} 
         velocity={100}

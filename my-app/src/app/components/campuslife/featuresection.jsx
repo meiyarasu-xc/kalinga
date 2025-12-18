@@ -114,7 +114,7 @@ export default function Page() {
             >
               <h1 className="text-xl md:text-2xl font-regular md:mt-[40px] mb-3">{sec.title}</h1>
               <p className="text-sm text-[var(--foreground)]/70 leading-relaxed mb-4 md:w-3/4 w-full">{sec.desc}</p>
-              <GlobalArrowButton>Know More</GlobalArrowButton>
+              <GlobalArrowButton className="hover:!bg-[var(--background)]">Know More</GlobalArrowButton>
             </div>
           ) : (
             <div

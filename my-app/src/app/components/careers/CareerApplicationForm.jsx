@@ -75,7 +75,7 @@ export default function CareerApplicationForm({
         {heading}
       </h2>
 
-      <p className="text-center text-[var(--background)]/70 max-w-3xl mx-auto mt-4 text-sm sm:text-base">
+      <p className="text-center text-[var(--background)]/70 max-w-6xl mx-auto mt-4 text-sm sm:text-base">
         {description}
       </p>
 

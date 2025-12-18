@@ -201,7 +201,7 @@ export default function CenterOfExcellence({
 
         {/* Navigation Buttons */}
         <div className="container mx-auto px-2">
-          <div className="flex justify-end items-center gap-3">
+          <div className="flex justify-end items-center gap-3 mt-5">
             <button className="centres-swiper-button-prev w-12 h-12 rounded-lg bg-[var(--button-red)] hover:bg-[#A2A2A2] flex items-center justify-center hover:opacity-90 transition-opacity shadow-md">
               <svg
                 width="20"
