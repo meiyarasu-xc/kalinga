@@ -34,10 +34,10 @@ export default function ProgramsTabs() {
   ];
 
   return (
-    <section className="py-16 bg-white">
+    <section className="bg-white">
       <div className="px-2">
         {/* Tabs Container */}
-        <div className="bg-[var(--dark-blue)] rounded-2xl p-2">
+        <div className="bg-[var(--dark-blue)] rounded-2xl py-16">
           <div className="container mx-auto">
           <Tabs value={activeTab} onValueChange={setActiveTab}>
             <TabsList className="mb-8 flex-wrap justify-center">
