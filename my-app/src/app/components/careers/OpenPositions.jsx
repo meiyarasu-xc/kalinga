@@ -139,7 +139,7 @@ export default function OpenPositions({
               </div>
             ) : (
               // Original Layout
-              <div className="flex flex-col lg:flex-row items-center lg:justify-between gap-6">
+              <div className="flex flex-col lg:flex-row items-start md:items-center lg:justify-between gap-6">
                 
                 <div className="flex-1">
                   <h3 className="text-[var(--button-red)] mb-4">
@@ -168,12 +168,12 @@ export default function OpenPositions({
       {/* Load More Button */}
       {showLoadMore && (
         <div className="container mx-auto mt-8 text-center">
-          <GlobalArrowButton
+          <button
             onClick={handleLoadMore}
-            className="!bg-[var(--button-red)] !text-white hover:!bg-[var(--button-red)]/90"
+            className="text-white cursor-pointer hover:underline"
           >
             Load More
-          </GlobalArrowButton>
+          </button>
         </div>
       )}
       </div>

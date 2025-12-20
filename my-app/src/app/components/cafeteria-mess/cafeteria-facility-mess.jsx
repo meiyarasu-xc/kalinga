@@ -32,7 +32,7 @@ export default function CanteenMess() {
             <div className="bg-[var(--card-sandal)] rounded-2xl p-8 shadow-md w-full">
               <h2 className="text-2xl font-regular mb-4">Mess</h2>
 
-              <p className="text-sm text-[var(--foreground)]/80 leading-relaxed mb-4">
+              <p className="text-sm text-[var(--foreground)] leading-relaxed mb-4">
                 We have designed three spacious halls to accommodate large groups of
                 students at a time and serve them with different food options every
                 day. Meals of both vegetarian and non-vegetarian plans are prepared
@@ -40,7 +40,7 @@ export default function CanteenMess() {
                 breakfast, lunch, high tea, and dinner.
               </p>
 
-              <p className="text-sm text-[var(--foreground)]/80 leading-relaxed mb-4">
+              <p className="text-sm text-[var(--foreground)] leading-relaxed mb-4">
                 There is a separate meal plan for international students as well. Our
                 attentive staff ensures warm hospitality and takes care of all food
                 requirements. During Ramadan, special meal plans are arranged for
@@ -48,7 +48,7 @@ export default function CanteenMess() {
                 Hindu students.
               </p>
 
-              <p className="text-sm text-[var(--foreground)]/80 leading-relaxed mb-6">
+              <p className="text-sm text-[var(--foreground)] leading-relaxed mb-6">
                 With wholesome and nutritious meals served in a calm atmosphere near
                 nature, students enjoy a healthy and pleasant dining experience.
               </p>

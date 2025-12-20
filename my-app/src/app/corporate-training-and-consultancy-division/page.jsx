@@ -8,6 +8,7 @@ import AdmissionCareer from '../components/general/admission_cta';
 import CareerApplicationForm from '../components/careers/CareerApplicationForm';
 import Gallery from '../components/general/gallery';
 import CtcdTrainingTabs from '../components/ctcd/ctcd_training_tabs';
+
 export default function CorporateTrainingAndConsultancyDivision() {
   const Items = [
     {
@@ -103,8 +104,8 @@ export default function CorporateTrainingAndConsultancyDivision() {
       id: 1,
       imageSrc: "https://kalinga-university.s3.ap-south-1.amazonaws.com/ctcd/master-class.webp",
       imageAlt: "Grow As a Leader: A Program For First-Time Managers",
-      title: "",
-      description: "Resource Person: Mr. Amar Pathak",
+      title: "Resource Person: Mr. Amar Pathak",
+      description: "",
       buttonText: "Read More",
       date: "17.08.2024",
     },
@@ -112,8 +113,8 @@ export default function CorporateTrainingAndConsultancyDivision() {
       id: 2,
       imageSrc: "https://kalinga-university.s3.ap-south-1.amazonaws.com/ctcd/master-class-2.webp",
       imageAlt: "Maximising Fund-Raising Resource For CSR",
-      title: "",
-      description: "Resource Person: Prof. Sanjay Vanani",
+      title: "Resource Person: Prof. Sanjay Vanani",
+      description: "",
       buttonText: "Read More",
       date: "19.10.2024",
     },
@@ -121,8 +122,8 @@ export default function CorporateTrainingAndConsultancyDivision() {
       id: 3,
       imageSrc: "https://kalinga-university.s3.ap-south-1.amazonaws.com/ctcd/masterclass-3.webp",
       imageAlt: "Crack The Code: Gen Z Connection Guide For Teachers and Parents",
-      title: "",
-      description: "Resource Person: Dr. Sunayna Shukla",
+      title: "Resource Person: Dr. Sunayna Shukla",
+      description: "",
       buttonText: "Read More",
       date: "21.12.2024",
     },
@@ -130,8 +131,8 @@ export default function CorporateTrainingAndConsultancyDivision() {
       id: 4,
       imageSrc: "https://kalinga-university.s3.ap-south-1.amazonaws.com/ctcd/masterclass-4.webp",
       imageAlt: "AI-Driven Benefits for Manufacturing & Operations",
-      title: "",
-      description: "Resource Person: Ms. Rajashree Rajadhya",
+      title: "Resource Person: Ms. Rajashree Rajadhya",
+      description: "",
       buttonText: "Read More",
       date: "08.03.2025",
     },
@@ -139,8 +140,8 @@ export default function CorporateTrainingAndConsultancyDivision() {
       id: 5,
       imageSrc: "https://kalinga-university.s3.ap-south-1.amazonaws.com/ctcd/masterclass-5.webp",
       imageAlt: "HR Analytics: Leveraging AI & Data for Strategic HR",
-      title: "",
-      description: "Resource Person: Saurabh Saxena",
+      title: "Resource Person: Saurabh Saxena",
+      description: "",
       buttonText: "Read More",
       date: "03.05.2025",
     },
@@ -148,7 +149,7 @@ export default function CorporateTrainingAndConsultancyDivision() {
       id: 6,
       imageSrc: "https://kalinga-university.s3.ap-south-1.amazonaws.com/ctcd/masterclass-6.webp",
       imageAlt: "Master Your Market: Sales, Marketing & Negotiating Strategies",
-      title: "",
+      title: "Resource Person: Ms. Rajashree Rajadhya",
       description: "",
       buttonText: "Read More",
       date: "26.07.2025",
@@ -265,7 +266,10 @@ export default function CorporateTrainingAndConsultancyDivision() {
       <HeroSectionTwo />
       <MainIntro 
         title="Corporate Training And Consultancy Division (CTCD)"
-        description="We offer training programs and provide one-on-one consultancy services to corporate employees using experiential methods at their location, at our campus, or through online mode, helping them upgrade their skills, boost morale, and improve productivity. Our team continuously researches and stays updated with the latest concepts and trends to provide valuable solutions to organisations. Through our soft skills, technical skills, and compliance training, they become ready to face any challenge and stand out in the workplace."
+        description={[
+          "We offer training programs and provide one-on-one consultancy services to corporate employees using experiential methods at their location, at our campus, or through online mode, helping them upgrade their skills, boost morale, and improve productivity.",
+          "Our team continuously researches and stays updated with the latest concepts and trends to provide valuable solutions to organisations. Through our soft skills, technical skills, and compliance training, they become ready to face any challenge and stand out in the workplace."
+        ]}
         points={[
           "To align training programs with business needs",
           "To measure the impact of training through Key Result Areas (KRAs) and business metrics",
@@ -275,6 +279,8 @@ export default function CorporateTrainingAndConsultancyDivision() {
         ]}
         imageUrl="https://kalinga-university.s3.ap-south-1.amazonaws.com/csr/csr-intro.png"
         imageAlt="CTCD"
+        initialVisibleParagraphs={1}
+        hidePointsUntilExpanded={true}
       />
       <CtcdTrainingTabs />
       <MasterClassTab
@@ -287,7 +293,10 @@ export default function CorporateTrainingAndConsultancyDivision() {
       />
       <OrganogramOfKalinga 
         title="Organogram of CTCD"
-        description="Our consultancy services are designed to transform organisations to reach their maximum potential. Our experts conduct one-on-one discussions with team members of companies and develop strategies that improve their organisations’ workflows, HR processes, and performance management systems. More specifically, we assist them in talent management, digital integration, and workforce planning; every approach ensures improved productivity and employee engagement. We help them make SMARTER decisions with proper resource planning and integration, enabling them to grow with a clear roadmap"
+        description={[
+          "Our consultancy services are designed to transform organisations to reach their maximum potential. Our experts conduct one-on-one discussions with team members of companies and develop strategies that improve their organisations' workflows, HR processes, and performance management systems. ",
+          "More specifically, we assist them in talent management, digital integration, and workforce planning; every approach ensures improved productivity and employee engagement. We help them make SMARTER decisions with proper resource planning and integration, enabling them to grow with a clear roadmap"
+        ]}
         buttonLabel="Explore Now"
         href="/ctcd-organogram"
         cardBackgroundColor="bg-[var(--dark-blue)]"
@@ -301,11 +310,15 @@ export default function CorporateTrainingAndConsultancyDivision() {
         showReadMore={false}
         showIcon={false}
         showHeaderButton={false}
+        itemsAlignment="center"
       />
-      <ImageListItem items={Items} imageSrc="https://kalinga-university.s3.ap-south-1.amazonaws.com/course/course_page.webp" title="Benefits for Organisations"  />
+      <ImageListItem items={Items} imageSrc="https://kalinga-university.s3.ap-south-1.amazonaws.com/ccrc/kif/kif.webp" title="Benefits for Organisations"  />
       <MainIntro 
         title="Training Benefits"
-        description="Training and development programs are a top priority in companies as they aim to maximise profit by eliminating low-productive tasks. But, how do they do it in the right direction? Well, Kalinga's CTCD team uses effective training methods and trains employees to stay productive, motivated, and improve soft and cognitive skills."
+        description={[
+          "Training and development programs are a top priority in companies as they aim to maximise profit by eliminating low-productive tasks. But, how do they do it in the right direction?",
+          "Well, Kalinga's CTCD team uses effective training methods and trains employees to stay productive, motivated, and improve soft and cognitive skills."
+        ]}
         points={[
           "Enhancing employee skills through targeted training programs aligned with industry needs",
           "Providing strategic consultancy services to help organizations navigate complex business challenges",
@@ -315,6 +328,8 @@ export default function CorporateTrainingAndConsultancyDivision() {
         ]}
         imageUrl="https://kalinga-university.s3.ap-south-1.amazonaws.com/ctcd/ctcd-meeting.jpg"
         imageAlt="CTCD"
+        initialVisibleParagraphs={1}
+        hidePointsUntilExpanded={true}
       />
       <OrganogramOfKalinga 
       

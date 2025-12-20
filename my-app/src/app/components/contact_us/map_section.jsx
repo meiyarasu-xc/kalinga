@@ -229,10 +229,10 @@ const Map = () => {
         )}
       </div>
 
-      <div className="bg-[var(--dark-blue)] md:h-[570px] w-full md:w-2/5 rounded-b-[20px] md:rounded-r-[20px] md:rounded-bl-none p-6 lg:p-8">
+      <div className="bg-[var(--dark-blue)] md:h-[570px] w-full md:w-2/5 rounded-b-[20px] md:rounded-r-[20px] md:rounded-bl-none p-0 md:p-6">
         <SectionHeading
           title="Nearest by KU"
-          titleClassName="text-white mb-6"
+          titleClassName="text-white mb-6 mt-5 md:mt-0"
         />
 
         <div className="space-y-4">
@@ -259,7 +259,7 @@ const Map = () => {
                   <h4 className="font-plus-jakarta-sans text-[20px] text-[var(--foreground)] mb-2">
                     {facility.name}
                   </h4>
-                  <div className="flex items-center justify-between flex-wrap gap-2">
+                  <div className="flex items-center justify-start flex-wrap md:gap-5 gap-2">
                     <p className="text-[14px] text-[var(--light-text-gray)]">
                       Distance : {facility.distance}
                     </p>

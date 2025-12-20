@@ -296,11 +296,11 @@ export default function IqacTabSection() {
         }
       `}</style>
       <div className="">
-        <div className="flex flex-col gap-2 bg-[var(--dark-blue)] py-16 md:px-10 px-4 rounded-xl">
-          {/* Horizontal Scrollable Tabs */}
-          <div className="w-full mb-4">
+        <div className="flex flex-col lg:flex-row gap-4 bg-[var(--dark-blue)] py-16 md:px-10 px-4 rounded-xl">
+          {/* Vertical Tabs on Left (Horizontal Scroll on Mobile) */}
+          <div className="w-full lg:w-80 flex-shrink-0">
             <div className="rounded-[16px] bg-[var(--dark-blue)]">
-              <nav className="flex gap-2 overflow-x-auto pb-2 scrollbar-hide">
+              <nav className="flex flex-row lg:flex-col gap-2 overflow-x-auto lg:overflow-x-visible pb-2 lg:pb-0 scrollbar-hide">
                 {IQAC_TABS.map((tab) => {
                   const isActive = activeTab === tab.id;
                   return (
@@ -308,7 +308,7 @@ export default function IqacTabSection() {
                       key={tab.id}
                       onClick={() => handleTabClick(tab.id)}
                       className={`
-                        flex-shrink-0 text-left px-4 py-5 rounded-[8px] 
+                        flex-shrink-0 lg:w-full text-left px-4 py-5 rounded-[8px] 
                         font-plus-jakarta-sans text-sm md:text-base whitespace-nowrap
                         transition-all duration-200
                         ${
@@ -327,12 +327,12 @@ export default function IqacTabSection() {
           </div>
 
           {/* Content Area - White Background */}
-          <div className="w-full">
+          <div className="flex-1 w-full">
             <div className="rounded-[16px] bg-white p-4 md:p-5 shadow-sm h-full flex flex-col">
               {/* IQAC Committee Tab */}
               {activeTab === "committee" && (
                 <div className="flex-1">
-                  <h2 className="font-plus-jakarta-sans text-xl md:text-3xl text-[var(--foreground)] mb-4 text-center">
+                  <h2 className="font-plus-jakarta-sans text-xl md:text-3xl text-[var(--foreground)] mb-4 text-center mt-3">
                     IQAC Committee
                   </h2>
                   <div className="overflow-x-auto overflow-y-auto max-h-[500px] border border-gray-200 rounded-lg">
@@ -437,7 +437,7 @@ export default function IqacTabSection() {
               {/* Minutes of Meeting Tab */}
               {activeTab === "minutes" && (
                 <div className="flex-1">
-                  <h2 className="font-plus-jakarta-sans text-xl md:text-3xl text-[var(--foreground)] mb-4 text-center">
+                  <h2 className="font-plus-jakarta-sans text-xl md:text-3xl text-[var(--foreground)] mb-4 text-center mt-3">
                     IQAC Minutes Of Meeting
                   </h2>
                   <div className="space-y-2 text-left">
@@ -489,7 +489,7 @@ export default function IqacTabSection() {
               {/* Feedback Analysis Tab */}
               {activeTab === "feedback" && (
                 <div className="flex-1">
-                  <h2 className="font-plus-jakarta-sans text-xl md:text-3xl text-[var(--foreground)] mb-4 text-center">
+                  <h2 className="font-plus-jakarta-sans text-xl md:text-3xl text-[var(--foreground)] mb-4 text-center mt-3">
                     Feedback Analysis & Action Taken Report
                   </h2>
                   <div className="space-y-2 text-left">
@@ -541,7 +541,7 @@ export default function IqacTabSection() {
               {/* Strategic Plan Tab */}
               {activeTab === "strategic" && (
                 <div className="flex-1">
-                  <h2 className="font-plus-jakarta-sans text-xl md:text-3xl text-[var(--foreground)] mb-4 text-center">
+                  <h2 className="font-plus-jakarta-sans text-xl md:text-3xl text-[var(--foreground)] mb-4 text-center mt-3">
                     Strategic Plan & Deployment
                   </h2>
                   <div className="mb-6 grid grid-cols-1 md:grid-cols-3 gap-4">
@@ -554,7 +554,7 @@ export default function IqacTabSection() {
                   </div>
                   <div className="text-left space-y-4">
                     {STRATEGIC_PLAN_CONTENT.split('\n\n').map((paragraph, idx) => (
-                      <p key={idx} className="text-[var(--foreground)]/80 font-plus-jakarta-sans text-sm md:text-base leading-relaxed">
+                      <p key={idx} className="text-[var(--foreground)] font-plus-jakarta-sans text-sm md:text-base leading-relaxed">
                         {paragraph}
                       </p>
                     ))}
@@ -562,13 +562,32 @@ export default function IqacTabSection() {
                 </div>
               )}
 
-              {/* Placeholder content for other tabs */}
-              {!["committee", "initiatives", "minutes", "feedback", "strategic"].includes(activeTab) && (
+              {/* Student Satisfaction Survey Tab */}
+              {activeTab === "satisfaction" && (
                 <div className="flex-1">
-                  <h2 className="font-plus-jakarta-sans text-xl md:text-3xl text-[var(--foreground)] mb-4 text-center">
+                  <h2 className="font-plus-jakarta-sans text-xl md:text-3xl text-[var(--foreground)] mb-4 text-center mt-3">
+                    Student Satisfaction Survey
+                  </h2>
+                  <div className="flex justify-center mt-6">
+                    <a
+                      href="https://kalinga-university.s3.ap-south-1.amazonaws.com/IQAC/Students+Satisfaction+Survey+2021-22.pdf"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="px-6 py-3 bg-[var(--button-red)] text-white rounded-lg hover:bg-[var(--button-red)]/90 transition-colors font-plus-jakarta-sans text-sm md:text-base font-semibold"
+                    >
+                      View Student Satisfaction Survey 2021-22
+                    </a>
+                  </div>
+                </div>
+              )}
+
+              {/* Placeholder content for other tabs */}
+              {!["committee", "initiatives", "minutes", "feedback", "strategic", "satisfaction"].includes(activeTab) && (
+                <div className="flex-1">
+                  <h2 className="font-plus-jakarta-sans text-xl md:text-3xl text-[var(--foreground)] mb-4 text-center mt-3">
                     {IQAC_TABS.find((tab) => tab.id === activeTab)?.label}
                   </h2>
-                  <p className="text-[var(--foreground)]/80 font-plus-jakarta-sans text-center">
+                  <p className="text-[var(--foreground)] font-plus-jakarta-sans text-center">
                     Content for this section will be added here.
                   </p>
                 </div>

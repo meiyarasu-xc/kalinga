@@ -10,7 +10,7 @@ const HeroSectionTwo = () => {
       <div 
         className="absolute inset-0 bg-cover bg-center bg-no-repeat  rounded-xl sm:rounded-4xl h-full w-full"
         style={{
-          backgroundImage: `url('https://kalinga-university.s3.ap-south-1.amazonaws.com/kalingabanner.webp')`,
+          backgroundImage: `url('https://kalinga-university.s3.ap-south-1.amazonaws.com/kif/kif-banner.webp')`,
           backgroundColor: '#e6e9f2', // fallback color
         }} 
       >
@@ -37,7 +37,7 @@ const HeroSectionTwo = () => {
         </div>
         
         {/* Right Side - Form */}
-        <div className="flex flex-col items-center md:items-end justify-center md:w-1/2 w-full mt-4 md:mt-0">
+        <div className="flex flex-col items-center md:items-end justify-center md:w-1/2 w-full mt-4">
           <form className="bg-white/95 backdrop-blur-sm rounded-lg p-6 md:p-8 w-full max-w-md shadow-xl">
             <h2 className="text-2xl font-bold text-gray-800 mb-6 text-center">Get in Touch</h2>
             <div className="space-y-4">

@@ -3,7 +3,7 @@
 import { useState } from 'react';
 import StudentActivities from '../department/student_activities';
 import Gallery from '../general/gallery';
-
+import SectionHeading from '../general/SectionHeading';
 // Default Masterclass Activities for Tab 1 (2024-25)
 const defaultTab1Activities = [
   {
@@ -204,6 +204,7 @@ export default function MasterClassTab({
 
   return (
     <section className="bg-white py-16">
+      <SectionHeading title="Masterclasses" titleClassName="text-center mb-5" />
       <div className="px-4 lg:px-6">
         {/* Tab Navigation */}
         <div className="flex flex-wrap justify-center mb-8 md:mb-12 gap-4 md:gap-6">
@@ -238,6 +239,7 @@ export default function MasterClassTab({
                 backgroundColor="bg-white"
                 paddingClassName="py-0"
                 titleClassName="font-plus-jakarta-sans text-lg font-bold sm:text-xl md:text-2xl mb-6 sm:mb-8 md:mb-10 mt-5 text-[var(--foreground)] text-center"
+                forceSliderOnMobile={true}
               />
             </>
           )}
@@ -255,6 +257,7 @@ export default function MasterClassTab({
                 backgroundColor="bg-white"
                 paddingClassName="py-0"
                 titleClassName="font-plus-jakarta-sans text-lg font-bold sm:text-xl md:text-2xl mb-6 sm:mb-8 md:mb-10 text-[var(--foreground)] text-center mt-10"
+                forceSliderOnMobile={true}
               />
             </>
           )}

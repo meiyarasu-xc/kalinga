@@ -35,9 +35,10 @@ export default function ProgramsTabs() {
 
   return (
     <section className="py-16 bg-white">
-      <div className="container mx-auto px-6">
+      <div className="px-2">
         {/* Tabs Container */}
-        <div className="bg-[var(--dark-blue)] rounded-2xl p-5 md:p-8">
+        <div className="bg-[var(--dark-blue)] rounded-2xl p-2">
+          <div className="container mx-auto">
           <Tabs value={activeTab} onValueChange={setActiveTab}>
             <TabsList className="mb-8 flex-wrap justify-center">
               <TabsTrigger value="45Days" className="flex-1 min-w-[calc(50%-7px)] md:min-w-[200px]">
@@ -79,6 +80,7 @@ export default function ProgramsTabs() {
               </div>
             </TabsContent>
           </Tabs>
+          </div>
         </div>
       </div>
     </section>
