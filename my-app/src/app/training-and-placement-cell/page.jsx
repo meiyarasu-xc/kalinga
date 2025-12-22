@@ -1,7 +1,10 @@
+"use client";
+
 import React from 'react'
 import MainIntro from '@/app/components/about/main_intro'
 import ImageContent from '@/app/components/ccrc/imagecontent'
 import ImageListItem from '@/app/components/ccrc/imagelistitem'
+import { Tabs, TabsList, TabsTrigger, TabsContent } from '@/app/components/general/tab'
 const TrainingAndPlacementCell = () => {
     const items = [
         {
@@ -31,6 +34,32 @@ const TrainingAndPlacementCell = () => {
     buttonLink="/career-and-corporate-resource-centre"
     buttonText="Explore More"
     />
+    <div className="mt-8 rounded-2xl bg-[var(--card-gray)] p-5 md:p-7">
+      <Tabs defaultValue="tab1">
+        <TabsList className="gap-0">
+          <TabsTrigger value="tab1">Tab 1</TabsTrigger>
+          <TabsTrigger value="tab2">Tab 2</TabsTrigger>
+        </TabsList>
+
+        <TabsContent value="tab1" className="pt-7">
+          <h3 className="font-stix text-[var(--foreground)]">
+            Tab 1 Content
+          </h3>
+          <p className="mt-5 text-[var(--light-text-gray)]">
+            Add your content here for tab 1
+          </p>
+        </TabsContent>
+
+        <TabsContent value="tab2" className="pt-7">
+          <h3 className="font-stix text-2xl font-bold text-[var(--foreground)]">
+            Tab 2 Content
+          </h3>
+          <p className="mt-5 text-[var(--light-text-gray)]">
+            Add your content here for tab 2
+          </p>
+        </TabsContent>
+      </Tabs>
+    </div>
     </>
   )
 }
