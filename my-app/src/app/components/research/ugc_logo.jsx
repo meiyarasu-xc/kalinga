@@ -114,7 +114,7 @@ export default function UGCLogo() {
 
         {/* Common Button for All Logos */}
         <div className="flex flex-col items-center w-full px-4 mt-6">
-          <div className="w-px h-8 border-2 border-dashed border-gray-500"></div>
+          <div className="w-px h-8 border-2 border-dashed border-gray-500 hidden lg:block"></div>
           <div className="mt-3 w-full">
             <GlobalRedPlainButton className="w-full text-sm px-4 py-3">
               University Grants Commission

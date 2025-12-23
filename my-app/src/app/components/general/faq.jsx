@@ -371,7 +371,7 @@ const FAQ = ({
             const isCollapsed = collapsedSections.has(sectionId)
             
             return (
-              <div key={item.id || index} className="max-w-4xl mx-auto mb-6 rounded-lg overflow-hidden shadow-md">
+              <div key={item.id || index} className="container mx-auto mb-6 rounded-lg overflow-hidden shadow-md mt-5">
                 {/* Header - Entire header is clickable */}
                 <button
                   onClick={() => toggleSection(sectionId)}

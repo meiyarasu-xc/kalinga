@@ -12,6 +12,7 @@ export default function Partner({
     singleColumn = false,
     milestones = null,
     description = "Organizations that have participated in skill development and professional training initiatives",
+    footerText = null,
 }) {
   // Duplicate items for seamless scrolling
   const duplicatedBlueItems = blueItems.length > 0 ? [...blueItems, ...blueItems] : [];
@@ -36,7 +37,7 @@ export default function Partner({
       return (
         <div className="partner-marquee-container overflow-hidden">
           <div className="animate-marquee-vertical partner-marquee-wrapper">
-            <div className="grid grid-cols-4 md:grid-cols-8 gap-3 sm:gap-4">
+            <div className="grid grid-cols-2 md:grid-cols-8 gap-3 sm:gap-4">
               {duplicatedItems.map((item, idx) => (
                 <div
                   key={idx}
@@ -144,6 +145,15 @@ export default function Partner({
       
               {/* Partners Grid with Vertical Marquee */}
               {renderPartnerGrid(combinedItems.length > 0 ? combinedItems : blueItems, true, true)}
+              
+              {/* Footer text at bottom */}
+              {footerText && (
+                <div className="mt-8 md:mt-10 text-center">
+                  <p className="text-white text-lg md:text-2xl font-plus-jakarta-sans">
+                    {footerText}
+                  </p>
+                </div>
+              )}
             </div>
           </div>
         </div>

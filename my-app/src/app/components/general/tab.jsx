@@ -39,7 +39,7 @@ export function TabsTrigger({ value, className = "", children }) {
       onClick={() => ctx.setValue(value)}
       className={[
         // pixel-ish: height, padding, radius like your screenshot
-        "h-[55px] rounded-[6px] px-[18px] text-[14px] leading-none transition",
+        "flex-1 h-[55px] rounded-[6px] px-[18px] text-[14px] leading-none transition",
         "border border-white/30",
         isActive ? "bg-[var(--button-red)] text-white" : "bg-white text-[var(--foreground)] cursor-pointer",
         className,
