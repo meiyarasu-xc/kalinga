@@ -42,14 +42,12 @@ const AboutKalinga = () => {
                 Kalinga University — The Pride of Central India
                 </h2>
                 <div className="mt-4">
-                <Link href="/about-us" passHref legacyBehavior>
-                <a className="inline-flex">
+                <Link href="/about-us" className="inline-flex">
                 <GlobalArrowButton className="!bg-white !text-black"
                 arrowClassName="!bg-[var(--button-red)]"
                 arrowIconClassName="!text-white"
                 textClassName="!text-black"
                 >Learn More</GlobalArrowButton>
-                </a>
                 </Link>
                 </div>
               </div>

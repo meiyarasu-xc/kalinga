@@ -354,6 +354,7 @@ export default function Research() {
         singleColumn={true}
         milestones={milestones}
         description="Maintaining the track record of providing students with the best job opportunities and rewarding salary packages at top companies."
+        footerText="Trusted by 500+ Global Recruiters"
       />
       <QuickLinks links={links} title="Placement Overview" description="Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incid"
        backgroundColor="bg-white" textColorClassName="text-black" showReadMore={false} />

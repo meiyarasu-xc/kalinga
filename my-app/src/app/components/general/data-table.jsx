@@ -55,7 +55,7 @@ const DataTable = ({
   const tableData = data || []
 
   return (
-    <div className={`${overflowX ? '' : 'container mx-auto'} rounded-lg py-5 overflow-hidden shadow-md bg-white ${className}`}>
+    <div className={`${overflowX ? '' : 'container mx-auto'} rounded-lg overflow-hidden shadow-md bg-white ${className}`}>
       <div className={overflowX ? "overflow-x-auto rounded-lg" : "rounded-lg overflow-hidden"}>
         <table className={`${overflowX ? "min-w-full w-max" : "w-full"}`} style={{ borderSpacing: 0, borderCollapse: 'separate' }}>
           <thead>
@@ -104,15 +104,37 @@ const DataTable = ({
                     // Check if this is the last row
                     const isLastRow = rowIdx === tableData.length - 1
                     
+                    // Check if this cell should be merged (colSpan support)
+                    const cellColSpan = row.colSpan && row.colSpan[column.key] !== undefined ? row.colSpan[column.key] : 1
+                    const shouldSkipCell = cellColSpan === 0
+                    
+                    // Skip rendering if this cell is merged into previous cell
+                    if (shouldSkipCell) {
+                      return null
+                    }
+                    
+                    // Calculate actual column index after accounting for skipped cells
+                    let actualColIdx = colIdx
+                    if (row.colSpan) {
+                      let skippedCount = 0
+                      for (let i = 0; i < colIdx; i++) {
+                        if (row.colSpan[tableColumns[i].key] === 0) {
+                          skippedCount++
+                        }
+                      }
+                      actualColIdx = colIdx - skippedCount
+                    }
+                    
                     return (
                       <td
                         key={column.key || colIdx}
+                        colSpan={cellColSpan > 1 ? cellColSpan : undefined}
                         className={`
                           ${borderColor} border-b border-r p-3 text-gray-700 font-plus-jakarta-sans text-sm
                           ${column.widthPx ? "" : (column.width || "")}
-                          ${colIdx === 0 ? "border-l" : ""}
-                          ${isLastRow && colIdx === 0 ? "rounded-bl-lg" : ""}
-                          ${isLastRow && colIdx === tableColumns.length - 1 ? "rounded-br-lg" : ""}
+                          ${actualColIdx === 0 ? "border-l" : ""}
+                          ${isLastRow && actualColIdx === 0 ? "rounded-bl-lg" : ""}
+                          ${isLastRow && actualColIdx === (tableColumns.length - 1 - (row.colSpan ? Object.values(row.colSpan).filter(v => v === 0).length : 0)) ? "rounded-br-lg" : ""}
                         `}
                         style={column.widthPx ? { width: `${column.widthPx}px` } : {}}
                       >
@@ -126,11 +148,11 @@ const DataTable = ({
                             </ul>
                           </div>
                         ) : (
-                          cellValue
+                          cellValue || ""
                         )}
                       </td>
                     )
-                  })}
+                  }).filter(Boolean)}
                 </tr>
               ))
             )}

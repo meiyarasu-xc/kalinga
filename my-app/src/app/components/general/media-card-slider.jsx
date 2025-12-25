@@ -8,6 +8,7 @@ import Image from "next/image";
 import SectionHeading from "./SectionHeading";
 import dynamic from "next/dynamic";
 
+
 // Dynamically import ReactPlayer to avoid SSR issues
 const ReactPlayer = dynamic(() => import("react-player"), { ssr: false });
 

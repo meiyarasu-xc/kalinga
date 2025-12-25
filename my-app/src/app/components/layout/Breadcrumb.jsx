@@ -6,7 +6,7 @@ import { usePathname } from 'next/navigation';
 import { useBreadcrumb } from './BreadcrumbContext';
 import { useEffect, useRef } from 'react';
 
-const imageposition = "object-center";
+const imageposition = "object-top";
 
 const Breadcrumb = ({ customBreadcrumbs, heroImage, pageTitle }) => {
   const pathname = usePathname();
@@ -18,6 +18,12 @@ const Breadcrumb = ({ customBreadcrumbs, heroImage, pageTitle }) => {
   
   // Don't show breadcrumb on corporate-training-and-consultancy-division page
   if (pathname === '/corporate-training-and-consultancy-division') return null;
+  
+  // Don't show breadcrumb on kalsee page
+  if (pathname === '/kalsee') return null;
+  
+  // Don't show breadcrumb on kalmat page
+  if (pathname === '/kalmat') return null;
 
   // Track previous pathname to detect route changes
   const prevPathnameRef = useRef(pathname);
@@ -61,6 +67,7 @@ const Breadcrumb = ({ customBreadcrumbs, heroImage, pageTitle }) => {
   const finalHeroImage = contextData?.heroImage ?? heroImage;
   const finalPageTitle = contextData?.pageTitle ?? pageTitle;
   const finalCustomBreadcrumbs = contextData?.customBreadcrumbs ?? customBreadcrumbs;
+  const finalImagePosition = contextData?.imageposition ?? imageposition;
 
   // Generate breadcrumbs from path or use custom ones
   const generateBreadcrumbs = () => {
@@ -103,7 +110,7 @@ const Breadcrumb = ({ customBreadcrumbs, heroImage, pageTitle }) => {
                 src={resolvedHeroImage}
                 alt={currentPageTitle}
                 fill
-                className={`object-cover object-center ${imageposition}`} 
+                className={`object-cover ${finalImagePosition}`} 
                 priority
               />
               {/* Gradient Overlay for image */}

@@ -165,6 +165,9 @@ export default function AwardsScrollbar({
   hideTitle = false,
   headerButtonLabel = "View All Awards",
   onHeaderButtonClick,
+  hideTopLeaves = false,
+  showLeavesAroundButton = false,
+  dottedLineTop = null,
 }) {
   const swiperRef = useRef(null);
 
@@ -175,7 +178,7 @@ export default function AwardsScrollbar({
         {hideTitle ? (
           <></>
         ) : (
-          <div className="text-left md:text-center mb-6 sm:mb-8">
+          <div className="text-center mb-6 sm:mb-8">
             <SectionHeading title={title} subtitle={subtitle} titleClassName="!py-2" />
           </div>
         )}
@@ -183,7 +186,7 @@ export default function AwardsScrollbar({
         {/* Scrollable timeline */}
         <div className="relative overflow-hidden">
           {/* dashed connector line */}
-          <div className={`absolute  ${hideTitle ? 'top-[60px] ' : 'top-[62px] sm:top-[138px]'} left-[260px] right-[260px] border-b border-dashed border-gray-500 pointer-events-none z-0`} />
+          <div className={`hidden md:block absolute ${dottedLineTop !== null ? dottedLineTop : (hideTitle ? 'top-[60px] ' : 'top-[62px] sm:top-[138px]')} left-0 right-0 border-b-2 border-dashed border-gray-600 pointer-events-none z-0`} />
 
           <Swiper
             ref={swiperRef}
@@ -206,8 +209,8 @@ export default function AwardsScrollbar({
             }}
           >
             {awards.map((award) => award.active && (
-              <SwiperSlide key={award.id} className="!w-auto">
-                <div className="flex flex-col items-center flex-shrink-0 min-w-[200px] sm:min-w-[220px]">
+              <SwiperSlide key={award.id} className="!w-auto relative z-10">
+                <div className="flex flex-col items-center flex-shrink-0 min-w-[200px] sm:min-w-[220px] relative z-10">
                   {/* Icon + texts/button with leaf images */}
                 {hideTitle ? ( 
                  <>
@@ -262,13 +265,15 @@ export default function AwardsScrollbar({
                 ) : (
                   <>
                   <div className="flex items-center justify-center gap-2 mb-2">
-                    <Image
-                      src="https://kalinga-university.s3.ap-south-1.amazonaws.com/common/awards-leaf.png"
-                      alt="Award leaf left"
-                      width={50}
-                      height={50}
-                      className="object-contain"
-                    />
+                    {!hideTopLeaves && (
+                      <Image
+                        src="https://kalinga-university.s3.ap-south-1.amazonaws.com/common/awards-leaf.png"
+                        alt="Award leaf left"
+                        width={50}
+                        height={50}
+                        className="object-contain"
+                      />
+                    )}
                       
                       <div className="flex flex-col items-center text-[var(--foreground)] text-center max-w-[200px]">
                         <h3 className="!text-[18px] font-stix break-words leading-tight">
@@ -280,19 +285,29 @@ export default function AwardsScrollbar({
                       
                       </div>
           
-                    <Image
-                      src="https://kalinga-university.s3.ap-south-1.amazonaws.com/common/awards-leaf.png"
-                      alt="Award leaf right"
-                      width={50}
-                      height={50}
-                      className="object-contain -scale-x-100"
-                    />
+                    {!hideTopLeaves && (
+                      <Image
+                        src="https://kalinga-university.s3.ap-south-1.amazonaws.com/common/awards-leaf.png"
+                        alt="Award leaf right"
+                        width={50}
+                        height={50}
+                        className="object-contain -scale-x-100"
+                      />
+                    )}
                   </div>
 
-                  {/* Year pill */}
+                  {/* Year pill with leaves on sides */}
                   <div className="flex items-center justify-center gap-2 mb-2">
+                    {showLeavesAroundButton && (
+                      <Image
+                        src="https://kalinga-university.s3.ap-south-1.amazonaws.com/common/awards-leaf.png"
+                        alt="Award leaf left"
+                        width={50}
+                        height={50}
+                        className="object-contain"
+                      />
+                    )}
                    
-                  
                       {award.link ? (
                         <a
                           href={award.link}
@@ -317,8 +332,16 @@ export default function AwardsScrollbar({
                           {award.year}
                         </div>
                       )}
-              
-                 
+                  
+                    {showLeavesAroundButton && (
+                      <Image
+                        src="https://kalinga-university.s3.ap-south-1.amazonaws.com/common/awards-leaf.png"
+                        alt="Award leaf right"
+                        width={50}
+                        height={50}
+                        className="object-contain -scale-x-100"
+                      />
+                    )}
                   </div>
                   </> 
                 )}

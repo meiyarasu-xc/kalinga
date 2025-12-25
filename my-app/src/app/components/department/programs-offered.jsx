@@ -140,7 +140,7 @@ export default function ProgramsOffered({
                         Duration: {program.duration}
                       </p>
                       <a
-                      href="#"
+                      href="/admissions"
                       className="font-[500] flex items-center gap-1 hover:gap-2 transition-all md:ml-4"
                     >
                       Explore Program

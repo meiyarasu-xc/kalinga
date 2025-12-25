@@ -18,9 +18,8 @@ const HeroSection = () => {
       <div className="container relative z-1 mx-auto h-full flex flex-col items-center justify-center text-center text-white gap-4 md:w-10/12 w-full">
         <h1>Best private university in Chhattisgarh</h1>
         <p className="md:text-base text-xs md:w-8/12 w-11/12"> Step into a world of educational excellence at Kalinga University — a rising hub of innovation, diversity, and academic distinction in Central India.</p>
-        <Link href="/about-us" passHref legacyBehavior>
-          <a className="inline-flex">
-            <GlobalArrowButton
+        <Link href="/about-us" className="inline-flex">
+          <GlobalArrowButton
               className="!bg-white !text-black"
               arrowClassName="!bg-[var(--button-red)]"
               arrowIconClassName="!text-white"
@@ -28,7 +27,6 @@ const HeroSection = () => {
             >
               Learn More
             </GlobalArrowButton>
-          </a>
         </Link>
       </div>
     </section>

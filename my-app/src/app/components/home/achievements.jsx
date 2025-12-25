@@ -7,6 +7,7 @@ import { Navigation, Autoplay } from 'swiper/modules'
 import 'swiper/css'
 import 'swiper/css/navigation'
 import GlobalArrowButton from '../general/global-arrow_button'
+import SectionHeading from '../general/SectionHeading'
 
 const achievements = [
   {
@@ -149,16 +150,15 @@ export default function Achievements() {
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-12 items-center">
             {/* Left Side - Heading and Button */}
             <div className="flex flex-col justify-center">
-              <h2 className="font-stix text-2xl sm:text-3xl md:text-4xl lg:text-5xl text-[var(--foreground)] mb-6 lg:mb-8 leading-tight">
-              Our Growth Story in Numbers
-              </h2>
+              <SectionHeading
+                title="Our Growth Story in Numbers"
+                titleClassName="text-[var(--foreground)] mb-6 lg:mb-8"
+              />
               <div>
-                <Link href="/about-us" passHref legacyBehavior>
-                  <a className="inline-flex">
-                    <GlobalArrowButton className="w-full sm:w-[160px] h-[44px] justify-between"> 
-                      Learn More
+                <Link href="/about-us" className="inline-flex">
+                  <GlobalArrowButton className="w-full sm:w-[160px] h-[44px] justify-between"> 
+                    Learn More
                     </GlobalArrowButton>
-                  </a>
                 </Link>
               </div>
             </div>

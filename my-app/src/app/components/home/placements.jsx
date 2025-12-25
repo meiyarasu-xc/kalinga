@@ -103,11 +103,12 @@ const Placements = ({ hideMarquee = false, hideMilestones = false, bgColor = "bg
 
   // Update stat values when placementData changes
   useEffect(() => {
-    if (placementStats.length > 0 && hasAnimated) {
+    if (hasAnimated) {
       // If already animated, just set the values directly
-      const studentsValue = getStatValue('students placed')
-      const recruitersValue = getStatValue('corporate recruiters')
-      const internshipsValue = getStatValue('internships')
+      // Use API data if available, otherwise use default values
+      const studentsValue = getStatValue('students placed') || 8000
+      const recruitersValue = getStatValue('corporate recruiters') || 400
+      const internshipsValue = getStatValue('internships') || 1300
       
       setStudentsPlaced(studentsValue)
       setRecruiters(recruitersValue)
@@ -124,10 +125,10 @@ const Placements = ({ hideMarquee = false, hideMilestones = false, bgColor = "bg
         entries.forEach((entry) => {
           if (entry.isIntersecting && !hasAnimated) {
             setHasAnimated(true)
-            // Only use API data, no static fallbacks
-            const studentsValue = getStatValue('students placed')
-            const recruitersValue = getStatValue('corporate recruiters')
-            const internshipsValue = getStatValue('internships')
+            // Use API data if available, otherwise use default values
+            const studentsValue = getStatValue('students placed') || 8000
+            const recruitersValue = getStatValue('corporate recruiters') || 400
+            const internshipsValue = getStatValue('internships') || 1300
             
             if (studentsValue > 0) {
               animateValue(0, studentsValue, 2000, setStudentsPlaced)

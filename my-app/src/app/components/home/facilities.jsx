@@ -150,7 +150,7 @@ export default function Facilities() {
         style={{
           backgroundImage: `url(${facilities[currentSlide].image})`,
           backgroundSize: 'cover',
-          backgroundPosition: 'center',
+          backgroundPosition: 'top',
           backgroundRepeat: 'no-repeat',
           transition: 'background-image 0.6s ease-in-out',
           imageRendering: 'crisp-edges',

@@ -23,7 +23,7 @@ export default function GetInTouch() {
   return (
     <section className="py-16 mt-16 mb-30 bg-[var(--dark-blue)] lg:h-[650px] rounded-xl mx-2">
       <div className="container mx-auto px-6">
-        <div className="grid grid-cols-1 lg:grid-cols-[minmax(0,1.2fr)_minmax(0,1fr)] gap-10 lg:gap-12 items-stretch">
+        <div className="grid grid-cols-1 lg:grid-cols-[minmax(0,1.2fr)_minmax(0,1fr)]  lg:gap-12 items-stretch">
 
           {/* Left: Heading + info cards */}
           <div className="flex flex-col gap-6 text-white">
@@ -91,7 +91,7 @@ export default function GetInTouch() {
                         />
                       </svg>
                     </span>
-                    <a href="tel:+91-9303097044" className="text-[var(--foreground)]">
+                    <a href="tel:9303097044" className="text-[var(--foreground)]">
                       +91–9303097044
                     </a>
                   </li>
@@ -171,7 +171,7 @@ export default function GetInTouch() {
                         />
                       </svg>
                     </span>
-                    <a href="tel:+91-9303097044" className="text-[var(--foreground)]">
+                    <a href="tel:9303097043" className="text-[var(--foreground)]">
                       +91-9303097043
                     </a>
                   </li>
@@ -204,8 +204,12 @@ export default function GetInTouch() {
           </div>
 
           {/* Right: Form card */}
-          <div className="flex justify-center mt-30 lg:justify-end">
-            <div className="w-full max-w-lg lg:max-w-lg bg-[var(--button-red)] rounded-2xl border-2 border-white px-5 py-8 sm:px-7 sm:py-10 lg:px-8 lg:py-12 shadow-2xl">
+          <div className="flex justify-center mt-10 lg:mt-30 lg:justify-end">
+
+<div className="w-full max-w-lg lg:max-w-lg bg-[var(--button-red)] rounded-2xl border-2 border-white 
+px-4 pt-2 pb-5 sm:px-5 sm:pt-4 sm:pb-7 lg:px-8 lg:py-12 shadow-2xl">
+
+
               <form className="space-y-6 sm:space-y-8 text-white">
                 {["Name", "Mail", "Phone"].map((label) => (
                   <div key={label}>

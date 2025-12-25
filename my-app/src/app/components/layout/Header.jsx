@@ -10,6 +10,7 @@ import MobileMenu from './MobileMenu';
 import FlatIcon from '../general/flat-icon';
 import GlobalArrowButton from '../general/global-arrow_button';
 import { contactInfo, getPhone, getEmail, getLogoSrc, getLogoAlt } from '../../config/contact-info';
+import { fetchAllDepartments } from '@/app/lib/api';
 
 
 const Header = () => {
@@ -19,15 +20,30 @@ const Header = () => {
   const [isSearchOpen, setIsSearchOpen] = useState(false);
   const [searchTerm, setSearchTerm] = useState('');
   const [filteredCourses, setFilteredCourses] = useState([]);
+  const [departments, setDepartments] = useState([]);
   const searchRef = useRef(null);
   const pathname = usePathname();
   const router = useRouter();
   const isHomePage = pathname === '/';
   const isCorporateTrainingPage = pathname === '/corporate-training-and-consultancy-division';
 
+  // Fetch departments for academics menu
+  useEffect(() => {
+    const loadDepartments = async () => {
+      try {
+        const departmentsData = await fetchAllDepartments();
+        setDepartments(Array.isArray(departmentsData) ? departmentsData : []);
+      } catch (err) {
+        console.error('Failed to load departments for menu:', err);
+        setDepartments([]);
+      }
+    };
+    loadDepartments();
+  }, []);
+
   const courses = useMemo(
     () => [
-      { name: 'Bachelor of Technology (B.Tech)', href: '/about' },
+      { name: 'Bachelor of Technology (B.Tech)', href: '/about-us' },
       { name: 'Bachelor of Business Administration (BBA)', href: '/academics/undergraduate/bba' },
       { name: 'Bachelor of Computer Applications (BCA)', href: '/academics/undergraduate/bca' },
       { name: 'Master of Business Administration (MBA)', href: '/academics/postgraduate/mba' },
@@ -84,29 +100,30 @@ const Header = () => {
     setIsSearchOpen(false);
   };
 
-  const navItems = [
+  const navItems = useMemo(() => [
     {
       id: 'about',
       label: 'About Us',
-      href: '/about',
+      href: '/about-us',
       megaMenu: {
         sections: [
           {
             title: 'Overview',
             links: [
-              { label: 'About University', href: '/about' },
-              { label: 'Vision & Mission', href: '/about/vision-mission' },
-              { label: 'Chancellor Message', href: '/about/chancellor' },
-              { label: 'Vice Chancellor', href: '/about/vice-chancellor' },
+              { label: 'About University', href: '/about-us' },
+              { label: 'Vision & Mission', href: '/about-us#vision-mission' },
+              { label: 'Chancellor Message', href: '/chancellor' },
+              { label: 'Vice Chancellor', href: '/vice-chancellor' },
+              { label: 'Leadership', href: '/leadership' },
             ]
           },
           {
             title: 'Infrastructure',
             links: [
-              { label: 'Campus', href: '/about/campus' },
-              { label: 'Facilities', href: '/about/facilities' },
-              { label: 'Libraries', href: '/about/libraries' },
-              { label: 'Labs', href: '/about/labs' },
+              { label: 'Campus Facilities', href: '/campus-facilities' },
+              { label: 'Academic Facilities', href: '/academic-facilities' },
+              { label: 'Library', href: '/library' },
+              { label: 'Laboratories', href: '/laboratories' },
             ]
           }
         ]
@@ -119,22 +136,31 @@ const Header = () => {
       megaMenu: {
         sections: [
           {
+            title: 'Overview',
+            links: [
+              { label: 'Academics', href: '/academics' },
+              { label: 'Academics API', href: '/academics-api' },
+            ]
+          },
+          {
             title: 'Programs',
             links: [
-              { label: 'Undergraduate', href: '/academics/undergraduate' },
-              { label: 'Postgraduate', href: '/academics/postgraduate' },
-              { label: 'Doctoral', href: '/academics/doctoral' },
-              { label: 'Distance Learning', href: '/academics/distance' },
+              { label: 'Undergraduate (UG)', href: '/admissions?studyLevel=UG' },
+              { label: 'Postgraduate (PG)', href: '/admissions?studyLevel=PG' },
+              { label: 'Doctoral (PhD)', href: '/admissions?studyLevel=PhD' },
+              { label: 'Diploma', href: '/admissions?studyLevel=Diploma' },
             ]
           },
           {
             title: 'Departments',
-            links: [
-              { label: 'Engineering', href: '/academics/engineering' },
-              { label: 'Management', href: '/academics/management' },
-              { label: 'Science', href: '/academics/science' },
-              { label: 'Arts', href: '/academics/arts' },
-            ]
+            links: departments.length > 0 
+              ? departments.slice(0, 10).map(dept => ({
+                  label: dept.name || 'Department',
+                  href: `/admissions?department=${encodeURIComponent(dept.slug || dept.id)}`
+                }))
+              : [
+                  { label: 'Loading...', href: '/academics' }
+                ]
           }
         ]
       }
@@ -165,10 +191,9 @@ const Header = () => {
             title: 'Admissions',
             links: [
               { label: 'Admission Overview', href: '/admissions' },
-              { label: 'How to Apply', href: '/admissions/how-to-apply' },
-              { label: 'Programs', href: '/admissions/programs' },
-              { label: 'Eligibility', href: '/admissions/eligibility' },
-              { label: 'Fee Structure', href: '/admissions/fees' },
+              { label: 'Entrance Exams', href: '/entrance-exam' },
+              { label: 'KALSEE', href: '/kalsee' },
+              { label: 'KAL-MAT', href: '/kalmat' },
             ]
           }
         ]
@@ -177,25 +202,25 @@ const Header = () => {
     {
       id: 'students',
       label: 'Students',
-      href: '/students',
+      href: '#',
       megaMenu: {
         sections: [
           {
             title: 'Student Life',
             links: [
-              { label: 'Campus Life', href: '/students/campus-life' },
-              { label: 'Clubs & Societies', href: '/students/clubs' },
-              { label: 'Sports', href: '/students/sports' },
-              { label: 'Events', href: '/students/events' },
+              { label: 'Campus Life', href: '/campuslife' },
+              { label: 'Student Clubs', href: '/student-clubs' },
+              { label: 'Sports & Wellness', href: '/sports-and-wellness-centre' },
+              { label: 'News & Events', href: '/news-and-events' },
             ]
           },
           {
             title: 'Resources',
             links: [
-              { label: 'Student Portal', href: '/students/portal' },
-              { label: 'Time Table', href: '/students/timetable' },
-              { label: 'Results', href: '/students/results' },
-              { label: 'Scholarships', href: '/students/scholarships' },
+              { label: 'Student Support', href: '/student-support' },
+              { label: 'Student Welfare', href: '/student-welfare' },
+              { label: 'Student Counselling', href: '/students-counselling-cell' },
+              { label: 'Downloads', href: '/downloads' },
             ]
           }
         ]
@@ -211,18 +236,18 @@ const Header = () => {
             title: 'Research',
             links: [
               { label: 'Research Overview', href: '/research' },
-              { label: 'Publications', href: '/research/publications' },
-              { label: 'Conferences', href: '/research/conferences' },
-              { label: 'Patents', href: '/research/patents' },
+              { label: 'Research Facilities', href: '/research-facilities' },
+              { label: 'Research Resources', href: '/research-resources' },
+              { label: 'Publications', href: '/research-papers-and-books-published' },
             ]
           },
           {
             title: 'Centers',
             links: [
-              { label: 'Research Centers', href: '/research/centers' },
-              { label: 'Innovation Lab', href: '/research/innovation' },
-              { label: 'Incubation', href: '/research/incubation' },
-              { label: 'Projects', href: '/research/projects' },
+              { label: 'Centres of Excellence', href: '/centresofexcellence' },
+              { label: 'Central Instrumentation Facility', href: '/central-instrumentation-facility' },
+              { label: 'IPR Cell', href: '/ipr-cell' },
+              { label: 'Conferences & Events', href: '/conferences-and-events' },
             ]
           }
         ]
@@ -238,9 +263,8 @@ const Header = () => {
             title: 'Placements',
             links: [
               { label: 'Placement Overview', href: '/placements' },
-              { label: 'Recruiters', href: '/placements/recruiters' },
-              { label: 'Statistics', href: '/placements/statistics' },
-              { label: 'Training', href: '/placements/training' },
+              { label: 'Training & Placement Cell', href: '/training-and-placement-cell' },
+              { label: 'Career & Corporate Resource Centre', href: '/career-and-corporate-resource-centre' },
             ]
           }
         ]
@@ -255,16 +279,14 @@ const Header = () => {
           {
             title: 'News & Events',
             links: [
-              { label: 'Events Calendar', href: '/news-and-events' },
-              { label: 'Latest News', href: '/news-and-events/news' },
-              { label: 'Upcoming Events', href: '/news-and-events/upcoming' },
-              { label: 'Past Events', href: '/news-and-events/past' },
+              { label: 'News & Events', href: '/news-and-events' },
+              { label: 'Conferences & Events', href: '/conferences-and-events' },
             ]
           }
         ]
       }
     },
-  ];
+  ], [departments]);
   const topBarItems = [
 
     {
@@ -273,8 +295,7 @@ const Header = () => {
     },
     {
       label: 'IQAC',
-      href: '/iqac',
-
+      href: '/internal-quality-assurance-cell',
     },
     {
       label: 'CCRC',
@@ -290,7 +311,7 @@ const Header = () => {
     },
     {
       label: 'ERP Login',
-      href: '/erp-login',
+      href: '#',
     },
     {
       label: 'Contact Us',
@@ -380,20 +401,22 @@ const Header = () => {
       </div>
 
       {/* Main Header */}
-      <div className={`transition-all z-[10050] w-full  overflow-visible ${isScrolled ? 'fixed top-0 left-0 right-0 bg-white duration-500 shadow-md' : (isHomePage || isCorporateTrainingPage) ? 'bg-transparent' : 'bg-white duration-500'}`}>
+      <div className={`transition-all z-[10050] w-full  overflow-visible ${isScrolled ? 'fixed top-0 left-0 right-0 bg-white duration-500 shadow-md' : isHomePage ? 'bg-transparent' : isCorporateTrainingPage ? 'bg-white duration-500' : 'bg-white duration-500'}`}>
           <div className="flex items-center justify-between   container mx-auto px-2 py-4 w-full max-w-full !z-[10050] overflow-visible">
             {/* Logo */}
             <Link href="/" className="flex items-center gap-2 relative">
-              <div className="w-42 h-12">
+              <div className="w-42 h-12 relative">
                 <Image
                   src={
-                    isHomePage || isCorporateTrainingPage
+                    isCorporateTrainingPage
+                      ? getLogoSrc('secondary')
+                      : isHomePage
                       ? (isScrolled ? getLogoSrc('secondary') : getLogoSrc('primary'))
                       : getLogoSrc('secondary')
                   }
                   alt={getLogoAlt('primary')}
                   fill
-                  className="object-contain relative transition-all duration-300"
+                  className="object-contain transition-all duration-300"
                 />
               </div>
             </Link>
@@ -414,7 +437,7 @@ const Header = () => {
                         isHomePage 
                           ? (isScrolled ? 'text-[var(--dark-gray)]' : 'text-white')
                           : isCorporateTrainingPage
-                          ? (isScrolled ? 'text-[var(--dark-gray)]' : 'text-white')
+                          ? 'text-black'
                           : 'text-black'
                       }`}
                     >

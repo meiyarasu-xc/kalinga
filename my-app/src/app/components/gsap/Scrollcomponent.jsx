@@ -110,8 +110,8 @@ export const ScrollComponent = ({
               <Image
                 src={logo}
                 alt="College Logo"
-                width={80}
-                height={80}
+                width={120}
+                height={120}
                 className="object-contain"
               />
             </span>
@@ -124,7 +124,7 @@ export const ScrollComponent = ({
     return (
       <div className={`${parallaxClassName} relative overflow-hidden container-fluid`} style={parallaxStyle}>
         <motion.div
-          className={`${scrollerClassName} py-16 !stroke-pink-500	 -rotate-3 flex whitespace-nowrap text-center  text-7xl  !font-stix`}
+          className={`${scrollerClassName} py-16 !stroke-pink-500	 -rotate-3 flex whitespace-nowrap text-center  md:text-7xl text-4xl  !font-stix`}
           style={{ x, ...scrollerStyle }}
         >
           {spans}

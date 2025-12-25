@@ -22,7 +22,7 @@ const FeaturedNewsCard = ({
             className="absolute bottom-0 left-0 right-0 text-white p-4 sm:p-6 !bg-[var(--button-red)]/60 flex flex-col justify-center backdrop-blur-xl h-auto min-h-[110px] sm:h-[110px] rounded-lg"
           >
             <p className="text-xs sm:text-sm tracking-wide font-light mb-1 sm:mb-[5px] mt-[-10px] sm:mt-[-15px]">{badgeText}</p>
-            <p className="text-sm sm:text-base md:text-[16px] font-plus-jakarta-sans font-semibold leading-[22px]">
+            <p className="text-sm sm:text-base md:text-[16px] font-plus-jakarta-sans font-medium leading-[22px]">
               {title}
             </p>
           </div>

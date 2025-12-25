@@ -1,14 +1,17 @@
 'use client';
 
-import { createContext, useContext, useState, useEffect } from 'react';
+import { createContext, useContext, useState, useEffect, useRef, useMemo } from 'react';
 
 const BreadcrumbContext = createContext(null);
 
 export function BreadcrumbProvider({ children }) {
   const [breadcrumbData, setBreadcrumbData] = useState(null);
 
+  // Memoize context value to prevent unnecessary re-renders
+  const contextValue = useMemo(() => ({ breadcrumbData, setBreadcrumbData }), [breadcrumbData]);
+
   return (
-    <BreadcrumbContext.Provider value={{ breadcrumbData, setBreadcrumbData }}>
+    <BreadcrumbContext.Provider value={contextValue}>
       {children}
     </BreadcrumbContext.Provider>
   );
@@ -22,18 +25,49 @@ export function useBreadcrumb() {
 export function useBreadcrumbData(data) {
   const context = useBreadcrumb();
   const setBreadcrumbData = context?.setBreadcrumbData;
+  const prevDataRef = useRef(undefined);
+  const isMountedRef = useRef(true);
   
   useEffect(() => {
-    if (setBreadcrumbData) {
-      // Set data if provided, or clear it if null/undefined
-      setBreadcrumbData(data || null);
-    }
-    // Cleanup: reset when component unmounts
+    isMountedRef.current = true;
     return () => {
-      if (setBreadcrumbData) {
+      isMountedRef.current = false;
+    };
+  }, []);
+  
+  useEffect(() => {
+    if (!setBreadcrumbData || !isMountedRef.current) return;
+    
+    // Compare data by serializing to JSON to avoid reference comparison issues
+    // Use try-catch in case data contains non-serializable values
+    let currentDataStr, prevDataStr;
+    try {
+      currentDataStr = JSON.stringify(data);
+      prevDataStr = JSON.stringify(prevDataRef.current);
+    } catch (e) {
+      // If serialization fails, fall back to reference comparison
+      if (data !== prevDataRef.current) {
+        setBreadcrumbData(data || null);
+        prevDataRef.current = data;
+      }
+      return;
+    }
+    
+    // Only update if data actually changed
+    if (currentDataStr !== prevDataStr) {
+      setBreadcrumbData(data || null);
+      prevDataRef.current = data;
+    }
+  }, [data, setBreadcrumbData]);
+  
+  // Cleanup: reset when component unmounts
+  useEffect(() => {
+    return () => {
+      if (setBreadcrumbData && isMountedRef.current) {
         setBreadcrumbData(null);
+        prevDataRef.current = null;
       }
     };
-  }, [data, setBreadcrumbData]);
+  }, [setBreadcrumbData]);
 }
 

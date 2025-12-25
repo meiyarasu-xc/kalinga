@@ -41,7 +41,7 @@ function Bullet({ children }) {
 export default function VisaFroFrroGuidelines({ viewAllHref = "#" }) {
   return (
     <section className="w-full py-16">
-      <div className="mx-auto w-full max-w-5xl px-4">
+      <div className="mx-auto w-full container px-4">
         <SectionHeading 
           title="Guidelines For Visa And FRO/FRRO"
           titleClassName="text-center text-[var(--foreground)]"

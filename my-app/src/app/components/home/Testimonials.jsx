@@ -174,7 +174,7 @@ export default function     Testimonials({ testimonials = [], className = "", su
             {/* Main Container */}
             <div className="relative w-full max-w-6xl mx-auto flex flex-col items-center justify-center">
                 {/* Section Heading */}
-                <h5 className="text-gray-600 text-center leading-tight text-xs sm:text-sm md:text-base">
+                <div className="text-gray-600 text-center leading-tight text-xs sm:text-sm md:text-base">
                     <SectionHeading 
                         subtitleClassName={`text-center ${subtitleClassName}`}
                         titleClassName={`text-center ${titleClassName}`}
@@ -182,7 +182,7 @@ export default function     Testimonials({ testimonials = [], className = "", su
                         title={title}
                         subtitleTextColor={subtitleTextColor || "text-[var(--button-red)]"}
                     />
-                </h5>
+                </div>
                 {/* Slider Track */}
                 <div 
                     className="relative w-full flex items-center justify-center" 
@@ -226,7 +226,7 @@ export default function     Testimonials({ testimonials = [], className = "", su
                                     >
                                         {/* Image */}
                                         <div className="w-full md:w-5/12 flex-shrink-0 relative">
-                                            <div className="aspect-[3/4] sm:aspect-[4/5] w-full bg-white rounded-xl sm:rounded-2xl border-2 sm:border-4 md:border-[6px] border-white relative overflow-hidden">
+                                            <div className="aspect-[3/3] sm:aspect-[3/3] w-full bg-white rounded-xl sm:rounded-2xl border-2 sm:border-4 md:border-[6px] border-white relative overflow-hidden">
                                                 <img 
                                                     src={item.image} 
                                                     className="w-full h-full object-cover" 

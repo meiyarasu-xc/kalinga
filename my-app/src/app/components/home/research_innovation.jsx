@@ -2,6 +2,7 @@
 
 import React, { useState, useRef, useEffect } from 'react'
 import Image from 'next/image'
+import Link from 'next/link'
 import GlobalArrowButton from '../general/global-arrow_button'
 import SectionHeading from '../general/SectionHeading'
 
@@ -91,9 +92,11 @@ export default function ResearchInnovation() {
               titleClassName="text-[var(--foreground)]"
             />
             <div className="mt-4 sm:mt-6">
-              <GlobalArrowButton >
-              Explore More
-              </GlobalArrowButton>
+              <Link href="/research">
+                <GlobalArrowButton >
+                Explore More
+                </GlobalArrowButton>
+              </Link>
             </div>
           </div>
 
@@ -119,13 +122,12 @@ export default function ResearchInnovation() {
                 className="rounded-xl p-4 sm:p-4 flex flex-col justify-between transition-colors duration-300 bg-[var(--light-gray)] hover:bg-[var(--card-skin)]"
               >
                 <div>
-                  <h3 className="text-lg sm:text-xl font-stix  text-[var(--foreground)] mb-4">
+                  <h3 className="text-lg sm:text-xl font-stix  text-[var(--foreground)] border-b border-black pb-4">
                     {stat.label}
                   </h3>
-                  <div className="w-full h-px bg-[var(--foreground)] mb-4"></div>
                 </div>
                 <div>
-                  <h2 className="font-stix  text-[var(--foreground)]">
+                  <h2 className="font-stix  text-[var(--foreground)] mt-2">
                     {getAnimatedValue(stat)}
                   </h2>
                 </div>

@@ -141,6 +141,7 @@ export const LogoLoop = memo(
     const [seqHeight, setSeqHeight] = useState(0);
     const [copyCount, setCopyCount] = useState(ANIMATION_CONFIG.MIN_COPIES);
     const [isHovered, setIsHovered] = useState(false);
+    const prevDimensionsRef = useRef({ width: 0, height: 0, copyCount: ANIMATION_CONFIG.MIN_COPIES });
 
     const effectiveHoverSpeed = useMemo(() => {
       if (hoverSpeed !== undefined) return hoverSpeed;
@@ -168,6 +169,7 @@ export const LogoLoop = memo(
       const sequenceRect = seqRef.current?.getBoundingClientRect?.();
       const sequenceWidth = sequenceRect?.width ?? 0;
       const sequenceHeight = sequenceRect?.height ?? 0;
+      
       if (isVertical) {
         const parentHeight = containerRef.current?.parentElement?.clientHeight ?? 0;
         if (containerRef.current && parentHeight > 0) {
@@ -181,18 +183,30 @@ export const LogoLoop = memo(
           const copiesNeeded = Math.ceil(viewport / sequenceHeight) + ANIMATION_CONFIG.COPY_HEADROOM;
           const newCopyCount = Math.max(ANIMATION_CONFIG.MIN_COPIES, copiesNeeded);
           
-          // Only update state if values actually changed to prevent infinite loops
-          setSeqHeight(prev => prev !== newHeight ? newHeight : prev);
-          setCopyCount(prev => prev !== newCopyCount ? newCopyCount : prev);
+          // Only update if values actually changed (compare with ref to prevent infinite loops)
+          if (prevDimensionsRef.current.height !== newHeight) {
+            setSeqHeight(newHeight);
+            prevDimensionsRef.current.height = newHeight;
+          }
+          if (prevDimensionsRef.current.copyCount !== newCopyCount) {
+            setCopyCount(newCopyCount);
+            prevDimensionsRef.current.copyCount = newCopyCount;
+          }
         }
       } else if (sequenceWidth > 0) {
         const newWidth = Math.ceil(sequenceWidth);
         const copiesNeeded = Math.ceil(containerWidth / sequenceWidth) + ANIMATION_CONFIG.COPY_HEADROOM;
         const newCopyCount = Math.max(ANIMATION_CONFIG.MIN_COPIES, copiesNeeded);
         
-        // Only update state if values actually changed to prevent infinite loops
-        setSeqWidth(prev => prev !== newWidth ? newWidth : prev);
-        setCopyCount(prev => prev !== newCopyCount ? newCopyCount : prev);
+        // Only update if values actually changed (compare with ref to prevent infinite loops)
+        if (prevDimensionsRef.current.width !== newWidth) {
+          setSeqWidth(newWidth);
+          prevDimensionsRef.current.width = newWidth;
+        }
+        if (prevDimensionsRef.current.copyCount !== newCopyCount) {
+          setCopyCount(newCopyCount);
+          prevDimensionsRef.current.copyCount = newCopyCount;
+        }
       }
     }, [isVertical]);
 

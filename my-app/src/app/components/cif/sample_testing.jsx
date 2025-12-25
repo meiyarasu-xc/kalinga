@@ -6,10 +6,17 @@ import SectionHeading from "../general/SectionHeading";
 import DataTable from "../general/data-table";
 
 export default function SampleTesting({
+  title = "Sample Testing",
+  description = "At our CIF, we provide sample testing services using our advanced instruments to obtain accurate outcomes. These are available for university students, research scholars, organisations, and industries at minimal rates. Charges may vary depending on the type of equipment.",
+  subtitle = "Cost Of Sample Analysis",
+  instruction,
+  note,
+  tableColumns,
+  tableData,
   imageUrl = "https://kalinga-university.s3.ap-south-1.amazonaws.com/CIF/cif-image-9.webp",
   imageAlt = "Sample Testing"
 }) {
-  const tableColumns = [
+  const defaultTableColumns = [
     { key: "slNo", label: "S.No.", width: "w-20" },
     { key: "facilities", label: "Facilities", width: "w-64" },
     { key: "students", label: "Students", width: "w-48" },
@@ -18,7 +25,7 @@ export default function SampleTesting({
     { key: "industries", label: "Industries", width: "w-48" }
   ];
 
-  const tableData = [
+  const defaultTableData = [
     {
       slNo: 1,
       facilities: "X-Ray Diffractometer",
@@ -133,39 +140,55 @@ export default function SampleTesting({
     }
   ];
 
+  const finalTableColumns = tableColumns || defaultTableColumns;
+  const finalTableData = tableData || defaultTableData;
+
   return (
     <section className="py-16 bg-white">
       <div className="container mx-auto px-6">
         {/* Title */}
         <div className="text-center mb-8">
           <SectionHeading
-            title="Sample Testing"
+            title={title}
             subtitle=""
             titleClassName="text-center"
           />
         </div>
 
-        {/* Image and Description */}
-        <div className="mb-12">
-          {/* Description */}
-          <div className="flex-1">
-            <p className=" leading-relaxed text-center">
-              At our CIF, we provide sample testing services using our advanced instruments to obtain accurate outcomes. These are available for university students, research scholars, organisations, and industries at minimal rates. Charges may vary depending on the type of equipment.
+        {/* Instruction */}
+        {instruction && (
+          <div className="text-center mb-6">
+            <p className="text-[var(--light-text-gray)] leading-relaxed">
+              {instruction}
             </p>
           </div>
-        </div>
+        )}
 
-        {/* Cost Of Sample Analysis Subtitle */}
-        <div className="text-center mb-8">
-          <h3 className="">
-            Cost Of Sample Analysis
-          </h3>
-        </div>
+        {/* Image and Description */}
+        {description && (
+          <div className="mb-12">
+            {/* Description */}
+            <div className="flex-1">
+              <p className="leading-relaxed text-center">
+                {description}
+              </p>
+            </div>
+          </div>
+        )}
+
+        {/* Subtitle */}
+        {subtitle && (
+          <div className="text-center mb-8">
+            <h3 className="font-stix text-2xl md:text-3xl text-[var(--foreground)]">
+              {subtitle}
+            </h3>
+          </div>
+        )}
 
         {/* Table */}
         <DataTable
-          columns={tableColumns}
-          data={tableData}
+          columns={finalTableColumns}
+          data={finalTableData}
           overflowX={true}
           headerBgColor="bg-[var(--button-red)]"
           headerTextColor="text-white"
@@ -173,6 +196,15 @@ export default function SampleTesting({
           oddRowBg="bg-white"
           borderColor="border-gray-200"
         />
+
+        {/* Note */}
+        {note && (
+          <div className="mt-6 text-center">
+            <p className="text-sm md:text-base text-[var(--light-text-gray)]">
+              {note}
+            </p>
+          </div>
+        )}
       </div>
     </section>
   );

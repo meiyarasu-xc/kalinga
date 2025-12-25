@@ -2,6 +2,7 @@
 
 import React from 'react'
 import Image from 'next/image'
+import Link from 'next/link'
 import GlobalArrowButton from './global-arrow_button'
 import Stack from '../gsap/Stack'
 
@@ -54,14 +55,18 @@ export const renderProgramCard = (program) => {
 
       <div className="mt-auto flex items-center justify-between gap-2 sm:gap-3">
         <div className="flex items-center gap-2 sm:gap-3">
-          <GlobalArrowButton className="!bg-transparent !shadow-none !text-[#1a1a1a] !px-0 !py-0 !h-auto text-sm sm:text-base" arrowClassName="!bg-transparent" arrowIconClassName="!text-[#1a1a1a]">
-            Know More
-          </GlobalArrowButton>
-          <GlobalArrowButton className="!bg-white !text-black"
-            arrowClassName="!bg-[var(--button-red)]"
-            arrowIconClassName="!text-white"
-            textClassName="!text-black"
-          >Apply More</GlobalArrowButton>
+          <Link href={`/courses/${program.title.toLowerCase().replace(/\s+/g, '-').replace(/[^a-z0-9-]/g, '')}`}>
+            <GlobalArrowButton className="!bg-transparent !shadow-none !text-[#1a1a1a] !px-0 !py-0 !h-auto text-sm sm:text-base" arrowClassName="!bg-transparent" arrowIconClassName="!text-[#1a1a1a]">
+              Know More
+            </GlobalArrowButton>
+          </Link>
+          <Link href="/admissions">
+            <GlobalArrowButton className="!bg-white !text-black"
+              arrowClassName="!bg-[var(--button-red)]"
+              arrowIconClassName="!text-white"
+              textClassName="!text-black"
+            >Apply More</GlobalArrowButton>
+          </Link>
         </div>
       </div>
     </div>
@@ -75,7 +80,7 @@ export const renderProgramCard = (program) => {
       <div className="h-[340px] sm:h-[380px] md:h-[400px] lg:h-[420px] w-[300px] sm:w-[340px] md:w-[360px] lg:w-[380px]">
         <Stack
           cards={cards}
-          randomRotation
+          randomRotation={false}
           sendToBackOnClick
           pauseOnHover
           autoplay={false}

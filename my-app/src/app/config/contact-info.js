@@ -65,6 +65,10 @@ export const logos = {
     src: '/kalingacolorlogo.svg',
     alt: 'Kalinga University'
   },
+  ctcd: {
+    src: 'https://kalinga-university.s3.ap-south-1.amazonaws.com/ccrc/logo-ctcd.svg',
+    alt: 'CTCD - Corporate Training and Consultancy Division'
+  },
 };
 
 // Helper functions for phone numbers

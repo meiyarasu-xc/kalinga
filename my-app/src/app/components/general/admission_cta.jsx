@@ -1,5 +1,6 @@
 import React from 'react'
 import Image from 'next/image'
+import Link from 'next/link'
 import GlobalArrowButton from './global-arrow_button'
 
 const defaultContent = {
@@ -45,14 +46,16 @@ const AdmissionCareer = ({
             {leftDescription}
           </h5>
           <div className="mt-3 sm:mt-5 w-full sm:w-[211px] self-start">
-            <GlobalArrowButton
-              className="!bg-white !text-black"
-              arrowClassName="!bg-[var(--button-red)]"
-              arrowIconClassName="!text-white"
-              textClassName="!text-black"
-            >
-              {leftButtonLabel}
-            </GlobalArrowButton>
+            <Link href="/admissions">
+              <GlobalArrowButton
+                className="!bg-white !text-black"
+                arrowClassName="!bg-[var(--button-red)]"
+                arrowIconClassName="!text-white"
+                textClassName="!text-black"
+              >
+                {leftButtonLabel}
+              </GlobalArrowButton>
+            </Link>
           </div>
           <h2
             className="font-stix !text-[50px] md:!text-[100px] mt-4 sm:mt-5 leading-none whitespace-nowrap self-start -ml-0 md:-ml-5 sm:-ml-6 md:-ml-10 -mb-6 sm:-mb-10"
@@ -81,14 +84,16 @@ const AdmissionCareer = ({
           <h5 className="mt-4 sm:mt-6 md:mt-8 leading-tight sm:leading-normal font-stix leading-[32px] sm:leading-[40px] pb-4 md:pl-20">
             {rightDescription}
           </h5>
-          <GlobalArrowButton
-            className="!bg-white !text-black"
-            arrowClassName="!bg-[var(--button-red)]"
-            arrowIconClassName="!text-white"
-            textClassName="!text-black"
-          >
-            {rightButtonLabel}
-          </GlobalArrowButton>
+          <Link href="/contact-us">
+            <GlobalArrowButton
+              className="!bg-white !text-black"
+              arrowClassName="!bg-[var(--button-red)]"
+              arrowIconClassName="!text-white"
+              textClassName="!text-black"
+            >
+              {rightButtonLabel}
+            </GlobalArrowButton>
+          </Link>
 
           <h2
             className="font-stix leading-none whitespace-nowrap !text-[50px] md:!text-[100px] mt-4 sm:mt-5 self-start sm:self-end -mr-5 sm:-mr-6 md:-mr-8 -mb-6 sm:-mb-10"

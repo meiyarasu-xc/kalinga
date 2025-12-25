@@ -12,6 +12,7 @@ export default function Partner({
     singleColumn = false,
     milestones = null,
     description = "Organizations that have participated in skill development and professional training initiatives",
+    footerText = null,
 }) {
   // Duplicate items for seamless scrolling
   const duplicatedBlueItems = blueItems.length > 0 ? [...blueItems, ...blueItems] : [];
@@ -36,7 +37,7 @@ export default function Partner({
       return (
         <div className="partner-marquee-container overflow-hidden">
           <div className="animate-marquee-vertical partner-marquee-wrapper">
-            <div className="grid grid-cols-4 md:grid-cols-8 gap-3 sm:gap-4">
+            <div className="grid grid-cols-2 md:grid-cols-8 gap-3 sm:gap-4">
               {duplicatedItems.map((item, idx) => (
                 <div
                   key={idx}
@@ -116,20 +117,20 @@ export default function Partner({
         <div className="grid grid-cols-1 !rounded-xl">
           <div className="bg-[var(--dark-blue)] py-16 rounded-xl">
             <div className="flex flex-col container mx-auto">
-              {/* Top Section: Title on Left, Milestones on Right */}
-              <div className="grid md:grid-cols-2 gap-6 md:gap-8 mb-6 md:mb-8 items-center">
-                {/* Left: Title */}
-                <div className="flex flex-col">
-                  <SectionHeading title={blueTitle} titleClassName="!py-2 text-white text-left" />
-                  <p className="text-white text-left text-sm mt-2 max-w-md">{description}</p>
+              {/* Top Section: Title and Milestones Centered */}
+              <div className="grid grid-cols-1 gap-6 md:gap-8 mb-6 md:mb-8 items-center justify-center">
+                {/* Title */}
+                <div className="flex flex-col items-center text-center">
+                  <SectionHeading title={blueTitle} titleClassName="!py-2 text-white text-center" />
+                  <p className="text-white text-center text-sm mt-2 max-w-md mx-auto">{description}</p>
                 </div>
                 
-                {/* Right: Milestones */}
+                {/* Milestones */}
                 {milestones && (
-                  <div className="flex flex-col md:flex-row items-start md:items-center gap-4 md:gap-0 text-white">
+                  <div className="flex flex-col md:flex-row items-center justify-center gap-4 md:gap-0 text-white">
                     {milestones.map((milestone, idx) => (
-                      <div key={idx} className="flex-1 flex items-center md:items-start w-full md:w-auto">
-                        <div className="flex-1">
+                      <div key={idx} className="flex-1 flex items-center justify-center w-full md:w-auto">
+                        <div className="flex-1 text-center">
                           <h3 className="!text-3xl sm:!text-[35px] md:!text-[40px] text-white mb-1 sm:mb-2">{milestone.value} +</h3>
                           <h6 className="text-sm sm:text-base text-white font-stix">{milestone.label}</h6>
                         </div>
@@ -144,6 +145,15 @@ export default function Partner({
       
               {/* Partners Grid with Vertical Marquee */}
               {renderPartnerGrid(combinedItems.length > 0 ? combinedItems : blueItems, true, true)}
+              
+              {/* Footer text at bottom */}
+              {footerText && (
+                <div className="mt-8 md:mt-10 text-center">
+                  <p className="text-white text-lg md:text-2xl font-plus-jakarta-sans">
+                    {footerText}
+                  </p>
+                </div>
+              )}
             </div>
           </div>
         </div>

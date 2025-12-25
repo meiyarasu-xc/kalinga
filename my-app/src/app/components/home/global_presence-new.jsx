@@ -10,7 +10,7 @@ const locations = [
     id: 1,
     name: "AFGHANISTAN",
     flag: "https://flagcdn.com/w40/af.png",
-    coordinates: { top: "35%", left: "69%" }
+    coordinates: { top: "35%", left: "64%" }
   },
   {
     id: 2,
@@ -82,7 +82,7 @@ const locations = [
     id: 13,
     name: "MOZAMBIQUE",
     flag: "https://flagcdn.com/w40/mz.png",
-    coordinates: { top: "44%", left: "57%" }
+    coordinates: { top: "44%", left: "53%" }
   },
   {
     id: 14,
@@ -106,7 +106,7 @@ const locations = [
     id: 17,
     name: "PAPUA NEW GUINEA",
     flag: "https://flagcdn.com/w40/pg.png",
-    coordinates: { top: "81%", left: "83%" }
+    coordinates: { top: "81%", left: "76%" }
   },
   {
     id: 18,
@@ -118,13 +118,13 @@ const locations = [
     id: 19,
     name: "SINGAPORE",
     flag: "https://flagcdn.com/w40/sg.png",
-    coordinates: { top: "60%", left: "75%" }
+    coordinates: { top: "58%", left: "70%" }
   },
   {
     id: 20,
     name: "SOMALIA",
     flag: "https://flagcdn.com/w40/so.png",
-    coordinates: { top: "39%", left: "60%" }
+    coordinates: { top: "35%", left: "60%" }
   },
   {
     id: 21,
@@ -280,13 +280,13 @@ export default function Map({ backgroundColor = "", textColor = "", subtitleText
           subtitleTextColor={subtitleTextColor}
         />
         <p className={`text-center ${textColor}`}>Kalinga University is home to students from 29+ countries, fostering a truly international learning environment. Through academic exchange programs, research collaborations, and strategic global alliances, the University prepares students to become globally competent professionals and leaders.</p>
-        <div className="relative">
+        <div className="relative flex justify-center">
           <Image 
             src="https://kalinga-university.s3.ap-south-1.amazonaws.com/about/globe-new.png"
             alt="Global Presence Map" 
-            width={1200} 
+            width={900} 
             height={600} 
-            className="w-full pt-10"
+            className="w-full pt-10 !w-[80%]"
             quality={100}
             priority
           />
@@ -332,10 +332,9 @@ export default function Map({ backgroundColor = "", textColor = "", subtitleText
                   title: location.name,
                   id: location.id
                 }))}
-                speed={60}
+                speed={30}
                 direction="left"
-                logoHeight={40}
-                gap={32}
+                gap={25}
                 pauseOnHover={true}
                 hoverSpeed={0}
                 ariaLabel="Global presence locations"

@@ -240,7 +240,7 @@ export default function VisionMission({
         };
 
         return (
-          <section key={idx} className={`pt-16 bg-white px-2 ${cls}`}>
+          <section id="vision-mission" key={idx} className={`pt-16 bg-white px-2 ${cls}`}>
             <div className="container mx-auto">
               <div className={`grid grid-cols-1 ${gridCols} gap-8 lg:gap-6 items-stretch`}>
                 {/* Left - Vision Box */}

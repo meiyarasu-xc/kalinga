@@ -185,8 +185,11 @@ const FAQ = ({
     })
   }
 
-  // Get items to render based on variant
-  const itemsToRender = variant === "editable" ? faqItems : items
+  // Get items to render based on variant and ensure they have IDs
+  const itemsToRender = (variant === "editable" ? faqItems : items).map((item, index) => ({
+    ...item,
+    id: item.id !== undefined ? item.id : index + 1
+  }))
 
   // Wrapper component that conditionally renders with or without section
   const Wrapper = ({ children, className = "" }) => {
@@ -213,10 +216,15 @@ const FAQ = ({
             ] : undefined
           }))
     
-    // Regular FAQ items (non-table)
-    const regularItems = items.filter(item => 
-      !(item.answer && typeof item.answer === 'object' && item.answer.type === 'table')
-    )
+    // Regular FAQ items (non-table) - ensure they have IDs
+    const regularItems = items
+      .filter(item => 
+        !(item.answer && typeof item.answer === 'object' && item.answer.type === 'table')
+      )
+      .map((item, index) => ({
+        ...item,
+        id: item.id !== undefined ? item.id : index + 1
+      }))
     
     return (
       <Wrapper className={`${backgroundColor} py-16`}>
@@ -350,8 +358,8 @@ const FAQ = ({
       title: item.question || `Section ${index + 1}`,
       description: item.answer || "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
       buttons: item.buttons || [
-        { label: "Annual Reports", onClick: () => {} },
-        { label: "Placement Details", onClick: () => {} }
+        { label: "Annual Reports", onClick: () => window.location.href = "/annual-reports" },
+        { label: "Placement Details", onClick: () => window.location.href = "/placements" }
       ]
     }))
     
@@ -371,7 +379,7 @@ const FAQ = ({
             const isCollapsed = collapsedSections.has(sectionId)
             
             return (
-              <div key={item.id || index} className="max-w-4xl mx-auto mb-6 rounded-lg overflow-hidden shadow-md">
+              <div key={item.id || index} className="mb-6 rounded-lg overflow-hidden shadow-md mt-5">
                 {/* Header - Entire header is clickable */}
                 <button
                   onClick={() => toggleSection(sectionId)}
@@ -568,7 +576,7 @@ const FAQ = ({
         )}
 
         {/* FAQ Items */}
-        <div className="container mx-auto space-y-4 mt-10">
+        <div className="space-y-4 mt-10">
           {itemsToRender.map((item) => {
             const isOpen = openItems.has(item.id)
             return (
@@ -632,7 +640,7 @@ const FAQ = ({
                     }`}
                     aria-expanded={isOpen}
                   >
-                    <h3 className="text-left text-xl pr-4 font-plus-jakarta-sans">
+                    <h3 className="text-left text-[14px] leading-[20px] md:leading-[24px] md:text-xl pr-4 font-plus-jakarta-sans">
                       {item.question}
                     </h3>
                     <div className="flex-shrink-0">

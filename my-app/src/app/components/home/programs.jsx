@@ -1,9 +1,9 @@
 'use client'
 
 import React, { useState, useRef } from 'react'
-import Image from 'next/image'
+import Link from 'next/link'
 import { Swiper, SwiperSlide } from 'swiper/react'
-import { Navigation, Autoplay } from 'swiper/modules'
+import { Navigation } from 'swiper/modules'
 import 'swiper/css'
 import 'swiper/css/navigation'
 import GlobalArrowButton from '../general/global-arrow_button'
@@ -11,38 +11,37 @@ import GlobalRedPlainButton from '../general/global-red_plain_button'
 import SectionHeading from '../general/SectionHeading'
 import { renderProgramCard } from '../general/program-cards-slider'
 
-// Program Preview Images
-const programPreviewImages = [
-  {
-    id: 1,
-    src: 'https://kalinga-university.s3.ap-south-1.amazonaws.com/Home/program/computer.webp',
-    alt: 'Computer Programs'
-  },
-  {
-    id: 2,
-    src: 'https://kalinga-university.s3.ap-south-1.amazonaws.com/Home/program/busniess.png',
-    alt: 'Business Programs'
-  },
-  {
-    id: 3,
-    src: 'https://kalinga-university.s3.ap-south-1.amazonaws.com/Home/program/MBA.webp',
-    alt: 'MBA Programs'
-  },
-  {
-    id: 4,
-    src: 'https://kalinga-university.s3.ap-south-1.amazonaws.com/Home/program/biotechnology.webp',
-    alt: 'Biotechnology Programs'
-  }
-]
-
 const Programs = () => {
   const [activeTab, setActiveTab] = useState('UG')
   const [query, setQuery] = useState('')
+  const [iamA, setIamA] = useState('')
+  const [iamLookingFor, setIamLookingFor] = useState('')
   const prevRef = useRef(null)
   const nextRef = useRef(null)
-  const previewPrevRef = useRef(null)
-  const previewNextRef = useRef(null)
-  const previewSwiperRef = useRef(null)
+
+  // Handle form submission - filter programs based on selection
+  const handleDiscoverProgram = () => {
+    if (iamLookingFor) {
+      // Map form selection to program type
+      const typeMap = {
+        'ug': 'UG',
+        'pg': 'PG',
+        'phd': 'Ph.D',
+        'diploma': 'Diploma'
+      }
+      const selectedType = typeMap[iamLookingFor]
+      if (selectedType) {
+        setActiveTab(selectedType)
+        // Scroll to programs section
+        setTimeout(() => {
+          const programsSection = document.querySelector('.programs-swiper')
+          if (programsSection) {
+            programsSection.scrollIntoView({ behavior: 'smooth', block: 'start' })
+          }
+        }, 100)
+      }
+    }
+  }
 
   const programs = [
     { id: 1, title: 'Diploma in Computer Applications', type: 'Diploma', img: 'https://kalinga-university.s3.ap-south-1.amazonaws.com/Home/program/computer.webp', summary: 'Build fundamentals in programming, networking, and databases for entry-level IT roles.', scholarships: 'Check eligibility', qualification: 'Pass in Higher Secondary Examinations of (10+2.' },
@@ -78,11 +77,18 @@ const Programs = () => {
     <section className="py-12 sm:py-16">
       <div className="container mx-auto px-2 md:pt-16">
         {/* Two column layout */}
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 sm:gap-8 lg:gap-10 mb-6 sm:mb-8 lg:mb-10">
+        <div className="mb-4 sm:mb-5 lg:mb-6 text-center">
+              <SectionHeading
+                subtitle="Explore Our Programs"
+                title="Learn Without Limits. Grow Without Boundaries."
+              />
+              <p className="text-[var(--light-text-gray)] text-sm md:text-sm max-w-3xl mx-auto">Explore future-focused programs that combine academic excellence with hands-on industry exposure, preparing you for success in a connected, global world.</p>
+            </div>
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 sm:gap-8 lg:gap-10 mb-6 sm:mb-8 lg:mb-10 items-center">
           {/* Left column: Text and Tabs */}
           <div className="flex flex-col justify-around">
             {/* Header text */}
-            <div className="mb-4 sm:mb-5 lg:mb-6">
+            <div className="mb-4 sm:mb-5 lg:mb-6 hidden">
               <SectionHeading
                 subtitle="Explore Our Programs"
                 title="Learn Without Limits. Grow Without Boundaries."
@@ -91,7 +97,7 @@ const Programs = () => {
             </div>
 
             {/* Tabs */}
-            <div className="flex flex-wrap items-center gap-2 sm:gap-3 lg:gap-2 pt-4 sm:pt-6 md:pt-10 lg:pt-12">
+            <div className="flex flex-wrap items-center gap-2 sm:gap-3 lg:gap-2 ">
               <button
                 onClick={() => setActiveTab('Diploma')}
                 className={`font-stix px-3 sm:px-4 md:px-6 lg:px-8 py-1.5 sm:py-2 md:py-2.5 lg:py-3 rounded-lg transition-all text-[clamp(20px,4vw,30px)] leading-tight ${activeTab === 'Diploma' ? 'bg-[var(--button-red)] text-white shadow-md' : 'text-[var(--dark-blue)] hover:bg-gray-100'}`}
@@ -119,80 +125,67 @@ const Programs = () => {
             </div>
           </div>
 
-          {/* Right column: Blue card and Search */}
+          {/* Right column: Form and Search */}
           <div className="flex flex-col gap-4 sm:gap-5 lg:gap-6 items-start lg:items-end w-full lg:w-auto">
-            {/* Blue card */}
-            <div className="bg-[var(--dark-blue)] p-4 sm:p-5 lg:p-6 shadow-xl w-full lg:w-full max-w-[560px] h-auto min-h-[230px] sm:min-h-[200px] lg:h-[300px] rounded-[10px]">
-              <div className="bg-white/90 rounded-lg h-[200px] sm:h-[150px] lg:h-[200px] mb-3 sm:mb-4 lg:mb-4 relative overflow-hidden">
-                <Swiper
-                  modules={[Navigation, Autoplay]}
-                  spaceBetween={8}
-                  slidesPerView={1}
-                  loop={true}
-                  autoplay={{
-                    delay: 3000,
-                    disableOnInteraction: false,
-                  }}
-                  navigation={{
-                    prevEl: previewPrevRef.current,
-                    nextEl: previewNextRef.current,
-                  }}
-                  onBeforeInit={(swiper) => {
-                    swiper.params.navigation.prevEl = previewPrevRef.current;
-                    swiper.params.navigation.nextEl = previewNextRef.current;
-                  }}
-                  onSwiper={(swiper) => {
-                    previewSwiperRef.current = swiper;
-                    setTimeout(() => {
-                      if (swiper && previewPrevRef.current && previewNextRef.current) {
-                        swiper.params.navigation.prevEl = previewPrevRef.current;
-                        swiper.params.navigation.nextEl = previewNextRef.current;
-                        swiper.navigation.init();
-                        swiper.navigation.update();
-                      }
-                    }, 0);
-                  }}
-                  className="program-preview-swiper h-full"
-                >
-                  {programPreviewImages.map((img) => (
-                    <SwiperSlide key={img.id} className="h-full">
-                      <div className="relative w-full h-full rounded-lg overflow-hidden">
-                        <Image
-                          src={img.src}
-                          alt={img.alt}
-                          fill
-                          className="object-cover"
-                        />
-                      </div>
-                    </SwiperSlide>
-                  ))}
-                </Swiper>
-                {/* Navigation buttons for preview slider */}
-                <button
-                  ref={previewPrevRef}
-                  className="absolute left-1 top-1/2 -translate-y-1/2 z-10 w-6 h-6 sm:w-7 sm:h-7 rounded-full bg-black/50 hover:bg-black/70 flex items-center justify-center transition-opacity"
-                  aria-label="Previous image"
-                >
-                  <svg width="12" height="12" viewBox="0 0 16 16" fill="none" className="text-white">
-                    <path d="M10 12L6 8L10 4" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
-                  </svg>
-                </button>
-                <button
-                  ref={previewNextRef}
-                  className="absolute right-1 top-1/2 -translate-y-1/2 z-10 w-6 h-6 sm:w-7 sm:h-7 rounded-full bg-black/50 hover:bg-black/70 flex items-center justify-center transition-opacity"
-                  aria-label="Next image"
-                >
-                  <svg width="12" height="12" viewBox="0 0 16 16" fill="none" className="text-white">
-                    <path d="M6 4L10 8L6 12" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
-                  </svg>
-                </button>
+            {/* Red form card */}
+            <div className="hidden bg-[var(--dark-blue)] p-6 sm:p-8 lg:p-10 shadow-xl w-full lg:w-full max-w-[560px] h-auto min-h-[230px] sm:min-h-[250px] lg:min-h-[300px] rounded-[10px]">
+              <div className="space-y-6 sm:space-y-8">
+                {/* I am a */}
+                <div className="flex items-center gap-3 sm:gap-4 relative">
+                  <span className="text-white font-stix text-2xl sm:text-3xl lg:text-4xl whitespace-nowrap">I am a</span>
+                  <div className="flex-1 relative">
+                    <select
+                      value={iamA}
+                      onChange={(e) => setIamA(e.target.value)}
+                      className="w-full bg-transparent text-white font-stix text-lg sm:text-xl lg:text-2xl appearance-none focus:outline-none cursor-pointer border-b-2 border-white pb-2 pr-8"
+                    >
+                      <option value="" className="text-gray-400 bg-[var(--button-red)]">Please select</option>
+                      <option value="student" className="text-white bg-[var(--button-red)]">Student</option>
+                      <option value="professional" className="text-white bg-[var(--button-red)]">Professional</option>
+                      <option value="parent" className="text-white bg-[var(--button-red)]">Parent</option>
+                    </select>
+                    <div className="absolute right-0 top-1/2 -translate-y-1/2 pointer-events-none">
+                      <svg width="16" height="16" viewBox="0 0 16 16" fill="none" className="text-white">
+                        <path d="M4 6L8 10L12 6" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
+                      </svg>
+                    </div>
+                  </div>
+                  <span className="text-white font-stix text-4xl sm:text-5xl lg:text-6xl opacity-80">&</span>
+                </div>
+
+                {/* I am looking for */}
+                <div className="flex items-center gap-3 sm:gap-4 relative">
+                  <span className="text-white font-stix text-2xl sm:text-3xl lg:text-4xl whitespace-nowrap">I am looking for</span>
+                  <div className="flex-1 relative">
+                    <select
+                      value={iamLookingFor}
+                      onChange={(e) => setIamLookingFor(e.target.value)}
+                      className="w-full bg-transparent text-white font-stix text-lg sm:text-xl lg:text-2xl appearance-none focus:outline-none cursor-pointer border-b-2 border-white pb-2 pr-8"
+                    >
+                      <option value="" className="text-gray-400 bg-[var(--button-red)]">Please select</option>
+                      <option value="ug" className="text-white bg-[var(--button-red)]">UG Programs</option>
+                      <option value="pg" className="text-white bg-[var(--button-red)]">PG Programs</option>
+                      <option value="phd" className="text-white bg-[var(--button-red)]">Ph.D Programs</option>
+                      <option value="diploma" className="text-white bg-[var(--button-red)]">Diploma Programs</option>
+                    </select>
+                    <div className="absolute right-0 top-1/2 -translate-y-1/2 pointer-events-none">
+                      <svg width="16" height="16" viewBox="0 0 16 16" fill="none" className="text-white">
+                        <path d="M4 6L8 10L12 6" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
+                      </svg>
+                    </div>
+                  </div>
+                </div>
               </div>
-              <div className="flex justify-center">
-              <GlobalArrowButton className="!bg-white !text-black"
-                arrowClassName="!bg-[var(--button-red)]"
-                arrowIconClassName="!text-white"
-                textClassName="!text-black"
-                >Discover Your Program</GlobalArrowButton>
+              <div className="flex justify-center mt-6 sm:mt-8">
+                <GlobalArrowButton 
+                  className="!bg-white !text-black"
+                  arrowClassName="!bg-[var(--button-red)]"
+                  arrowIconClassName="!text-white"
+                  textClassName="!text-black"
+                  onClick={handleDiscoverProgram}
+                >
+                  Discover Your Program
+                </GlobalArrowButton>
               </div>
             </div>
 
@@ -311,14 +304,16 @@ const Programs = () => {
 
         {/* Explore Programs Button */}
         <div className="relative flex items-center justify-center mt-4 px-2 sm:px-0">
-          <GlobalArrowButton
-            className="!bg-white !text-black shadow-none"
-            arrowClassName="!bg-[var(--button-red)]"
-            arrowIconClassName="!text-white"
-            textClassName="!text-black text-xs sm:text-base"
-          >
-            Explore Programs
-          </GlobalArrowButton>
+          <Link href="/admissions">
+            <GlobalArrowButton
+              className="!bg-white !text-black shadow-none"
+              arrowClassName="!bg-[var(--button-red)]"
+              arrowIconClassName="!text-white"
+              textClassName="!text-black text-xs sm:text-base"
+            >
+              Explore Programs
+            </GlobalArrowButton>
+          </Link>
         </div>
       </div>
     </section>

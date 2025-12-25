@@ -4,13 +4,20 @@ export const API_CONFIG = {
   
   // Course endpoints
   courses: {
+    list: () => `/courses/`,
     completeDetail: (courseId) => `/courses/${courseId}/complete-detail/`,
   },
   
   // Department endpoints
   departments: {
+    list: () => `/departments/`,
     completeDetail: (departmentId) => `/departments/${departmentId}/complete-detail/`,
     courses: (slugOrId) => `/departments/${slugOrId}/courses/`,
+  },
+  
+  // Optimized endpoints
+  departmentCourses: {
+    list: () => `/department-courses/`,
   },
   
   // Add other API endpoints here as needed

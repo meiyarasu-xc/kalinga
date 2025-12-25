@@ -97,7 +97,7 @@ export default function Home() {
       />
       <ImageAnimation />
       <Facilities />
-      <Placements />
+      <Placements hideMilestones={false} />
       <Testimonials />
       <Map backgroundColor="bg-[var(--dark-blue)]" textColor="text-white" subtitleTextColor="!text-white" textColorClass="text-white" />
       <Scroll
@@ -105,7 +105,7 @@ export default function Home() {
         velocity={100}
         numCopies={6}
         className="font-stix !stroke-pink-500	 !text-var(--button-red)"
-        logo="https://kalinga-university.s3.ap-south-1.amazonaws.com/ccrc/kalinga+logo+png.webp"
+        logo="/kalingacolorlogo.svg"
       />
       <ResearchInnovation />
       <CampusTour />

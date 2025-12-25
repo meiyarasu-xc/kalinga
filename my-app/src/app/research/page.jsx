@@ -125,7 +125,43 @@ export default function Research() {
       
       />
       <UGCLogo />
-      <QuickLinks titleClassName="text-white" />
+      <QuickLinks 
+        title="Research Facilities and Resources"
+        titleClassName="text-white"
+        links={[
+          {
+            id: 1,
+            icon: "https://kalinga-university.s3.ap-south-1.amazonaws.com/logos/check-icon.png",
+            title: "IPR Cell",
+            description: "Whether you are developing an app or a gadget, our IPR cell will always guide you in protecting your unique work, providing patents, and launching them on different platforms.",
+          },
+          {
+            id: 2,
+            icon: "https://kalinga-university.s3.ap-south-1.amazonaws.com/logos/check-icon.png",
+            title: "Laboratories",
+            description: "Our laboratories offer all-around facilities with modern machines, helping young researchers acquire complete practical knowledge and support in their research pursuits.",
+          },
+          {
+            id: 3,
+            icon: "https://kalinga-university.s3.ap-south-1.amazonaws.com/logos/check-icon.png",
+            title: "CIF Labs",
+            description: "Convert your bold ideas into a great discovery! Our CIF Labs are packed with high-end instruments like an X-Ray Diffractometer, 3D Printer, Bio-Chemistry Analyser, Scanning Electron Microscope, and more.",
+          },
+          {
+            id: 4,
+            icon: "https://kalinga-university.s3.ap-south-1.amazonaws.com/logos/check-icon.png",
+            title: "Library",
+            description: "Curious minds, get ready to explore the pool of resources! Our library houses vast academic materials in both physical and digital forms, where students gain new knowledge at every stage of their research journey.",
+          },
+          {
+            id: 5,
+            icon: "https://kalinga-university.s3.ap-south-1.amazonaws.com/logos/check-icon.png",
+            title: "Seed Money",
+            description: "We promote a research culture that supports faculty members and researchers in real-time research, innovation, and product development by providing seed funding of up to 100,000/- and, in exceptional cases, up to 300,000/-.",
+          },
+        ]}
+        showReadMore={false}
+      />
       
       <MentorIntro   imageSrc = "https://kalinga-university.s3.ap-south-1.amazonaws.com/departments/oprakash.png"
   title = "Dr. Harsha Patil"
@@ -207,6 +243,9 @@ export default function Research() {
         hideTitle={false}
         headerButtonLabel="View All Awards"
         onHeaderButtonClick={() => console.log('View all awards clicked')}
+        hideTopLeaves={true}
+        showLeavesAroundButton={true}
+        dottedLineTop="top-[200px] sm:top-[70px]"
       />
       <AdmissionCareer />
     </div>

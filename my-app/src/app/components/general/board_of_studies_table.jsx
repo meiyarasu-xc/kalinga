@@ -1,6 +1,7 @@
 "use client";
 
 import React from "react";
+import SectionHeading from "@/app/components/general/SectionHeading";
 
 export default function BoardOfStudiesTable({
   title = "Board Of Studies",
@@ -17,12 +18,12 @@ export default function BoardOfStudiesTable({
       <div className="container mx-auto px-4 sm:px-6 lg:px-8">
         {/* Title + Description */}
         <div className="mb-6">
-          <h2 className="font-stix text-[32px] leading-[42px] text-[var(--button-red)]">
-            {title}
-          </h2>
+          <SectionHeading className="font-stix text-[32px] leading-[42px] text-[var(--button-red)]"
+            title={title}
+          />
 
           {description && (
-            <p className="mt-2 max-w-3xl text-[15px] leading-[26px] text-[var(--light-text-gray)]">
+            <p className="mt-2 md:w-4/5 w-full mx-auto text-[15px] leading-[26px] text-[var(--light-text-gray)]">
               {description}
             </p>
           )}

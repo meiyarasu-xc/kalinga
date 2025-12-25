@@ -1,5 +1,6 @@
 "use client";
 
+import { Suspense } from "react";
 import OurPrograms from "../components/admissions/our_programs";
 import ScholarshipsSlider from "../components/admissions/scholarships_slider";
 import AdmissionSteps from "../components/admissions/admission-steps";
@@ -89,6 +90,7 @@ export default function Admissions() {
     arrowIconClassName: "!text-[var(--button-red)]",
     textClassName: "!text-white",
     useContainer: true,
+    href: "/entrance-exam",
   };
 
   // OrganogramOfKalinga content (second instance - without image)
@@ -106,6 +108,7 @@ export default function Admissions() {
     arrowClassName: "!bg-[var(--dark-orange-red)]",
     arrowIconClassName: "!text-white",
     textClassName: "!text-black",
+    href: "/admissions",
   };
 
   // Facility content
@@ -229,7 +232,17 @@ export default function Admissions() {
 
   return (
     <div>
-      <OurPrograms />
+      <Suspense fallback={
+        <section className="py-16 bg-white">
+          <div className="container mx-auto px-2">
+            <div className="text-center">
+              <p className="text-gray-600">Loading programs...</p>
+            </div>
+          </div>
+        </section>
+      }>
+        <OurPrograms />
+      </Suspense>
       <OrganogramOfKalinga
         title={entranceExamContent.title}
         description={entranceExamContent.description}
@@ -243,6 +256,7 @@ export default function Admissions() {
         arrowIconClassName={entranceExamContent.arrowIconClassName}
         textClassName={entranceExamContent.textClassName}
         useContainer={entranceExamContent.useContainer}
+        href={entranceExamContent.href}
       />
       {/* <EntranceExam /> */}
       <AdmissionSteps
@@ -253,6 +267,7 @@ export default function Admissions() {
         ctaLabel={admissionStepsContent.ctaLabel}
         showReadMore={admissionStepsContent.showReadMore}
         showIcon={admissionStepsContent.showIcon}
+        ctaHref="/admissions"
       />
       <OrganogramOfKalinga
         title={admissionOrganogramContent.title}
@@ -267,6 +282,7 @@ export default function Admissions() {
         arrowIconClassName={admissionOrganogramContent.arrowIconClassName}
         textClassName={admissionOrganogramContent.textClassName}
         useContainer={true}
+        href={admissionOrganogramContent.href}
       />
       <ScholarshipsSlider />
       <Facility
