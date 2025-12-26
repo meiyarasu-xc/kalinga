@@ -23,7 +23,7 @@ export default function ResearchLab() {
       `}</style>
 
       <ImageContent
-        imageSrc="https://kalinga-university.s3.ap-south-1.amazonaws.com/common/placeholder-img.png"
+        imageSrc="https://kalinga-university.s3.ap-south-1.amazonaws.com/research-facilities/researchfacilities-labimage.webp"
         title="Laboratories"
         subtitle={null}
         description="We have research labs, including the Central Instrumentation Facility (CIF), and computer labs that fulfill the research needs of students through advanced resources, tools, and technologies."

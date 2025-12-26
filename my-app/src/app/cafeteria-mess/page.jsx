@@ -3,6 +3,7 @@ import AboutCafeteria from '../components/cafeteria-mess/about-cafeteria-mess'
 import AdmissionCareer from '../components/general/admission_cta';
 import AutoBreadcrumb from '../components/layout/BreadcrumbData';
 import CanteenMess from '../components/cafeteria-mess/cafeteria-facility-mess';
+import Page from '../components/campuslife/featuresection';
 
 const page = () => {
    const breadcrumbData = {
@@ -20,6 +21,7 @@ const page = () => {
     <AboutCafeteria/>
     <CanteenMess/>
     <AdmissionCareer/>
+    
     </>
   )
 }

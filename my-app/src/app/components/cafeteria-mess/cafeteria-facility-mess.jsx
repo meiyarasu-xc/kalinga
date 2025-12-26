@@ -1,90 +1,178 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useState, useEffect } from "react";
 import GlobalArrowButton from "../general/global-arrow_button";
 
 export default function CanteenMess() {
-  // ✅ 2 images as required
   const imageSets = [
     [
-      "https://kalinga-university.s3.ap-south-1.amazonaws.com/canteen-and-mess/canteen+mess+(5).webp",
       "https://kalinga-university.s3.ap-south-1.amazonaws.com/canteen-and-mess/canteen+mess+(4).webp",
+      "https://kalinga-university.s3.ap-south-1.amazonaws.com/canteen-and-mess/canteen+mess+(5).webp",
+    ],
+    [
+      "https://kalinga-university.s3.ap-south-1.amazonaws.com/canteen-and-mess/canteen+mess+(4).webp",
+      "https://kalinga-university.s3.ap-south-1.amazonaws.com/campus-life/Health+Clinic2.webp",
+      "https://kalinga-university.s3.ap-south-1.amazonaws.com/campus-life/Health+Clinic3.webp",
     ],
   ];
 
-  const [indexes, setIndexes] = useState([0]);
+  const [indexes, setIndexes] = useState([0, 0]);
 
   useEffect(() => {
     const t = setInterval(() => {
-      setIndexes((prev) => prev.map((val, i) => (val + 1) % imageSets[i].length));
+      setIndexes((prev) =>
+        prev.map((val, i) => (val + 1) % imageSets[i].length)
+      );
     }, 3000);
-
     return () => clearInterval(t);
   }, []);
 
+  const sections = [
+    {
+      type: "sandal",
+      title: "Mess",
+      desc: "We have designed three spacious halls to accommodate large groups of students at a time and serve with different food options every day. Meals of both vegetarian and non-vegetarian plans are prepared and served to students as per their preference, serving 4 meals a day – breakfast, lunch, high tea, and dinner.",
+      full:
+        "We have designed three spacious halls to accommodate large groups of students at a time and serve with different food options every day. Meals of both vegetarian and non-vegetarian plans are prepared and served to students as per their preference, serving 4 meals a day – breakfast, lunch, high tea, and dinner. There is a separate meal plan for international students as well. Experience warm hospitality with our attentive staff members who will take care of your food requirements. As part of the University’s support network for hostel students, during Ramadan, an appropriate meal plan is provided to our Muslim students, and at the time of Navratri, a special meal is provided to our Hindu students. With wholesome and nutritious meals, our students enjoy their food in a calm atmosphere near nature.",
+    },
+    {
+      type: "red",
+      title: "Canteen and Cafeterias",
+      desc: "Apart from the mess food, you can also explore some other options in our canteen and cafeterias. Check out regular food and fast food items on the menu of our canteen, and if you are looking for fresh juices, snacks, or ice-creams, then our campus has cafeterias that remain open till late hours.",
+      full:
+        "Apart from the mess food, you can also explore some other options in our canteen and cafeterias. Check out regular food and fast food items on the menu of our canteen, and if you are looking for fresh juices, snacks, or ice-creams, then our campus has cafeterias that remain open till late hours. Our students love to hang out in cafes with their friends and enjoy delicious snacks at affordable prices. So, if you are taking a study break, these will ensure that you never go hungry.",
+    },
+  ];
+
+  const [popupOpen, setPopupOpen] = useState(false);
+  const [activeIndex, setActiveIndex] = useState(0);
+
   return (
-    <section className="w-full py-10 md:py-16">
-      <div className="container mx-auto px-6">
-        {/* ✅ Best layout: grid (no absolute, no overlap) */}
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-start">
-          {/* CONTENT (Left) */}
-          <div className="lg:col-span-6">
-            <div className="bg-[var(--card-sandal)] rounded-2xl p-8 shadow-md w-full">
-              <h2 className="text-2xl font-regular mb-4">Mess</h2>
+    <div className="container mx-auto py-16 md:pb-25 px-2 flex flex-col md:gap-20 gap-12 items-stretch">
 
-              <p className="text-sm text-[var(--foreground)] leading-relaxed mb-4">
-                We have designed three spacious halls to accommodate large groups of
-                students at a time and serve them with different food options every
-                day. Meals of both vegetarian and non-vegetarian plans are prepared
-                and served as per student preferences, offering four meals a day —
-                breakfast, lunch, high tea, and dinner.
-              </p>
+      {/* ✅ TITLE ADDED (ONLY ADDITION) */}
+     <h2 className="flex flex-col items-center text-center">
 
-              <p className="text-sm text-[var(--foreground)] leading-relaxed mb-4">
-                There is a separate meal plan for international students as well. Our
-                attentive staff ensures warm hospitality and takes care of all food
-                requirements. During Ramadan, special meal plans are arranged for
-                Muslim students, and during Navratri, special meals are provided for
-                Hindu students.
-              </p>
+        Explore KU’s Food Corners
+      </h2>
 
-              <p className="text-sm text-[var(--foreground)] leading-relaxed mb-6">
-                With wholesome and nutritious meals served in a calm atmosphere near
-                nature, students enjoy a healthy and pleasant dining experience.
-              </p>
 
-              <GlobalArrowButton>Know More</GlobalArrowButton>
-            </div>
-          </div>
 
-          {/* IMAGE (Right) */}
-          <div className="lg:col-span-6">
-            <div className="w-full">
-              <div className="relative h-[220px] md:h-[320px] rounded-2xl overflow-hidden shadow-lg w-full">
+      {sections.map((sec, index) => (
+        <div
+          key={index}
+          className="relative w-full h-auto md:h-[400px] flex flex-col md:block"
+        >
+          {sec.type === "sandal" ? (
+            <div className="md:absolute md:bottom-[75px] md:right-[0px] md:w-[55%] w-full mb-4 md:mb-0">
+              <div className="relative h-[220px] md:h-[300px] rounded-2xl overflow-hidden shadow-lg w-full z-10">
                 <img
-                  src={imageSets[0][indexes[0]]}
-                  alt="Mess Facility at Kalinga University"
+                  src={imageSets[index][indexes[index]]}
+                  alt={`${sec.title} at Kalinga University`}
                   className="w-full h-full object-cover transition-all duration-700 object-top"
                 />
               </div>
 
-              {/* Indicators */}
-              <div className="mt-3 w-full flex justify-center gap-2">
-                {imageSets[0].map((_, i) => (
+              <div className="mt-3 w-full flex justify-center gap-2 z-20">
+                {imageSets[index].map((_, i) => (
                   <div
                     key={i}
-                    className={`h-2 rounded-full ${
-                      i === indexes[0]
+                    className={`h-2 rounded-full ${i === indexes[index]
                         ? "bg-[var(--dark-orange-red-light)] w-12"
                         : "bg-[var(--light-gray)] w-4"
-                    }`}
+                      }`}
                   />
                 ))}
               </div>
             </div>
+          ) : (
+            <div className="md:absolute md:top-10 md:left-[0px] md:w-[55%] md:z-20 w-full mb-4 md:mb-0">
+              <div className="relative h-[220px] md:h-[300px] rounded-2xl overflow-hidden shadow-lg w-full">
+                <img
+                  src={imageSets[index][indexes[index]]}
+                  alt={`${sec.title} at Kalinga University`}
+                  className="w-full h-full object-cover transition-all duration-700 object-top"
+                />
+              </div>
+
+              <div className="mt-3 w-full flex justify-center gap-2">
+                {imageSets[index].map((_, i) => (
+                  <div
+                    key={i}
+                    className={`h-2 rounded-full ${i === indexes[index]
+                        ? "bg-[var(--dark-orange-red-light)] w-12"
+                        : "bg-[var(--light-gray)] w-4"
+                      }`}
+                  />
+                ))}
+              </div>
+            </div>
+          )}
+
+          {/* CONTENT */}
+          {sec.type === "sandal" ? (
+            <div className="bg-[var(--card-sandal)] rounded-2xl p-6 md:p-8 shadow-md w-full md:w-[55%] md:min-h-[330px] md:absolute md:left-[0] md:top-[100px] flex flex-col justify-center">
+              <h1 className="text-xl md:text-2xl font-regular mb-3">
+                {sec.title}
+              </h1>
+              <p className="text-sm text-[var(--foreground)]/70 leading-relaxed mb-4 md:w-3/4 w-full">
+                {sec.desc}
+              </p>
+              <GlobalArrowButton
+                onClick={() => {
+                  setActiveIndex(index);
+                  setPopupOpen(true);
+                }}
+              >
+                Know More
+              </GlobalArrowButton>
+            </div>
+          ) : (
+            <div className="bg-[var(--button-red)] text-white rounded-2xl p-6 md:p-8 shadow-md w-full md:w-[55%] md:min-h-[330px] md:absolute md:right-[0px] md:top-[100px] flex flex-col justify-center">
+              <h2 className="text-xl md:text-2xl font-regular mb-3 md:pl-[140px]">
+                {sec.title}
+              </h2>
+              <p className="text-sm leading-relaxed mb-4 md:pl-[140px] w-full">
+                {sec.desc}
+              </p>
+
+              <div className="md:pl-[140px] flex flex-wrap">
+                <GlobalArrowButton
+                  className="!bg-white !text-[var(--foreground)]"
+                  variant="transparent"
+                  arrowClassName="bg-[var(--brown)]"
+                  onClick={() => {
+                    setActiveIndex(index);
+                    setPopupOpen(true);
+                  }}
+                >
+                  Know More
+                </GlobalArrowButton>
+              </div>
+            </div>
+          )}
+        </div>
+      ))}
+
+      {popupOpen && (
+        <div className="fixed inset-0 z-[9999] flex items-center justify-center px-4">
+          <div
+            className="absolute inset-0 bg-black/50"
+            onClick={() => setPopupOpen(false)}
+          />
+          <div className="relative bg-white rounded-2xl max-w-3xl w-full p-6 shadow-xl">
+            <h3 className="text-2xl mb-4">{sections[activeIndex].title}</h3>
+            <p className="text-sm leading-relaxed text-black/80">
+              {sections[activeIndex].full}
+            </p>
+            <div className="mt-6 flex justify-end">
+              <GlobalArrowButton onClick={() => setPopupOpen(false)}>
+                Close
+              </GlobalArrowButton>
+            </div>
           </div>
         </div>
-      </div>
-    </section>
+      )}
+    </div>
   );
 }
