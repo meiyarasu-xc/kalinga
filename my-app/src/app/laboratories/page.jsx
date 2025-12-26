@@ -197,30 +197,20 @@ export default function LaboratoriesPage() {
 
   return (
     <main className="bg-white">
-      {/* Page Title */}
-      <section className="pt-10 pb-6">
-        <div className="container mx-auto px-4">
-          <h1 className="text-2xl md:text-4xl font-semibold text-[var(--title-color)]">
-            Laboratories
-          </h1>
-          <p className="mt-2 text-base md:text-lg text-gray-600">
-            Explore | Experiment | Excel
-          </p>
-        </div>
-      </section>
+      
 
       {/* 1) Main Intro */}
       <MainIntro
         title="About Our Cutting-Edge Laboratories"
         description={[aboutP1, aboutP2]}
-        imageUrl="https://kalinga-university.s3.ap-south-1.amazonaws.com/common/placeholder-img.png" // (Cover Image - 1)
+        imageUrl="https://kalinga-university.s3.ap-south-1.amazonaws.com/common/placeholder-img.png"
         imageAlt="Laboratories"
-        showReadMore={true}
-        readMoreLabel="Read More"
-        readLessLabel="Show Less"
+        showKnowMore={true}
+        knowMoreLabel="Read More"
+        initialVisibleParagraphs={1}
       />
 
-      {/* 2) FAQ dropdown (one dropdown per faculty) */}
+      {/* 2) FAQ dropdown */}
       <FAQ
         title="Introducing Our Labs"
         subtitle=""

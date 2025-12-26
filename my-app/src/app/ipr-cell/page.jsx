@@ -1,5 +1,6 @@
 "use client";
 
+import { useLayoutEffect } from "react";
 import ImageContent from "@/app/components/ccrc/imagecontent";
 import MentorIntro from "@/app/components/department/dept_head_intro";
 import DataTable from "@/app/components/general/data-table";
@@ -10,7 +11,7 @@ import AdmissionCareer from "@/app/components/general/admission_cta";
 const breadcrumbData = {
   heroImage:
     "https://kalinga-university.s3.ap-south-1.amazonaws.com/common/placeholder-img.png",
-  pageTitle: "Intellectual Property Rights (IPR) Cell",
+  pageTitle: "Intellectual Property Rights Cell",
   breadcrumbs: [
     { label: "Home", href: "/" },
     { label: "IPR Cell", href: "/ipr-cell" },
@@ -22,6 +23,7 @@ const aboutP1 =
 
 const aboutP2 =
   "The IPR Cell at Kalinga University extends its initiatives for spreading awareness about the concepts among academicians, scholars, and students for taking steps to implement the objectives of the national IPR Policy, including strengthening IPR management and ensuring ease of access to the IP system for all stakeholders.";
+
 const MentorIntroProps = [
   {
     id: 1,
@@ -65,9 +67,12 @@ const committeeMembers = [
 ];
 
 export default function IPRCellPage() {
-  if (typeof window !== "undefined") {
-    window.__breadcrumbData = breadcrumbData;
-  }
+  useLayoutEffect(() => {
+    if (typeof window !== "undefined") window.__breadcrumbData = breadcrumbData;
+    return () => {
+      if (typeof window !== "undefined") delete window.__breadcrumbData;
+    };
+  }, []);
 
   const columns = [
     { key: "sno", label: "S. No.", width: "w-24" },
@@ -82,24 +87,17 @@ export default function IPRCellPage() {
   }));
 
   return (
-    <main className="bg-white">
-      <section className="pt-10 pb-6">
-        <div className="container mx-auto px-4">
-          <h1 className="text-2xl md:text-4xl font-semibold text-[var(--title-color)]">
-            Intellectual Property Rights (IPR) Cell
-          </h1>
-          <p className="mt-2 text-base md:text-lg text-gray-600">
-            Protecting Your Innovations
-          </p>
-        </div>
-      </section>
+    // ✅ Enforce same font family across the whole page
+    <main className="bg-white font-jakarta">
       <ImageContent
         title="Intellectual Property Rights (IPR) Cell"
         subtitle="About IPR Cell"
         description={`${aboutP1} ${aboutP2}`}
         imageSrc="/images/ipr-cell/logo.png"
         imageAlt="IPR Cell Logo"
+        readmore={false}
       />
+
       <MentorIntro items={MentorIntroProps} />
 
       <section className="py-12">
@@ -113,6 +111,7 @@ export default function IPRCellPage() {
           </div>
         </div>
       </section>
+
       <section className="pb-12">
         <div className="container mx-auto px-4 flex justify-center">
           <Link
@@ -123,11 +122,13 @@ export default function IPRCellPage() {
             <GlobalArrowButton
               variant="outline"
               className="border-[var(--button-red)] text-[var(--button-red)] hover:bg-[var(--button-red)] hover:text-white"
-            >KU Ref. Citation
+            >
+              KU Ref. Citation
             </GlobalArrowButton>
           </Link>
         </div>
       </section>
+
       <AdmissionCareer />
     </main>
   );
