@@ -8,7 +8,7 @@ import AdmissionCareer from "@/app/components/general/admission_cta";
 
 const breadcrumbData = {
   heroImage:
-    "https://kalinga-university.s3.ap-south-1.amazonaws.com/common/placeholder-img.png",
+    "https://kalinga-university.s3.ap-south-1.amazonaws.com/robotics/robotics-banner.webp",
   pageTitle: "Robotics, Coding, & Drones Training Centre",
   customBreadcrumbs: [
     { label: "Home", href: "/" },
@@ -30,37 +30,37 @@ const learnCards = [
     id: 1,
     title: "",
     description: "Programming languages used in robotics & automation tasks",
-    icon: "https://kalinga-university.s3.ap-south-1.amazonaws.com/admission/merit.svg",
+    icon: "https://kalinga-university.s3.ap-south-1.amazonaws.com/robotics/robotics-1.svg",
   },
   {
     id: 2,
     title: "",
     description: "Robotics mechanisms & control systems",
-    icon: "https://kalinga-university.s3.ap-south-1.amazonaws.com/admission/social.svg",
+    icon: "https://kalinga-university.s3.ap-south-1.amazonaws.com/robotics/robotics-2.svg",
   },
   {
     id: 3,
     title: "",
     description: "Drone mechanisms & safe flying practices",
-    icon: "https://kalinga-university.s3.ap-south-1.amazonaws.com/logos/book-logo.png",
+    icon: "https://kalinga-university.s3.ap-south-1.amazonaws.com/robotics/robotics-3.svg",
   },
   {
     id: 4,
     title: "",
     description: "Artificial Intelligence principles used in smart gadgets",
-    icon: "https://kalinga-university.s3.ap-south-1.amazonaws.com/admission/merit.svg",
+    icon: "https://kalinga-university.s3.ap-south-1.amazonaws.com/robotics/robotics-4.svg",
   },
   {
     id: 5,
     title: "",
     description: "Project-based learning & experimentation",
-    icon: "https://kalinga-university.s3.ap-south-1.amazonaws.com/admission/social.svg",
+    icon: "https://kalinga-university.s3.ap-south-1.amazonaws.com/robotics/robotics-5.svg",
   },
   {
     id: 6,
     title: "",
     description: "Develop and prototype your own tech-based ideas",
-    icon: "https://kalinga-university.s3.ap-south-1.amazonaws.com/logos/book-logo.png",
+    icon: "https://kalinga-university.s3.ap-south-1.amazonaws.com/robotics/robotics-6.svg",
   },
 ];
 
@@ -68,7 +68,7 @@ const glimpses = [
   {
     id: 1,
     imageSrc:
-      "https://kalinga-university.s3.ap-south-1.amazonaws.com/common/placeholder-img.png",
+      "https://kalinga-university.s3.ap-south-1.amazonaws.com/robotics/robotics-glimpse1.webp",
     imageAlt: "Robotics & Drones Glimpse",
     title: "Training Session Glimpse",
     buttonText: "Read More",
@@ -77,7 +77,7 @@ const glimpses = [
   {
     id: 2,
     imageSrc:
-      "https://kalinga-university.s3.ap-south-1.amazonaws.com/common/placeholder-img.png",
+      "https://kalinga-university.s3.ap-south-1.amazonaws.com/robotics/robotics-glimpse2.webp",
     imageAlt: "Robotics & Drones Glimpse",
     title: "Project Demonstration",
     buttonText: "Read More",
@@ -86,7 +86,7 @@ const glimpses = [
   {
     id: 3,
     imageSrc:
-      "https://kalinga-university.s3.ap-south-1.amazonaws.com/common/placeholder-img.png",
+      "https://kalinga-university.s3.ap-south-1.amazonaws.com/robotics/robotics-glimpse3.webp",
     imageAlt: "Robotics & Drones Glimpse",
     title: "Drone Practice Glimpse",
     buttonText: "Read More",
@@ -119,7 +119,7 @@ export default function RoboticsCodingDronesTrainingCentrePage() {
         title="Robotics, Coding, & Drones Training Centre"
         subtitle="In collaboration with BDS Education"
         description={aboutCentreDescription}
-        imageSrc="https://kalinga-university.s3.ap-south-1.amazonaws.com/common/placeholder-img.png"
+        imageSrc="https://kalinga-university.s3.ap-south-1.amazonaws.com/coe/coe-robotics.webp"
         imageAlt="Robotics, Coding, & Drones Training Centre"
         readmore={false}
       />

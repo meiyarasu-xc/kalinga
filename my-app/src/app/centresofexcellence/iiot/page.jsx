@@ -8,7 +8,7 @@ import AdmissionCareer from "@/app/components/general/admission_cta";
 
 const breadcrumbData = {
   heroImage:
-    "https://kalinga-university.s3.ap-south-1.amazonaws.com/common/placeholder-img.png",
+    "https://kalinga-university.s3.ap-south-1.amazonaws.com/iiot/iiot-banner.webp",
   pageTitle: "IIoT Training Centre",
   customBreadcrumbs: [
     { label: "Home", href: "/" },
@@ -27,37 +27,37 @@ const learnCards = [
     id: 1,
     title: "",
     description: "Understanding of industrial IoT architecture",
-    icon: "https://kalinga-university.s3.ap-south-1.amazonaws.com/admission/merit.svg",
+    icon: "https://kalinga-university.s3.ap-south-1.amazonaws.com//iiot/iiot-1.svg",
   },
   {
     id: 2,
     title: "",
     description: "Working of industrial sensors & devices",
-    icon: "https://kalinga-university.s3.ap-south-1.amazonaws.com/admission/social.svg",
+    icon: "https://kalinga-university.s3.ap-south-1.amazonaws.com//iiot/iiot-2.svg",
   },
   {
     id: 3,
     title: "",
     description: "Real-time data monitoring & analysis",
-    icon: "https://kalinga-university.s3.ap-south-1.amazonaws.com/logos/book-logo.png",
+    icon: "https://kalinga-university.s3.ap-south-1.amazonaws.com//iiot/iiot-3.svg",
   },
   {
     id: 4,
     title: "",
     description: "Cloud connectivity & data integration",
-    icon: "https://kalinga-university.s3.ap-south-1.amazonaws.com/admission/merit.svg",
+    icon: "https://kalinga-university.s3.ap-south-1.amazonaws.com//iiot/iiot-4.svg",
   },
   {
     id: 5,
     title: "",
     description: "IIoT communication protocols",
-    icon: "https://kalinga-university.s3.ap-south-1.amazonaws.com/admission/social.svg",
+    icon: "https://kalinga-university.s3.ap-south-1.amazonaws.com//iiot/iiot-5.svg",
   },
   {
     id: 6,
     title: "",
     description: "Dashboard & visualization tools",
-    icon: "https://kalinga-university.s3.ap-south-1.amazonaws.com/logos/book-logo.png",
+    icon: "https://kalinga-university.s3.ap-south-1.amazonaws.com/iiot/iiot-6.svg",
   },
 ];
 
@@ -65,7 +65,7 @@ const glimpses = [
   {
     id: 1,
     imageSrc:
-      "https://kalinga-university.s3.ap-south-1.amazonaws.com/common/placeholder-img.png",
+      "https://kalinga-university.s3.ap-south-1.amazonaws.com/iiot/iiot-glimpse1.webp",
     imageAlt: "IIoT Glimpse",
     title: "Training Session Glimpse",
     buttonText: "Read More",
@@ -74,7 +74,7 @@ const glimpses = [
   {
     id: 2,
     imageSrc:
-      "https://kalinga-university.s3.ap-south-1.amazonaws.com/common/placeholder-img.png",
+      "https://kalinga-university.s3.ap-south-1.amazonaws.com/iiot/iiot-glimpse2.webp",
     imageAlt: "IIoT Glimpse",
     title: "Live Dashboard Demo",
     buttonText: "Read More",
@@ -83,7 +83,7 @@ const glimpses = [
   {
     id: 3,
     imageSrc:
-      "https://kalinga-university.s3.ap-south-1.amazonaws.com/common/placeholder-img.png",
+      "https://kalinga-university.s3.ap-south-1.amazonaws.com/iiot/iiot-glimpse3.webp",
     imageAlt: "IIoT Glimpse",
     title: "Industry Expert Interaction",
     buttonText: "Read More",
@@ -116,7 +116,7 @@ export default function IIoTTrainingCentrePage() {
         title="IIoT Training Centre"
         subtitle="In collaboration with Technoviz Automation"
         description={aboutCentreDescription}
-        imageSrc="https://kalinga-university.s3.ap-south-1.amazonaws.com/common/placeholder-img.png"
+        imageSrc="https://kalinga-university.s3.ap-south-1.amazonaws.com/coe/coe-iiot.webp"
         imageAlt="IIoT Training Centre"
         readmore={false}
       />

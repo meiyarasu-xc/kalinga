@@ -19,7 +19,7 @@ import StudentActivities from "@/app/components/department/student_activities";
 
 const breadcrumbData = {
   heroImage:
-    "https://kalinga-university.s3.ap-south-1.amazonaws.com/common/placeholder-img.png",
+    "https://kalinga-university.s3.ap-south-1.amazonaws.com/msme/msme-banner.webp",
   pageTitle: "MSME Training Centre",
   customBreadcrumbs: [
     { label: "Home", href: "/" },
@@ -34,37 +34,37 @@ const learnCards = [
     id: 1,
     title: "",
     description: "Understanding of MSME Business Models & Industrial Practices",
-    icon: "https://kalinga-university.s3.ap-south-1.amazonaws.com/admission/merit.svg",
+    icon: "https://kalinga-university.s3.ap-south-1.amazonaws.com/msme/msme-1.svg",
   },
   {
     id: 2,
     title: "",
     description: "Real-Time Methods Used by Successful MSMEs",
-    icon: "https://kalinga-university.s3.ap-south-1.amazonaws.com/admission/social.svg",
+    icon: "https://kalinga-university.s3.ap-south-1.amazonaws.com/msme/msme-2.svg",
   },
   {
     id: 3,
     title: "",
     description: "Effective Strategy Planning & Decision-Making Skills",
-    icon: "https://kalinga-university.s3.ap-south-1.amazonaws.com/logos/book-logo.png",
+    icon: "https://kalinga-university.s3.ap-south-1.amazonaws.com/msme/msme-3.svg",
   },
   {
     id: 4,
     title: "",
     description: "Market Research & Opportunity Identification",
-    icon: "https://kalinga-university.s3.ap-south-1.amazonaws.com/admission/merit.svg",
+    icon: "https://kalinga-university.s3.ap-south-1.amazonaws.com/msme/msme-4.svg",
   },
   {
     id: 5,
     title: "",
     description: "Financial Planning & Risk Management",
-    icon: "https://kalinga-university.s3.ap-south-1.amazonaws.com/admission/social.svg",
+    icon: "https://kalinga-university.s3.ap-south-1.amazonaws.com/msme/msme-5.svg",
   },
   {
     id: 6,
     title: "",
     description: "Communication & Negotiation Skills",
-    icon: "https://kalinga-university.s3.ap-south-1.amazonaws.com/logos/book-logo.png",
+    icon: "https://kalinga-university.s3.ap-south-1.amazonaws.com/msme/msme-6.svg",
   },
 ];
 
@@ -72,7 +72,7 @@ const learnCards = [
 const glimpsesImageItems = [
   {
     id: 1,
-    imageSrc: "https://kalinga-university.s3.ap-south-1.amazonaws.com/common/placeholder-img.png",
+    imageSrc: "https://kalinga-university.s3.ap-south-1.amazonaws.com/msme/msme-glimpse1.webp",
     imageAlt: "Student Activities",
     title: "Lorem ipsum dolor sit amet, consectetur",
     description:
@@ -82,7 +82,7 @@ const glimpsesImageItems = [
   },
   {
     id: 2,
-    imageSrc: "https://kalinga-university.s3.ap-south-1.amazonaws.com/common/placeholder-img.png",
+    imageSrc: "https://kalinga-university.s3.ap-south-1.amazonaws.com/msme/msme-glimpse2.webp",
     imageAlt: "Student Activities",
     title: "Lorem ipsum dolor sit amet, consectetur",
     description:
@@ -92,7 +92,7 @@ const glimpsesImageItems = [
   },
   {
     id: 3,
-    imageSrc: "https://kalinga-university.s3.ap-south-1.amazonaws.com/common/placeholder-img.png",
+    imageSrc: "https://kalinga-university.s3.ap-south-1.amazonaws.com/msme/msme-glimpse3.webp",
     imageAlt: "Student Activities",
     title: "Lorem ipsum dolor sit amet, consectetur",
     description:
@@ -113,7 +113,7 @@ export default function MSMETrainingCentrePage() {
   return (
     <>
       <ImageContent
-        imageSrc="https://kalinga-university.s3.ap-south-1.amazonaws.com/common/placeholder-img.png"
+        imageSrc="https://kalinga-university.s3.ap-south-1.amazonaws.com/about/smeindia.webp"
         title="MSME Training Centre"
         subtitle="In collaboration with IamSMEofIndia"
         description={[
