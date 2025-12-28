@@ -2,11 +2,12 @@
 
 import { useState, useEffect, useMemo } from 'react'
 import Image from 'next/image'
+import Link from 'next/link'
 import SectionHeading from '@/app/components/general/SectionHeading'
 import AdmissionCareer from '@/app/components/general/admission_cta'
 import QuickLinks from "@/app/components/general/quick_links";
 import Stack from '@/app/components/gsap/Stack'
-import { fetchAllDepartments, fetchDepartmentCompleteDetail, parseHtmlToText } from '@/app/lib/api'
+import { fetchAllDepartments, fetchDepartmentCompleteDetail, parseHtmlToText, fetchDepartmentCourseCounts } from '@/app/lib/api'
 import { useBreadcrumbData } from '@/app/components/layout/BreadcrumbContext'
 
 // Breadcrumb configuration
@@ -56,8 +57,24 @@ export default function AcademicsApi() {
         setLoading(true);
         setError(null);
 
-        // Fetch all departments
-        const departmentsList = await fetchAllDepartments();
+        // Fetch all departments and course counts in parallel
+        const [departmentsList, courseCountsData] = await Promise.all([
+          fetchAllDepartments(),
+          fetchDepartmentCourseCounts().catch(err => {
+            console.warn('Failed to fetch course counts, will use fallback:', err);
+            return [];
+          })
+        ]);
+        
+        // Create a map of department ID to course count for quick lookup
+        const courseCountMap = new Map();
+        if (Array.isArray(courseCountsData)) {
+          courseCountsData.forEach(item => {
+            if (item.id && item.course_count !== undefined) {
+              courseCountMap.set(item.id, item.course_count);
+            }
+          });
+        }
         
         // Fetch complete details for each department to get course count and about image
         const departmentsWithDetails = await Promise.all(
@@ -74,11 +91,20 @@ export default function AcademicsApi() {
               // Get overview text from about_sections
               const overviewText = parseHtmlToText(completeDetail?.about_sections?.[0]?.content || '');
               
-              // Get programs count from department_courses
-              const programsCount = completeDetail?.department_courses?.length || 0;
+              // Get programs count - prefer from courseCountsData, then dept.course_count, then calculate from department_courses
+              const programsCount = courseCountMap.get(dept.id) ?? 
+                                   dept.course_count ?? 
+                                   completeDetail?.department_courses?.length ?? 
+                                   0;
               
-              // Generate department slug
-              const deptSlug = completeDetail?.slug || generateSlug(completeDetail?.name || dept.name);
+              // Generate department slug - prefer from courseCountsData, then dept, then completeDetail, then generate
+              const courseCountItem = Array.isArray(courseCountsData) 
+                ? courseCountsData.find(item => item.id === dept.id) 
+                : null;
+              const deptSlug = courseCountItem?.slug || 
+                              dept.slug || 
+                              completeDetail?.slug || 
+                              generateSlug(completeDetail?.name || dept.name);
               
               return {
                 id: dept.id,
@@ -87,22 +113,26 @@ export default function AcademicsApi() {
                 summary: overviewText,
                 fullSummary: overviewText, // Store full text for expansion
                 programs: programsCount.toString(),
-                scholarships: "Check eligibility",
+                scholarships: "Know More",
                 slug: deptSlug,
                 departmentId: dept.id,
               };
             } catch (err) {
               console.error(`Error fetching details for department ${dept.id}:`, err);
-              // Return basic info if detail fetch fails
+              // Return basic info if detail fetch fails - use course_count from courseCountsData or dept
+              const fallbackCount = courseCountMap.get(dept.id) ?? dept.course_count ?? 0;
+              const courseCountItem = Array.isArray(courseCountsData) 
+                ? courseCountsData.find(item => item.id === dept.id) 
+                : null;
               return {
                 id: dept.id,
                 title: dept.name,
                 img: PLACEHOLDER_IMAGE,
                 summary: '',
                 fullSummary: '',
-                programs: '0',
-                scholarships: "Check eligibility",
-                slug: generateSlug(dept.name),
+                programs: fallbackCount.toString(),
+                scholarships: "Know More",
+                slug: courseCountItem?.slug || dept.slug || generateSlug(dept.name),
                 departmentId: dept.id,
               };
             }
@@ -325,26 +355,16 @@ function DepartmentCard({ program }) {
           {program.summary || 'Learn more about this department and its opportunities.'}
           {shouldShowReadMore && !isExpanded && (
             <button
-              onClick={(e) => {
-                e.stopPropagation();
-                if (program.onReadMore) program.onReadMore();
-              }}
-              className="text-[var(--button-red)] font-semibold ml-1 hover:underline inline"
+            onClick={(e) => {
+              e.stopPropagation();
+              if (program.onKnowMore) program.onKnowMore();
+            }}
+              className="cursor-pointer text-[var(--button-red)] font-semibold ml-1 hover:underline inline"
             >
               Read More
             </button>
           )}
-          {shouldShowReadMore && isExpanded && (
-            <button
-              onClick={(e) => {
-                e.stopPropagation();
-                if (program.onReadMore) program.onReadMore(); // Navigate to department page
-              }}
-              className="text-[var(--button-red)] font-semibold ml-1 hover:underline inline"
-            >
-              Read More
-            </button>
-          )}
+         
         </p>
       </div>
       <ul className="text-sm sm:text-base font-plus-jakarta-sans space-y-2.5 sm:space-y-3 mb-4 sm:mb-5">
@@ -357,7 +377,12 @@ function DepartmentCard({ program }) {
               height={20}
               className="mt-0.5"
             />
-            <span className="text-gray-800"><span className="font-stix text-[20px] text-black">Scholarships :</span> {program.scholarships}</span>
+            <span className="text-gray-800">
+              <span className="font-stix text-[20px] text-black">Scholarships :</span>{' '}
+              <Link href="/scholarships" className=" cursor-pointer text-[var(--button-red)] font-semibold ml-1 hover:underline inline !text-[16px]">
+                {program.scholarships}
+              </Link>
+            </span>
           </li>
         )}
         {program.programs && (

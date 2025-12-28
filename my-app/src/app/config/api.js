@@ -13,11 +13,14 @@ export const API_CONFIG = {
     list: () => `/departments/`,
     completeDetail: (departmentId) => `/departments/${departmentId}/complete-detail/`,
     courses: (slugOrId) => `/departments/${slugOrId}/courses/`,
+    courseCounts: () => `/departments/course-counts/`,
+    updateCourseCount: () => `/departments/course-counts/update/`,
   },
   
   // Optimized endpoints
   departmentCourses: {
     list: () => `/department-courses/`,
+    departmentsCourses: () => `/departments-courses/`,
   },
   
   // Add other API endpoints here as needed

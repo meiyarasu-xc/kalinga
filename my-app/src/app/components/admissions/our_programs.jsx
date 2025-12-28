@@ -3,7 +3,7 @@ import { useState, useEffect, useMemo } from "react";
 import { useSearchParams, useRouter } from "next/navigation";
 import SectionHeading from "../general/SectionHeading";
 import ProgramCard from "../general/program-card";
-import { fetchAllDepartments, fetchAllDepartmentCourses, fetchAllCourses } from "@/app/lib/api";
+import { fetchAllDepartments, fetchAllDepartmentCourses, fetchAllCourses, fetchDepartmentsCourses } from "@/app/lib/api";
 import Link from "next/link";
 
 // Helper function to format course name (BSE, BTech format - uppercase first few letters, then lowercase)
@@ -70,6 +70,7 @@ export default function OurPrograms({
   programCardTitleClassName = ""
 }) {
   const searchParams = useSearchParams();
+  const router = useRouter();
   
   // Initialize state from URL query parameters
   const initialStudyLevel = searchParams?.get('studyLevel') || "All";
@@ -118,14 +119,81 @@ export default function OurPrograms({
         setLoading(true);
         setError(null);
 
-        // Fetch all departments for the dropdown
-        const departmentsData = await fetchAllDepartments();
-        const deptArray = Array.isArray(departmentsData) ? departmentsData : [];
-        setDepartments(deptArray);
+        // Try to fetch from the new departments-courses endpoint first
+        let departmentsData = [];
+        let coursesData = [];
+        
+        try {
+          const response = await fetchDepartmentsCourses();
+          
+          // Extract departments and courses from the response
+          departmentsData = Array.isArray(response.departments) ? response.departments : [];
+          coursesData = Array.isArray(response.courses) ? response.courses : [];
+          
+          // Map courses to include department info from nested department object
+          coursesData = coursesData.map(course => ({
+            ...course,
+            departmentId: course.department?.id,
+            departmentName: course.department?.name || '',
+            departmentSlug: course.department?.slug || '',
+          }));
+          
+        } catch (deptCoursesError) {
+          console.warn('departments-courses endpoint failed, trying fallback approach:', deptCoursesError);
+          
+          // Fallback: Fetch departments separately
+          try {
+            departmentsData = await fetchAllDepartments();
+            departmentsData = Array.isArray(departmentsData) ? departmentsData : [];
+          } catch (deptError) {
+            console.warn('Failed to fetch departments:', deptError);
+          }
+          
+          // Fallback: Try to use optimized endpoint (department-courses with department info)
+          try {
+            coursesData = await fetchAllDepartmentCourses();
+          } catch (deptCoursesError2) {
+            console.warn('department-courses endpoint failed, trying alternative approach:', deptCoursesError2);
+            
+            // Final fallback: Fetch all courses and departments separately
+            try {
+              const [allCoursesData, allDepartmentsData] = await Promise.all([
+                fetchAllCourses(),
+                fetchAllDepartments()
+              ]);
+              
+              // Create a map of department IDs to names
+              const deptMap = new Map();
+              (Array.isArray(allDepartmentsData) ? allDepartmentsData : []).forEach(dept => {
+                if (dept.id) {
+                  deptMap.set(dept.id, {
+                    id: dept.id,
+                    name: dept.name,
+                    slug: dept.slug
+                  });
+                }
+              });
+              
+              // Map courses with department info
+              coursesData = (Array.isArray(allCoursesData) ? allCoursesData : []).map(course => ({
+                ...course,
+                departmentId: course.department,
+                departmentName: deptMap.get(course.department)?.name || '',
+                departmentSlug: deptMap.get(course.department)?.slug || '',
+              }));
+            } catch (fallbackError) {
+              console.error('Fallback approach also failed:', fallbackError);
+              throw fallbackError;
+            }
+          }
+        }
+
+        // Set departments for the dropdown
+        setDepartments(departmentsData);
         
         // If department is selected from URL (by slug), find matching department
-        if (initialDepartment !== "All" && deptArray.length > 0) {
-          const matchingDept = deptArray.find(dept => 
+        if (initialDepartment !== "All" && departmentsData.length > 0) {
+          const matchingDept = departmentsData.find(dept => 
             dept.slug?.toLowerCase() === initialDepartment.toLowerCase() ||
             dept.id?.toString() === initialDepartment ||
             dept.name?.toLowerCase() === initialDepartment.toLowerCase()
@@ -133,45 +201,6 @@ export default function OurPrograms({
           if (matchingDept) {
             // Use department ID or slug for filtering
             setSelectedDepartment(matchingDept.slug || matchingDept.id?.toString() || matchingDept.name);
-          }
-        }
-
-        // Try to use optimized endpoint first (department-courses with department info)
-        let coursesData = [];
-        try {
-          coursesData = await fetchAllDepartmentCourses();
-        } catch (deptCoursesError) {
-          console.warn('department-courses endpoint failed, trying alternative approach:', deptCoursesError);
-          
-          // Fallback: Fetch all courses and departments separately
-          try {
-            const [allCoursesData, allDepartmentsData] = await Promise.all([
-              fetchAllCourses(),
-              fetchAllDepartments()
-            ]);
-            
-            // Create a map of department IDs to names
-            const deptMap = new Map();
-            (Array.isArray(allDepartmentsData) ? allDepartmentsData : []).forEach(dept => {
-              if (dept.id) {
-                deptMap.set(dept.id, {
-                  id: dept.id,
-                  name: dept.name,
-                  slug: dept.slug
-                });
-              }
-            });
-            
-            // Map courses with department info
-            coursesData = (Array.isArray(allCoursesData) ? allCoursesData : []).map(course => ({
-              ...course,
-              departmentId: course.department,
-              departmentName: deptMap.get(course.department)?.name || '',
-              departmentSlug: deptMap.get(course.department)?.slug || '',
-            }));
-          } catch (fallbackError) {
-            console.error('Fallback approach also failed:', fallbackError);
-            throw fallbackError;
           }
         }
 
