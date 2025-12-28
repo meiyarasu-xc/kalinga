@@ -27,7 +27,6 @@ const MediaCardSlider = dynamicImport(() => import("@/app/components/general/med
 
 // Disable static generation to prevent SSR issues with DOMMatrix
 export const dynamic = 'force-dynamic';
-export const revalidate = 0;
 
 // Breadcrumb configuration
 const breadcrumbData = {
