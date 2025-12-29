@@ -124,7 +124,7 @@ export default function CanteenMess() {
                   setPopupOpen(true);
                 }}
               >
-                Know More
+                Read More
               </GlobalArrowButton>
             </div>
           ) : (
@@ -146,7 +146,7 @@ export default function CanteenMess() {
                     setPopupOpen(true);
                   }}
                 >
-                  Know More
+                    Read More
                 </GlobalArrowButton>
               </div>
             </div>

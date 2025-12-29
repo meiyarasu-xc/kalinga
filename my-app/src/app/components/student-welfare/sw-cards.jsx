@@ -3,9 +3,6 @@
 import React, { useEffect, useRef, useState } from "react";
 import Cards from "../ccrc/cards";
 
-const PLACEHOLDER_IMAGE =
-  "https://kalinga-university.s3.ap-south-1.amazonaws.com/common/placeholder-img.png";
-
 const swCardsData = [
   {
     title: "Tours & Trips",
@@ -46,6 +43,7 @@ const swCardsData = [
     imageSrc:
       "https://kalinga-university.s3.ap-south-1.amazonaws.com/student-welfare/international-student-support.webp",
     logoSrc: "",
+    href: "/international-students",
   },
   {
     title: "Counselling Support",
@@ -86,6 +84,7 @@ const swCardsData = [
     imageSrc:
       "https://kalinga-university.s3.ap-south-1.amazonaws.com/student-welfare/grievance-redressal-cell.webp",
     logoSrc: "",
+    href: "/grievance-redressal",
   },
   {
     title: "Health Clinic",
@@ -94,6 +93,7 @@ const swCardsData = [
     imageSrc:
       "https://kalinga-university.s3.ap-south-1.amazonaws.com/health-clinic/health-clinic-1.webp",
     logoSrc: "",
+    href: "/health-clinic",
   },
   {
     title: "Sanitary Napkins Vending Machines",
@@ -123,15 +123,19 @@ const swCardsData = [
     title: "NCC",
     description:
       "Our NCC cadets develop leadership, discipline, confidence, and a sense of responsibility.",
-    imageSrc: "https://kalinga-university.s3.ap-south-1.amazonaws.com/ncc/Ncc-1.webp",
+    imageSrc:
+      "https://kalinga-university.s3.ap-south-1.amazonaws.com/ncc/Ncc-1.webp",
     logoSrc: "",
+    href: "/Ncc",
   },
   {
     title: "NSS",
     description:
       "It encourages students to actively participate in community service and outreach programs.",
-    imageSrc: "https://kalinga-university.s3.ap-south-1.amazonaws.com/student-welfare/Nss.jpeg",
+    imageSrc:
+      "https://kalinga-university.s3.ap-south-1.amazonaws.com/ncc/Ncc-3.webp",
     logoSrc: "",
+    href: "/nss",
   },
   {
     title: "Sports",
@@ -140,6 +144,7 @@ const swCardsData = [
     imageSrc:
       "https://kalinga-university.s3.ap-south-1.amazonaws.com/student-welfare/sports-studentwelfare.jpg",
     logoSrc: "",
+    href: "/sports-and-wellness-centre",
   },
   {
     title: "Hostel Facilities",
@@ -148,6 +153,7 @@ const swCardsData = [
     imageSrc:
       "https://kalinga-university.s3.ap-south-1.amazonaws.com/student-welfare/hostel-facilities.jpeg",
     logoSrc: "",
+    href: "/hostel",
   },
   {
     title: "First Weeks",
@@ -169,93 +175,104 @@ const swCardsData = [
     title: "Scholarships",
     description:
       "Obtain up to 100% scholarships as per our eligibility criteria and make your finances more manageable. Students who face financial difficulties at the time of admission can get scholarships such as merit-based, sports-based, entrance exam, content creators, and more.",
-    imageSrc: "https://kalinga-university.s3.ap-south-1.amazonaws.com/phd/Phd-intro.webp",
+    imageSrc:
+      "https://kalinga-university.s3.ap-south-1.amazonaws.com/phd/Phd-intro.webp",
     logoSrc: "",
+    href: "/scholarships",
   },
 ];
 
 export default function SwCards() {
   const wrapperRef = useRef(null);
 
+  // kept (reference structure) – no modal/routing logic needed
   const [open, setOpen] = useState(false);
   const [modalData, setModalData] = useState({ title: "", description: "" });
 
   useEffect(() => {
     const onKeyDown = (e) => e.key === "Escape" && setOpen(false);
-
     if (open) document.body.style.overflow = "hidden";
     window.addEventListener("keydown", onKeyDown);
-
     return () => {
       window.removeEventListener("keydown", onKeyDown);
       document.body.style.overflow = "";
     };
   }, [open]);
 
-  const handleClickCapture = (e) => {
-    const btn = e.target?.closest?.("button, a");
-    if (!btn) return;
-
-    const label = (btn.textContent || "").trim().toLowerCase();
-    if (!label.includes("know more")) return;
-
-    e.preventDefault();
-
+  // ✅ Show "Know More" button ONLY for cards that have href
+  useEffect(() => {
     const root = wrapperRef.current;
     if (!root) return;
 
-    // find all "Know more" buttons rendered by Cards
-    const knowMoreButtons = Array.from(root.querySelectorAll("button, a")).filter((el) =>
-      (el.textContent || "").trim().toLowerCase().includes("know more")
-    );
+    const getTitleFromCard = (cardEl) => {
+      const titleEl = cardEl.querySelector("h3");
+      return (titleEl?.textContent || "").trim();
+    };
 
-    const idx = knowMoreButtons.indexOf(btn);
-    const picked = swCardsData[idx];
-    if (!picked) return;
+    const apply = () => {
+      const cardEls = Array.from(
+        root.querySelectorAll('.bg-\\[var\\(--card-sandal\\)\\]')
+      );
 
-    setModalData({
-      title: picked?.title || "Details",
-      description: picked?.description || "",
-    });
-    setOpen(true);
-  };
+      cardEls.forEach((cardEl) => {
+        const title = getTitleFromCard(cardEl);
+        const btnWrap = cardEl.querySelector(".absolute.left-5.bottom-4");
+        if (!btnWrap) return;
+
+        const data = swCardsData.find((c) => c.title === title);
+
+        // ✅ only show if href exists
+        btnWrap.style.display = data?.href ? "inline-flex" : "none";
+      });
+    };
+
+    apply();
+
+    const obs = new MutationObserver(() => apply());
+    obs.observe(root, { childList: true, subtree: true });
+
+    return () => obs.disconnect();
+  }, []);
 
   return (
-    <section className="bg-white">
-      {/* ✅ CSS only changes + scope */}
-      <style jsx global>{`
-        .sw-cards-wrapper img {
-          width: 100% !important;
-          height: 340px !important;
-          object-fit: cover !important;
-        }
-
-        .sw-cards-wrapper img[src=""],
-        .sw-cards-wrapper img:not([src]) {
-          display: none !important;
-        }
-
-        @media (max-width: 768px) {
+    <>
+      <section className="bg-white">
+        {/* ✅ Same structure approach as Campusfacilitiescard (wrapper + scoped CSS) */}
+        <style jsx global>{`
           .sw-cards-wrapper img {
-            height: 260px !important;
+            width: 100% !important;
+            height: 340px !important;
+            object-fit: cover !important;
           }
-        }
-      `}</style>
 
-      <div className="container mx-auto px-4 pt-16">
-        <h2 className="text-center mb-8">Our Student Welfare Initiatives</h2>
-      </div>
+          @media (max-width: 768px) {
+            .sw-cards-wrapper img {
+              height: 260px !important;
+            }
+          }
 
-      {/* Reusing existing Cards component */}
-      <div
-        ref={wrapperRef}
-        onClickCapture={handleClickCapture}
-        className="sw-cards-wrapper"
-      >
-        <Cards cards={swCardsData} />
-      </div>
+          /* ✅ Fix broken small icon: hide images with empty src (logoSrc="") */
+          .sw-cards-wrapper img[src=""],
+          .sw-cards-wrapper img:not([src]) {
+            display: none !important;
+          }
 
-      {/* ✅ Modal popup on Know More */}
+          /* ✅ Move ONLY NSS image down INSIDE its container (no layout shift) */
+          .sw-cards-wrapper img[src*="Nss.jpeg"] {
+            transform: translateY(12px) !important;
+          }
+        `}</style>
+
+        <div className="container mx-auto px-4 pt-16">
+          <h2 className="text-center mb-0">Our Student Welfare Initiatives</h2>
+        </div>
+
+        <div ref={wrapperRef} className="sw-cards-wrapper">
+          <Cards cards={swCardsData} />
+        </div>
+      </section>
+
+      {/* (kept for reference structure; not triggered) */}
       {open && (
         <div
           className="fixed inset-0 z-[9999] flex items-center justify-center px-4"
@@ -300,6 +317,6 @@ export default function SwCards() {
           </div>
         </div>
       )}
-    </section>
+    </>
   );
 }

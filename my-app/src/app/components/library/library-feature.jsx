@@ -19,12 +19,12 @@ export default function LibraryGrid() {
         },
         {
           title: "E-Books",
-          value: "8683K+",
+          value: "86L+",
           description: "Digital books accessible anytime through the university portal.",
         },
         {
           title: "E-Journals",
-          value: "159K+",
+          value: "1.5L+",
           description: "Online journals covering diverse research domains.",
         },
         {

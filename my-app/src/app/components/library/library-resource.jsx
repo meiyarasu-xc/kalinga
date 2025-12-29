@@ -6,7 +6,7 @@ import UpcomingConference from "../research/upcoming_conference";
 const eResources = [
   {
     id: 1,
-    title: "SCOPUS",
+    title: "Scopus",
     description:
       "Scopus is a comprehensive abstract and citation database used for academic research across various disciplines. Developed by Elsevier, it is widely utilized by researchers, academics, and institutions to access a broad range of scientific literature and track research impact. A total of 49,037 journals from various disciplines are indexed in this database.",
     image:
@@ -33,7 +33,7 @@ const eResources = [
   },
   {
     id: 4,
-    title: "DRILLBIT",
+    title: "Drillbit",
     description:
       "Drillbit is a cloud-based tool designed to assist educators and students in managing and improving academic writing skills. Drillbit is designed to enhance the writing process, providing tools and resources that support better writing practices and academic integrity. Its focus on grammar, style, and feedback makes it a valuable resource for both students looking to improve their writing and educators aiming to support their students’ development.",
     image:
@@ -42,7 +42,7 @@ const eResources = [
   },
   {
     id: 5,
-    title: "TURNITIN",
+    title: "Turnitin",
     description:
       "Turnitin is widely used across educational institutions to maintain academic integrity and improve the quality of scholarly work. It’s important to note that while Turnitin is a powerful tool, it should be used as part of a broader approach to teaching academic integrity and writing skills.",
     image:

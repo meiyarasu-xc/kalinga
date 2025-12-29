@@ -5,7 +5,7 @@ import AdmissionCareer from '../components/general/admission_cta'
 
 const breadcrumbData = {
         heroImage:
-            "https://kalinga-university.s3.ap-south-1.amazonaws.com/mini-market/mini-market-banner-image-1.webp",
+            "https://kalinga-university.s3.ap-south-1.amazonaws.com/about/about-banner.webp",
         pageTitle: "Mini Market",
         customBreadcrumbs: [
             { label: "Home", href: "/" },

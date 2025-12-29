@@ -5,14 +5,63 @@ import SectionHeading from "@/app/components/general/SectionHeading";
 
 function LinkItem({ label, href }) {
   return (
-    <li className="text-sm text-neutral-700">
+    <li className="list-none">
       <a
         href={href}
         target="_blank"
         rel="noreferrer"
-        className="hover:underline break-words"
+        className={[
+          "group inline-flex items-center gap-3",
+          "rounded-full px-5 py-2 text-sm font-semibold",
+          "border border-[#8B2C2C]",
+          "bg-[#8B2C2C] text-white",
+          "shadow-sm transition-all duration-200 ease-out",
+          "hover:bg-[#F6E1CF] hover:text-[#8B2C2C]",
+          "focus:outline-none focus-visible:ring-2 focus-visible:ring-[#8B2C2C]/40",
+        ].join(" ")}
       >
-        {label}
+        <span className="whitespace-nowrap transition-colors duration-200">
+          {label}
+        </span>
+
+        <span
+          className={[
+            "inline-flex h-8 w-8 items-center justify-center rounded-lg",
+            "bg-white transition-all duration-200 ease-out",
+            "group-hover:bg-[#8B2C2C]",
+          ].join(" ")}
+          aria-hidden="true"
+        >
+          <svg
+            width="16"
+            height="16"
+            viewBox="0 0 16 16"
+            fill="none"
+            xmlns="http://www.w3.org/2000/svg"
+            className={[
+              "text-[#8B2C2C]",
+              "transition-all duration-200 ease-out",
+              "group-hover:text-white",
+              "group-hover:translate-x-0.5",
+              "group-hover:rotate-45",
+            ].join(" ")}
+          >
+            <path
+              d="M6.2 3.5H12.5V9.8"
+              stroke="currentColor"
+              strokeWidth="1.6"
+              strokeLinecap="round"
+              strokeLinejoin="round"
+            />
+            <path
+              d="M12.5 3.5L3.5 12.5"
+              stroke="currentColor"
+              strokeWidth="1.6"
+              strokeLinecap="round"
+              strokeLinejoin="round"
+            />
+          </svg>
+        </span>
       </a>
     </li>
   );
@@ -20,31 +69,69 @@ function LinkItem({ label, href }) {
 
 function FaqStyledTable({ columns = [], rows = [] }) {
   return (
-    <div className="w-full overflow-x-auto">
-      <table className="w-full text-left text-sm">
-        <thead className="text-neutral-700">
-          <tr className="border-b border-neutral-200 bg-white/60">
-            {columns.map((c) => (
-              <th key={c} className="py-3 px-3 font-semibold whitespace-nowrap">
+    <div className="w-full overflow-x-auto rounded-lg">
+      <table
+        className="min-w-full w-max"
+        style={{ borderSpacing: 0, borderCollapse: "separate" }}
+      >
+        <thead>
+          <tr className="bg-[#1e3a8a]">
+            {columns.map((c, idx) => (
+              <th
+                key={c}
+                className={[
+                  "border-gray-300 border-b border-r border-t p-3 text-left",
+                  "font-plus-jakarta-sans font-semibold text-sm text-white",
+                  idx === 0 ? "border-l rounded-tl-lg" : "",
+                  idx === columns.length - 1 ? "rounded-tr-lg" : "",
+                  "whitespace-nowrap",
+                ].join(" ")}
+              >
                 {c}
               </th>
             ))}
           </tr>
         </thead>
 
-        <tbody className="text-neutral-700">
-          {rows.map((r, idx) => (
-            <tr
-              key={idx}
-              className="border-b border-neutral-200 last:border-b-0"
-            >
-              {r.map((cell, cidx) => (
-                <td key={cidx} className="py-3 px-3 align-top">
-                  {cell}
-                </td>
-              ))}
+        <tbody>
+          {rows.length === 0 ? (
+            <tr>
+              <td
+                colSpan={columns.length}
+                className="border-gray-300 border-b border-r border-l p-8 text-center text-gray-500 font-plus-jakarta-sans rounded-b-lg"
+              >
+                No data available
+              </td>
             </tr>
-          ))}
+          ) : (
+            rows.map((r, rowIdx) => {
+              const isLastRow = rowIdx === rows.length - 1;
+              return (
+                <tr
+                  key={rowIdx}
+                  className={rowIdx % 2 === 0 ? "bg-white" : "bg-gray-50"}
+                >
+                  {r.map((cell, cidx) => (
+                    <td
+                      key={cidx}
+                      className={[
+                        "border-gray-300 border-b border-r p-3",
+                        "text-gray-700 font-plus-jakarta-sans text-sm align-top",
+                        cidx === 0 ? "border-l" : "",
+                        isLastRow && cidx === 0 ? "rounded-bl-lg" : "",
+                        isLastRow && cidx === r.length - 1
+                          ? "rounded-br-lg"
+                          : "",
+                        cidx === r.length - 1 ? "text-center align-middle" : "",
+                      ].join(" ")}
+                    >
+                      {cell}
+                    </td>
+                  ))}
+                </tr>
+              );
+            })
+          )}
         </tbody>
       </table>
     </div>
@@ -57,13 +144,13 @@ export default function PhdResourcesAccordion({ className = "" }) {
       {
         title: "Ph.D. Ordinance",
         body: (
-          <ul className="space-y-2">
+          <ul className="flex flex-wrap gap-3">
             <LinkItem
-              label="Ordinance No. 48 (16.09.2013)"
+              label="Ordinance No. 48"
               href="https://kalinga-university.s3.ap-south-1.amazonaws.com/phd/Ordinance+No.+48+(16.09.2013).pdf"
             />
             <LinkItem
-              label="Revised Ordinance No. 48 (18.02.2022)"
+              label="Revised Ordinance No. 48"
               href="https://kalinga-university.s3.ap-south-1.amazonaws.com/phd/Amended+Ordinance+No.+48+(18.02.2022).pdf"
             />
           </ul>
@@ -72,7 +159,7 @@ export default function PhdResourcesAccordion({ className = "" }) {
       {
         title: "Thesis Format",
         body: (
-          <ul className="space-y-2">
+          <ul className="flex flex-wrap gap-3">
             <LinkItem
               label="Cover Page Format"
               href="https://kalinga-university.s3.ap-south-1.amazonaws.com/phd/Kalinga+University-+Cover+Page+-Thesis.pdf"
@@ -99,7 +186,7 @@ export default function PhdResourcesAccordion({ className = "" }) {
       {
         title: "Ph.D. Admission Policy",
         body: (
-          <ul className="space-y-2">
+          <ul className="flex flex-wrap gap-3">
             <LinkItem
               label="Ph.D. Admission Policy"
               href="https://kalinga-university.s3.ap-south-1.amazonaws.com/phd/2.+Admission+poilcy+(1).pdf"
@@ -110,9 +197,9 @@ export default function PhdResourcesAccordion({ className = "" }) {
       {
         title: "Detailed Syllabus of Research Methodology",
         body: (
-          <ul className="space-y-2">
+          <ul className="flex flex-wrap gap-3">
             <LinkItem
-              label="Detailed Syllabus of Research Methodology"
+              label="Detailed Syllabus"
               href="https://kalinga-university.s3.ap-south-1.amazonaws.com/phd/Detailed+Syllabus.pdf"
             />
           </ul>
@@ -121,9 +208,9 @@ export default function PhdResourcesAccordion({ className = "" }) {
       {
         title: "Fellowship Scholarship Policy for Ph.D. Scholars",
         body: (
-          <ul className="space-y-2">
+          <ul className="flex flex-wrap gap-3">
             <LinkItem
-              label="Fellowship Scholarship Policy for Ph.D. Scholars"
+              label="Fellowship Scholarship Policy"
               href="https://kalinga-university.s3.ap-south-1.amazonaws.com/phd/3.+Fellowship+Scholarship+Policy+for+Ph.D.+Scholars.pdf"
             />
           </ul>
@@ -132,9 +219,9 @@ export default function PhdResourcesAccordion({ className = "" }) {
       {
         title: "Policy for the Grievance Redress Mechanism of Scholars",
         body: (
-          <ul className="space-y-2">
+          <ul className="flex flex-wrap gap-3">
             <LinkItem
-              label="Policy for the Grievance Redress Mechanism of Scholars"
+              label="Grievance Redress Policy"
               href="https://kalinga-university.s3.ap-south-1.amazonaws.com/phd/6+POLICY+FOR+GRIEVANCE+REDRESS+MECHANISM+OF+SCHOLARS.pdf"
             />
           </ul>
@@ -143,7 +230,7 @@ export default function PhdResourcesAccordion({ className = "" }) {
       {
         title: "Ph.D. Process Improvement",
         body: (
-          <ul className="space-y-2">
+          <ul className="flex flex-wrap gap-3">
             <LinkItem
               label="Best Practices & Process Improvement"
               href="https://kalinga-university.s3.ap-south-1.amazonaws.com/phd/Best+Practices+%26+Process+Improvement+(1).pdf"
@@ -154,7 +241,7 @@ export default function PhdResourcesAccordion({ className = "" }) {
       {
         title: "UGC Regulations",
         body: (
-          <ul className="space-y-2">
+          <ul className="flex flex-wrap gap-3">
             <LinkItem
               label="2022"
               href="https://kalinga-university.s3.ap-south-1.amazonaws.com/phd/UGC+Regulation+2022+(1).pdf"
@@ -173,7 +260,7 @@ export default function PhdResourcesAccordion({ className = "" }) {
       {
         title: "Ph.D. Notification 2025-26",
         body: (
-          <ul className="space-y-2">
+          <ul className="flex flex-wrap gap-3">
             <LinkItem
               label="Ph.D. Notification 2025-26"
               href="https://kalinga-university.s3.ap-south-1.amazonaws.com/phd/Ph.+D.+2025+Notification+26-07-2025.pdf"
@@ -184,9 +271,9 @@ export default function PhdResourcesAccordion({ className = "" }) {
       {
         title: "Details of Currently Enrolled Ph.d. Scholars and Supervisors",
         body: (
-          <ul className="space-y-2">
+          <ul className="flex flex-wrap gap-3">
             <LinkItem
-              label="Details of Currently Enrolled Ph.d. Scholars and Supervisors"
+              label="Open Page"
               href="https://kalingauniversity.ac.in/research/Details-Of-Currently-Enrolled-Ph.d.-Scholars-And-Details-Of-Supervisor.php"
             />
           </ul>
@@ -196,21 +283,29 @@ export default function PhdResourcesAccordion({ className = "" }) {
         title: "University Register Scholar In Various Fellowship Programmes",
         body: (
           <div className="space-y-6">
-            <div className="rounded-lg border border-neutral-200 bg-white/60 p-3 sm:p-4">
+            <div className="rounded-lg border border-neutral-200 bg-white/60 p-3 sm:p-4 phd-table-scope">
               <FaqStyledTable
                 columns={["S.No.", "Scheme Name", "Scheme Full Form"]}
                 rows={[
                   ["1", "CSIR", "COUNCIL OF SCIENTIFIC AND INDUSTRIAL RESEARCH"],
-                  ["2", "NET-JOINT-CSIR", "JOINT COUNCIL OF SCIENTIFIC AND INDUSTRIAL RESEARCH"],
+                  [
+                    "2",
+                    "NET-JOINT-CSIR",
+                    "JOINT COUNCIL OF SCIENTIFIC AND INDUSTRIAL RESEARCH",
+                  ],
                   ["3", "UGC-NETJRF", "NATIONAL ELIGIBILITY TEST"],
                   ["4", "NFSC", "NATIONAL FELLOWSHIP FOR SCHEDULED CASTE"],
                   ["5", "NFST", "NATIONAL FELLOWSHIP FOR SCHEDULED TRIBES"],
-                  ["6", "INSPIRE", "INNOVATION IN SCIENCE PURSUIT FOR INSPIRED RESEARCH"],
+                  [
+                    "6",
+                    "INSPIRE",
+                    "INNOVATION IN SCIENCE PURSUIT FOR INSPIRED RESEARCH",
+                  ],
                 ]}
               />
             </div>
 
-            <div className="rounded-lg border border-neutral-200 bg-white/60 p-3 sm:p-4">
+            <div className="rounded-lg border border-neutral-200 bg-white/60 p-3 sm:p-4 phd-table-scope">
               <FaqStyledTable
                 columns={[
                   "S.No.",
@@ -223,10 +318,62 @@ export default function PhdResourcesAccordion({ className = "" }) {
                   "Image",
                 ]}
                 rows={[
-                  ["1", "2025", "PENDING", "NETJRF", "ROBIN KUMAR VERMA", "SANTOSH DAS", "YOGA", <img src={"https://kalinga-university.s3.ap-south-1.amazonaws.com/phd/phd_scholar_1.jpg"}/>],
-                  ["2", "2025", "PENDING", "NETJRF", "SHUBHAM SINGH", "VISHNU SINGH", "YOGA", <img src={"https://kalinga-university.s3.ap-south-1.amazonaws.com/phd/phd_scholar_2.jpg"}/>],
-                  ["3", "2025", "PENDING", "CSIR", "PRIYA", "ASHOK MALIK", "ZOOLOGY", ""],
-                  ["4", "2025", "PENDING", "NETJRF", "SHEETAL NAIK", "GOURISHANKAR", "ZOOLOGY", <img src={"https://kalinga-university.s3.ap-south-1.amazonaws.com/phd/phd_scholar_4.jpg"}/>],
+                  [
+                    "1",
+                    "2025",
+                    "PENDING",
+                    "NETJRF",
+                    "ROBIN KUMAR VERMA",
+                    "SANTOSH DAS",
+                    "YOGA",
+                    <img
+                      key="img1"
+                      src="https://kalinga-university.s3.ap-south-1.amazonaws.com/phd/phd_scholar_1.jpg"
+                      alt="ROBIN KUMAR VERMA"
+                    />,
+                  ],
+                  [
+                    "2",
+                    "2025",
+                    "PENDING",
+                    "NETJRF",
+                    "SHUBHAM SINGH",
+                    "VISHNU SINGH",
+                    "YOGA",
+                    <img
+                      key="img2"
+                      src="https://kalinga-university.s3.ap-south-1.amazonaws.com/phd/phd_scholar_2.jpg"
+                      alt="SHUBHAM SINGH"
+                    />,
+                  ],
+                  [
+                    "3",
+                    "2025",
+                    "PENDING",
+                    "CSIR",
+                    "PRIYA",
+                    "ASHOK MALIK",
+                    "ZOOLOGY",
+                    <img
+                      key="img3"
+                      src="https://kalinga-university.s3.ap-south-1.amazonaws.com/phd/Phd-scholar-priya.webp"
+                      alt="PRIYA"
+                    />,
+                  ],
+                  [
+                    "4",
+                    "2025",
+                    "PENDING",
+                    "NETJRF",
+                    "SHEETAL NAIK",
+                    "GOURISHANKAR",
+                    "ZOOLOGY",
+                    <img
+                      key="img4"
+                      src="https://kalinga-university.s3.ap-south-1.amazonaws.com/phd/phd_scholar_4.jpg"
+                      alt="SHEETAL NAIK"
+                    />,
+                  ],
                 ]}
               />
             </div>
@@ -236,7 +383,7 @@ export default function PhdResourcesAccordion({ className = "" }) {
       {
         title: "Undertaking",
         body: (
-          <ul className="space-y-2">
+          <ul className="flex flex-wrap gap-3">
             <LinkItem
               label="Undertaking"
               href="https://kalinga-university.s3.ap-south-1.amazonaws.com/phd/Undertaking+(1).pdf"
@@ -252,9 +399,7 @@ export default function PhdResourcesAccordion({ className = "" }) {
 
   return (
     <section className={`bg-white ${className}`}>
-      {/* ✅ Match FAQ container behavior (full width, consistent padding) */}
       <div className="container mx-auto px-4 sm:px-6 lg:px-8 py-16">
-        {/* ✅ Center heading like FAQ */}
         <div className="mb-8 flex justify-center">
           <SectionHeading
             title="Ph.D. Resources"
@@ -264,7 +409,6 @@ export default function PhdResourcesAccordion({ className = "" }) {
           />
         </div>
 
-        {/* ✅ Full width accordion list like FAQ */}
         <div className="w-full max-w-6xl mx-auto space-y-4">
           {sections.map((sec, idx) => {
             const isOpen = idx === openIndex;
@@ -274,7 +418,6 @@ export default function PhdResourcesAccordion({ className = "" }) {
                 key={sec.title}
                 className="border border-gray-200 rounded-lg overflow-hidden shadow-sm"
               >
-                {/* ✅ Header CSS like FAQ */}
                 <button
                   type="button"
                   onClick={() => setOpenIndex(isOpen ? -1 : idx)}
@@ -289,13 +432,11 @@ export default function PhdResourcesAccordion({ className = "" }) {
                     {sec.title}
                   </h3>
 
-                  {/* ✅ Right square icon like FAQ */}
                   <span className="flex-shrink-0">
                     <span
-                      className={[
-                        "inline-flex h-8 w-8 items-center justify-center rounded",
-                        "bg-white",
-                      ].join(" ")}
+                      className={["inline-flex h-8 w-8 items-center justify-center rounded", "bg-white"].join(
+                        " "
+                      )}
                       aria-hidden="true"
                     >
                       <svg
@@ -318,7 +459,6 @@ export default function PhdResourcesAccordion({ className = "" }) {
                   </span>
                 </button>
 
-                {/* ✅ Body CSS like FAQ */}
                 <div
                   className={`overflow-hidden transition-all duration-300 ${
                     isOpen ? "max-h-[2000px] opacity-100" : "max-h-0 opacity-0"
@@ -333,6 +473,27 @@ export default function PhdResourcesAccordion({ className = "" }) {
           })}
         </div>
       </div>
+
+      {/* ✅ ONLY for uniform images inside your tables */}
+      <style jsx global>{`
+        .phd-table-scope table td:last-child {
+          text-align: center;
+          vertical-align: middle;
+        }
+        .phd-table-scope table img {
+          width: 60px;
+          height: 60px;
+          object-fit: cover;
+          border-radius: 8px;
+          display: block;
+          margin: 0 auto;
+        }
+          /* Center-align only "Scheme Full Form" column */
+  .phd-table-scope table th:nth-child(3),
+  .phd-table-scope table td:nth-child(3) {
+    text-align: center;
+  }
+      `}</style>
     </section>
   );
 }
