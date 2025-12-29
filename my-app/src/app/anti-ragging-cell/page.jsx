@@ -6,7 +6,6 @@ import VisionMission from "../components/about/vision-mission";
 import ImageListItem from "../components/ccrc/imagelistitem";
 import DataTable from "@/app/components/general/data-table";
 import GlobalArrowButton from "../components/general/global-arrow_button";
-import SectionHeading from "../components/general/SectionHeading";
 import Gallery from "../components/campuslife/campusgallery";
 /* ---------------- BREADCRUMB CONFIG ---------------- */
 
@@ -193,10 +192,14 @@ export default function Page() {
       
               </div>
             </section>
-
-
-              <Gallery title="Anti-Ragging Week - 2024" description = "It was an interactive session organised for newcomers in which they were informed about the university’s commitment to maintaining a ragging-free campus. Senior students shared their positive experiences in the University regarding this matter and even encouraged them to report any issue to the anti-ragging cell."
-              imageS={AntiImages} />
+              <Gallery
+                title="Anti-Ragging Week - 2024" 
+                description="It was an interactive session organised for newcomers in which they were informed about the university's commitment to maintaining a ragging-free campus. Senior students shared their positive experiences in the University regarding this matter and even encouraged them to report any issue to the anti-ragging cell."
+                images={AntiImages.map(img => ({ id: img.id, src: img.image, alt: img.alt }))}
+                paddingClassName="py-0"
+                titleClassName="text-[var(--foreground)] text-center"
+                forceSliderOnMobile={true}
+              />
     </>
   );
 }
