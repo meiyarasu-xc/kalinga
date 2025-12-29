@@ -48,7 +48,7 @@ export default function Page() {
 
           {/* ✅ PAGE HEADING */}
           <div className="mb-10 text-center">
-            <h2 >
+            <h2 className="mb-4" >
               Academic Calendar 2025-26
 
             </h2>

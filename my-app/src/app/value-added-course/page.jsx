@@ -136,9 +136,9 @@ export default function ValueAddedPage() {
      {/* ---------- YEAR WISE PDF SECTION ---------- */}
 <section className="py-14">
   <div className="mx-auto max-w-6xl rounded-3xl bg-[#0d4a75] p-6">
-    <h3 className="text-white mb-6">
-      Our Value Added Courses (PDFs)
-    </h3>
+    {/* <h3 className="text-white mb-6">
+      
+    </h3> */}
 
     {/* Tabs */}
     <div className="flex flex-wrap gap-3 mb-6">

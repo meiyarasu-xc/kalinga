@@ -95,7 +95,7 @@ export default function Page() {
 
           
             name: (
-              <div className="flex flex-col  gap-4">
+              <div className="flex flex-row items-center justify-between gap-4 w-full">
                 <span>{club.name}</span>
 
                 <div
@@ -104,7 +104,7 @@ export default function Page() {
                     window.open(club.url, "_blank");
                   }}
                 >
-                 <button type="button" aria-label="Next testimonial" class="jsx-aa3431cba0c88d50 cursor-pointer w-10 h-10 sm:w-11 sm:h-11 md:w-12 md:h-12 rounded-lg bg-[var(--button-red)] text-white flex items-center justify-center hover:bg-[#A2A2A2] transition-colors"><svg fill="none" stroke="currentColor" viewBox="0 0 24 24" class="jsx-aa3431cba0c88d50 w-3.5 h-3.5 sm:w-4 sm:h-4"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" class="jsx-aa3431cba0c88d50"></path></svg></button>
+                 <button type="button" aria-label="Next testimonial" className="cursor-pointer w-10 h-10 sm:w-11 sm:h-11 md:w-12 md:h-12 rounded-lg bg-[var(--button-red)] text-white flex items-center justify-center hover:bg-[#A2A2A2] transition-colors flex-shrink-0"><svg fill="none" stroke="currentColor" viewBox="0 0 24 24" className="w-3.5 h-3.5 sm:w-4 sm:h-4"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M9 5l7 7-7 7"></path></svg></button>
                 </div>
               </div>
             ),
