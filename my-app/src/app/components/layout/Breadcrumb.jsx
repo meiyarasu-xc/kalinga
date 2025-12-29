@@ -159,7 +159,7 @@ const Breadcrumb = ({ customBreadcrumbs, heroImage, pageTitle }) => {
                     <span className="text-[var(--dark-gray)] mx-2 text-sm">»</span>
                   )}
                   {isLast ? (
-                    <span className="text-sm font-medium text-[var(--red)] whitespace-nowrap">
+                    <span className="text-sm font-medium text-[var(--red)] break-normal">
                       {crumb.label}
                     </span>
                   ) : (

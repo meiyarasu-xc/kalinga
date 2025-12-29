@@ -22,6 +22,7 @@ import FAQ from "@/app/components/general/faq";
 import AdmissionCareer from "@/app/components/general/admission_cta";
 import CourseNavigation from "@/app/components/general/course-navigation";
 import QuickLinks from "@/app/components/general/quick_links";
+import GlobalArrowButton from "@/app/components/general/global-arrow_button";
 import { fetchAllCourses, fetchCourseCompleteDetail, fetchDepartmentCompleteDetail, parseHtmlToParagraphs, parseHtmlToText, parseHtmlListItems } from "@/app/lib/api";
 import { useBreadcrumbData } from "@/app/components/layout/BreadcrumbContext";
 
@@ -42,6 +43,18 @@ const generateSlug = (name) => {
     .replace(/^-+|-+$/g, '');
 };
 
+// Normalize slug for comparison (handles variations)
+const normalizeSlug = (slug) => {
+  if (!slug) return '';
+  return slug
+    .toLowerCase()
+    .trim()
+    .replace(/\s+/g, '-')
+    .replace(/[^a-z0-9-]/g, '')
+    .replace(/-+/g, '-')
+    .replace(/^-+|-+$/g, '');
+};
+
 export default function DynamicCoursePage() {
   const params = useParams();
   const slug = params?.slug;
@@ -56,21 +69,96 @@ export default function DynamicCoursePage() {
   useEffect(() => {
     const findCourse = async () => {
       try {
+        setLoading(true);
+        setError(null);
         const courses = await fetchAllCourses();
-        const course = courses.find(c => 
-          (c.slug && c.slug === slug) || 
-          generateSlug(c.name) === slug
-        );
+        
+        const normalizedSlug = normalizeSlug(slug);
+        console.log(`[Course Page] Looking for course with slug: "${slug}" (normalized: "${normalizedSlug}")`);
+        console.log(`[Course Page] Total courses fetched: ${courses.length}`);
+        
+        // Try multiple matching strategies
+        let course = null;
+        
+        // Strategy 1: Exact slug match (case-insensitive)
+        course = courses.find(c => {
+          if (!c.slug) return false;
+          return normalizeSlug(c.slug) === normalizedSlug;
+        });
+        
+        // Strategy 2: Generated slug from name
+        if (!course) {
+          course = courses.find(c => {
+            if (!c.name) return false;
+            return normalizeSlug(generateSlug(c.name)) === normalizedSlug;
+          });
+        }
+        
+        // Strategy 3: Partial match on slug
+        if (!course) {
+          course = courses.find(c => {
+            if (!c.slug) return false;
+            return normalizeSlug(c.slug).includes(normalizedSlug) || normalizedSlug.includes(normalizeSlug(c.slug));
+          });
+        }
+        
+        // Strategy 4: Match on name (remove common prefixes/suffixes)
+        if (!course) {
+          const searchTerms = normalizedSlug.split('-').filter(t => t.length > 2);
+          course = courses.find(c => {
+            if (!c.name) return false;
+            const normalizedName = normalizeSlug(c.name);
+            return searchTerms.every(term => normalizedName.includes(term));
+          });
+        }
+        
+        // Log potential matches for debugging
+        if (!course) {
+          const potentialMatches = courses.filter(c => {
+            const cSlug = normalizeSlug(c.slug || generateSlug(c.name || ''));
+            const cName = (c.name || '').toLowerCase();
+            const searchName = slug.replace(/-/g, ' ').toLowerCase();
+            
+            return cSlug.includes(normalizedSlug) || 
+                   normalizedSlug.includes(cSlug) ||
+                   cName.includes(searchName) ||
+                   searchName.includes(cName);
+          });
+          
+          console.log(`[Course Page] No exact match found. Potential matches (${potentialMatches.length}):`, 
+            potentialMatches.slice(0, 10).map(c => ({ 
+              id: c.id, 
+              name: c.name, 
+              slug: c.slug,
+              generatedSlug: generateSlug(c.name),
+              normalizedSlug: normalizeSlug(c.slug || generateSlug(c.name))
+            }))
+          );
+        }
         
         if (course) {
+          console.log(`[Course Page] Found course:`, { 
+            id: course.id, 
+            name: course.name, 
+            slug: course.slug,
+            generatedSlug: generateSlug(course.name),
+            matchType: 'found'
+          });
           setCourseId(course.id);
         } else {
-          setError('Course not found');
+          console.error(`[Course Page] Course not found for slug: "${slug}"`);
+          console.error(`[Course Page] All course slugs:`, courses.slice(0, 20).map(c => ({
+            id: c.id,
+            name: c.name,
+            slug: c.slug,
+            normalized: normalizeSlug(c.slug || generateSlug(c.name))
+          })));
+          setError(`Course not found: ${slug}`);
           setLoading(false);
         }
       } catch (err) {
-        console.error('Failed to find course:', err);
-        setError(err.message);
+        console.error('[Course Page] Failed to find course:', err);
+        setError(`Failed to load courses: ${err.message}`);
         setLoading(false);
       }
     };
@@ -87,7 +175,11 @@ export default function DynamicCoursePage() {
     const loadCourseData = async () => {
       try {
         setLoading(true);
+        setError(null);
+        console.log(`[Course Page] Fetching complete details for course ID: ${courseId}`);
+        
         const data = await fetchCourseCompleteDetail(courseId);
+        console.log(`[Course Page] Successfully loaded course data for ID: ${courseId}`, { name: data.name, slug: data.slug });
         setCourseData(data);
         setError(null);
         
@@ -96,17 +188,19 @@ export default function DynamicCoursePage() {
           try {
             const deptId = typeof data.department === 'object' ? data.department.id : data.department;
             if (deptId) {
+              console.log(`[Course Page] Fetching department data for ID: ${deptId}`);
               const deptData = await fetchDepartmentCompleteDetail(deptId);
               setDepartmentData(deptData);
             }
           } catch (deptErr) {
-            console.error('Failed to load department data for fallbacks:', deptErr);
+            console.error('[Course Page] Failed to load department data for fallbacks:', deptErr);
             // Silently fail - will just not show milestones or use fallback images
           }
         }
       } catch (err) {
-        console.error('Failed to load course data:', err);
-        setError(err.message);
+        console.error(`[Course Page] Failed to load course data for ID ${courseId}:`, err);
+        const errorMessage = err.message || 'Unknown error';
+        setError(`Failed to load course details: ${errorMessage}. This might be a backend issue. Please check the API endpoint: /courses/${courseId}/complete-detail/`);
       } finally {
         setLoading(false);
       }
@@ -309,13 +403,30 @@ export default function DynamicCoursePage() {
       .filter(item => item.title || item.body) // Filter out empty items
   } : null;
 
-  const syllabusContent = courseData?.syllabus && courseData.syllabus.length > 0 ? {
-    title: courseData.syllabus[0].heading,
-    description: parseHtmlToParagraphs(courseData.syllabus[0].description),
+  // Extract link from HTML description if available
+  const extractLinkFromHtml = (htmlContent) => {
+    if (!htmlContent) return null;
+    const linkMatch = htmlContent.match(/<a[^>]+href=["']([^"']+)["'][^>]*>/i);
+    return linkMatch ? linkMatch[1] : null;
+  };
+
+  const syllabusContent = courseData?.syllabus_info ? {
+    title: courseData.syllabus_info.heading || "Scheme & Syllabus",
+    description: parseHtmlToParagraphs(courseData.syllabus_info.description),
     buttonLabel: "Explore Now",
-    href: courseData.syllabus[0].link || "/about-us",
-    imageUrl: courseData.syllabus[0].file || null,
-    showImage: !!courseData.syllabus[0].file,
+    href: extractLinkFromHtml(courseData.syllabus_info.description) || "/about-us",
+    imageUrl: null,
+    showImage: false,
+    buttons: courseData?.syllabus_buttons && courseData.syllabus_buttons.length > 0
+      ? courseData.syllabus_buttons
+          .sort((a, b) => (a.display_order || 0) - (b.display_order || 0))
+          .map(btn => ({
+            id: btn.id,
+            text: btn.button_text || "Download",
+            fileUrl: btn.file_url || btn.file || null,
+            displayOrder: btn.display_order || 0,
+          }))
+      : null,
   } : null;
 
   const faqContent = courseData?.faqs && courseData.faqs.length > 0 ? {
@@ -497,6 +608,7 @@ export default function DynamicCoursePage() {
           description={syllabusContent.description}
           buttonLabel={syllabusContent.buttonLabel}
           href={syllabusContent.href}
+          buttons={syllabusContent.buttons}
           buttonClassName="!bg-white !text-black"
           arrowClassName="!bg-[var(--dark-orange-red)]"
           arrowIconClassName="!text-white"
@@ -509,7 +621,9 @@ export default function DynamicCoursePage() {
         />
       )}
       <div id="facilities" className="scroll-mt-24 md:scroll-mt-28">
-        <Facility />
+        <Facility 
+        subtitle="An Environment That Empowers Students"
+        />
       </div>
       <QuickLinks 
         title={quickLinksContent.title}
