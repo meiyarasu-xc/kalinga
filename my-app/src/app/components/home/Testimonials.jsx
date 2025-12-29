@@ -8,7 +8,7 @@ const defaultTestimonialsData = [
         {
             id: 1,
             name: "David Chen",
-            role: "Founder, TechFlow",
+            role: "Student- IT",
             quote: "The mentorship I received was transformative. They didn't just help me refine my pitch; they helped me reshape my entire business model for scalability.",
             image: "https://kalinga-university.s3.ap-south-1.amazonaws.com/Home/students-say-2.webp",
             theme: "orange"
@@ -16,7 +16,7 @@ const defaultTestimonialsData = [
     {
         id: 2,
         name: "Sarah Jenkins",
-        role: "CEO, InnovateDaily",
+        role: "Student- Automobile Engineering",
         quote: "Kalinga Incubation Centre gave me a perfect platform where I turned my business idea into a successful startup. I am extremely grateful for their guidance.",
         image: "https://kalinga-university.s3.ap-south-1.amazonaws.com/Home/program/diploma.webp",
         theme: "red"
@@ -24,7 +24,7 @@ const defaultTestimonialsData = [
     {
         id: 3,
         name: "Marcus Ray",
-        role: "Director, SwiftStart",
+        role: "Student- Pharmacy",
         quote: "The network effects here are real. Being surrounded by other ambitious founders pushed us to iterate faster and aim higher than we thought possible.",
         image: "https://kalinga-university.s3.ap-south-1.amazonaws.com/Home/student-say-3.webp",
         theme: "amber"
@@ -32,7 +32,7 @@ const defaultTestimonialsData = [
     {
         id: 5,
         name: "Thomas Wright",
-        role: "CTO, FutureScale",
+        role: "Student- MBA",
         quote: "Finding technical co-founders was my biggest challenge. This community bridged that gap immediately.",
         image: "https://kalinga-university.s3.ap-south-1.amazonaws.com/Home/student-say-1.webp",
         theme: "amber"

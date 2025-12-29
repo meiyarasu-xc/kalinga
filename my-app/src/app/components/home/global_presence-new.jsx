@@ -286,7 +286,7 @@ export default function Map({ backgroundColor = "", textColor = "", subtitleText
             alt="Global Presence Map" 
             width={900} 
             height={600} 
-            className="w-full pt-10 !w-[80%]"
+            className="w-full pt-6 !w-[80%]"
             quality={100}
             priority
           />
