@@ -9,6 +9,7 @@ const QuickLinkCard = ({
   description,
   cardBackgroundColor = "bg-[var(--lite-sand)]",
   showReadMore = true, // default is false, can set to true inline if needed
+  showDescriptionReadMore = true, // controls the description read more button
   href = null
 }) => {
   const isImageUrl = typeof icon === 'string' && (icon.startsWith('http') || icon.startsWith('/'))
@@ -17,6 +18,11 @@ const QuickLinkCard = ({
   const descriptionRef = useRef(null)
 
   useEffect(() => {
+    if (!showDescriptionReadMore) {
+      setShowReadMoreButton(false)
+      return
+    }
+    
     const checkOverflow = () => {
       if (descriptionRef.current) {
         const element = descriptionRef.current
@@ -46,7 +52,7 @@ const QuickLinkCard = ({
       clearTimeout(timer)
       window.removeEventListener('resize', checkOverflow)
     }
-  }, [description])
+  }, [description, showDescriptionReadMore])
 
   const toggleExpand = () => {
     setIsExpanded(!isExpanded)
@@ -84,12 +90,12 @@ const QuickLinkCard = ({
         <p 
           ref={descriptionRef}
           className={`text-sm font-plus-jakarta-sans ${
-            !isExpanded && showReadMoreButton ? 'line-clamp-4' : ''
+            !isExpanded && showReadMoreButton && showDescriptionReadMore ? 'line-clamp-4' : ''
           }`}
         >
           {description}
         </p>
-        {showReadMoreButton && (
+        {showReadMoreButton && showDescriptionReadMore && (
           <button
             onClick={toggleExpand}
             className="text-[var(--button-red)] text-sm font-semibold mt-2 hover:underline"

@@ -98,11 +98,11 @@ const AdminLeadershipSection = () => {
     <section className="py-12 px-4 bg-white">
       <div className="max-w-7xl mx-auto">
         {/* Title */}
-        <div className="text-center mb-12">
+        {/* <div className="text-center mb-12">
           <h2 className="text-3xl sm:text-4xl lg:text-[45px] font-normal text-black tracking-wide font-stix">
             Administration & Leadership
           </h2>
-        </div>
+        </div> */}
 
         {/* GRID */}
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8 justify-items-center">

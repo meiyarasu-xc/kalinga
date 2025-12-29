@@ -50,6 +50,7 @@ const QuickLinks = ({
   cardBackgroundColor = "bg-[var(--lite-sand)]",
   textColorClassName = "text-white/80",
   showReadMore = true,
+  showDescriptionReadMore = true,
   titleClassName = "",
   gridClassName = "grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-10",
 }) => {
@@ -79,6 +80,7 @@ const QuickLinks = ({
               description={link.description}
               cardBackgroundColor={cardBackgroundColor}
               showReadMore={showReadMore}
+              showDescriptionReadMore={showDescriptionReadMore}
               href={link.href}
             />
           ))}

@@ -176,6 +176,7 @@ export default function Research() {
           },
         ]}
         showReadMore={true}
+        showDescriptionReadMore={false}
       />
       
       <MentorIntro   imageSrc = "https://kalinga-university.s3.ap-south-1.amazonaws.com/research/chart-1.webp"

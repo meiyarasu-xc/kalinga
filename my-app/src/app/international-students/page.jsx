@@ -360,7 +360,7 @@ export default function InternationalStudents() {
         cards={internationalStudentsFeatureCards}
       />        
        <ImageListItem 
-         imageSrc="https://kalinga-university.s3.ap-south-1.amazonaws.com/ccrc/kif/kif.webp" 
+         imageSrc="https://kalinga-university.s3.ap-south-1.amazonaws.com/international-students/int-why-3.webp" 
          boxItems={boxItems} 
          title="Why Study At India" 
          subtitle="" 
