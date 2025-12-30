@@ -43,17 +43,17 @@ function Hostelfacilities() {
         {
             id: 7,
             name: "CCTV Surveillance",
-            image: "https://kalinga-university.s3.ap-south-1.amazonaws.com/common/placeholder-img.png",
+            image: "https://kalinga-university.s3.ap-south-1.amazonaws.com/campus-life/security1.jpg",
         },
         {
             id: 8,
             name: "24/7 Security",
-            image: "https://kalinga-university.s3.ap-south-1.amazonaws.com/common/placeholder-img.png",
+            image: "https://kalinga-university.s3.ap-south-1.amazonaws.com/campus-life/security2.jpeg",
         },
         {
             id: 9,
             name: "Recreational Corners",
-            image: "https://kalinga-university.s3.ap-south-1.amazonaws.com/common/placeholder-img.png",
+            image: "https://kalinga-university.s3.ap-south-1.amazonaws.com/campus-facilities/recreation.webp",
         },
         {
             id: 10,
@@ -63,7 +63,7 @@ function Hostelfacilities() {
         {
             id: 11,
             name: "Staff Nurse",
-            image: "https://kalinga-university.s3.ap-south-1.amazonaws.com/common/placeholder-img.png",
+            image: "https://kalinga-university.s3.ap-south-1.amazonaws.com/campus-life/Health+Clinic1.webp",
         },
     ];
 

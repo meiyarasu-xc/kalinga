@@ -56,10 +56,10 @@ export default function ScholarshipsPage() {
   const breadcrumbData = {
     heroImage:
       "https://kalinga-university.s3.ap-south-1.amazonaws.com/scholarships/scholarship-banner.webp",
-    pageTitle: "Scolarships",
+    pageTitle: "Scholarships",
     customBreadcrumbs: [
       { label: "Home", href: "/" },
-      { label: "Scolarships", href: "/scolarships" },
+      { label: "Scholarships", href: "/scholarships" },
     ],
   };
 
@@ -176,49 +176,49 @@ export default function ScholarshipsPage() {
       title: "Entrance Exam Scholarships",
       description:
         "Scholarships based on percentile in national/state entrance & competitive exams.",
-      icon: "https://kalinga-university.s3.ap-south-1.amazonaws.com/common/placeholder-img.png",
+      icon: "https://kalinga-university.s3.ap-south-1.amazonaws.com/admission/social.svg",
     },
     {
       id: 4,
       title: "Culture & Achievers Scholarships",
       description:
         "Scholarships for cultural excellence and exceptional achievements (case-to-case).",
-      icon: "https://kalinga-university.s3.ap-south-1.amazonaws.com/common/placeholder-img.png",
+      icon: "https://kalinga-university.s3.ap-south-1.amazonaws.com/admission/scholarship/scholarship-2.png",
     },
     {
       id: 5,
       title: "Siblings Scholarships",
       description:
         "Scholarships for direct blood relations of current KU students (as per policy).",
-      icon: "https://kalinga-university.s3.ap-south-1.amazonaws.com/common/placeholder-img.png",
+      icon: "https://kalinga-university.s3.ap-south-1.amazonaws.com/admission/scholarship/scholarship-3.png",
     },
     {
       id: 6,
       title: "Sports Scholarships",
       description:
         "Scholarships for participation at District/State/National/International levels.",
-      icon: "https://kalinga-university.s3.ap-south-1.amazonaws.com/common/placeholder-img.png",
+      icon: "https://kalinga-university.s3.ap-south-1.amazonaws.com/admission/scholarship/sports-bg.png",
     },
     {
       id: 7,
       title: "Social Media Scholarships",
       description:
         "Scholarships for strong social media presence involved in knowledge dissemination.",
-      icon: "https://kalinga-university.s3.ap-south-1.amazonaws.com/common/placeholder-img.png",
+      icon: "https://kalinga-university.s3.ap-south-1.amazonaws.com/admission/scholarship/social_media-bg.png",
     },
     {
       id: 8,
       title: "Innovation & Research Scholarships",
       description:
         "Scholarships for research publications, books, startups, and product innovation.",
-      icon: "https://kalinga-university.s3.ap-south-1.amazonaws.com/common/placeholder-img.png",
+      icon: "https://kalinga-university.s3.ap-south-1.amazonaws.com/admission/scholarship/research-bg.png",
     },
     {
       id: 9,
       title: "Other Scholarships",
       description:
         "Additional KU-specific scholarships as per scholarship committee/policy.",
-      icon: "https://kalinga-university.s3.ap-south-1.amazonaws.com/common/placeholder-img.png",
+      icon: "https://kalinga-university.s3.ap-south-1.amazonaws.com/admission/scholarship/scholarship-10bg.png",
     },
   ];
 

@@ -1277,19 +1277,22 @@ export default function FeesTabSection() {
         return null;
     }, [activeTab]);
 
+    
     return (
         <section className="w-full py-4 px-2 overflow-x-hidden">
             <style jsx>{`
-            .scrollbar-hide::-webkit-scrollbar {
-            display: none;
-            }
-            .scrollbar-hide {
-            -ms-overflow-style: none;
-            scrollbar-width: none;
-            }
-        `}</style>
+      .scrollbar-hide::-webkit-scrollbar {
+        display: none;
+      }
+      .scrollbar-hide {
+        -ms-overflow-style: none;
+        scrollbar-width: none;
+      }
+    `}</style>
 
-            <div className="flex flex-col lg:flex-row gap-4 bg-[var(--dark-blue)] py-16 md:px-10 px-4 rounded-xl overflow-x-hidden">
+            {/* ✅ 1) items-stretch so both columns take same height */}
+            <div className="flex flex-col lg:flex-row gap-4 bg-[var(--dark-blue)] py-16 md:px-10 px-4 rounded-xl overflow-x-hidden items-stretch">
+
                 {/* Tabs */}
                 <div className="w-full lg:w-80 flex-shrink-0">
                     <div className="rounded-[16px] bg-[var(--dark-blue)]">
@@ -1301,15 +1304,15 @@ export default function FeesTabSection() {
                                         key={tab.id}
                                         onClick={() => setActiveTab(tab.id)}
                                         className={`
-                                                    flex-shrink-0 lg:w-full text-left px-4 py-5 rounded-[8px]
-                                                    font-plus-jakarta-sans text-sm md:text-base
-                                                    ${tab.id === "other" ? "whitespace-normal break-words" : "whitespace-nowrap"}
-                                                    transition-all duration-200
-                                                    ${isActive
+                    flex-shrink-0 lg:w-full text-left px-4 py-5 rounded-[8px]
+                    font-plus-jakarta-sans text-sm md:text-base
+                    ${tab.id === "other" ? "whitespace-normal break-words" : "whitespace-nowrap"}
+                    transition-all duration-200
+                    ${isActive
                                                 ? "bg-[var(--button-red)] text-white font-semibold"
                                                 : "bg-[var(--lite-sand)] text-[var(--foreground)] hover:opacity-90"
                                             }
-`}
+                  `}
                                     >
                                         {tab.label}
                                     </button>
@@ -1319,11 +1322,12 @@ export default function FeesTabSection() {
                     </div>
                 </div>
 
-                {/* Content */}
-                <div className="flex-1 w-full overflow-x-hidden">
-                    {/* ✅ Fixed height for right panel + internal scroll + bottom padding */}
-                    <div className="rounded-[16px] bg-white shadow-sm overflow-hidden">
-                        <div className="h-[720px] md:h-[760px] overflow-y-auto px-4 md:px-5 pt-4 md:pt-5 pb-8">
+                {/* ✅ 2) Right side becomes a flex column and stretches to left height */}
+                <div className="flex-1 w-full min-w-0 flex flex-col">
+                    {/* ✅ 3) White card takes full height of wrapper */}
+                    <div className="rounded-[16px] bg-white shadow-sm overflow-hidden h-full flex flex-col">
+                        {/* ✅ Only THIS part scrolls */}
+                        <div className="flex-1 overflow-y-auto px-4 md:px-5 pt-4 md:pt-5 pb-8">
                             {/* Faculty Tables */}
                             {faculty && (
                                 <div>
@@ -1340,9 +1344,7 @@ export default function FeesTabSection() {
                             {activeTab === "other" && (
                                 <div>
                                     <div className="w-full min-w-0">
-                                        <h2
-                                            className="font-plus-jakarta-sans text-xl md:text-3xl text-[var(--foreground)] mb-4 mt-1 text-center w-full max-w-full min-w-0 px-2 !whitespace-normal !break-words !overflow-visible"
-                                        >
+                                        <h2 className="font-plus-jakarta-sans text-xl md:text-3xl text-[var(--foreground)] mb-4 mt-1 text-center w-full max-w-full min-w-0 px-2 !whitespace-normal !break-words !overflow-visible">
                                             Other Charges / Transport / Scholarship
                                         </h2>
                                     </div>
@@ -1359,26 +1361,19 @@ export default function FeesTabSection() {
                                         <div className="p-4 rounded-lg border border-gray-200 bg-white">
                                             <div className="font-semibold mb-2">Transport Charges (To &amp; From)</div>
 
-                                            {/* ✅ scroller inside */}
                                             <div className="border border-gray-200 rounded-lg overflow-hidden">
                                                 <div className="w-full max-w-full overflow-x-auto overflow-y-auto max-h-[360px]">
                                                     <table className="w-max min-w-full border-collapse">
                                                         <thead className="sticky top-0 z-10">
                                                             <tr className="bg-[var(--dark-blue)] text-white">
-                                                                <th className="px-4 py-3 text-left font-semibold whitespace-nowrap">
-                                                                    Route
-                                                                </th>
-                                                                <th className="px-4 py-3 text-left font-semibold whitespace-nowrap">
-                                                                    Fee
-                                                                </th>
+                                                                <th className="px-4 py-3 text-left font-semibold whitespace-nowrap">Route</th>
+                                                                <th className="px-4 py-3 text-left font-semibold whitespace-nowrap">Fee</th>
                                                             </tr>
                                                         </thead>
                                                         <tbody>
                                                             {OTHER_CHARGES.transport.map((t, i) => (
                                                                 <tr key={i} className="border-b border-gray-200 hover:bg-gray-50">
-                                                                    <td className="px-4 py-3 whitespace-normal break-words min-w-[280px]">
-                                                                        {t.route}
-                                                                    </td>
+                                                                    <td className="px-4 py-3 whitespace-normal break-words min-w-[280px]">{t.route}</td>
                                                                     <td className="px-4 py-3 whitespace-nowrap">{t.fee}</td>
                                                                 </tr>
                                                             ))}
@@ -1388,7 +1383,6 @@ export default function FeesTabSection() {
                                             </div>
                                         </div>
 
-                                        {/* ✅ Removed old website links as per QC */}
                                         <div className="p-4 rounded-lg border border-gray-200 bg-gray-50">
                                             <div className="font-semibold mb-2">Scholarship Details</div>
                                             <p className="whitespace-normal break-words">{OTHER_CHARGES.scholarship}</p>
@@ -1429,17 +1423,13 @@ export default function FeesTabSection() {
                                         {VALUE_ADDED_PDF_YEARS.map((y) => {
                                             const yearPdfs = VALUE_ADDED_PDFS?.[y] || [];
                                             return (
-                                                <div
-                                                    key={y}
-                                                    className="border border-gray-200 rounded-lg p-4 bg-gray-50"
-                                                >
+                                                <div key={y} className="border border-gray-200 rounded-lg p-4 bg-gray-50">
                                                     <div className="font-semibold text-[var(--foreground)]">{y}</div>
 
                                                     {yearPdfs.length > 0 ? (
                                                         <ul className="mt-2 space-y-2">
                                                             {yearPdfs.map((p, idx) => (
                                                                 <li key={idx}>
-                                                                    {/* ✅ No drive links: keep only your official site/static PDFs here */}
                                                                     <a
                                                                         href={p.href}
                                                                         target="_blank"
@@ -1460,12 +1450,9 @@ export default function FeesTabSection() {
                                             );
                                         })}
                                     </div>
-
-                                    {/* ✅ Removed the Google sheet / drive link button as per QC */}
                                 </div>
                             )}
 
-                            {/* Placeholder if ever needed */}
                             {!faculty && !["other", "value", "pdfs"].includes(activeTab) && (
                                 <div>
                                     <h2 className="font-plus-jakarta-sans text-xl md:text-3xl text-[var(--foreground)] mb-4 text-center mt-1">
@@ -1478,7 +1465,6 @@ export default function FeesTabSection() {
                             )}
                         </div>
                     </div>
-                    {/* end right card */}
                 </div>
             </div>
         </section>
