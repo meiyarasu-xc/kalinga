@@ -1,6 +1,7 @@
 "use client";
 
 import { useLayoutEffect } from "react";
+import { useRouter } from "next/navigation";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Navigation, Autoplay } from "swiper/modules";
 import "swiper/css";
@@ -14,6 +15,7 @@ const centresOfExcellence = [
     title: "IBM Innovation Centre for Education",
     image:
       "https://kalinga-university.s3.ap-south-1.amazonaws.com/coe/coe-ibm.webp",
+    href: "/centresofexcellence/ai-ml",
   },
   {
     id: 2,
@@ -21,6 +23,7 @@ const centresOfExcellence = [
     title: "JustAuto Solutions",
     image:
       "https://kalinga-university.s3.ap-south-1.amazonaws.com/coe/coe-automobile.webp",
+    href: "/centresofexcellence/automobile",
   },
   {
     id: 3,
@@ -28,6 +31,7 @@ const centresOfExcellence = [
     title: "In collaboration with BOSCH",
     image:
       "https://kalinga-university.s3.ap-south-1.amazonaws.com/coe/coe-bosch.webp",
+    href: "/centresofexcellence/bosch",
   },
   {
     id: 4,
@@ -35,6 +39,7 @@ const centresOfExcellence = [
     title: "BDS Education",
     image:
       "https://kalinga-university.s3.ap-south-1.amazonaws.com/coe/coe-robotics.webp",
+    href: "/centresofexcellence/robotics",
   },
   {
     id: 5,
@@ -42,6 +47,7 @@ const centresOfExcellence = [
     title: "Godawari Electric Motors Pvt. Ltd. (Eblu)",
     image:
       "https://kalinga-university.s3.ap-south-1.amazonaws.com/coe/coe-godawari.webp",
+    href: "/centresofexcellence/godawari",
   },
   {
     id: 6,
@@ -49,6 +55,7 @@ const centresOfExcellence = [
     title: "Technoviz Automation",
     image:
       "https://kalinga-university.s3.ap-south-1.amazonaws.com/coe/coe-iiot.webp",
+    href: "/centresofexcellence/iiot",
   },
   {
     id: 7,
@@ -56,6 +63,7 @@ const centresOfExcellence = [
     title: "IamSMEofIndia",
     image:
       "https://kalinga-university.s3.ap-south-1.amazonaws.com/about/smeindia.webp",
+    href: "/centresofexcellence/msme",
   },
 ];
 
@@ -66,9 +74,10 @@ export default function CenterOfExcellenceMain({
   nameOnly = false,
   showDescription = true,
   breadcrumbData = null,
-  headerTextMaxWidthClass = "max-w-screen-xl"
-,
+  headerTextMaxWidthClass = "max-w-screen-xl",
 }) {
+  const router = useRouter();
+
   useLayoutEffect(() => {
     if (!breadcrumbData) return;
 
@@ -181,7 +190,15 @@ export default function CenterOfExcellenceMain({
         >
           {centres.map((centre) => (
             <SwiperSlide key={centre.id}>
-              <div className="h-full w-full">
+              <div
+                className="h-full w-full cursor-pointer transition-transform duration-300 hover:-translate-y-1"
+                role="button"
+                tabIndex={0}
+                onClick={() => centre.href && router.push(centre.href)}
+                onKeyDown={(e) => {
+                  if (e.key === "Enter" && centre.href) router.push(centre.href);
+                }}
+              >
                 <div className="bg-white rounded-xl p-1 h-full relative">
                   <div className="centres-card-wrapper h-full flex flex-col">
                     {nameOnly ? (
@@ -224,6 +241,7 @@ export default function CenterOfExcellenceMain({
           ))}
         </Swiper>
       </div>
+
       <div className="container mx-auto px-2">
         <div className="flex justify-end items-center gap-3">
           <button className="centres-swiper-button-prev w-12 h-12 rounded-lg bg-[var(--button-red)] hover:bg-[#A2A2A2] flex items-center justify-center hover:opacity-90 transition-opacity shadow-md">
@@ -265,17 +283,18 @@ export default function CenterOfExcellenceMain({
           </button>
         </div>
       </div>
-      <style jsx global>{`
-  .absolute.inset-0 > img {
-    object-position: center 50% !important;
-  }
 
-  @media (max-width: 768px) {
-    .absolute.inset-0 > img {
-      object-position: center 5% !important;
-    }
-  }
-`}</style>
+      <style jsx global>{`
+        .absolute.inset-0 > img {
+          object-position: center 50% !important;
+        }
+
+        @media (max-width: 768px) {
+          .absolute.inset-0 > img {
+            object-position: center 5% !important;
+          }
+        }
+      `}</style>
     </section>
   );
 }
