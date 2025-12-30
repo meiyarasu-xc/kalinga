@@ -64,6 +64,7 @@ export default function DynamicCoursePage() {
   const [error, setError] = useState(null);
   const [courseId, setCourseId] = useState(null);
   const [departmentData, setDepartmentData] = useState(null);
+  const [metadataLoaded, setMetadataLoaded] = useState(false);
 
   // Find course ID from slug
   useEffect(() => {
@@ -221,16 +222,53 @@ export default function DynamicCoursePage() {
           });
           setCourseId(course.id);
         } else {
-          console.error(`[Course Page] Course not found for slug: "${slug}"`);
-          console.error(`[Course Page] First 20 courses:`, courses.slice(0, 20).map(c => ({
-            id: c.id,
-            name: c.name,
-            slug: c.slug,
-            normalized: normalizeSlug(c.slug || generateSlug(c.name || '')),
-            normalizedName: normalizeSlug(c.name || '')
-          })));
-          setError(`Course not found: ${slug}`);
-          setLoading(false);
+          // Fallback: Try to fetch course directly by slug from complete-detail endpoint
+          console.warn(`[Course Page] Course not found in list. Trying direct fetch by slug: "${slug}"`);
+          try {
+            const directCourseData = await fetchCourseCompleteDetail(slug);
+            if (directCourseData && directCourseData.id) {
+              console.log(`[Course Page] Successfully fetched course directly by slug:`, {
+                id: directCourseData.id,
+                name: directCourseData.name,
+                slug: directCourseData.slug
+              });
+              // Set course data directly and skip the second useEffect
+              setCourseData(directCourseData);
+              setCourseId(directCourseData.id);
+              setError(null);
+              setMetadataLoaded(false); // Reset metadata loaded state
+              
+              // Also fetch department data for fallbacks
+              if (directCourseData.department) {
+                try {
+                  const deptId = typeof directCourseData.department === 'object' ? directCourseData.department.id : directCourseData.department;
+                  if (deptId) {
+                    console.log(`[Course Page] Fetching department data for ID: ${deptId}`);
+                    const deptData = await fetchDepartmentCompleteDetail(deptId);
+                    setDepartmentData(deptData);
+                  }
+                } catch (deptErr) {
+                  console.error('[Course Page] Failed to load department data for fallbacks:', deptErr);
+                  // Silently fail - will just not show milestones or use fallback images
+                }
+              }
+              
+              setLoading(false);
+            } else {
+              throw new Error('Course data structure invalid');
+            }
+          } catch (directFetchError) {
+            console.error(`[Course Page] Direct fetch by slug also failed:`, directFetchError);
+            console.error(`[Course Page] First 20 courses:`, courses.slice(0, 20).map(c => ({
+              id: c.id,
+              name: c.name,
+              slug: c.slug,
+              normalized: normalizeSlug(c.slug || generateSlug(c.name || '')),
+              normalizedName: normalizeSlug(c.name || '')
+            })));
+            setError(`Course not found: ${slug}. The course might not exist or the API endpoint might be paginated.`);
+            setLoading(false);
+          }
         }
       } catch (err) {
         console.error('[Course Page] Failed to find course:', err);
@@ -246,12 +284,19 @@ export default function DynamicCoursePage() {
 
   // Fetch course data from API
   useEffect(() => {
+    // Skip if courseData was already set by direct fetch in findCourse
+    if (courseData) {
+      setLoading(false);
+      return;
+    }
+    
     if (!courseId) return;
 
     const loadCourseData = async () => {
       try {
         setLoading(true);
         setError(null);
+        setMetadataLoaded(false); // Reset metadata loaded state
         console.log(`[Course Page] Fetching complete details for course ID: ${courseId}`);
         
         const data = await fetchCourseCompleteDetail(courseId);
@@ -283,7 +328,7 @@ export default function DynamicCoursePage() {
     };
 
     loadCourseData();
-  }, [courseId]);
+  }, [courseId, courseData]);
 
   // Update SEO metadata when courseData is available
   useEffect(() => {
@@ -352,6 +397,9 @@ export default function DynamicCoursePage() {
         console.error('Error parsing schema JSON:', e);
       }
     }
+    
+    // Mark metadata as loaded
+    setMetadataLoaded(true);
   }, [courseData]);
 
   // Map API data to components (same logic as static page)
@@ -432,7 +480,7 @@ export default function DynamicCoursePage() {
     href: courseData.eligibility_criteria[0].cta_link || null,
   } : null;
 
-  const breadcrumbData = (courseData?.name && !loading) ? {
+  const breadcrumbData = (courseData?.name && !loading && metadataLoaded) ? {
     heroImage: courseData?.banners?.[0]?.image || courseData?.banners?.[0]?.image_url || courseData.image || "https://kalinga-university.s3.ap-south-1.amazonaws.com/course/student-computer.webp",
     pageTitle: courseData.name,
     customBreadcrumbs: [
@@ -443,8 +491,6 @@ export default function DynamicCoursePage() {
         href: `/courses/${courseData.slug || generateSlug(courseData.name)}` 
       }
     ]
-  } : loading ? {
-    customBreadcrumbs: []
   } : null;
 
   useBreadcrumbData(breadcrumbData);
@@ -607,7 +653,44 @@ export default function DynamicCoursePage() {
     );
   }
 
-  if (error) {
+  // Check if error is a "not found" error
+  const isNotFound = error && (
+    error.includes('Course not found') || 
+    error.includes('not found') ||
+    (!courseData && !loading && error)
+  );
+
+  if (isNotFound || (!courseData && !loading && error && error.includes('not found'))) {
+    return (
+      <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-[var(--dark-blue)] to-[var(--foreground)]">
+        <div className="text-center px-4">
+          <div className="mb-8">
+            <h1 className="text-9xl font-bold text-white mb-4">404</h1>
+            <h2 className="text-3xl md:text-4xl font-bold text-white mb-4">Course Not Found</h2>
+            <p className="text-white/80 text-lg mb-8 max-w-md mx-auto">
+              The course you're looking for doesn't exist or may have been moved.
+            </p>
+          </div>
+          <div className="flex flex-col sm:flex-row gap-4 justify-center items-center">
+            <a
+              href="/admissions"
+              className="px-6 py-3 bg-[var(--button-red)] text-white rounded-lg font-semibold hover:bg-[var(--button-red)]/90 transition-colors"
+            >
+              Browse All Courses
+            </a>
+            <a
+              href="/"
+              className="px-6 py-3 bg-white/10 text-white rounded-lg font-semibold hover:bg-white/20 transition-colors backdrop-blur-sm"
+            >
+              Go to Homepage
+            </a>
+          </div>
+        </div>
+      </div>
+    );
+  }
+
+  if (error && !isNotFound) {
     return (
       <div className="min-h-screen flex items-center justify-center">
         <div className="text-center">
@@ -618,11 +701,31 @@ export default function DynamicCoursePage() {
     );
   }
 
-  if (!courseData) {
+  if (!courseData && !loading && !error) {
     return (
-      <div className="min-h-screen flex items-center justify-center">
-        <div className="text-center">
-          <p className="text-[var(--light-text-gray)]">Course not found.</p>
+      <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-[var(--dark-blue)] to-[var(--foreground)]">
+        <div className="text-center px-4">
+          <div className="mb-8">
+            <h1 className="text-9xl font-bold text-white mb-4">404</h1>
+            <h2 className="text-3xl md:text-4xl font-bold text-white mb-4">Course Not Found</h2>
+            <p className="text-white/80 text-lg mb-8 max-w-md mx-auto">
+              The course you're looking for doesn't exist or may have been moved.
+            </p>
+          </div>
+          <div className="flex flex-col sm:flex-row gap-4 justify-center items-center">
+            <a
+              href="/admissions"
+              className="px-6 py-3 bg-[var(--button-red)] text-white rounded-lg font-semibold hover:bg-[var(--button-red)]/90 transition-colors"
+            >
+              Browse All Courses
+            </a>
+            <a
+              href="/"
+              className="px-6 py-3 bg-white/10 text-white rounded-lg font-semibold hover:bg-white/20 transition-colors backdrop-blur-sm"
+            >
+              Go to Homepage
+            </a>
+          </div>
         </div>
       </div>
     );

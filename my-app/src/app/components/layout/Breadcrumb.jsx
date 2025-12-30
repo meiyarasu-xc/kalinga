@@ -31,7 +31,7 @@ const toTitleCase = (str) => {
 const Breadcrumb = ({ customBreadcrumbs, heroImage, pageTitle }) => {
   const pathname = usePathname();
   const breadcrumbContext = useBreadcrumb();
-  const { breadcrumbData: contextData } = breadcrumbContext || {};
+  const { breadcrumbData: contextData, isLoading: contextLoading } = breadcrumbContext || {};
 
   // Don't show breadcrumb on homepage
   if (pathname === '/') return null;
@@ -118,12 +118,28 @@ const Breadcrumb = ({ customBreadcrumbs, heroImage, pageTitle }) => {
   
   // Use pageTitle if provided, otherwise use last breadcrumb label
   const currentPageTitle = toTitleCase(finalPageTitle || breadcrumbs[breadcrumbs.length - 1]?.label || '');
+  
+  // Check if breadcrumb data is loading
+  // Show loader if context is loading OR if we're on a dynamic route and contextData is null
+  const isDynamicRoute = pathname.includes('/courses/') || pathname.includes('/departments/');
+  const isLoading = contextLoading || (isDynamicRoute && contextData === null && !finalPageTitle);
 
   return (
     <div className="relative px-2  ">
       {/* Hero Image Section */}
       <div className="relative h-[400px] rounded-4xl md:h-[400px] lg:h-[400px] w-full overflow-visible bg-gradient-to-br from-[var(--dark-blue)] to-[var(--foreground)] z-0 pb-20 md:pb-24 lg:pb-28">
-        {resolvedHeroImage ? (
+        {isLoading ? (
+          <>
+            {/* Loading state with spinner */}
+            <div className="absolute rounded-4xl inset-0 bg-gradient-to-br from-[var(--dark-blue)] via-[var(--dark-blue)]/90 to-[var(--foreground)]/95"></div>
+            <div className="absolute rounded-4xl inset-0 flex items-center justify-center">
+              <div className="text-center text-white">
+                <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-white mx-auto mb-4"></div>
+                <p className="text-sm font-medium">Loading...</p>
+              </div>
+            </div>
+          </>
+        ) : resolvedHeroImage ? (
           <>
             <div className="absolute inset-0 overflow-hidden rounded-4xl">
               <Image
@@ -160,7 +176,15 @@ const Breadcrumb = ({ customBreadcrumbs, heroImage, pageTitle }) => {
       </div>
 
       {/* Page Title Card - Positioned at the boundary between blue and white sections */}
-      {currentPageTitle  && (
+      {isLoading ? (
+        <div className="container mx-auto">
+          <div className="absolute z-[10] flex md:flex-row flex-col md:items-end items-start gap-2 md:gap-6 left-1/2 -translate-x-1/2 md:left-auto md:right-auto md:translate-x-0 md:bottom-[25px] -bottom-[35px] translate-y-1/2 mb-12 md:mb-16">
+            <div className="p-5 bg-[var(--dark-blue)]/80 backdrop-blur-md rounded-2xl md:min-h-[150px] min-h-[100px] flex justify-center items-center min-w-[330px] md:max-w-4/5 max-w-full">
+              <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-white"></div>
+            </div>
+          </div>
+        </div>
+      ) : currentPageTitle && (
         <div className="container mx-auto">
         <div className="absolute z-[10] flex md:flex-row flex-col md:items-end items-start gap-2  md:gap-6 left-1/2 -translate-x-1/2 md:left-auto md:right-auto md:translate-x-0 md:bottom-[25px]  -bottom-[35px] translate-y-1/2 mb-12 md:mb-16 ">
           <div className="p-5 bg-[var(--dark-blue)]/80 backdrop-blur-md rounded-2xl md:min-h-[150px] min-h-[100px] flex justify-center items-center min-w-[330px] md:max-w-4/5 max-w-full wraptext-center">

@@ -6,6 +6,7 @@ export const API_CONFIG = {
   courses: {
     list: () => `/courses/`,
     completeDetail: (courseId) => `/courses/${courseId}/complete-detail/`,
+    about: () => `/course-about/`,
   },
   
   // Department endpoints

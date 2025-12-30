@@ -6,9 +6,24 @@ const BreadcrumbContext = createContext(null);
 
 export function BreadcrumbProvider({ children }) {
   const [breadcrumbData, setBreadcrumbData] = useState(null);
+  const [isLoading, setIsLoading] = useState(true);
 
   // Memoize context value to prevent unnecessary re-renders
-  const contextValue = useMemo(() => ({ breadcrumbData, setBreadcrumbData }), [breadcrumbData]);
+  const contextValue = useMemo(() => ({ 
+    breadcrumbData, 
+    setBreadcrumbData,
+    isLoading,
+    setIsLoading
+  }), [breadcrumbData, isLoading]);
+
+  // Auto-set loading to false when breadcrumbData is set
+  useEffect(() => {
+    if (breadcrumbData !== null) {
+      setIsLoading(false);
+    } else {
+      setIsLoading(true);
+    }
+  }, [breadcrumbData]);
 
   return (
     <BreadcrumbContext.Provider value={contextValue}>

@@ -1,6 +1,6 @@
 'use client'
 
-import React, { useState, useRef } from 'react'
+import React, { useState, useRef, useEffect, useMemo } from 'react'
 import Link from 'next/link'
 import { Swiper, SwiperSlide } from 'swiper/react'
 import { Navigation } from 'swiper/modules'
@@ -10,14 +10,128 @@ import GlobalArrowButton from '../general/global-arrow_button'
 import GlobalRedPlainButton from '../general/global-red_plain_button'
 import SectionHeading from '../general/SectionHeading'
 import { renderProgramCard } from '../general/program-cards-slider'
+import { fetchAllDepartmentsCourses, fetchAllCourseAbout } from '@/app/lib/api'
+
+// Helper function to format course name (BSE, BTech format - uppercase first few letters, then lowercase)
+const formatCourseName = (name) => {
+  if (!name) return ""
+  const match = name.match(/^([A-Za-z]+)(.*)$/)
+  if (match) {
+    const firstPart = match[1].toUpperCase()
+    const rest = match[2]
+    return firstPart + rest
+  }
+  return name
+}
+
+// Helper function to get study level from program_type
+const getStudyLevel = (programType) => {
+  if (!programType) return "UG"
+  const type = programType.toLowerCase()
+  if (type === "pg" || type === "postgraduate") return "PG"
+  if (type === "phd" || type === "doctorate") return "Ph.D"
+  if (type === "diploma") return "Diploma"
+  return "UG"
+}
+
+// Helper function to format duration
+const formatDuration = (course) => {
+  if (!course) return "3 Year"
+  const duration = course.duration
+  const durationNum = typeof duration === 'number' ? duration : parseInt(duration)
+  let formattedDuration = "3 Year"
+  
+  if (!isNaN(durationNum)) {
+    formattedDuration = `${durationNum} Year${durationNum > 1 ? 's' : ''}`
+  } else if (duration && typeof duration === 'string') {
+    formattedDuration = duration
+  }
+  
+  return formattedDuration
+}
+
+// Placeholder images by program type
+const getPlaceholderImage = (programType) => {
+  const type = programType?.toLowerCase() || 'ug'
+  const placeholders = {
+    'diploma': 'https://kalinga-university.s3.ap-south-1.amazonaws.com/Home/program/computer.webp',
+    'ug': 'https://kalinga-university.s3.ap-south-1.amazonaws.com/Home/program/information.png',
+    'pg': 'https://kalinga-university.s3.ap-south-1.amazonaws.com/Home/program/MBA.webp',
+    'phd': 'https://kalinga-university.s3.ap-south-1.amazonaws.com/Home/program/Phd-mba.webp'
+  }
+  return placeholders[type] || placeholders['ug']
+}
 
 const Programs = () => {
   const [activeTab, setActiveTab] = useState('UG')
   const [query, setQuery] = useState('')
   const [iamA, setIamA] = useState('')
   const [iamLookingFor, setIamLookingFor] = useState('')
+  const [allCourses, setAllCourses] = useState([])
+  const [courseAboutMap, setCourseAboutMap] = useState(new Map())
+  const [loading, setLoading] = useState(true)
+  const [error, setError] = useState(null)
   const prevRef = useRef(null)
   const nextRef = useRef(null)
+
+  // Fetch all courses and course-about data from API
+  useEffect(() => {
+    const loadData = async () => {
+      try {
+        setLoading(true)
+        setError(null)
+
+        // Fetch all courses and course-about data in parallel
+        const [coursesResponse, courseAboutData] = await Promise.all([
+          fetchAllDepartmentsCourses(null),
+          fetchAllCourseAbout().catch(err => {
+            console.warn('Failed to fetch course-about data:', err)
+            return []
+          })
+        ])
+        
+        // Create a map of course ID to image URL
+        // Handle multiple entries per course by keeping the first one
+        const aboutMap = new Map()
+        if (Array.isArray(courseAboutData)) {
+          courseAboutData.forEach(item => {
+            if (item.course && item.image) {
+              // Convert course ID to number for consistent matching
+              const courseId = typeof item.course === 'number' ? item.course : parseInt(item.course)
+              // Only set if not already in map (keep first entry)
+              if (!aboutMap.has(courseId) && item.image) {
+                aboutMap.set(courseId, item.image)
+              }
+            }
+          })
+        }
+        setCourseAboutMap(aboutMap)
+        
+        if (coursesResponse && coursesResponse.courses) {
+          const coursesData = Array.isArray(coursesResponse.courses) 
+            ? coursesResponse.courses.map(course => ({
+                ...course,
+                departmentId: course.department?.id || course.departmentId,
+                departmentName: course.department?.name || course.departmentName || '',
+                departmentSlug: course.department?.slug || course.departmentSlug || '',
+              }))
+            : []
+          
+          setAllCourses(coursesData)
+        } else {
+          setAllCourses([])
+        }
+      } catch (err) {
+        console.error('Failed to load programs:', err)
+        setError(err.message || 'Failed to load programs')
+        setAllCourses([])
+      } finally {
+        setLoading(false)
+      }
+    }
+
+    loadData()
+  }, [])
 
   // Handle form submission - filter programs based on selection
   const handleDiscoverProgram = () => {
@@ -43,34 +157,58 @@ const Programs = () => {
     }
   }
 
-  const programs = [
-    { id: 1, title: 'Diploma in Computer Applications', type: 'Diploma', img: 'https://kalinga-university.s3.ap-south-1.amazonaws.com/Home/program/computer.webp', summary: 'Build fundamentals in programming, networking, and databases for entry-level IT roles.', scholarships: 'Check eligibility', qualification: 'Pass in Higher Secondary Examinations of (10+2.' },
-    { id: 2, title: 'Diploma in Hospitality', type: 'Diploma', img: 'https://kalinga-university.s3.ap-south-1.amazonaws.com/Home/program/diploma.webp', summary: 'Front office, F&B and operations with hands-on hotel training.', scholarships: 'Check eligibility', qualification: 'Pass in Higher Secondary Examinations of (10+2)' },
-    { id: 3, title: 'Diploma in Graphic Design', type: 'Diploma', img: 'https://kalinga-university.s3.ap-south-1.amazonaws.com/Home/program/graphic.webp', summary: 'Visual communication, branding, and digital tools to craft compelling designs.', scholarships: 'Check eligibility', qualification: 'Pass in Higher Secondary Examinations of (10+2)' },
-    { id: 4, title: 'Diploma in Hotel Management', type: 'Diploma', img: 'https://kalinga-university.s3.ap-south-1.amazonaws.com/Home/program/hotel.webp', summary: 'Front office, F&B and operations with hands-on hotel training.', scholarships: 'Check eligibility', qualification: 'Pass in Higher Secondary Examinations of (10+2)' },
+  // Filter and format programs based on active tab and search query
+  const visiblePrograms = useMemo(() => {
+    if (loading) return []
+    
+    let filtered = allCourses
 
-    { id: 5, title: 'Law', type: 'UG', img: 'https://kalinga-university.s3.ap-south-1.amazonaws.com/Home/program/law.png', summary: 'Explore constitutional, corporate, and criminal law with moot courts and internships.', scholarships: 'Check eligibility', qualification: 'Pass in Higher Secondary Examinations of (10+2)' },
-    { id: 6, title: 'Information Technology', type: 'UG', img: 'https://kalinga-university.s3.ap-south-1.amazonaws.com/Home/program/information.png', summary: 'Software, data, and cloud fundamentals with project-based learning and labs.', scholarships: 'Check eligibility', qualification: 'Pass in Higher Secondary Examinations of (10+2)' },
-    { id: 7, title: 'Business Administration', type: 'UG', img: 'https://kalinga-university.s3.ap-south-1.amazonaws.com/Home/program/busniess.png', summary: 'Managerial, marketing, and entrepreneurial skills through cases and projects.', scholarships: 'Check eligibility', qualification: 'Pass in Higher Secondary Examinations of (10+2)' },
+    // Filter by study level (active tab)
+    if (activeTab && activeTab !== 'All') {
+      filtered = filtered.filter(course => {
+        const programType = course.program_type
+        if (!programType) {
+          return activeTab === "UG"
+        }
+        const level = getStudyLevel(programType)
+        return level === activeTab
+      })
+    }
 
-    { id: 8, title: 'MBA', type: 'PG', img: 'https://kalinga-university.s3.ap-south-1.amazonaws.com/Home/program/MBA.webp', summary: 'Leadership, strategy, finance, and analytics with industry mentors.', scholarships: 'Check eligibility', qualification: 'Pass in Higher Secondary Examinations of (10+2)' },
-    { id: 9, title: 'M.Sc Biotechnology', type: 'PG', img: 'https://kalinga-university.s3.ap-south-1.amazonaws.com/Home/program/biotechnology.webp', summary: 'Advanced genetics, molecular biology, and lab techniques for research roles.', scholarships: 'Check eligibility', qualification: 'Pass in Higher Secondary Examinations of (10+2)' },
-    { id: 10, title: 'MCA', type: 'PG', img: 'https://kalinga-university.s3.ap-south-1.amazonaws.com/Home/program/mca.webp', summary: 'Advanced programming, data structures, and application architecture.', scholarships: 'Check eligibility', qualification: 'Pass in Higher Secondary Examinations of (10+2)' },
+    // Filter by search query
+    const normalizedQuery = query.trim().toLowerCase()
+    if (normalizedQuery) {
+      filtered = filtered.filter(course => {
+        const courseName = (course.name || "").toLowerCase()
+        const deptName = (course.departmentName || "").toLowerCase()
+        return courseName.includes(normalizedQuery) || deptName.includes(normalizedQuery)
+      })
+    }
 
-    { id: 11, title: 'Ph.D in Management', type: 'Ph.D', img: 'https://kalinga-university.s3.ap-south-1.amazonaws.com/Home/program/Phd-mba.webp', summary: 'Research on leadership, strategy, and organizational behavior with faculty guidance.', scholarships: 'Check eligibility', qualification: 'Pass in Higher Secondary Examinations of (10+2)' },
-    { id: 12, title: 'Ph.D in Computer Science', type: 'Ph.D', img: 'https://kalinga-university.s3.ap-south-1.amazonaws.com/Home/program/Phd-cs.webp', summary: 'AI, data science, and systems research with publications and lab residencies.', scholarships: 'Check eligibility', qualification: 'Pass in Higher Secondary Examinations of (10+2)' },
-    { id: 13, title: 'Ph.D in Biotechnology', type: 'Ph.D', img: 'https://kalinga-university.s3.ap-south-1.amazonaws.com/Home/program/phd-biotechnology-n.webp', summary: 'Genomics, proteomics, and bioinformatics research with advanced lab work.', scholarships: 'Check eligibility', qualification: 'Pass in Higher Secondary Examinations of (10+2)' },
-  ]
-
-  const normalizedQuery = query.trim().toLowerCase()
-  const visiblePrograms = programs.filter((p) => {
-    const matchesTab = p.type === activeTab
-    if (!normalizedQuery) return matchesTab
-    const matchesQuery =
-      p.title.toLowerCase().includes(normalizedQuery) ||
-      p.summary.toLowerCase().includes(normalizedQuery)
-    return matchesTab && matchesQuery
-  })
+    // Format courses for renderProgramCard
+    return filtered.map(course => {
+      const courseName = formatCourseName(course.name || "")
+      const programType = course.program_type
+      const mappedLevel = getStudyLevel(programType)
+      const courseSlug = course.slug || course.name?.toLowerCase().replace(/[^a-z0-9]+/g, "-").replace(/^-+|-+$/g, "")
+      
+      // Get image from course-about API, fallback to placeholder
+      // Ensure course.id is treated as a number for consistent map lookup
+      const courseId = typeof course.id === 'number' ? course.id : parseInt(course.id)
+      const courseImage = courseAboutMap.get(courseId) || getPlaceholderImage(programType)
+      
+      return {
+        id: course.id,
+        title: courseName,
+        type: mappedLevel,
+        img: courseImage,
+        summary: `Explore ${courseName} program with comprehensive curriculum and industry exposure.`,
+        scholarships: 'Check eligibility',
+        courseSlug: courseSlug,
+        duration: formatDuration(course)
+      }
+    })
+  }, [allCourses, activeTab, query, loading, courseAboutMap])
 
 
   return (
@@ -210,7 +348,15 @@ const Programs = () => {
 
         {/* Cards row using Stack inside Swiper */}
         <div className="relative">
-          {visiblePrograms.length > 0 ? (
+          {loading ? (
+            <div className="w-full bg-[var(--lite-sand)] border border-gray-200 rounded-lg p-6 text-center text-[var(--light-text-gray)]">
+              Loading programs...
+            </div>
+          ) : error ? (
+            <div className="w-full bg-[var(--lite-sand)] border border-gray-200 rounded-lg p-6 text-center text-[var(--light-text-gray)]">
+              {error}
+            </div>
+          ) : visiblePrograms.length > 0 ? (
             <Swiper
               modules={[Navigation]}
               navigation={{

@@ -6,10 +6,10 @@ import { getApiUrl, API_CONFIG } from '../config/api';
  * @param {number|string} courseId - The course ID or slug
  * @returns {Promise<Object>} Course data
  */
-export async function fetchCourseCompleteDetail(courseId) {
+export async function fetchCourseCompleteDetail(courseIdOrSlug) {
   try {
-    // Try with ID first, then try with slug if ID fails
-    let url = getApiUrl(API_CONFIG.courses.completeDetail(courseId));
+    // Try with ID/slug first
+    let url = getApiUrl(API_CONFIG.courses.completeDetail(courseIdOrSlug));
     let response = await fetch(url, {
       method: 'GET',
       headers: {
@@ -21,7 +21,7 @@ export async function fetchCourseCompleteDetail(courseId) {
     // If 500 error, the endpoint might not exist or course ID is invalid
     if (!response.ok) {
       if (response.status === 500) {
-        console.warn(`Course endpoint returned 500 for ID ${courseId}. This might be a backend issue or the course ID might not exist.`);
+        console.warn(`Course endpoint returned 500 for ${courseIdOrSlug}. This might be a backend issue or the course might not exist.`);
         // Try to get more details from the error response
         try {
           const errorData = await response.text();
@@ -36,7 +36,7 @@ export async function fetchCourseCompleteDetail(courseId) {
     const data = await response.json();
     return data;
   } catch (error) {
-    console.error(`Error fetching course details for ID ${courseId}:`, error);
+    console.error(`Error fetching course details for ${courseIdOrSlug}:`, error);
     throw error;
   }
 }
@@ -384,6 +384,71 @@ export async function updateDepartmentCourseCount(departmentId, courseCount) {
     return data;
   } catch (error) {
     console.error(`Error updating course count for department ${departmentId}:`, error);
+    throw error;
+  }
+}
+
+/**
+ * Fetches all course-about data (handles pagination)
+ * @returns {Promise<Array>} Array of course-about objects
+ */
+export async function fetchAllCourseAbout() {
+  try {
+    let allResults = [];
+    let nextUrl = getApiUrl(API_CONFIG.courses.about());
+    let pageCount = 0;
+    const maxPages = 100; // Safety limit to prevent infinite loops
+    
+    while (nextUrl && pageCount < maxPages) {
+      try {
+        // Handle both absolute and relative URLs
+        const fetchUrl = nextUrl.startsWith('http') ? nextUrl : getApiUrl(nextUrl);
+        
+        const response = await fetch(fetchUrl, {
+          method: 'GET',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          cache: 'no-store',
+        });
+
+        if (!response.ok) {
+          // If it's a 404 or 500 on subsequent pages, return what we have
+          if (pageCount > 0 && (response.status === 404 || response.status === 500)) {
+            console.warn(`Stopped pagination at page ${pageCount + 1} due to ${response.status}`);
+            break;
+          }
+          throw new Error(`API error: ${response.status} ${response.statusText}`);
+        }
+
+        const data = await response.json();
+        
+        // Extract results from paginated response
+        if (data.results && Array.isArray(data.results)) {
+          allResults = allResults.concat(data.results);
+        }
+        
+        // Check if there's a next page
+        nextUrl = data.next ? data.next : null;
+        pageCount++;
+      } catch (fetchError) {
+        // If it's the first page, throw the error
+        if (pageCount === 0) {
+          // Provide more helpful error message
+          if (fetchError.message === 'Failed to fetch' || fetchError.name === 'TypeError') {
+            throw new Error(`Network error: Unable to fetch course-about data. This might be due to CORS issues or network connectivity. Original error: ${fetchError.message}`);
+          }
+          throw fetchError;
+        }
+        // If it's a subsequent page, log warning and return what we have
+        console.warn(`Error fetching page ${pageCount + 1} of course-about data:`, fetchError);
+        break;
+      }
+    }
+
+    return allResults;
+  } catch (error) {
+    console.error('Error fetching course-about data:', error);
     throw error;
   }
 }
