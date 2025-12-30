@@ -23,9 +23,9 @@ export default function Footer() {
           }
         }
       `}} />
-    <footer className="text-white mt-5 px-2">
+    <footer className="text-white mt-5 px-2 sm:px-4">
       <div className="relative bg-[var(--dark-blue)] rounded-[10px] sm:rounded-[15px]">
-          <div className="px-4 sm:px-4 md:px-6 lg:px-12 py-6 sm:py-6 md:py-8 lg:py-10 !pb-0 relative z-10">
+          <div className="px-4 sm:px-6 md:px-6 lg:px-12 py-6 sm:py-8 md:py-8 lg:py-10 !pb-0 relative z-10">
         {/* Top Row: Logo and Follow Us */}
         <div className="flex flex-col sm:flex-row justify-between items-center sm:items-start gap-4 sm:gap-4 md:gap-0 mb-6 sm:mb-6 md:mb-8 lg:mb-10">
           {/* Logo Section - Left */}
@@ -42,60 +42,98 @@ export default function Footer() {
         </div>
 
         {/* Main Content: Three Columns */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-12 gap-6 sm:gap-6 md:gap-8 lg:gap-10">
+        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-12 gap-6 sm:gap-8 md:gap-8 lg:gap-10">
           {/* Quick Link - 2 columns */}
-          <div className="sm:col-span-1 md:col-span-4 mb-6 sm:mb-0">
+          <div className="sm:col-span-1 md:col-span-2 mb-6 sm:mb-0">
             <h4 className="text-sm sm:text-base lg:text-lg font-stix mb-4 sm:mb-4 lg:mb-6 flex items-end gap-2">
               <span className="text-white font-stix">Quick Links</span>
-              <span className="flex-1 border-t border-thick border-white/70 relative bottom-2"></span>
+              {/* <span className="flex-1 border-t border-thick border-white/70 relative bottom-2"></span> */}
             </h4>
-            <div className="grid grid-cols-2 gap-x-4 sm:gap-x-12 gap-y-2.5 sm:gap-y-3 font-plus-jakarta-sans text-xs sm:text-[14px] leading-relaxed sm:leading-[25px] font-normal">
+            <div className="grid grid-cols-1 gap-x-4 sm:gap-x-12 gap-y-2.5 sm:gap-y-3 font-plus-jakarta-sans text-xs sm:text-[14px] leading-relaxed sm:leading-[25px] font-normal">
               <ul className="text-white/80 space-y-2 sm:space-y-3">
                 <li><a className="hover:text-white transition-colors" href="/about-us">About</a></li>
                 <li><a className="hover:text-white transition-colors" href="/academics">Academics</a></li>
                 <li><a className="hover:text-white transition-colors" href="/admissions">Admissions</a></li>
                 <li><a className="hover:text-white transition-colors" href="/research">Research</a></li>
                 <li><a className="hover:text-white transition-colors" href="/placements">Placements</a></li>
+                <li><a className="hover:text-white transition-colors" href="/news-and-events">News and Events</a></li>
+                <li><a className="hover:text-white transition-colors" href="/campuslife">Campus life</a></li>
               </ul>
-              <ul className="text-white/80 space-y-2 sm:space-y-3">
-                <li><a className="hover:text-white transition-colors" href="/departments">Departments</a></li>
-                <li><a className="hover:text-white transition-colors" href="/campuslife">Campus Life</a></li>
-                <li><a className="hover:text-white transition-colors" href="/campus-facilities">Facilities</a></li>
-                <li><a className="hover:text-white transition-colors" href="/laboratories">Labs</a></li>
-                <li><a className="hover:text-white transition-colors" href="/news-and-events">Events</a></li>
-              </ul>
+              {/* <ul className="text-white/80 space-y-2 sm:space-y-3">
+                <li><a className="hover:text-white transition-colors" href="#"></a>Media</li>
+                <li><a className="hover:text-white transition-colors" href="#"></a>Important Links</li>
+                <li><a className="hover:text-white transition-colors" href=""></a>Academic Planner</li>
+                <li><a className="hover:text-white transition-colors" href="/laboratories"></a></li>
+                <li><a className="hover:text-white transition-colors" href="/news-and-events"></a></li>
+              </ul> */}
             </div>
           </div>
 
           {/* Important Links - 2 columns */}
-          <div className="sm:col-span-1 md:col-span-4 mb-6 sm:mb-0">
+          <div className="sm:col-span-1 md:col-span-6 mb-6 sm:mb-0">
             <h4 className="text-sm sm:text-base lg:text-lg font-normal mb-4 sm:mb-6 flex items-end gap-2">
               <span className="text-white font-stix">Important Links</span>
-              <span className="flex-1 border-t border-white/70 relative bottom-2"></span>
+              <span className="hidden sm:block flex-1 border-t border-white/70 relative bottom-2"></span>
             </h4>
-            <div className="grid grid-cols-2 gap-x-4 sm:gap-x-12 gap-y-2.5 sm:gap-y-3 font-plus-jakarta-sans text-xs sm:text-[14px] leading-relaxed sm:leading-[25px] font-normal">
+            <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-5 gap-x-4 sm:gap-x-6 md:gap-x-8 lg:gap-x-50 gap-y-2.5 sm:gap-y-3 md:gap-y-4 font-plus-jakarta-sans text-xs sm:text-[14px] leading-relaxed sm:leading-[25px] font-normal">
               <ul className="text-white/80 space-y-2 sm:space-y-3">
-                <li><a className="hover:text-white transition-colors" href="/privacy-policy">Privacy Policy</a></li>
-                <li><a className="hover:text-white transition-colors" href="/terms-conditions">Terms & Conditions</a></li>
-                <li><a className="hover:text-white transition-colors" href="/refund-policy">Refund Policy</a></li>
-                <li><a className="hover:text-white transition-colors" href="#">Accessibility</a></li>
-                <li><a className="hover:text-white transition-colors" href="/downloads">Downloads</a></li>
+                <li><a className="hover:text-white transition-colors md:whitespace-nowrap break-words" href="/privacy-policy">Privacy Policy</a></li>
+                <li><a className="hover:text-white transition-colors md:whitespace-nowrap break-words" href="/terms-conditions">Terms & Conditions</a></li>
+                <li><a className="hover:text-white transition-colors md:whitespace-nowrap break-words" href="/refund-policy">Refund Policy</a></li>
+                <li><a className="hover:text-white transition-colors md:whitespace-nowrap break-words" href="#">Accessibility</a></li>
+                <li><a className="hover:text-white transition-colors md:whitespace-nowrap break-words" href="/downloads">Downloads</a></li>
+                <li><a className="hover:text-white transition-colors md:whitespace-nowrap break-words" href="/important-links">Important Links</a></li>
+                <li><a className="hover:text-white transition-colors md:whitespace-nowrap break-words" href="https://kalinga-university.s3.ap-south-1.amazonaws.com/downloads/KU+NIRF+2024+DCF.pdf">NIRF Ranking</a></li>
+                <li><a className="hover:text-white transition-colors md:whitespace-nowrap break-words" href="/ku-fees">Proposed KU Fees</a></li>
+                <li><a className="hover:text-white transition-colors md:whitespace-nowrap break-words" href="/academic-planner">Academic Planner</a></li>
+
               </ul>
               <ul className="text-white/80 space-y-2 sm:space-y-3">
-                <li><a className="hover:text-white transition-colors" href="/grievance-redressal">Grievance</a></li>
-                <li><a className="hover:text-white transition-colors" href="/rti">RTI</a></li>
-                <li><a className="hover:text-white transition-colors" href="#">NIRF Ranking</a></li>
-                <li><a className="hover:text-white transition-colors" href="#">IQAC Documents</a></li>
-                <li><a className="hover:text-white transition-colors" href="#">Mandatory Disclosures</a></li>
+                <li><a className="hover:text-white transition-colors md:whitespace-nowrap break-words" href="/academic-calendar">Academic Calendar</a></li>
+                <li><a className="hover:text-white transition-colors md:whitespace-nowrap break-words" href="/students-welfare">Student Welfare</a></li>
+                <li><a className="hover:text-white transition-colors md:whitespace-nowrap break-words" href="#">IEEE Student Branch at KU</a></li>
+                <li><a className="hover:text-white transition-colors md:whitespace-nowrap break-words" href="/media">Media</a></li>
+                <li><a className="hover:text-white transition-colors md:whitespace-nowrap break-words" href="/document-verification">Document Verification</a></li>
+                <li><a className="hover:text-white transition-colors md:whitespace-nowrap break-words" href="/chhattisgarh">Discover Chhattisgarh </a></li>
+                <li><a className="hover:text-white transition-colors md:whitespace-nowrap break-words" href="https://wpengineering.kalingauniversity.ac.in/">Working Professionals</a></li>
+                <li><a className="hover:text-white transition-colors md:whitespace-nowrap break-words" href="/voter-portal">Voter Portal</a></li>
+                <li><a className="hover:text-white transition-colors md:whitespace-nowrap break-words" href="/csr">CSR at Kalinga University</a></li>
+                
+
+              </ul>
+              <ul className="text-white/80 space-y-2 sm:space-y-3">
+                <li><a className="hover:text-white transition-colors md:whitespace-nowrap break-words" href="/value-added-course">Value Added Courses</a></li>
+                <li><a className="hover:text-white transition-colors md:whitespace-nowrap break-words" href="/unnat-bharat-abhiyan">Unnat Bharat Abhiyan </a></li>
+                <li><a className="hover:text-white transition-colors md:whitespace-nowrap break-words" href="https://kalinga-university.s3.ap-south-1.amazonaws.com/common/UGC+(Detailed+Info.).pdf">UGC Detailed Information</a></li>
+                <li><a className="hover:text-white transition-colors md:whitespace-nowrap break-words" href="https://studyinindia.gov.in/">Study in India</a></li>
+                <li><a className="hover:text-white transition-colors md:whitespace-nowrap break-words" href="/pay-online">Pay Online</a></li>
+                <li><a className="hover:text-white transition-colors md:whitespace-nowrap break-words" href="/sdg-cell">SDG Cell</a></li>
+                <li><a className="hover:text-white transition-colors md:whitespace-nowrap break-words" href="/anti-ragging-cell">Anti-Ragging Cell</a></li>
+                <li><a className="hover:text-white transition-colors md:whitespace-nowrap break-words" href="/book-publication">Book Publication</a></li>
+                <li><a className="hover:text-white transition-colors md:whitespace-nowrap break-words" href="/other-committees">Other Committees</a></li>
+              </ul>
+              <ul className="text-white/80 space-y-2 sm:space-y-3">
+                <li><a className="hover:text-white transition-colors md:whitespace-nowrap break-words" href="/radio">Kalinga Radio</a></li>
+                <li><a className="hover:text-white transition-colors md:whitespace-nowrap break-words" href="/podcast">Kalinga Podcast</a></li>
+                <li><a className="hover:text-white transition-colors md:whitespace-nowrap break-words" href="/kalinga-buzz">Kalinga Buzz</a></li>
+                <li><a className="hover:text-white transition-colors md:whitespace-nowrap break-words" href="https://kalinga-university.s3.ap-south-1.amazonaws.com/downloads/IT+Policy+-+KU.pdf">IT Policy</a></li>
+                
+                <li><a className="hover:text-white transition-colors md:whitespace-nowrap break-words" href="/institution-innovation-council">Institution's Innovation Council</a></li>
+                <li><a className="hover:text-white transition-colors md:whitespace-nowrap break-words" href="#">Code of Conduct Handbook</a></li>
+                <li><a className="hover:text-white transition-colors md:whitespace-nowrap break-words" href="/executive-development-program">Executive Development Program</a></li>
+                <li><a className="hover:text-white transition-colors md:whitespace-nowrap break-words" href="/national-council-teacher-education">National Council For Teacher Education</a></li>
+                <li><a className="hover:text-white transition-colors md:whitespace-nowrap break-words" href="/academic-and-industry-collaborations">Academic and Industry Collaborations</a></li>
+                <li><a className="hover:text-white transition-colors md:whitespace-nowrap break-words" href="https://kalinga-university.s3.ap-south-1.amazonaws.com/downloads/IIC_Appreciation_Letter_AY_2023_24.pdf">IIC Appreciation Letter AY 2023-24</a></li>
+
               </ul>
             </div>
           </div>
 
           {/* Contact Us */}
-            <div className="sm:col-span-2 md:col-span-4 mt-0 md:mt-[-75px] md:ml-[75px] ml-[0px]">
+            <div className="sm:col-span-2 md:col-span-3 md:col-start-10 mt-0 md:-mt-15 md:ml-7">
             <div className="grid grid-cols-1 gap-4 sm:gap-6 lg:gap-6">
               {/* Follow Us Section */}
-              <div className="text-left">
+              <div className="">
                 <div className="grid grid-cols-1 gap-3 ">
                   <h4 className="text-sm sm:text-base lg:text-lg font-normal text-white font-stix">
                     Follow Us
@@ -113,13 +151,13 @@ export default function Footer() {
               {/* Contact Us Section */}
               <div className="grid grid-cols-1 gap-3 sm:gap-4 lg:gap-6">
                 <h4 className="text-sm sm:text-base lg:text-lg font-normal text-white font-stix">Contact us</h4>
-                <div className="grid grid-cols-1 gap-3 sm:gap-4 md:gap-6 lg:gap-8 text-xs sm:text-xs lg:text-sm text-white/80 pb-10 md:pb-0">
+                <div className="grid grid-cols-1 gap-3 sm:gap-4 md:gap-6 lg:gap-8 text-xs sm:text-xs lg:text-sm text-white/80 pb-6 sm:pb-8 md:pb-0">
               <div>
                 <div className="flex items-start gap-2.5 sm:gap-3">
                   <svg className="w-4 h-4 sm:w-5 sm:h-5 mt-0.5 text-[var(--dark-orange-red)] flex-shrink-0" fill="currentColor" viewBox="0 0 20 20"><path fillRule="evenodd" d="M5.05 4.05a7 7 0 119.9 9.9L10 18.9l-4.95-4.95a7 7 0 010-9.9zM10 11a2 2 0 100-4 2 2 0 000 4z" clipRule="evenodd"></path></svg>
-                  <div>
+                  <div className="flex-1 min-w-0">
                     <p className="font-medium text-white text-xs sm:text-sm">Kalinga University</p>
-                    <p className="text-[10px] sm:text-xs leading-relaxed">Kotni, Near Mantralaya,<br/>Naya Raipur - 492101, Chhattisgarh, India</p>
+                    <p className="text-[10px] sm:text-xs leading-relaxed break-words">Kotni, Near Mantralaya, Naya Raipur - 492101,<br className="hidden sm:inline"/> Chhattisgarh, India</p>
                   </div>
                 </div>
               </div>

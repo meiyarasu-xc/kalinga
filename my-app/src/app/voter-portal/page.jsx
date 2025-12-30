@@ -20,7 +20,7 @@ if (typeof window !== "undefined") {
 
 export default function Page() {
   return (
-    <section className="min-h-[70vh] mb-10px flex items-center justify-center bg-white py-20">
+    <section className="min-h-[70vh] mb-10 flex items-center justify-center bg-white py-20">
       <div className="flex flex-col items-center text-center gap-6">
 
         {/* Clickable Image */}
@@ -47,19 +47,14 @@ export default function Page() {
         </a>
 
         {/* Register Button */}
-        <a
-          href="https://voterportal.eci.gov.in/"
-          target="_blank"
-          rel="noopener noreferrer"
+        <GlobalArrowButton
+          className="px-8 py-3 text-base"
+          arrowClassName="!px-2 !py-1"
+          arrowSize={24}
+          onClick={() => window.open("https://voterportal.eci.gov.in/", "_blank", "noopener,noreferrer")}
         >
-          <GlobalArrowButton
-            className="px-8 py-3 text-base"
-            arrowClassName="!px-2 !py-1"
-            arrowSize={24}
-          >
-            Register
-          </GlobalArrowButton>
-        </a>
+          Apply For Voter Portal
+        </GlobalArrowButton>
 
       </div>
     </section>

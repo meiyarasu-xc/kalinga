@@ -31,7 +31,7 @@ export default function TransportFacilityPage() {
     imageAlt="Transport Facility"
     showKnowMore={true}
     knowMoreLabel="Bus Route Details"
-    knowMoreHref="https://kalinga.vercel.app/transport-facility"
+    knowMoreHref="https://kalinga.vercel.app/ku-fees?tab=other"
     />
     </>
   )

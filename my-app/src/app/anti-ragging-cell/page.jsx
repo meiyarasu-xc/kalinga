@@ -117,16 +117,6 @@ const AntiImages = [
         image: "https://kalinga-university.s3.ap-south-1.amazonaws.com/anti-ragging-cell/anti-ragging(9).webp",
         alt: "anti(9)",
     },
-     {           
-        id: 10,
-        image: "https://kalinga-university.s3.ap-south-1.amazonaws.com/anti-ragging-cell/anti-ragging(10).webp",
-        alt: "anti(10)",
-    },
-     {           
-        id: 11,
-        image: "https://kalinga-university.s3.ap-south-1.amazonaws.com/anti-ragging-cell/anti-ragging(11).webp",
-        alt: "anti(11)",
-    },
   ];
 /* ---------------- PAGE COMPONENT ---------------- */
 
@@ -149,7 +139,7 @@ export default function Page() {
         ]}
         readMoreLabel="Read More"
         readLessLabel="Read Less"
-        imageUrl="https://kalinga-university.s3.ap-south-1.amazonaws.com/departments/student-gathered.webp"
+        imageUrl="https://kalinga-university.s3.ap-south-1.amazonaws.com/common/students-3.jpg"
         imageAlt="Anti-Ragging Cell - Kalinga University"
         showKnowMore={false}
         initialVisibleParagraphs={1}
