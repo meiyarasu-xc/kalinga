@@ -94,7 +94,7 @@ Edit `/src/app/components/layout/Header.jsx`:
 
 ```jsx
 // Line ~182 - Update phone number
-<a href="tel:+919090999999">
+<a href="tel:+91-9907-252-100">
 
 // Line ~189 - Update email
 <a href="mailto:info@kalingauniversity.ac.in">
