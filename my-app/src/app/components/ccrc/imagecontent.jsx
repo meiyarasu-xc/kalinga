@@ -5,14 +5,6 @@ import Link from "next/link";
 import GlobalArrowButton from "@/app/components/general/global-arrow_button";
 import SectionHeading from "@/app/components/general/SectionHeading";
 
-const additionalContent = [
-  "Our incubation managers and support members transform their raw ideas into real ventures. With expert guidance, research-related infrastructure, pitch trainings, workshops, guest lectures, industrial visits, and presentation trainings, our incubation centre will guide you at every stage of your startup journey. In line with the Startup India Policy and the Chhattisgarh State Startup & Incubation Policy, KIF ensures that its incubation model is closely aligned with both national and regional priorities. Through industrial insights, networking opportunities, and seed funding support, KIF will fast-track your entrepreneurial journey. Whether you are building a new app or solving a real-world problem, it will provide you with an environment where your innovative ideas will be executed in the right direction."
-];
-
-const additionalContent2 = [
-  "Our incubation managers and support members transform their raw ideas into real ventures. With expert guidance, research-related infrastructure, pitch trainings, workshops, guest lectures, industrial visits, and presentation trainings, our incubation centre will guide you at every stage of your startup journey. In line with the Startup India Policy and the Chhattisgarh State Startup & Incubation Policy, KIF ensures that its incubation model is closely aligned with both national and regional priorities. Through industrial insights, networking opportunities, and seed funding support, KIF will fast-track your entrepreneurial journey. Whether you are building a new app or solving a real-world problem, it will provide you with an environment where your innovative ideas will be executed in the right direction."
-];
-
 export default function ImageContent({
   imageSrc = "https://kalinga-university.s3.ap-south-1.amazonaws.com/kif/kif.png",
   imageAlt = "CCRC Banner",
@@ -30,7 +22,7 @@ export default function ImageContent({
   hasImage = true,
   readmore = true,
   subtitleclassName = "!mb-0",
-  additionalContent = additionalContent2,
+  additionalContent = null, // No default - each page should provide its own content
   titleClassName = "",
 }) {
   const [isExpanded, setIsExpanded] = useState(false);
@@ -64,7 +56,7 @@ export default function ImageContent({
             <p>{description}</p>
             {isExpanded && (
               <div className="space-y-3 mt-3">
-                {additionalContent.map((item, index) => (
+                {additionalContent && additionalContent.length > 0 && additionalContent.map((item, index) => (
                   <p key={index} className="text-sm">{item}</p>
                 ))}
                 
@@ -104,7 +96,7 @@ export default function ImageContent({
                   {buttonText}
                 </GlobalArrowButton>
               </Link>
-            ) : (
+            ) : (additionalContent && additionalContent.length > 0) ? (
               <GlobalArrowButton
                 variant="transparent"
                 onClick={toggleExpand}
@@ -112,7 +104,7 @@ export default function ImageContent({
               >
                 {isExpanded ? 'Read Less' : buttonText}
               </GlobalArrowButton>
-            )
+            ) : null
           )}
         </div>
       </div>

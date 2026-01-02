@@ -13,7 +13,7 @@ import MediaCardSlider from "@/app/components/general/media-card-slider";
 
 const breadcrumbData = {
   heroImage: "https://kalinga-university.s3.ap-south-1.amazonaws.com/ccrc/ccrc-banner-updated.jpg",
-  pageTitle: "CCRC",
+  pageTitle: "Career and Corporate Resource Centre (CCRC)",
   customBreadcrumbs: [
     { label: 'Home', href: '/' },
     { label: 'CCRC', href: '/ccrc' }
@@ -65,7 +65,7 @@ const cards = [
     imageSrc: "https://kalinga-university.s3.ap-south-1.amazonaws.com/ccrc/ctcd.png",
     logoSrc: "https://kalinga-university.s3.ap-south-1.amazonaws.com/ccrc/logo-ctcd.svg",
     subtitle: "CORPORATE TRAINING & CONSULTANCY DIVISION",
-    href: "/ctcd",
+    href: "/corporate-training-and-consultancy-division",
   },
   {
     title: "Corporate Social Responsibility (CSR) ",
@@ -347,7 +347,7 @@ const MentorIntroProps = [
     cardClassName: "",
     imageSrc: "https://kalinga-university.s3.ap-south-1.amazonaws.com/ccrc/kif/Mr.+Pankaj+Tiwari.webp",
     title: "Mr. Pankaj Tiwari",
-    subtitle: "Career & Corporate Resource Centre",
+    subtitle: "Message from CCRC Head",
     department: "Director, Career & Corporate Resource Centre",
     message: [
       "CCRC is a platform where learning meets leadership, the right skillset meets industry requirements, and innovation turns into transformation. As the Head of the Career and Corporate Resource Centre (CCRC) at Kalinga University, it is my privilege to empower our students on their journey into the professional world and support corporates and working professionals in achieving maximum output.",

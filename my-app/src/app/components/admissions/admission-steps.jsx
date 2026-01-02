@@ -9,6 +9,7 @@ import GlobalArrowButton from "../general/global-arrow_button";
 import SectionHeading from "../general/SectionHeading";
 import { useRef, useEffect } from "react";
 
+
 const stepData = [
   {
     title: "Step 1",
@@ -59,10 +60,27 @@ export default function AdmissionSteps({
   showImage = true,
   bgColor = "bg-[var(--light-gray)]",
   itemsAlignment = "end",
+  firstCardScrollTarget = null,
 }) {
   const prevRef = useRef(null);
   const nextRef = useRef(null);
   const swiperRef = useRef(null);
+
+  const handleFirstCardClick = () => {
+    if (firstCardScrollTarget) {
+      const targetElement = document.getElementById(firstCardScrollTarget);
+      if (targetElement) {
+        const headerOffset = 100;
+        const elementPosition = targetElement.getBoundingClientRect().top;
+        const offsetPosition = elementPosition + window.pageYOffset - headerOffset;
+        
+        window.scrollTo({
+          top: offsetPosition,
+          behavior: 'smooth'
+        });
+      }
+    }
+  };
 
   const bindNavigation = (swiperInstance) => {
     if (!swiperInstance || !prevRef.current || !nextRef.current) return;
@@ -122,12 +140,27 @@ export default function AdmissionSteps({
           border-radius: 0.75rem;
           overflow: hidden;
         }
+        .admission-steps-swiper .flip-face.back a {
+          position: relative !important;
+          z-index: 9999 !important;
+          pointer-events: auto !important;
+          cursor: pointer !important;
+          display: inline !important;
+        }
+        .admission-steps-swiper .flip-face.back a:active,
+        .admission-steps-swiper .flip-face.back a:focus {
+          z-index: 9999 !important;
+          pointer-events: auto !important;
+          outline: none;
+        }
         .admission-steps-swiper .flip-face.back {
           transform: rotateY(180deg);
+          pointer-events: auto;
         }
         .admission-steps-swiper .flip-face.back .step-card-inner {
           overflow-y: auto;
           overflow-x: hidden;
+          pointer-events: auto;
         }
         .admission-steps-swiper .step-card-inner::-webkit-scrollbar {
           width: 6px;
@@ -221,8 +254,12 @@ export default function AdmissionSteps({
                   )}
                   
                   {/* Step Card */}
-                  <div className={`card-wrapper w-[320px] md:w-[360px] min-h-[180px] md:min-h-[200px] max-h-[400px] flex flex-col ${showReadMore ? "hoverable" : ""}`}>
-                    <div className="flip-inner h-full">
+                  <div 
+                    className={`card-wrapper w-[320px] md:w-[360px] min-h-[180px] md:min-h-[200px] max-h-[400px] flex flex-col ${showReadMore ? "hoverable" : ""} ${index === 0 && firstCardScrollTarget ? "cursor-pointer" : ""}`} 
+                    style={{ pointerEvents: 'auto' }}
+                    onClick={index === 0 && firstCardScrollTarget ? handleFirstCardClick : undefined}
+                  >
+                    <div className="flip-inner h-full" style={{ pointerEvents: 'auto' }}>
                       {/* Front Face */}
                       <div className="flip-face front bg-white rounded-xl p-1 h-full flex flex-col">
                         <div className="step-card-inner h-full flex flex-col rounded-xl relative overflow-hidden bg-[var(--button-red)] text-white p-4">
@@ -306,14 +343,14 @@ export default function AdmissionSteps({
                       </div>
 
                       {/* Back Face */}
-                      <div className="flip-face back bg-white rounded-xl p-1 h-full flex flex-col">
-                        <div className="step-card-inner h-full flex flex-col rounded-xl relative bg-[var(--lite-sand)] p-4">
+                      <div className="flip-face back bg-white rounded-xl p-1 h-full flex flex-col" style={{ pointerEvents: 'auto' }}>
+                        <div className="step-card-inner h-full flex flex-col rounded-xl relative bg-[var(--lite-sand)] p-4" style={{ pointerEvents: 'auto' }}>
                           {/* Background Number */}
                           <div className="step-number absolute top-4 right-4 text-7xl md:text-8xl font-bold leading-none font-stix text-gray-400 pointer-events-none z-0">
                             {step.stepNumber}
                           </div>
                           <div className={`relative z-10 flex flex-col h-full ${step.id === 5 ? 'items-start justify-center' : 'items-center justify-center'} gap-3 py-2 min-h-0`}>
-                            <div className={`${step.id === 5 ? 'text-xs md:text-sm text-left' : 'text-sm md:text-base text-center'} text-[var(--text-gray-card)] break-words overflow-wrap-anywhere leading-relaxed whitespace-pre-line w-full`}>
+                            <div className={`${step.id === 5 ? 'text-xs md:text-sm text-left' : 'text-sm md:text-base text-center'} text-[var(--text-gray-card)] break-words overflow-wrap-anywhere leading-relaxed whitespace-pre-line w-full`} style={{ position: 'relative', zIndex: 20 }}>
                               {step.backDescription ?? step.description}
                             </div>
                           </div>

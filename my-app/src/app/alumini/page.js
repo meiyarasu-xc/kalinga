@@ -346,9 +346,7 @@ const columns = [
   return (
     <div>
       
-      <ImageContent subtitleclassName="!hidden" titleClassName="!hidden" imageSrc="https://kalinga-university.s3.ap-south-1.amazonaws.com/alumini/Alumni+1+1.webp" title="About the KU Alumni Association" description="
-The Kalinga University’s alumni network is an open platform where our students share their experiences and build lifelong connections. More than creating a network, our current students and alumni from different academic backgrounds share their experiences from their professional journey, offer tips and tricks on how to crack any job interview, and motivate candidates. Through alumni talks, collaborations, and mentorship programs, our current students learn about industry insights and new-age skills so that they can stand out in job interviews. The association's members also stay informed about the latest university achievements and activities. " />
-     
+      <ImageContent subtitleclassName="!hidden" titleClassName="!hidden" imageSrc="https://kalinga-university.s3.ap-south-1.amazonaws.com/alumini/Alumni+1+1.webp" title="About the KU Alumni Association" description="The Kalinga University’s alumni network is an open platform where our students share their experiences and build lifelong connections. More than creating a network, our current students and alumni from different academic backgrounds share their experiences from their professional journey, offer tips and tricks on how to crack any job interview, and motivate candidates. Through alumni talks, collaborations, and mentorship programs, our current students learn about industry insights and new-age skills so that they can stand out in job interviews. The association's members also stay informed about the latest university achievements and activities. " />
       <Testimonials
         testimonials={testimonials}
         className="bg-[var(--dark-blue)]"

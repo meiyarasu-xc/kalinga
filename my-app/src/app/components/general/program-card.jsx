@@ -148,6 +148,11 @@ export default function ProgramCard({
           {/* Check Eligibility Button - Dark Red with white arrow in white square */}
           <a href={href} onClick={(e) => {
             e.preventDefault();
+            // Validate if specialization is required
+            if (showSpecializationDropdown && !selectedSpecialization) {
+              alert("Please select a specialization from the dropdown before checking eligibility.");
+              return;
+            }
             if (onCheckEligibility) onCheckEligibility(program);
           }}>
           <GlobalArrowButton
@@ -155,7 +160,15 @@ export default function ProgramCard({
             arrowClassName="!bg-[var(--background)] !px-1"
             arrowIconClassName="!text-[var(--button-red)]"
             textClassName="!text-[12px] md:!text-[14px] !px-2 md:!px-3"
-            onClick={() => onCheckEligibility && onCheckEligibility(program)}
+            onClick={(e) => {
+              e.preventDefault();
+              // Validate if specialization is required
+              if (showSpecializationDropdown && !selectedSpecialization) {
+                alert("Please select a specialization from the dropdown before checking eligibility.");
+                return;
+              }
+              if (onCheckEligibility) onCheckEligibility(program);
+            }}
             >
               Check Eligibility
             </GlobalArrowButton>

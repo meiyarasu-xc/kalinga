@@ -234,7 +234,7 @@ export default function KalseePage() {
         imageSrc="https://kalinga-university.s3.ap-south-1.amazonaws.com/departments/bg-course.webp"
         imageAlt="KAL-MAT Course Materials"
         leftCardTitle="BBA"
-        leftCardDescription="All questions carry 1 mark each."
+        leftCardDescription="Within 3 days post-exam"
         leftCardButtonText="Know more"
         leftCardButtonLink="/admissions"
         leftCardSecondButtonText="Register now"
@@ -263,26 +263,26 @@ export default function KalseePage() {
           {
             slNo: 1,
             section: "Section A",
-            subject: "Physics/ECE",
+            subject: "English Communication",
             questions: 25
           },
           {
             slNo: 2,
             section: "Section B",
-            subject: "Chemistry",
+            subject: "Logical Reasoning",
             questions: 25
           },
           {
             slNo: 3,
             section: "Section C",
-            subject: "Maths",
-            questions: 25
+            subject: "Quantitative Aptitude",
+            questions: 20
           },
           {
             slNo: 4,
             section: "Section D",
-            subject: "English Communication",
-            questions: 15
+            subject: "General Aptitude",
+            questions: 20
           },
           {
             slNo: "Total",
@@ -322,7 +322,7 @@ export default function KalseePage() {
                 "Aviation"
               ],
               specializationPlaceholder: "- Select Single Specialisation -",
-              coursePageUrl: "/courses/bba"
+              coursePageUrl: "/admissions"
             },
             {
               id: 2,
@@ -347,7 +347,7 @@ export default function KalseePage() {
                 "Marketing Management"
               ],
               specializationPlaceholder: "- Select Dual Specialisation -",
-              coursePageUrl: "/courses/mba"
+              coursePageUrl: "/admissions"
             }
           ]}
           hideSearchFilter={true}
@@ -368,7 +368,7 @@ export default function KalseePage() {
         showImage={false}
         bgColor="bg-white"
       />
-      <Testimonials testimonials={testimonials} className="bg-[var(--light-gray)]" />
+      {/* <Testimonials testimonials={testimonials} className="bg-[var(--light-gray)]" /> */}
       <FAQ title="Frequently Asked Questions" items={faqItems} />
       <AdmissionCareer />
     </>

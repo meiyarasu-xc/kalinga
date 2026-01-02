@@ -64,6 +64,7 @@ export default function KalseePage() {
 
   const testimonials = [
   {
+    name: "Syedzaid Mohammad",
     title: "Syedzaid Mohammad",
     subtitle: "B. TECH. (Computer Science Engineering)",
     description: "Score: 81",
@@ -72,6 +73,7 @@ export default function KalseePage() {
     videoUrl: "", // keep empty if no video
   },
   {
+    name: "Vishal Kumar Mandal",
     title: "Vishal Kumar Mandal",
     subtitle: "B. TECH. CS - AIML with IBM",
     description: "KALSEE Qualified Student",
@@ -80,6 +82,7 @@ export default function KalseePage() {
     videoUrl: "",
   },
   {
+    name: "Ajay Chauhan",
     title: "Ajay Chauhan",
     subtitle: "B. TECH. (Computer Science Engineering)",
     description: "KALSEE Qualified Student",
@@ -88,49 +91,55 @@ export default function KalseePage() {
     videoUrl: "",
   },
   {
-    title: "KALSEE Student",
-    subtitle: "Undergraduate Program",
-    description: "Scholarship Achiever",
+    name: "Chintu Maurya",
+    title: "Chintu Maurya",
+    subtitle: "B. TECH. (Computer Science Engineering)",
+    description: "Score: 81",
     thumbnail:
       "https://kalinga-university.s3.ap-south-1.amazonaws.com/kalsee/kalsee-student(4).png",
     videoUrl: "",
   },
   {
-    title: "KALSEE Student",
-    subtitle: "Undergraduate Program",
-    description: "Scholarship Achiever",
+    name: "Govind Kumar",
+    title: "Govind Kumar",
+    subtitle: "B. TECH. (Computer Science Engineering)",
+    description: "Score: 80",
     thumbnail:
       "https://kalinga-university.s3.ap-south-1.amazonaws.com/kalsee/kalsee-student(5).png",
     videoUrl: "",
   },
   {
-    title: "KALSEE Student",
-    subtitle: "Postgraduate Program",
-    description: "Merit Based Selection",
+    name: "Kajal Kumari",
+    title: "Kajal Kumari",
+    subtitle: "B. TECH. LATERAL ENTRY (Computer Science Engineering)",
+    description: "Score: 80",
     thumbnail:
       "https://kalinga-university.s3.ap-south-1.amazonaws.com/kalsee/kalsee-student(6).png",
     videoUrl: "",
   },
   {
-    title: "KALSEE Student",
-    subtitle: "Postgraduate Program",
-    description: "Merit Based Selection",
+    name: "Mahesh Verma",
+    title: "Mahesh Verma",
+    subtitle: "B. TECH. CS - AIML WITH IBM",
+    description: "Score: 81",
     thumbnail:
       "https://kalinga-university.s3.ap-south-1.amazonaws.com/kalsee/kalsee-student(7).png",
     videoUrl: "",
   },
   {
-    title: "KALSEE Student",
-    subtitle: "UG Program",
-    description: "Entrance Exam Qualifier",
+    name: "Pankaj Kumar Sahu",
+    title: "Pankaj Kumar Sahu",
+    subtitle: "B. TECH. (Computer Science Engineering)",
+    description: "Score: 81",
     thumbnail:
       "https://kalinga-university.s3.ap-south-1.amazonaws.com/kalsee/kalsee-student(8).png",
     videoUrl: "",
   },
   {
-    title: "KALSEE Student",
-    subtitle: "UG Program",
-    description: "Entrance Exam Qualifier",
+    name: "Sudhir Kushwaha",
+    title: "Sudhir Kushwaha",
+    subtitle: "B. TECH. (Computer Science Engineering)",
+    description: "Score: 80",
     thumbnail:
       "https://kalinga-university.s3.ap-south-1.amazonaws.com/kalsee/kalsee-student(9).png",
     videoUrl: "",
@@ -286,14 +295,15 @@ export default function KalseePage() {
   return (
     <>
       <HeroSectionTwo 
+        id="kalsee-application-form"
         backgroundImage="https://kalinga-university.s3.ap-south-1.amazonaws.com/kalsee/kalsee-banner-new.png"
-        title="Your Next Big Chapter Starts With One Click"
+        title="One Entrance Exam Opens Door To 130+ Programs"
         description="KALSEE (Kalinga University Entrance Examination) is the gateway to your academic journey at Kalinga University. This comprehensive entrance exam is designed to assess your knowledge, aptitude, and readiness for various undergraduate and postgraduate programs. Prepare yourself for success and take the first step towards a bright future."
         buttonText="Apply Now"
         buttonLink="/admissions"
         showForm={false}
         customForm={<KalseeApplicationForm />}
-        subtitle="Admission Open 2026-2027"
+        subtitle="KALSEE - Entrance Exam [2025-26]"
       />
       <KalseeMilestone />
       <MainIntro
@@ -308,7 +318,7 @@ export default function KalseePage() {
        textColorClassName="text-[var(--background)]" showReadMore={false}  titleClassName="text-white" gridClassName="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 sm:gap-5" />
       <AdmissionSteps
         steps={kifSteps}
-     subtitleClassName="hidden"
+        subtitleClassName="hidden"
         title="Your Step-By-Step Startup Process"
         ctaLabel="How To Apply? "
         showReadMore={true}
@@ -316,6 +326,7 @@ export default function KalseePage() {
         showIcon={true}
         showImage={false}
         bgColor="bg-white"
+        firstCardScrollTarget="kalsee-application-form"
       />
       <MediaCardSlider
         title="KALSEE Testimonials"

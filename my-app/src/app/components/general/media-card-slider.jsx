@@ -125,15 +125,10 @@ export default function MediaCardSlider({
             {items.map((item) => (
               <SwiperSlide key={item.id || item.name}>
                 <div className="h-full w-full">
-                  <div className={`${cardBgClass} rounded-xl p-4 h-full flex flex-col border border-gray-300 border-2  transition-shadow ${isVideo && item.videoUrl ? 'cursor-pointer hover:shadow-xl' : ''}`}>
+                  <div className={`${cardBgClass} rounded-xl p-4 h-full flex flex-col border border-gray-300 border-2 transition-shadow`}>
                     {/* Media Container */}
                     <div 
                       className="relative w-full h-[250px] md:h-[350px] mb-4 rounded-lg overflow-hidden bg-gray-200"
-                      onClick={() => {
-                        if (isVideo && item.videoUrl) {
-                          openVideoModal(item.videoUrl, item.name);
-                        }
-                      }}
                     >
                       {isVideo ? (
                         <>
@@ -142,7 +137,7 @@ export default function MediaCardSlider({
                             // Use Image component for actual image thumbnails
                             <Image
                               src={item.thumbnail}
-                              alt={item.name || "Video thumbnail"}
+                              alt={item.name || item.title || "Video thumbnail"}
                               fill
                               className="object-cover object-top brightness-100"
                               priority
@@ -159,29 +154,12 @@ export default function MediaCardSlider({
                           ) : (
                             <div className="w-full h-full bg-gray-300" />
                           )}
-                          {/* Play Button Overlay */}
-                          <div className="absolute inset-0 flex items-center justify-center pointer-events-none">
-                            <div className="w-12 h-12 md:w-16 md:h-16 rounded-full bg-white/90 flex items-center justify-center hover:bg-white transition-all hover:scale-110 pointer-events-auto shadow-lg">
-                              <svg
-                                width="24"
-                                height="24"
-                                viewBox="0 0 24 24"
-                                fill="none"
-                                className="text-gray-700 ml-1"
-                              >
-                                <path
-                                  d="M8 5v14l11-7z"
-                                  fill="currentColor"
-                                />
-                              </svg>
-                            </div>
-                          </div>
                         </>
                       ) : (
                         // Image Display
                         <Image
                           src={item.image || item.thumbnail}
-                          alt={item.name || "Image"}
+                          alt={item.name || item.title || "Image"}
                           fill
                           className="object-cover"
                         />
@@ -190,14 +168,23 @@ export default function MediaCardSlider({
 
                     {/* Content */}
                     <div className="flex-1 flex flex-col items-center text-center">
-                      {/* Name/Title */}
-                      {item.name && (
-                       <SectionHeading subtitle={item.name} subtitleClassName="!mb-2" />
+                      {/* Title */}
+                      {item.title && (
+                        <h3 className={`text-lg md:text-xl font-semibold mb-2 font-plus-jakarta-sans ${nameTextClass}`}>
+                          {item.title}
+                        </h3>
+                      )}
+                      
+                      {/* Subtitle */}
+                      {item.subtitle && (
+                        <p className="text-sm md:text-base text-gray-700 mb-2">
+                          {item.subtitle}
+                        </p>
                       )}
                       
                       {/* Description */}
                       {item.description && (
-                        <p className={` ${descriptionTextClass}`}>
+                        <p className={`text-sm md:text-base ${descriptionTextClass}`}>
                           {item.description}
                         </p>
                       )}

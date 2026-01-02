@@ -19,7 +19,7 @@ const dataMap = {
     rows: [
       { sl: 1, section: "Section A", subject: "English Communication", questions: 25 },
       { sl: 2, section: "Section B", subject: "Logical Reasoning", questions: 25 },
-      { sl: 3, section: "Section C", subject: "Quantitative Aptitude", questions: 250 },
+      { sl: 3, section: "Section C", subject: "Quantitative Aptitude", questions: 20 },
       { sl: 4, section: "Section D", subject: "General Aptitude", questions: 20 },
     ],
   },

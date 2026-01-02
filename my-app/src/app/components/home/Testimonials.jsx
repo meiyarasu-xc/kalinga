@@ -64,9 +64,24 @@ export default function     Testimonials({ testimonials = [], className = "", su
     const recalculateHeight = () => {
         const isMobileCheck = window.innerWidth < 768;
         let maxHeight = isMobileCheck ? 400 : 500;
+        
+        // Force a reflow to ensure DOM is updated
+        void document.body.offsetHeight;
+        
         Object.values(cardRefs.current).forEach((ref) => {
             if (ref && ref.current) {
-                const cardHeight = ref.current.offsetHeight;
+                // Temporarily remove any height constraints to get accurate measurement
+                const originalHeight = ref.current.style.height;
+                const originalMaxHeight = ref.current.style.maxHeight;
+                ref.current.style.height = 'auto';
+                ref.current.style.maxHeight = 'none';
+                
+                const cardHeight = ref.current.scrollHeight || ref.current.offsetHeight;
+                
+                // Restore original styles
+                ref.current.style.height = originalHeight;
+                ref.current.style.maxHeight = originalMaxHeight;
+                
                 if (cardHeight > maxHeight) {
                     maxHeight = cardHeight;
                 }
@@ -90,7 +105,7 @@ export default function     Testimonials({ testimonials = [], className = "", su
             clearTimeout(timer);
             window.removeEventListener('resize', recalculateHeight);
         };
-    }, [activeIndex, isMobile]);
+    }, [activeIndex, isMobile, expandedQuotes]);
 
     // Reset expanded quotes when active index changes
     useEffect(() => {
@@ -247,8 +262,12 @@ export default function     Testimonials({ testimonials = [], className = "", su
             ...prev,
             [itemId]: !prev[itemId]
         }));
-        // Recalculate height after expanding/collapsing
-        setTimeout(recalculateHeight, 100);
+        // Recalculate height after expanding/collapsing with multiple timeouts to ensure DOM updates
+        setTimeout(() => {
+            recalculateHeight();
+            setTimeout(recalculateHeight, 50);
+            setTimeout(recalculateHeight, 150);
+        }, 50);
     };
 
     return (
@@ -275,11 +294,11 @@ export default function     Testimonials({ testimonials = [], className = "", su
                 </div>
                 {/* Slider Track */}
                 <div 
-                    className="mt-15 md:mt-5 relative w-full flex items-center justify-center lg:!min-h-[450px] lg:!h-[450px] !h-[600px] !min-h-[620px]" 
+                    className="mt-15 md:mt-5 relative w-full flex items-center justify-center overflow-visible" 
                     style={{ 
                         perspective: '1000px',
                         minHeight: `${sliderHeight}px`,
-                        height: `${sliderHeight}px`
+                        height: `${Math.max(sliderHeight, 500)}px`
                     }}
                 >
                     {testimonialsData.map((item, index) => {
