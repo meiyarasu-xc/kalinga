@@ -9,7 +9,51 @@ import ImageListItem from "../components/ccrc/imagelistitem";
 
 import DataTable from "@/app/components/general/data-table";
 import ContactSection from '../components/cif/contact_section';
-
+import AdmissionSteps from "../components/admissions/admission-steps";
+const ubaSteps = [
+  {
+    id: 1,
+    stepNumber: "01",
+    title: "Palaud",
+    description: "",
+    backDescription: "",
+  },
+  {
+    id: 2,
+    stepNumber: "02",
+    title: "Kotni",
+    description: "",
+    backDescription: "",
+  },
+  {
+    id: 3,
+    stepNumber: "03",
+    title: "Tandul",
+    description: "",
+    backDescription: "",
+  },
+  {
+    id: 4,
+    stepNumber: "04",
+    title: "Kuhera",
+    description: "",
+    backDescription: "",
+  },
+  {
+    id: 5,
+    stepNumber: "05",
+    title: "Parsada",
+    description: "",
+    backDescription: "",
+  },
+  {
+    id: 6,
+    stepNumber: "06",
+    title: "Kotara Bhantha",
+    description: "",
+    backDescription: "",
+  },
+];
 /* ---------------- Breadcrumb ---------------- */
 const breadcrumbData = {
   heroImage: "https://kalinga-university.s3.ap-south-1.amazonaws.com/kif/kif-banner.webp",
@@ -89,31 +133,6 @@ export default function UnnatBharatAbhiyanPage() {
   return (
     
     <div className="bg-white">
- <style jsx>{`
-        .uba-tabs button {
-          background: white;
-          color: var(--foreground);
-          border-radius: 14px;
-          height: 54px;
-          font-family: "Plus Jakarta Sans";
-          font-size: 16px;
-          font-weight: 500;
-          padding: 0 24px;
-          transition: all 0.25s ease;
-          white-space: nowrap;
-          flex-shrink: 0;
-        }
-
-        .uba-tabs button:hover {
-          background: #972B28;
-          color: white;
-        }
-
-        .uba-tabs [data-active="true"] {
-          background: #972B28 !important;
-          color: white !important;
-        }
-      `}</style>
 
       <ImageContent
         title="Unnat Bharat Abhiyan"
@@ -132,14 +151,22 @@ export default function UnnatBharatAbhiyanPage() {
       />
 
       <VisionMission data={visionMissionData} showImg={false} />
-
+      
       <ImageListItem
         items={objectives}
         imageSrc="https://kalinga-university.s3.ap-south-1.amazonaws.com/common/kalinga-students-2.jpg"
         title="Goals of Unnat Bharat Abhiyan"
         description={false}
       />
-
+      <AdmissionSteps
+        steps={ubaSteps}
+        bgColor="bg-white"
+        title="Villages We Adopted Under the UBA Scheme"
+        showReadMore={false}
+        showIcon={false}
+        subtitle=""
+        showHeaderButton={false}
+      />
 <div className="container mx-auto px-4 mt-16">
   <div className="grid grid-cols-1  lg:grid-cols-12 items-center gap-8">
 
@@ -236,20 +263,18 @@ export default function UnnatBharatAbhiyanPage() {
       <div className="mt-20 mx-2 rounded-xl bg-[var(--dark-blue)] py-16">
         <div className="container mx-auto">
           <Tabs defaultValue="infra">
- <TabsList className="uba-tabs flex gap-4 md:gap-5 bg-transparent p-0 overflow-x-auto px-2 md:px-0">
-
-              <TabsTrigger value="infra" className="min-w-[240px] shadow-sm">
+            <TabsList className="mb-8 justify-center">
+              <TabsTrigger value="infra">
                 Infrastructure Development
               </TabsTrigger>
 
-              <TabsTrigger value="survey" className="min-w-[200px] shadow-sm">
+              <TabsTrigger value="survey">
                 Village Survey
               </TabsTrigger>
 
-              <TabsTrigger value="garbage" className="min-w-[280px] shadow-sm">
+              <TabsTrigger value="garbage">
                 Smart Garbage Monitoring
               </TabsTrigger>
-
             </TabsList>
 
 

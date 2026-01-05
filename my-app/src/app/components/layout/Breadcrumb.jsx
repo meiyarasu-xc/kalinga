@@ -9,21 +9,45 @@ import { useEffect, useRef } from 'react';
 const imageposition = "object-top";
 
 // Function to convert text to proper title case
-const toTitleCase = (str) => {
+// applyLowercaseRestrictions: if true, applies lowercase restrictions (of, and, the, etc.) for department/course pages
+// if false, preserves existing capitalizations and capitalizes all words normally without restrictions
+const toTitleCase = (str, applyLowercaseRestrictions = false) => {
   if (!str) return '';
-  // Words that should be lowercase unless they're the first word
+  
+  const words = str.split(' ');
+  
+  // If lowercase restrictions should not be applied, preserve existing caps and capitalize normally
+  if (!applyLowercaseRestrictions) {
+    return words
+      .map((word) => {
+        // If word is already all caps (like "SDG", "SGD"), preserve it
+        if (word === word.toUpperCase() && word.length > 1) {
+          return word;
+        }
+        // Otherwise, capitalize first letter and lowercase the rest
+        return word.charAt(0).toUpperCase() + word.slice(1).toLowerCase();
+      })
+      .join(' ');
+  }
+  
+  // Words that should be lowercase unless they're the first word (for department/course pages)
   const lowercaseWords = ['of', 'and', 'the', 'a', 'an', 'in', 'on', 'at', 'to', 'for', 'with', 'by'];
   
-  return str
-    .toLowerCase()
-    .split(' ')
+  return words
     .map((word, index) => {
+      const lowerWord = word.toLowerCase();
+      
+      // If word is already all caps (like "SDG", "SGD"), preserve it
+      if (word === word.toUpperCase() && word.length > 1) {
+        return word;
+      }
+      
       // Always capitalize first word, or if word is not in lowercase list
-      if (index === 0 || !lowercaseWords.includes(word)) {
-        return word.charAt(0).toUpperCase() + word.slice(1);
+      if (index === 0 || !lowercaseWords.includes(lowerWord)) {
+        return word.charAt(0).toUpperCase() + word.slice(1).toLowerCase();
       }
       // Keep lowercase for words in the list (except first word)
-      return word;
+      return lowerWord;
     })
     .join(' ');
 };
@@ -100,13 +124,16 @@ const Breadcrumb = ({ customBreadcrumbs, heroImage, pageTitle }) => {
   // Use heroImage if provided, otherwise null
   const resolvedHeroImage = finalHeroImage || null;
   
-  // Use pageTitle if provided, otherwise use last breadcrumb label
-  const currentPageTitle = toTitleCase(finalPageTitle || breadcrumbs[breadcrumbs.length - 1]?.label || '');
-  
   // Check if breadcrumb data is loading
   // Show loader if context is loading OR if we're on a dynamic route and contextData is null
   const isDynamicRoute = pathname.includes('/courses/') || pathname.includes('/departments/');
   const isLoading = contextLoading || (isDynamicRoute && contextData === null && !finalPageTitle);
+  
+  // Apply lowercase restrictions only for department or course pages
+  const applyLowercaseRestrictions = isDynamicRoute;
+  
+  // Use pageTitle if provided, otherwise use last breadcrumb label
+  const currentPageTitle = toTitleCase(finalPageTitle || breadcrumbs[breadcrumbs.length - 1]?.label || '', applyLowercaseRestrictions);
 
   return (
     <div className="relative px-2  ">

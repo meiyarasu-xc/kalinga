@@ -223,37 +223,37 @@ export default function InternationalStudents() {
     {
       id: 2,
       title: "International students from",
-      value: "600 +",
+      value: "600+",
       description: "",
     },
     {
       id: 3,
       title: "Countries",
-      value: "29 +",
+      value: "29+",
       description: "",
     },
     {
       id: 4,
       title: "Scholarships Distributed",
-      value: "3 Cr. +",
+      value: "3 Cr+",
       description: "",
     },
     {
       id: 5,
       title: "Programs",
-      value: "130 +",
+      value: "130+",
       description: "",
     },
     {
       id: 6,
       title: "Recruitment Partners",
-      value: "250 +",
+      value: "250+",
       description: "",
     },
     {
       id: 7,
       title: "Research Publications",
-      value: "3360 +",
+      value: "3360+",
       description: "",
     },
     {

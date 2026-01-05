@@ -197,6 +197,7 @@ export default function SDGCell() {
         tableSections={tableSections}
         items={faqItems}
         pyClassName="py-8 md:py-12"
+        headerBgColor="bg-[var(--button-red)]"
       />
     </div>
   );

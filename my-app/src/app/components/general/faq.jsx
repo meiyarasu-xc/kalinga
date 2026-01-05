@@ -54,6 +54,7 @@ const FAQ = ({
   tableSections = [], // Array of { id, title, data } for multiple sections
   overflowX = false,
   pyClassName = "py-16",
+  headerBgColor = "bg-[var(--dark-blue)]", // Background color for table header
   // For button variant
   buttons = []
 }) => {
@@ -522,6 +523,7 @@ const FAQ = ({
                             data={section.data}
                             overflowX={true}
                             className="shadow-none"
+                            headerBgColor={headerBgColor}
                           />
                         </div>
                       ) : section.answer ? (
@@ -954,6 +956,7 @@ const FAQ = ({
                           data={item.answer.rows}
                           overflowX={true}
                           className="shadow-none"
+                          headerBgColor={headerBgColor}
                         />
                       </div>
                     ) : Array.isArray(item.answer) ? (

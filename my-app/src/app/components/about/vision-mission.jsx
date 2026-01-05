@@ -254,7 +254,7 @@ export default function VisionMission({
                 <div className={`${visionCol} flex`}>
                   {/* Filter Wrapper for Drop Shadow */}
                   <div 
-                    className="relative group w-full max-w-[900px] h-full transition-transform duration-500 pb-5" 
+                    className="relative group w-full max-w-[900px] h-full transition-transform duration-500 pb-7" 
                     style={{ filter: 'drop-shadow(0 25px 25px rgba(0,0,0,0.08))' }}
                   >
                     {/* The Clipped Card - Inverted */}
@@ -301,7 +301,7 @@ export default function VisionMission({
                 <div className={`${missionCol} flex`}>
                   {/* Filter Wrapper for Drop Shadow */}
                   <div 
-                    className="relative group w-full max-w-[900px] h-full transition-transform duration-500 pb-5" 
+                    className="relative group w-full max-w-[900px] h-full transition-transform duration-500 pb-7" 
                     style={{ filter: 'drop-shadow(0 25px 25px rgba(0,0,0,0.08))' }}
                   >
                     {/* The Clipped Card */}
