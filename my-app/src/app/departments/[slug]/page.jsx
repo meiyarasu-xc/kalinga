@@ -41,7 +41,7 @@ const generateSlug = (name) => {
 export default function DynamicDepartmentPage() {
   const params = useParams();
   const slug = params?.slug;
-  
+
   const [departmentData, setDepartmentData] = useState(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
@@ -53,11 +53,11 @@ export default function DynamicDepartmentPage() {
     const findDepartment = async () => {
       try {
         const departments = await fetchAllDepartments();
-        const dept = departments.find(d => 
-          (d.slug && d.slug === slug) || 
+        const dept = departments.find(d =>
+          (d.slug && d.slug === slug) ||
           generateSlug(d.name) === slug
         );
-        
+
         if (dept) {
           setDepartmentId(dept.id);
         } else {
@@ -122,7 +122,7 @@ export default function DynamicDepartmentPage() {
 
     const updateMetaTag = (name, content, attribute = 'name') => {
       if (!content) return;
-      
+
       let element = document.querySelector(`meta[${attribute}="${name}"]`);
       if (!element) {
         element = document.createElement('meta');
@@ -185,11 +185,11 @@ export default function DynamicDepartmentPage() {
   const mainIntroContent = departmentData?.about_sections?.[0] ? (() => {
     const apiParagraphs = parseHtmlToParagraphs(departmentData.about_sections[0].content);
     const mockSecondParagraph = "The Faculty of Computer Science and Information Technology is a department of skilled professionals who combine theoretical and practical knowledge and prepare students with the trending IT skills that will keep them ahead in the digital world.";
-    
-    const description = apiParagraphs.length > 0 
+
+    const description = apiParagraphs.length > 0
       ? [apiParagraphs[0], mockSecondParagraph, ...apiParagraphs.slice(1)]
       : [mockSecondParagraph];
-    
+
     return {
       title: departmentData.about_sections[0].heading,
       subtitle: departmentData.about_sections[0].heading,
@@ -215,24 +215,24 @@ export default function DynamicDepartmentPage() {
 
   const publicationStats = departmentData?.milestones && departmentData.milestones.length > 0
     ? departmentData.milestones
-        .sort((a, b) => (a.display_order || 0) - (b.display_order || 0))
-        .map(milestone => ({
-          title: milestone.heading || "",
-          value: `${milestone.number || ""} ${milestone.symbol || ""}`.trim(),
-          description: milestone.description || "",
-        }))
+      .sort((a, b) => (a.display_order || 0) - (b.display_order || 0))
+      .map(milestone => ({
+        title: milestone.heading || "",
+        value: `${milestone.number || ""} ${milestone.symbol || ""}`.trim(),
+        description: milestone.description || "",
+      }))
     : null;
 
   const programsOffered = useMemo(() => {
     // Prioritize courses from the optimized endpoint, fallback to department_courses
-    const coursesData = (departmentCourses && departmentCourses.length > 0) 
-      ? departmentCourses 
+    const coursesData = (departmentCourses && departmentCourses.length > 0)
+      ? departmentCourses
       : departmentData?.department_courses;
-    
+
     if (!coursesData || !Array.isArray(coursesData) || coursesData.length === 0) {
       return null;
     }
-    
+
     return coursesData.map(course => {
       let level = "UG";
       if (course.program_type) {
@@ -247,7 +247,7 @@ export default function DynamicDepartmentPage() {
           level = "UG";
         }
       }
-      
+
       const durationNum = typeof course.duration === 'number' ? course.duration : parseInt(course.duration);
       let duration = "3 Year";
       if (!isNaN(durationNum)) {
@@ -255,7 +255,7 @@ export default function DynamicDepartmentPage() {
       } else if (course.duration && typeof course.duration === 'string') {
         duration = course.duration;
       }
-      
+
       return {
         id: course.id,
         title: course.name || "",
@@ -296,7 +296,7 @@ export default function DynamicDepartmentPage() {
     if (!departmentData?.faqs || !Array.isArray(departmentData.faqs) || departmentData.faqs.length === 0) {
       return [];
     }
-    
+
     return departmentData.faqs
       .sort((a, b) => (a.display_order || 0) - (b.display_order || 0))
       .map(faq => ({
@@ -311,7 +311,7 @@ export default function DynamicDepartmentPage() {
     if (!departmentData?.video_interviews || !Array.isArray(departmentData.video_interviews) || departmentData.video_interviews.length === 0) {
       return [];
     }
-    
+
     return departmentData.video_interviews
       .filter(interview => interview.heading || interview.description) // Filter out items without heading or description
       .sort((a, b) => (a.display_order || 0) - (b.display_order || 0))
@@ -329,9 +329,9 @@ export default function DynamicDepartmentPage() {
     if (!departmentData?.video_interviews || !Array.isArray(departmentData.video_interviews) || departmentData.video_interviews.length === 0) {
       return [];
     }
-    
+
     const themes = ["orange", "red", "amber"];
-    
+
     return departmentData.video_interviews
       .filter(interview => interview.heading || interview.description) // Filter out items without heading or description
       .sort((a, b) => (a.display_order || 0) - (b.display_order || 0))
@@ -350,7 +350,7 @@ export default function DynamicDepartmentPage() {
     if (!departmentData?.board_of_studies || !Array.isArray(departmentData.board_of_studies) || departmentData.board_of_studies.length === 0) {
       return [];
     }
-    
+
     return departmentData.board_of_studies
       .sort((a, b) => (a.s_no || 0) - (b.s_no || 0))
       .map(member => ({
@@ -366,9 +366,9 @@ export default function DynamicDepartmentPage() {
     imageposition: "object-[45%_25%]",
     customBreadcrumbs: [
       { label: 'Home', href: '/' },
-      { 
-        label: departmentData.name, 
-        href: `/departments/${departmentData.slug || generateSlug(departmentData.name)}` 
+      {
+        label: departmentData.name,
+        href: `/departments/${departmentData.slug || generateSlug(departmentData.name)}`
       }
     ]
   } : loading ? {
@@ -412,7 +412,7 @@ export default function DynamicDepartmentPage() {
   return (
     <div>
       {mainIntroContent && (
-        <MainIntro 
+        <MainIntro
           title={mainIntroContent.title}
           // subtitle={mainIntroContent.subtitle}
           description={mainIntroContent.description}
@@ -448,7 +448,7 @@ export default function DynamicDepartmentPage() {
       <Placements placementData={placementData} bgColor="bg-white" />
       <Facility />
       {whyStudyContent && whyStudyContent.items && whyStudyContent.items.length > 0 && (
-        <WhyStudy 
+        <WhyStudy
           sectionTitle={whyStudyContent.sectionTitle}
           backgroundImage={whyStudyContent.backgroundImage}
           items={whyStudyContent.items}
@@ -466,6 +466,8 @@ export default function DynamicDepartmentPage() {
         <UpcomingConference
           title="Student Clubs"
           registerButtonText="Join Now"
+          imageContainerClass="object-contain py-16 h-[350px]"
+
           conferences={departmentData.clubs
             .sort((a, b) => (a.display_order || 0) - (b.display_order || 0))
             .map(club => ({
@@ -526,7 +528,7 @@ export default function DynamicDepartmentPage() {
       )} */}
       <StudentActivities />
       {faqItems && faqItems.length > 0 && (
-        <FAQ 
+        <FAQ
           title="Frequently Asked Questions"
           items={faqItems}
           key={`${departmentData.id}-${faqItems.length}-${faqItems.map(item => item.id).join('-')}`}

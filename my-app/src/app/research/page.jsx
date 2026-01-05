@@ -2,7 +2,7 @@
 import PublicationGrid from "../components/research/publication-grid";
 import UGCLogo from "../components/research/ugc_logo";
 import UpcomingConference from "../components/research/upcoming_conference";
-import ProgramsOffered from "../components/department/programs-offered"; 
+import ProgramsOffered from "../components/department/programs-offered";
 import OrganogramOfKalinga from "../components/about/organogram_of_kalinga";
 import MainIntro from "../components/about/main_intro";
 import QuickLinks from "../components/general/quick_links";
@@ -11,8 +11,9 @@ import ResearchSixGridButtons from "../components/research/research_six_grid-but
 import AdmissionCareer from "../components/general/admission_cta";
 import UpcomingConferences from "../components/research/upcoming_conference";
 import MentorIntro from "../components/department/dept_head_intro";
+import NewsEvents from "../components/home/news_and_events";
 import CenterOfExcellence from "../components/about/center_of_excellence";
-import AwardsScrollbar from "../components/home/awards-scrollbar"; 
+import AwardsScrollbar from "../components/home/awards-scrollbar";
 import AutoBreadcrumb from "../components/layout/BreadcrumbData";
 export default function Research() {
 
@@ -22,31 +23,31 @@ export default function Research() {
       title: "Scopus Workshop: Research Impact",
       date: "Nov 28, 2025 · 10:00 A.M.",
       category: "Academic Event",
-            description: "Hybrid workshop on Scopus analytics and publishing insights with experts.",
-            image: "https://kalinga-university.s3.ap-south-1.amazonaws.com/campus-life/Pic1+(1).jpeg",
-            href: "/contact-us"
+      description: "Hybrid workshop on Scopus analytics and publishing insights with experts.",
+      image: "https://kalinga-university.s3.ap-south-1.amazonaws.com/campus-life/Pic1+(1).jpeg",
+      href: "/contact-us"
     }
   ];
   const centres = [
     {
       id: 1,
       name: "Rajasthan Global Security Pvt. Ltd.",
-     
+
       image: "https://kalinga-university.s3.ap-south-1.amazonaws.com/research/Rajasthan+Global+Security+Pvt.+Ltd..png",
     },
     {
       id: 2,
       name: "WANFENG Aluminium Wheel (INDIA) Pvt. Ltd.",
-      
+
       image: "https://kalinga-university.s3.ap-south-1.amazonaws.com/research/WANFENG+Aluminium+Wheel+(INDIA)+Pvt.+Ltd+(2).png",
     },
     {
       id: 3,
       name: "Real Care Foundation",
-      
+
       image: "https://kalinga-university.s3.ap-south-1.amazonaws.com/research/Real+Care+Foundation.png",
     },
-    
+
   ];
   const awards = [
     {
@@ -117,17 +118,17 @@ export default function Research() {
         initialVisibleParagraphs={1}
       />
 
-      <PublicationGrid  />
-      <OrganogramOfKalinga 
+      <PublicationGrid />
+      <OrganogramOfKalinga
         title="Apply Now for Ph.D. Admissions"
         description="Begin your research journey with world-class faculty, advanced labs, and a structured research ecosystem."
         buttonLabel="Apply Now"
         href="/phd"
         useContainer={true}
-      
+
       />
       <UGCLogo />
-      <QuickLinks 
+      <QuickLinks
         title="Research Facilities and Resources"
         titleClassName="text-white"
         description="We provide a conducive environment for research work through our advanced laboratories, IPR cell, CIF labs, and library."
@@ -178,18 +179,18 @@ export default function Research() {
         showReadMore={true}
         showDescriptionReadMore={false}
       />
-      
-      <MentorIntro   imageSrc = "https://kalinga-university.s3.ap-south-1.amazonaws.com/research/chart-1.webp"
-  title = "Dr. Harsha Patil"
-  subtitle = "A Message From the Dean"
-  department = "HoD - Research"
-  quote = "Research is the foundation of academic excellence, where curiosity transforms into innovation and knowledge advances society."
-  message = "Research is the soul of academic excellence, and Kalinga University strives to develop a rich research ecosystem that generates curiosity, problem-solving, and inspiration among young researchers and faculty. With our advanced research labs, high-tech instruments, updated policy guidelines, IPR facilitation, CIF labs, and connections with national and international organisations, our research scholars work together toward societal progress. With hands-on training opportunities, workshops, and seminars on how to use modern machines, students learn to lead in their field. Our faculty members support students in publishing their research papers, filing patents, and presenting their work on different platforms."
-  />  
 
-      <FAQ 
-        title="Conferences" 
-        subtitleClassName="!hidden" 
+      <MentorIntro imageSrc="https://kalinga-university.s3.ap-south-1.amazonaws.com/research/chart-1.webp"
+        title="Dr. Harsha Patil"
+        subtitle="A Message From the Dean"
+        department="HoD - Research"
+        quote="Research is the foundation of academic excellence, where curiosity transforms into innovation and knowledge advances society."
+        message="Research is the soul of academic excellence, and Kalinga University strives to develop a rich research ecosystem that generates curiosity, problem-solving, and inspiration among young researchers and faculty. With our advanced research labs, high-tech instruments, updated policy guidelines, IPR facilitation, CIF labs, and connections with national and international organisations, our research scholars work together toward societal progress. With hands-on training opportunities, workshops, and seminars on how to use modern machines, students learn to lead in their field. Our faculty members support students in publishing their research papers, filing patents, and presenting their work on different platforms."
+      />
+
+      <FAQ
+        title="Conferences"
+        subtitleClassName="!hidden"
         variant="table-display"
         items={[]}
         tableSections={[
@@ -240,22 +241,30 @@ export default function Research() {
         ]}
         overflowX={false}
       />
-      
+
       <ResearchSixGridButtons />
 
-      <UpcomingConferences 
-        conferences={newsConferences}
-        title="Upcoming Conferences & Events"
-    
+
+      {/* 
+        categoryId="RESEARCH_ID" is a placeholder. 
+        Since this ID presumably doesn't exist, it will fallback to showing ALL events (fallback='all' by default).
+        Once a real Research category ID exists, it will filter correctly.
+      */}
+      {/* <NewsEvents categoryId="RESEARCH_ID" title="Upcoming Conferences & Events" /> */}
+      <UpcomingConferences
+        categoryIds={['5']}
+        title="Conferences & Events"
+        fallback="all"
+        limit={5}
       />
-          <CenterOfExcellence
+      <CenterOfExcellence
         centres={centres}
         title=" Collaborative Activities/MoU"
         description="Explore the spaces and partnerships that power the Kalinga Incubation Foundation."
       />
-      <AwardsScrollbar 
+      <AwardsScrollbar
         title="Awards Received for Research & Innovation"
-        awards={awards} 
+        awards={awards}
         hideTitle={false}
         headerButtonLabel="View All Awards"
         onHeaderButtonClick={() => console.log('View all awards clicked')}
@@ -265,5 +274,5 @@ export default function Research() {
       />
       <AdmissionCareer />
     </div>
-  );        
+  );
 }

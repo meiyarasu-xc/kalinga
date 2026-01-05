@@ -6,22 +6,21 @@ import "swiper/css";
 import "swiper/css/navigation";
 import Image from "next/image";
 import SectionHeading from "./SectionHeading";
-import dynamic from "next/dynamic";
-
-
-// Dynamically import ReactPlayer to avoid SSR issues
-const ReactPlayer = dynamic(() => import("react-player"), { ssr: false });
 
 export default function MediaCardSlider({
   title = "Testimonials",
   categoryTitle = "",
   description = "",
-  imageItems = [],
-  videoItems = [],
+  imageItems = [
+
+  ],
+  videoItems = [
+
+  ],
   cardBgClass = "bg-white",
   nameTextClass = "text-[var(--button-red)]",
   descriptionTextClass = "text-gray-600",
-  thumbnail="https://kalinga-university.s3.ap-south-1.amazonaws.com/common/placeholder-img.png",
+  thumbnail = "https://kalinga-university.s3.ap-south-1.amazonaws.com/common/placeholder-img.png",
   className = "",
   backgroundColor = "bg-white",
   swiperClassName = "media-card-slider",
@@ -29,7 +28,7 @@ export default function MediaCardSlider({
   // Determine which items to use - prioritize video if both provided
   const items = videoItems.length > 0 ? videoItems : imageItems;
   const isVideo = videoItems.length > 0;
-  
+
   // Modal state
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [currentVideo, setCurrentVideo] = useState(null);
@@ -46,6 +45,26 @@ export default function MediaCardSlider({
     setCurrentVideo(null);
     // Restore body scroll
     document.body.style.overflow = 'unset';
+  };
+
+  // Extract YouTube video ID from various URL formats
+  const getYouTubeVideoId = (url) => {
+    if (!url) return null;
+
+    // Handle different YouTube URL formats
+    const patterns = [
+      /(?:youtube\.com\/watch\?v=|youtu\.be\/|youtube\.com\/embed\/)([^&\n?#]+)/,
+      /^([a-zA-Z0-9_-]{11})$/ // Direct video ID
+    ];
+
+    for (const pattern of patterns) {
+      const match = url.match(pattern);
+      if (match && match[1]) {
+        return match[1];
+      }
+    }
+
+    return null;
   };
 
   // Check if URL is a direct video file (AWS S3 or other direct URLs)
@@ -81,7 +100,7 @@ export default function MediaCardSlider({
       <div className="container mx-auto px-2">
         {/* Header Section */}
         <div className="text-center">
-         
+
           <SectionHeading title={title} subtitle={categoryTitle} titleClassName="!py-3" />
           {description && (
             <p className={` ${descriptionTextClass} mb-10`}>
@@ -127,7 +146,7 @@ export default function MediaCardSlider({
                 <div className="h-full w-full">
                   <div className={`${cardBgClass} rounded-xl p-4 h-full flex flex-col border border-gray-300 border-2 transition-shadow ${isVideo && item.videoUrl ? 'cursor-pointer hover:shadow-xl' : ''}`}>
                     {/* Media Container */}
-                    <div 
+                    <div
                       className="relative w-full h-[250px] md:h-[350px] mb-4 rounded-lg overflow-hidden bg-gray-200"
                       onClick={() => {
                         if (isVideo && item.videoUrl) {
@@ -198,14 +217,14 @@ export default function MediaCardSlider({
                           {item.title}
                         </h3>
                       )}
-                      
+
                       {/* Subtitle */}
                       {item.subtitle && (
                         <p className="text-sm md:text-base text-gray-700 mb-2">
                           {item.subtitle}
                         </p>
                       )}
-                      
+
                       {/* Description */}
                       {item.description && (
                         <p className={`text-sm md:text-base ${descriptionTextClass}`}>
@@ -263,11 +282,11 @@ export default function MediaCardSlider({
 
       {/* Video Modal */}
       {isModalOpen && currentVideo && (
-        <div 
+        <div
           className="fixed inset-0 z-[9999] flex items-center justify-center bg-black/80 backdrop-blur-sm p-4"
           onClick={closeVideoModal}
         >
-          <div 
+          <div
             className="relative w-full max-w-5xl bg-black rounded-lg overflow-hidden shadow-2xl"
             onClick={(e) => e.stopPropagation()}
           >
@@ -318,24 +337,21 @@ export default function MediaCardSlider({
                   <source src={currentVideo.url} type="video/webm" />
                   Your browser does not support the video tag.
                 </video>
-              ) : (
-                // ReactPlayer for YouTube, Vimeo, etc.
-                <ReactPlayer
-                  url={currentVideo.url}
-                  width="100%"
-                  height="100%"
-                  controls
-                  playing
-                  className="absolute top-0 left-0"
-                  config={{
-                    youtube: {
-                      playerVars: { showinfo: 1 }
-                    },
-                    vimeo: {
-                      playerOptions: { controls: true }
-                    }
-                  }}
+              ) : getYouTubeVideoId(currentVideo.url) ? (
+                // YouTube iframe embed
+                <iframe
+                  className="absolute top-0 left-0 w-full h-full"
+                  src={`https://www.youtube.com/embed/${getYouTubeVideoId(currentVideo.url)}?autoplay=1&rel=0`}
+                  title={currentVideo.name || "YouTube video"}
+                  frameBorder="0"
+                  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                  allowFullScreen
                 />
+              ) : (
+                // Fallback for other video URLs
+                <div className="absolute top-0 left-0 w-full h-full flex items-center justify-center bg-gray-900">
+                  <p className="text-white">Unable to load video</p>
+                </div>
               )}
             </div>
           </div>

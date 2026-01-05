@@ -204,7 +204,7 @@ export async function fetchDepartmentCourses(slugOrId) {
  */
 function decodeHtmlEntities(text) {
   if (!text) return '';
-  
+
   // Comprehensive entity map for common HTML entities
   const entityMap = {
     // Named entities
@@ -240,9 +240,9 @@ function decodeHtmlEntities(text) {
     '&#160;': ' ',    // Non-breaking space
     '&#32;': ' ',     // Space
   };
-  
+
   let decoded = text;
-  
+
   // Replace entities (order matters - &amp; should be first to decode encoded entities)
   const sortedEntities = Object.keys(entityMap).sort((a, b) => {
     // Process &amp; first, then longer entities
@@ -250,11 +250,11 @@ function decodeHtmlEntities(text) {
     if (b === '&amp;') return 1;
     return b.length - a.length;
   });
-  
+
   sortedEntities.forEach(entity => {
     decoded = decoded.replace(new RegExp(entity.replace(/[.*+?^${}()|[\]\\]/g, '\\$&'), 'gi'), entityMap[entity]);
   });
-  
+
   // Also handle numeric entities in format &#123; or &#x1F;
   decoded = decoded.replace(/&#(\d+);/g, (match, dec) => {
     try {
@@ -263,7 +263,7 @@ function decodeHtmlEntities(text) {
       return match;
     }
   });
-  
+
   decoded = decoded.replace(/&#x([0-9a-fA-F]+);/g, (match, hex) => {
     try {
       return String.fromCharCode(parseInt(hex, 16));
@@ -271,7 +271,7 @@ function decodeHtmlEntities(text) {
       return match;
     }
   });
-  
+
   return decoded;
 }
 
@@ -282,10 +282,10 @@ function decodeHtmlEntities(text) {
  */
 export function parseHtmlToParagraphs(htmlContent) {
   if (!htmlContent) return [];
-  
+
   // First decode HTML entities
   let text = decodeHtmlEntities(htmlContent);
-  
+
   // Remove HTML tags and split by paragraph breaks
   text = text
     .replace(/<p[^>]*>/gi, '')
@@ -293,7 +293,7 @@ export function parseHtmlToParagraphs(htmlContent) {
     .replace(/<br\s*\/?>/gi, '\n')
     .replace(/<[^>]+>/g, '') // Remove any remaining HTML tags
     .trim();
-  
+
   // Split by newlines and filter out empty strings
   return text
     .split('\n')
@@ -308,16 +308,16 @@ export function parseHtmlToParagraphs(htmlContent) {
  */
 export function parseHtmlToText(htmlContent) {
   if (!htmlContent) return '';
-  
+
   // First decode HTML entities
   let text = decodeHtmlEntities(htmlContent);
-  
+
   // Remove HTML tags and clean up whitespace
   text = text
     .replace(/<[^>]*>/g, '') // Remove all HTML tags
     .replace(/\s+/g, ' ') // Replace multiple spaces with single space
     .trim();
-  
+
   return text;
 }
 
@@ -329,12 +329,12 @@ export function parseHtmlToText(htmlContent) {
  */
 export function parseHtmlListItems(htmlContent) {
   if (!htmlContent) return [];
-  
+
   // Match all <li>...</li> tags and extract their inner content
   const liMatches = htmlContent.match(/<li[^>]*>([\s\S]*?)<\/li>/gi);
-  
+
   if (!liMatches) return [];
-  
+
   return liMatches.map(li => {
     // Extract the inner content of the <li> tag
     const innerMatch = li.match(/<li[^>]*>([\s\S]*?)<\/li>/i);
@@ -472,12 +472,12 @@ export async function fetchAllCourseAbout() {
     let nextUrl = getApiUrl(API_CONFIG.courses.about());
     let pageCount = 0;
     const maxPages = 100; // Safety limit to prevent infinite loops
-    
+
     while (nextUrl && pageCount < maxPages) {
       try {
         // Handle both absolute and relative URLs
         const fetchUrl = nextUrl.startsWith('http') ? nextUrl : getApiUrl(nextUrl);
-        
+
         const response = await fetch(fetchUrl, {
           method: 'GET',
           headers: {
@@ -496,12 +496,12 @@ export async function fetchAllCourseAbout() {
         }
 
         const data = await response.json();
-        
+
         // Extract results from paginated response
         if (data.results && Array.isArray(data.results)) {
           allResults = allResults.concat(data.results);
         }
-        
+
         // Check if there's a next page
         nextUrl = data.next ? data.next : null;
         pageCount++;
@@ -524,5 +524,104 @@ export async function fetchAllCourseAbout() {
   } catch (error) {
     console.error('Error fetching course-about data:', error);
     throw error;
+  }
+}
+
+/**
+ * Fetches news and events from the API
+ * @param {Object} params - Query parameters (slug, department, category, is_published, etc.)
+ * @returns {Promise<Object>} News and events data
+ */
+export async function fetchNewsEvents(params = {}) {
+  try {
+    const searchParams = new URLSearchParams();
+    Object.entries(params).forEach(([key, value]) => {
+      if (value !== null && value !== undefined && value !== '') {
+        searchParams.append(key, value);
+      }
+    });
+
+    const queryString = searchParams.toString() ? `?${searchParams.toString()}` : '';
+    const url = getApiUrl(API_CONFIG.newsEvents.list(queryString));
+
+    // Using no-store to ensure fresh data for news
+    const response = await fetch(url, {
+      method: 'GET',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      cache: 'no-store',
+    });
+
+    if (!response.ok) {
+      throw new Error(`API error: ${response.status} ${response.statusText}`);
+    }
+
+    const data = await response.json();
+    return data;
+  } catch (error) {
+    console.error('Error fetching news and events:', error);
+    throw error;
+  }
+}
+
+/**
+ * Fetches single news/event details by slug
+ * @param {string} slug - The slug of the news/event
+ * @returns {Promise<Object>} News/event details
+ */
+export async function fetchNewsEventDetails(slug) {
+  try {
+    const url = getApiUrl(API_CONFIG.newsEvents.detail(slug));
+    const response = await fetch(url, {
+      method: 'GET',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      cache: 'no-store',
+    });
+
+    if (!response.ok) {
+      if (response.status === 404) return null;
+      throw new Error(`API error: ${response.status} ${response.statusText}`);
+    }
+
+    const data = await response.json();
+    return data;
+  } catch (error) {
+    console.error(`Error fetching news event details for ${slug}:`, error);
+    throw error;
+  }
+}
+
+/**
+ * Fetches SEO data for a specific news/event
+ * @param {string} slug - The slug of the news/event
+ * @returns {Promise<Object>} SEO data
+ */
+export async function fetchNewsEventSEO(slug) {
+  try {
+    const url = getApiUrl(API_CONFIG.newsEvents.seo(slug));
+    const response = await fetch(url, {
+      method: 'GET',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      cache: 'no-store',
+    });
+
+    // If 404, it might mean no specific SEO data is configured, which is fine
+    if (!response.ok) {
+      if (response.status === 404) {
+        return null;
+      }
+      throw new Error(`API error: ${response.status} ${response.statusText}`);
+    }
+
+    const data = await response.json();
+    return data;
+  } catch (error) {
+    console.error(`Error fetching SEO for ${slug}:`, error);
+    return null; // Return null on error to allow fallback to default SEO
   }
 }

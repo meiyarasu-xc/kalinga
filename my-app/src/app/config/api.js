@@ -1,14 +1,14 @@
 // Global API Configuration
 export const API_CONFIG = {
   baseURL: 'https://kalinga.dupebox.com/api',
-  
+
   // Course endpoints
   courses: {
     list: () => `/courses/`,
     completeDetail: (courseId) => `/courses/${courseId}/complete-detail/`,
     about: () => `/course-about/`,
   },
-  
+
   // Department endpoints
   departments: {
     list: () => `/departments/`,
@@ -25,13 +25,20 @@ export const API_CONFIG = {
     courseCounts: () => `/departments/course-counts/`,
     updateCourseCount: () => `/departments/course-counts/update/`,
   },
-  
+
   // Optimized endpoints
   departmentCourses: {
     list: () => `/department-courses/`,
     departmentsCourses: () => `/departments-courses/`,
   },
-  
+
+  // News & Events endpoints
+  newsEvents: {
+    list: (params = '') => `/news-events/${params}`,
+    detail: (slug) => `/news-events/${slug}/`,
+    seo: (slug) => `/news-events/${slug}/seo/`,
+  },
+
   // Add other API endpoints here as needed
 };
 

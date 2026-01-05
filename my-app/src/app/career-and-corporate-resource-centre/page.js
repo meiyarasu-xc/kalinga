@@ -1,5 +1,5 @@
- "use client" 
- import ImageListItem from "@/app/components/ccrc/imagelistitem";
+"use client"
+import ImageListItem from "@/app/components/ccrc/imagelistitem";
 import ImageContent from "@/app/components/ccrc/imagecontent";
 import Cards from "@/app/components/ccrc/cards";
 import Hearfrom from "@/app/components/ccrc/Hearfrom";
@@ -13,7 +13,7 @@ import MediaCardSlider from "@/app/components/general/media-card-slider";
 
 const breadcrumbData = {
   heroImage: "https://kalinga-university.s3.ap-south-1.amazonaws.com/ccrc/ccrc-banner-updated.jpg",
-  pageTitle: "Career and Corporate Resource Centre (CCRC)",
+  pageTitle: "CCRC",
   customBreadcrumbs: [
     { label: 'Home', href: '/' },
     { label: 'CCRC', href: '/ccrc' }
@@ -26,38 +26,7 @@ if (typeof window !== 'undefined') {
 }
 
 
-const newsConferences = [
-  {
-    id: 1,
-    title: "Annual Research Symposium 2025",
-    date: "November 10 · 2025",
-    category: "Research & Innovation",
-    description:
-      "Join us for our annual research symposium featuring cutting-edge research presentations, keynote speakers, and networking opportunities for researchers and academics.",
-    image:
-      "https://kalinga-university.s3.ap-south-1.amazonaws.com/common/student.jpg",
-  },
-  {
-    id: 2,
-    title: "International Education Summit",
-    date: "December 05 · 2025",
-    category: "Education",
-    description:
-      "A global gathering of educators, policymakers, and thought leaders to discuss the future of higher education and innovative teaching methodologies.",
-    image:
-      "https://kalinga-university.s3.ap-south-1.amazonaws.com/common/student.jpg",
-  },
-  {
-    id: 3,
-    title: "Technology & Innovation Conference",
-    date: "January 20 · 2026",
-    category: "Technology",
-    description:
-      "Explore the latest trends in technology, artificial intelligence, and digital transformation in education and industry applications.",
-    image:
-      "https://kalinga-university.s3.ap-south-1.amazonaws.com/common/student.jpg",
-  },
-];
+
 const cards = [
   {
     title: "Corporate Training And Consultancy Division (CTCD)",
@@ -324,20 +293,34 @@ const accreditations = [
 const videoItems = [
   {
     id: 1,
-    name: "Name",
-    description: "Lorem ipsum",
+    title: "Rajiv Chwala",
+    name: "Rajiv Chwala",
+    description: "Alumni Testimonial",
+    videoUrl: "https://www.youtube.com/watch?v=Fy4fnnqU238",
     thumbnail: "https://kalinga-university.s3.ap-south-1.amazonaws.com/common/student.jpg",
   },
   {
     id: 2,
-    name: "Name",
-    description: "Lorem ipsum",
+    title: "Sumit Mitra",
+    name: "Sumit Mitra",
+    description: "Alumni Testimonial",
+    videoUrl: "https://www.youtube.com/watch?v=Fy4fnnqU238",
     thumbnail: "https://kalinga-university.s3.ap-south-1.amazonaws.com/common/student.jpg",
   },
   {
     id: 3,
-    name: "Name",
-    description: "Lorem ipsum",
+    title: "Amar Pathak",
+    name: "Amar Pathak",
+    description: "Alumni Testimonial",
+    videoUrl: "https://www.youtube.com/watch?v=Fy4fnnqU238",
+    thumbnail: "https://kalinga-university.s3.ap-south-1.amazonaws.com/common/student.jpg",
+  },
+  {
+    id: 4,
+    title: "Prateek Singh",
+    name: "Prateek Singh",
+    description: "Alumni Testimonial",
+    videoUrl: "https://www.youtube.com/watch?v=Fy4fnnqU238",
     thumbnail: "https://kalinga-university.s3.ap-south-1.amazonaws.com/common/student.jpg",
   },
 ]
@@ -356,56 +339,58 @@ const MentorIntroProps = [
       "We approach every project with excellence and commitment. I sincerely thank all our recruitment partners for turning the aspirations of our students into rewarding careers and corporate partners for their continued trust and collaboration. I warmly welcome more companies and organisations to work with us and generate capable future leaders."
     ],
     quote: "Where Learning Transforms into Leadership and Skills Drive Corporate Success.",
-   }
+  }
 ]
 export default function CCRCPage() {
   return <>
-   
-    <ImageContent 
+
+    <ImageContent
       imageSrc="https://kalinga-university.s3.ap-south-1.amazonaws.com/ccrc/ccrclogo.webp"
       description="The Career and Corporate Resource Centre (CCRC) of Kalinga University bridges academic learning and industrial knowledge through collaborations and customised solutions. Our services include: Corporate Trainings & Psychometric Analysis, Consultancy Services: 360 Degree PMS & HRIS, Corporate Social Responsibility, Training and Placements, and Incubation support."
       additionalContent={[
         "With skill-based training programs, workshops, guest lectures, corporate mentorship, industrial visits, soft skill trainings, personality development workshops, internships, industrial training, campus placement drives, and industry-certified programs, we're able to maximise the output and save the time of students and working professionals, and build a future-ready workforce. The Centre features state-of-the-art infrastructure and resources that meet industry standards and has earned high appreciation from leading organisations across India and abroad. With experiential learning strategies and an updated curriculum, our students are placed at top companies, and corporate professionals have learned to deliver maximum output and maintain consistent performance."
       ]}
     />
-    <ImageListItem items={Items} description="" imageSrc="https://kalinga-university.s3.ap-south-1.amazonaws.com/placement/placement-intro.jpg" title="Benefits for Organisations"  />
+    <ImageListItem items={Items} description="" imageSrc="https://kalinga-university.s3.ap-south-1.amazonaws.com/placement/placement-intro.jpg" title="Benefits for Organisations" />
     <DeptHeadIntro items={MentorIntroProps} />
 
     <Cards cards={cards} />
-    <Hearfrom items={sliderItems  } title="Hear From Our Clients" />
+    <Hearfrom items={sliderItems} title="Hear From Our Clients" />
     <MediaCardSlider
-        categoryTitle="Video Interviews"
-        title="Alumni Talk"
-        description="Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed"
-        videoItems={videoItems}
-        cardBgClass="bg-white"
-        nameTextClass="text-[var(--button-red)]"
-        descriptionTextClass=""
-        swiperClassName="ccrc-video-slider"
-      />
-    <Partner 
-      blueTitle="Industry Partner" 
-      redTitle="MoU Partners" 
-      blueItems={blueItems} 
+      categoryTitle="Video Interviews"
+      title="Alumni Talk"
+      description=""
+      videoItems={videoItems}
+      cardBgClass="bg-white"
+      nameTextClass="text-[var(--button-red)]"
+      descriptionTextClass=""
+      swiperClassName="ccrc-video-slider"
+    />
+    <Partner
+      blueTitle="Industry Partner"
+      redTitle="MoU Partners"
+      blueItems={blueItems}
       redItems={redItems}
       ccrcLogo="https://kalinga-university.s3.ap-south-1.amazonaws.com/ccrc/ccrclogo.webp"
     />
-    <AccreditationRanking 
+    <AccreditationRanking
       heading="Clients We Served"
-          accreditations={accreditations} 
+      accreditations={accreditations}
     />
-  <UpcomingConferences 
-        conferences={newsConferences}
-        title="Upcoming CCRC Events"
-        backgroundColor="bg-[var(--light-gray)]"
-        backgroundColorcard="bg-white"
-        href="/contact-us"
-      />
-      <Gallery title=" CCRC  Glimpse" paddingClassName="py-20" />
-     
-      <AdmissionCareer />
+    <UpcomingConferences
+      categoryIds={['']}
+      title="Conferences & Events"
+      fallback="all"
+      limit={5}
+      backgroundColor="bg-[var(--light-gray)]"
+      backgroundColorcard="bg-white"
+      href="/contact-us"
+    />
+    <Gallery title=" CCRC  Glimpse" paddingClassName="py-20" />
+
+    <AdmissionCareer />
 
 
-        {/* <CCrcContent /> */}
-  </>;  
+    {/* <CCrcContent /> */}
+  </>;
 }

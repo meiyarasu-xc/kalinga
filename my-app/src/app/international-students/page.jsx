@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useEffect } from 'react'   
+import React, { useEffect } from 'react'
 import MainIntro from '../components/about/main_intro'
 import PublicationGrid from '../components/research/publication-grid'
 import AccreditationRanking from '../components/home/AccreditationRanking'
@@ -82,7 +82,7 @@ export default function InternationalStudents() {
       description: "Pharmacy Student",
       videoUrl: "https://kalinga-university.s3.ap-south-1.amazonaws.com/international-students/REEL_PHARMA_TESTIMONIALS_04.mp4",
       thumbnail: "https://kalinga-university.s3.ap-south-1.amazonaws.com/international-students/REEL_PHARMA_TESTIMONIALS_04.mp4",
-    },  
+    },
     {
       id: 4,
       name: "Palchin Upadhyay",
@@ -212,7 +212,7 @@ export default function InternationalStudents() {
       variant: 'amber',
     },
   ];
-  
+
   const publicationStats = [
     {
       id: 1,
@@ -349,31 +349,31 @@ export default function InternationalStudents() {
         heading="Accreditations & Rankings"
         secondHeading=""
       />
-      <FeatureCards 
+      <FeatureCards
         title="Why International Students Choose Kalinga University?"
         subtitle=""
         description="At Kalinga University, international students discover an education hub designed for global success. From academic excellence to an inclusive learning environment, every step of their journey is thoughtfully designed so that they can focus on fulfilling their aspirations."
         imageUrl="https://kalinga-university.s3.ap-south-1.amazonaws.com/international-students/int-why.jpg"
         imageAlt="International Students"
         cards={internationalStudentsFeatureCards}
-      />        
-       <ImageListItem 
-         imageSrc="https://kalinga-university.s3.ap-south-1.amazonaws.com/international-students/int-why-3.webp" 
-         boxItems={boxItems} 
-         title="Why Study At India" 
-         subtitle="" 
-         description=""
-         className="bg-white"
-         textClassName=""
-         headingClassName="" 
-         cardBackgroundColor="bg-[var(--button-red)]"
-         cardTitleClassName="text-white"
-         listItemTextClassName="text-white"
-         hideIcons={true}
-       /> 
+      />
+      <ImageListItem
+        imageSrc="https://kalinga-university.s3.ap-south-1.amazonaws.com/international-students/int-why-3.webp"
+        boxItems={boxItems}
+        title="Why Study At India"
+        subtitle=""
+        description=""
+        className="bg-white"
+        textClassName=""
+        headingClassName=""
+        cardBackgroundColor="bg-[var(--button-red)]"
+        cardTitleClassName="text-white"
+        listItemTextClassName="text-white"
+        hideIcons={true}
+      />
       <StudentCell />
       <VisaFrofrroGuidelines />
-      <AdmissionSteps   
+      <AdmissionSteps
         steps={internationalAdmissionSteps}
         bgColor="bg-[var(--background)]"
       />
@@ -400,8 +400,8 @@ export default function InternationalStudents() {
         ]}
       />
       <div id="bridge-course" className="scroll-mt-24 md:scroll-mt-28">
-        <OpenPositions 
-          title="BRIDGE Courses for International Students" 
+        <OpenPositions
+          title="BRIDGE Courses for International Students"
           subtitle="Pre-Semester Preparation Programs"
           description="BRIDGE Courses for newly admitted international students are conducted before the commencement of the first semester classes. The main objective of the course is to bridge the gap between subjects studied at the Pre-university level and subjects they would be studying here. We also understand that the students applying to the university come from different backgrounds and countries, and thus, we have included a few topics that will help them understand the local culture and history of India. To make this bridge course interesting for the students, we have included workshops related to art and culture & a hobby class too. We have bridge courses of 2 months, 4 months, and 6 months (5 days a week)."
           hideCheckEligibility={true}
@@ -454,17 +454,17 @@ export default function InternationalStudents() {
         descriptionTextClass=""
         swiperClassName="ccrc-video-slider"
       />
-      <UpcomingConference 
-        conferences={newsConferences}
-        title="Upcoming Conferences & Events"
+      <UpcomingConference
+        categoryIds={['']}
+        fallback="all"
+        limit={5}
+
+        title="Conferences & Events"
         backgroundColor="bg-[var(--light-gray)]"
         backgroundColorcard="bg-white"
-        showCategory={false}
-        showDate={false}
-        href="/contact-us"
       />
-      <Gallery 
-        title="Glimpse" 
+      <Gallery
+        title="Glimpse"
         description="Explore the vibrant life of our international students at Kalinga University. From cultural celebrations to academic achievements, witness the diverse experiences that make our campus a global community."
         images={[
           { id: 1, src: "https://kalinga-university.s3.ap-south-1.amazonaws.com/international-students/int-g-1.webp", alt: "International Students Introduction" },
@@ -476,7 +476,7 @@ export default function InternationalStudents() {
           { id: 7, src: "https://kalinga-university.s3.ap-south-1.amazonaws.com/international-students/int-g-7.webp", alt: "International Students Banner" },
           { id: 8, src: "https://kalinga-university.s3.ap-south-1.amazonaws.com/international-students/int-g-8.webp", alt: "International Students Banner" },
         ]}
-      /> 
+      />
       <AdmissionCareer />
     </>
   )

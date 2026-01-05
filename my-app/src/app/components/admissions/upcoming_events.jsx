@@ -7,8 +7,9 @@ import { Navigation } from 'swiper/modules'
 import 'swiper/css'
 import 'swiper/css/navigation'
 
-const UpcomingEvents = () => {
-  const events = [
+const UpcomingEvents = ({ events }) => {
+  // Use passed events or fallback (although we expect events to be passed now)
+  const displayEvents = events || [
     {
       id: 1,
       image: 'https://kalinga-university.s3.ap-south-1.amazonaws.com/common/student.jpg',
@@ -16,27 +17,17 @@ const UpcomingEvents = () => {
       badgeText: 'Day 5 Highlights',
       title: 'Lorem ipsum dolor sit amet, consectetur adipiscing'
     },
-    {
-      id: 2,
-      image: 'https://kalinga-university.s3.ap-south-1.amazonaws.com/common/student.jpg',
-      alt: 'Event 2',
-      badgeText: 'Day 5 Highlights',
-      title: 'Lorem ipsum dolor sit amet, consectetur adipiscing'
-    },
-    {
-      id: 3,
-      image: 'https://kalinga-university.s3.ap-south-1.amazonaws.com/common/student.jpg',
-      alt: 'Event 3',
-      badgeText: 'Day 5 Highlights',
-      title: 'Lorem ipsum dolor sit amet, consectetur adipiscing'
-    }
-  ]
+    // ... add more fallbacks if really needed, or just empty array
+  ];
+
+  if (!events || events.length === 0) return null; // Or return fallback if prefered, but usually hide if no data.
+
 
   return (
     <section className="py-16 bg-white">
       <div className="container mx-auto px-2">
         {/* Title */}
-        <SectionHeading 
+        <SectionHeading
           title="Upcoming Events"
           titleClassName="text-center mb-6 sm:mb-8 md:mb-10"
         />
@@ -64,7 +55,7 @@ const UpcomingEvents = () => {
               </SwiperSlide>
             ))}
           </Swiper>
-          
+
           {/* Navigation Buttons */}
           <div className="flex justify-end items-center gap-3 mt-5">
             <button className="upcoming-events-prev w-12 h-12 rounded-lg bg-[var(--button-red)] hover:bg-[#A2A2A2] flex items-center justify-center hover:opacity-90 transition-opacity shadow-md">

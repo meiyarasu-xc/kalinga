@@ -20,37 +20,33 @@ const breadcrumbData = {
 export default function Page() {
   return (
     <>
-    <AutoBreadcrumb data={breadcrumbData} />
-      <MainIntro 
+      <AutoBreadcrumb data={breadcrumbData} />
+      <MainIntro
         title="Life at KU"
         description={["Life at Kalinga University is a vibrant blend of learning, culture, and community. Students from across India and around the world come together to explore ideas, develop skills, and build lifelong connections.From academic clubs and cultural events to sports and leadership activities, every experience at KU fosters growth, confidence, and creativity — all within a modern, green, and inclusive campus."
-      ]}
+        ]}
         imageUrl="https://kalinga-university.s3.ap-south-1.amazonaws.com/campus-life/campus-life-intro-1.webp"
         imageAlt="Life at KU"
-        showButton ={false}
-        showKnowMore ={false}
+        showButton={false}
+        showKnowMore={false}
       />
-      <Facilities/>
+      <Facilities />
       <FeaturesSection />
-      <CampusLife/>
+      <CampusLife />
       <GalleryAll className="mt-10 mb-10" />
+
+      {/* 
+        Show events from Sports (6) and NCC (7).
+        If no events found, HIDE the section (fallback="hide").
+      */}
       <UpcomingConferences
-        conferences={[
-          {
-            id: 1,
-            title: "Scopus Workshop: Research Impact",
-            date: "Nov 28, 2025 · 10:00 A.M.",
-            category: "Academic Event",
-            description: "Hybrid workshop on Scopus analytics and publishing insights with experts.",
-            image: "https://kalinga-university.s3.ap-south-1.amazonaws.com/campus-life/Pic1+(1).jpeg",
-            href: "/contact-us"
-          }
-        ]}
-       
-        title="Upcoming Campus Events"
+        categoryIds={['6', '7']}
+        title="Campus Events"
+        fallback="hide"
       />
-      <Gallery/>
-      <AdmissionCareer/>
+
+      <Gallery />
+      <AdmissionCareer />
     </>
   );
 }

@@ -202,7 +202,7 @@ export default function AwardsScrollbar({
             slidesPerView="auto"
             grabCursor={true}
             freeMode={true}
-           loop={false}
+            loop={false}
             autoplay={autoScroll ? {
               delay: 1,
               disableOnInteraction: false,
@@ -219,142 +219,138 @@ export default function AwardsScrollbar({
               <SwiperSlide key={award.id} className="!w-auto relative z-10">
                 <div className="flex flex-col items-center flex-shrink-0 min-w-[200px] sm:min-w-[220px] relative z-10">
                   {/* Icon + texts/button with leaf images */}
-                {hideTitle ? ( 
-                 <>
-                 <div className="flex items-center justify-center gap-2 mb-2">
-                  <Image
-                    src="https://kalinga-university.s3.ap-south-1.amazonaws.com/common/awards-leaf.png"
-                    alt="Award leaf left"
-                    width={50}
-                    height={50}
-                    className="object-contain"
-                  />
-                  
-                   
-                
-                    {award.link ? (
-                      <a
-                        href={award.link}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className={`mt-2 rounded-md px-5 py-3 text-xs sm:text-sm font-stix cursor-pointer transition-opacity hover:opacity-90 ${
-                          award.active
-                            ? "bg-[var(--button-red)] text-white shadow-md"
-                            : "bg-[#e6e6e6] text-[var(--foreground)]"
-                        }`}
-                      >
-                        {award.year}
-                      </a>
-                    ) : (
-                      <div
-                        className={`mt-2 rounded-md px-5 py-3 text-xs sm:text-sm font-stix ${
-                          award.active
-                            ? "bg-[var(--button-red)] text-white shadow-md"
-                            : "bg-[#e6e6e6] text-[var(--foreground)]"
-                        }`}
-                      >
-                        {award.year}
-                      </div>
-                    )}
-                 
-                  <Image
-                    src="https://kalinga-university.s3.ap-south-1.amazonaws.com/common/awards-leaf.png"
-                    alt="Award leaf right"
-                    width={50}
-                    height={50}
-                    className="object-contain -scale-x-100"
-                  />
-                </div>
-                
-                </>  
-                  
-                  
-                ) : (
-                  <>
-                  <div className="flex items-center justify-center gap-2 mb-2">
-                    {!hideTopLeaves && (
-                      <Image
-                        src="https://kalinga-university.s3.ap-south-1.amazonaws.com/common/awards-leaf.png"
-                        alt="Award leaf left"
-                        width={50}
-                        height={50}
-                        className="object-contain"
-                      />
-                    )}
-                      
-                      <div className="flex flex-col items-center text-[var(--foreground)] text-center max-w-[200px]">
-                        <h3 className="!text-[18px] font-stix break-words leading-tight">
-                          {award.title}
-                        </h3>
-                        <p className="!text-[12px] sm:text-xs text-gray-500 font-plus-jakarta-sans">{award.subtitle}</p>
-                       
-                          
-                      
-                      </div>
-          
-                    {!hideTopLeaves && (
-                      <Image
-                        src="https://kalinga-university.s3.ap-south-1.amazonaws.com/common/awards-leaf.png"
-                        alt="Award leaf right"
-                        width={50}
-                        height={50}
-                        className="object-contain -scale-x-100"
-                      />
-                    )}
-                  </div>
+                  {hideTitle ? (
+                    <>
+                      <div className="flex items-center justify-center gap-2 mb-2">
+                        <Image
+                          src="https://kalinga-university.s3.ap-south-1.amazonaws.com/common/awards-leaf.png"
+                          alt="Award leaf left"
+                          width={50}
+                          height={50}
+                          className="object-contain"
+                        />
 
-                  {/* Year pill with leaves on sides */}
-                  <div className="flex items-center justify-center gap-2 mb-2">
-                    {showLeavesAroundButton && (
-                      <Image
-                        src="https://kalinga-university.s3.ap-south-1.amazonaws.com/common/awards-leaf.png"
-                        alt="Award leaf left"
-                        width={50}
-                        height={50}
-                        className="object-contain"
-                      />
-                    )}
-                   
-                      {award.link ? (
-                        <a
-                          href={award.link}
-                          target="_blank"
-                          rel="noopener noreferrer"
-                          className={`mt-2 rounded-md px-5 py-3 text-xs sm:text-sm font-stix cursor-pointer transition-opacity hover:opacity-90 ${
-                            award.active
-                              ? "bg-[var(--button-red)] text-white shadow-md"
-                              : "bg-[#e6e6e6] text-[var(--foreground)]"
-                          }`}
-                        >
-                          {award.year}
-                        </a>
-                      ) : (
-                        <div
-                          className={`mt-2 rounded-md px-5 py-3 text-xs sm:text-sm font-stix ${
-                            award.active
-                              ? "bg-[var(--button-red)] text-white shadow-md"
-                              : "bg-[#e6e6e6] text-[var(--foreground)]"
-                          }`}
-                        >
-                          {award.year}
+
+
+                        {award.link ? (
+                          <a
+                            href={award.link}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            className={`mt-2 rounded-md px-5 py-3 text-xs sm:text-sm font-stix cursor-pointer transition-opacity hover:bg-[var(--lite-sand)] ${award.active
+                              ? "bg-[var(--button-red)] text-white hover:text-[var(--red)] shadow-md"
+                              : "bg-[#e6e6e6] text-[var(--red )]"
+                              }`}
+                          >
+                            {award.year}
+                          </a>
+                        ) : (
+                          <div
+                            className={`mt-2 rounded-md px-5 py-3 text-xs sm:text-sm font-stix ${award.active
+                              ? "bg-[var(--button-red)] text-white hover:text-[var(--red)] shadow-md"
+                              : "bg-[#e6e6e6] text-[var(--red)]"
+                              }`}
+                          >
+                            {award.year}
+                          </div>
+                        )}
+
+                        <Image
+                          src="https://kalinga-university.s3.ap-south-1.amazonaws.com/common/awards-leaf.png"
+                          alt="Award leaf right"
+                          width={50}
+                          height={50}
+                          className="object-contain -scale-x-100"
+                        />
+                      </div>
+
+                    </>
+
+
+                  ) : (
+                    <>
+                      <div className="flex items-center justify-center gap-2 mb-2">
+                        {!hideTopLeaves && (
+                          <Image
+                            src="https://kalinga-university.s3.ap-south-1.amazonaws.com/common/awards-leaf.png"
+                            alt="Award leaf left"
+                            width={50}
+                            height={50}
+                            className="object-contain"
+                          />
+                        )}
+
+                        <div className="flex flex-col items-center text-[var(--foreground)] text-center max-w-[200px]">
+                          <h3 className="!text-[18px] font-stix break-words leading-tight">
+                            {award.title}
+                          </h3>
+                          <p className="!text-[12px] sm:text-xs text-gray-500 font-plus-jakarta-sans">{award.subtitle}</p>
+
+
+
                         </div>
-                      )}
-                  
-                    {showLeavesAroundButton && (
-                      <Image
-                        src="https://kalinga-university.s3.ap-south-1.amazonaws.com/common/awards-leaf.png"
-                        alt="Award leaf right"
-                        width={50}
-                        height={50}
-                        className="object-contain -scale-x-100"
-                      />
-                    )}
-                  </div>
-                  </> 
-                )}
-            
-                    
-                  
+
+                        {!hideTopLeaves && (
+                          <Image
+                            src="https://kalinga-university.s3.ap-south-1.amazonaws.com/common/awards-leaf.png"
+                            alt="Award leaf right"
+                            width={50}
+                            height={50}
+                            className="object-contain -scale-x-100"
+                          />
+                        )}
+                      </div>
+
+                      {/* Year pill with leaves on sides */}
+                      <div className="flex items-center justify-center gap-2 mb-2">
+                        {showLeavesAroundButton && (
+                          <Image
+                            src="https://kalinga-university.s3.ap-south-1.amazonaws.com/common/awards-leaf.png"
+                            alt="Award leaf left"
+                            width={50}
+                            height={50}
+                            className="object-contain"
+                          />
+                        )}
+
+                        {award.link ? (
+                          <a
+                            href={award.link}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            className={`mt-2 rounded-md px-5 py-3 text-xs sm:text-sm font-stix cursor-pointer transition-opacity hover:bg-[var(--lite-sand)] ${award.active
+                              ? "bg-[var(--button-red)] text-white hover:text-[var(--red)] shadow-md"
+                              : "bg-[#e6e6e6] text-[var(--red)]"
+                              }`}
+                          >
+                            {award.year}
+                          </a>
+                        ) : (
+                          <div
+                            className={`mt-2 rounded-md px-5 py-3 text-xs sm:text-sm font-stix ${award.active
+                              ? "bg-[var(--button-red)] text-white hover:text-[var(--red)] shadow-md"
+                              : "bg-[#e6e6e6] text-[var(--red)]"
+                              }`}
+                          >
+                            {award.year}
+                          </div>
+                        )}
+
+                        {showLeavesAroundButton && (
+                          <Image
+                            src="https://kalinga-university.s3.ap-south-1.amazonaws.com/common/awards-leaf.png"
+                            alt="Award leaf right"
+                            width={50}
+                            height={50}
+                            className="object-contain -scale-x-100"
+                          />
+                        )}
+                      </div>
+                    </>
+                  )}
+
+
+
                 </div>
               </SwiperSlide>
             ))}
