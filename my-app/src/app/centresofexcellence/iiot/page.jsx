@@ -114,7 +114,7 @@ export default function IIoTTrainingCentrePage() {
         title="IIoT Training Centre"
         subtitle="In collaboration with Technoviz Automation"
         description={aboutCentreDescription}
-        imageSrc="https://kalinga-university.s3.ap-south-1.amazonaws.com/coe/coe-iiot.webp"
+        imageSrc="https://kalinga-university.s3.ap-south-1.amazonaws.com/about/accerdation/Group+1000002977.png"
         imageAlt="IIoT Training Centre"
         readmore={false}
       />
