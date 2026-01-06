@@ -203,9 +203,7 @@ export default function UpcomingConference({
                           </GlobalArrowButton>
                         </Link>
                       ) : (
-                        <GlobalArrowButton className="w-fit mt-1 text-sm">
-                          {conf.registerButtonText || "Register Now"}
-                        </GlobalArrowButton>
+                        <></>
                       )}
                     </div>
                   </div>
