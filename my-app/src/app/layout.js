@@ -53,6 +53,7 @@ import Breadcrumb from "./components/layout/Breadcrumb";
 import Footer from "./components/layout/Footer";
 import ClickSparkWrapper from "./components/layout/ClickSparkWrapper";
 import { BreadcrumbProvider } from "./components/layout/BreadcrumbContext";
+import { FlipbookProvider } from "./components/general/FlipbookContext";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -94,16 +95,18 @@ export default function RootLayout({ children }) {
         className={`${geistSans.variable} ${geistMono.variable} antialiased bg-white`}
         suppressHydrationWarning
       >
-        <BreadcrumbProvider>
-          <ClickSparkWrapper>
-            <Header />
-            <main className="min-h-screen">
-              <Breadcrumb />
-              {children}
-            </main>
-            <Footer />
-          </ClickSparkWrapper>
-        </BreadcrumbProvider>
+        <FlipbookProvider>
+          <BreadcrumbProvider>
+            <ClickSparkWrapper>
+              <Header />
+              <main className="min-h-screen">
+                <Breadcrumb />
+                {children}
+              </main>
+              <Footer />
+            </ClickSparkWrapper>
+          </BreadcrumbProvider>
+        </FlipbookProvider>
       </body>
     </html>
   );

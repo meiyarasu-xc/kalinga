@@ -26,6 +26,8 @@ import UpcomingConference from "@/app/components/research/upcoming_conference";
 import Testimonials from "@/app/components/home/Testimonials";
 import DataTable from "@/app/components/general/data-table";
 import SectionHeading from "@/app/components/general/SectionHeading";
+import EligibilityCriteria from "@/app/components/course/eligibility_criteria";
+import CareerPath from "@/app/components/course/career_path";
 import { fetchAllDepartments, fetchDepartmentCompleteDetail, fetchAllDepartmentsCourses, parseHtmlToParagraphs, parseHtmlToText } from "@/app/lib/api";
 import { useBreadcrumbData } from "@/app/components/layout/BreadcrumbContext";
 
@@ -445,6 +447,31 @@ export default function DynamicDepartmentPage() {
           message={deptHeadIntroContent.message}
         />
       )}
+
+      {/* Course Eligibility & Admission CTA */}
+      <EligibilityCriteria
+        duration={departmentData?.duration || "Multiple Years"}
+        title="Eligibility Criteria"
+        criteria={parseHtmlListItems(departmentData?.eligibility_criteria || departmentData?.eligibility || "")}
+        admissionTitle={departmentData?.admission_title || "Your Next Big Chapter Starts With One Click"}
+        admissionButtonLabel="Admission Open"
+        href="https://admissions.kalingauniversity.ac.in/"
+      />
+
+      {/* Career Pathways */}
+      {departmentData?.career_pathways && departmentData.career_pathways.length > 0 && (
+        <CareerPath
+          title="Career Pathways"
+          description={parseHtmlToText(departmentData.career_pathway_description || "")}
+          careers={departmentData.career_pathways.map(career => ({
+            id: career.id,
+            title: career.heading || career.title,
+            description: parseHtmlToText(career.description || ""),
+            imageUrl: career.icon_image || career.icon || null
+          }))}
+        />
+      )}
+
       <Placements placementData={placementData} bgColor="bg-white" />
       <Facility />
       {whyStudyContent && whyStudyContent.items && whyStudyContent.items.length > 0 && (

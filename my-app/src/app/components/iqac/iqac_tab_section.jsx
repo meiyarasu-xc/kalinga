@@ -1,6 +1,7 @@
 "use client";
 
 import { useState } from "react";
+import FlipbookTrigger from "../general/FlipbookTrigger";
 
 const IQAC_TABS = [
   { id: "minutes", label: "IQAC Minutes Of Meeting" },
@@ -326,10 +327,9 @@ export default function IqacTabSection() {
                         flex-shrink-0 lg:w-full text-left px-4 py-5 rounded-[8px] 
                         font-plus-jakarta-sans text-sm md:text-base font-semibold
                         transition-all duration-200
-                        ${
-                          isActive
-                            ? "bg-[var(--button-red)] text-white font-semibold"
-                            : "bg-[var(--lite-sand)] text-[var(--foreground)] hover:opacity-90"
+                        ${isActive
+                          ? "bg-[var(--button-red)] text-white font-semibold"
+                          : "bg-[var(--lite-sand)] text-[var(--foreground)] hover:opacity-90"
                         }
                       `}
                     >
@@ -479,15 +479,16 @@ export default function IqacTabSection() {
                             <div className="mt-2 space-y-2">
                               {minutes.length > 0 ? (
                                 minutes.map((minute, idx) => (
-                                  <a
-                                    key={idx}
-                                    href={minute.url}
-                                    target="_blank"
-                                    rel="noopener noreferrer"
-                                    className="block px-4 py-2 bg-gray-50 hover:bg-gray-100 rounded-lg transition-colors text-[var(--foreground)] border border-gray-200"
-                                  >
-                                    <span className="font-plus-jakarta-sans text-sm md:text-base">{minute.title}</span>
-                                  </a>
+                                  <FlipbookTrigger key={idx} pdfUrl={minute.url} title={minute.title}>
+                                    <a
+                                      href={minute.url}
+                                      target="_blank"
+                                      rel="noopener noreferrer"
+                                      className="block px-4 py-2 bg-gray-50 hover:bg-gray-100 rounded-lg transition-colors text-[var(--foreground)] border border-gray-200"
+                                    >
+                                      <span className="font-plus-jakarta-sans text-sm md:text-base">{minute.title}</span>
+                                    </a>
+                                  </FlipbookTrigger>
                                 ))
                               ) : (
                                 <p className="px-4 py-2 text-[var(--foreground)]/60 text-sm">No minutes available for this year.</p>
@@ -531,15 +532,16 @@ export default function IqacTabSection() {
                             <div className="mt-2 space-y-2">
                               {feedbacks.length > 0 ? (
                                 feedbacks.map((feedback, idx) => (
-                                  <a
-                                    key={idx}
-                                    href={feedback.url}
-                                    target="_blank"
-                                    rel="noopener noreferrer"
-                                    className="block px-4 py-2 bg-gray-50 hover:bg-gray-100 rounded-lg transition-colors text-[var(--foreground)] border border-gray-200"
-                                  >
-                                    <span className="font-plus-jakarta-sans text-sm md:text-base">{feedback.title}</span>
-                                  </a>
+                                  <FlipbookTrigger key={idx} pdfUrl={feedback.url} title={feedback.title}>
+                                    <a
+                                      href={feedback.url}
+                                      target="_blank"
+                                      rel="noopener noreferrer"
+                                      className="block px-4 py-2 bg-gray-50 hover:bg-gray-100 rounded-lg transition-colors text-[var(--foreground)] border border-gray-200"
+                                    >
+                                      <span className="font-plus-jakarta-sans text-sm md:text-base">{feedback.title}</span>
+                                    </a>
+                                  </FlipbookTrigger>
                                 ))
                               ) : (
                                 <p className="px-4 py-2 text-[var(--foreground)]/60 text-sm">No feedback reports available for this year.</p>
@@ -583,14 +585,16 @@ export default function IqacTabSection() {
                     Student Satisfaction Survey
                   </h2>
                   <div className="flex justify-center mt-6">
-                    <a
-                      href="https://kalinga-university.s3.ap-south-1.amazonaws.com/IQAC/Students+Satisfaction+Survey+2021-22.pdf"
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="px-6 py-3 bg-[var(--button-red)] text-white rounded-lg hover:bg-[var(--button-red)]/90 transition-colors font-plus-jakarta-sans text-sm md:text-base font-semibold"
-                    >
-                      View Student Satisfaction Survey 2021-22
-                    </a>
+                    <FlipbookTrigger pdfUrl="https://kalinga-university.s3.ap-south-1.amazonaws.com/IQAC/Students+Satisfaction+Survey+2021-22.pdf" title="Student Satisfaction Survey 2021-22">
+                      <a
+                        href="https://kalinga-university.s3.ap-south-1.amazonaws.com/IQAC/Students+Satisfaction+Survey+2021-22.pdf"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="px-6 py-3 bg-[var(--button-red)] text-white rounded-lg hover:bg-[var(--button-red)]/90 transition-colors font-plus-jakarta-sans text-sm md:text-base font-semibold"
+                      >
+                        View Student Satisfaction Survey 2021-22
+                      </a>
+                    </FlipbookTrigger>
                   </div>
                 </div>
               )}

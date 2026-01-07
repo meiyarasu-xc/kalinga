@@ -4,6 +4,7 @@ import Image from "next/image";
 import { useState } from "react";
 import GlobalArrowButton from "../general/global-arrow_button";
 import SectionHeading from "../general/SectionHeading";
+import FlipbookTrigger from "../general/FlipbookTrigger";
 
 const defaultContent = {
   title: "Transforming futures with knowledge & innovation",
@@ -92,22 +93,43 @@ export default function MainIntro({
               {showKnowMore && (descriptionArray.length > initialVisibleParagraphs || (knowMoreHref && knowMoreHref !== "#")) && (
                 <div className="pt-2">
                   {knowMoreHref && knowMoreHref !== "#" ? (
-                    <a
-                      href={knowMoreHref}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      onClick={onKnowMore}
-                      className="inline-block"
-                    >
-                      <GlobalArrowButton
-                        className="w-fit !bg-white !text-white gap-2 !px-0 !py-0"
-                        textClassName="!text-[var(--button-red)] !font-semibold !px-0"
-                        arrowClassName="p-[3px] !px-1 mr-2 !py-1 !bg-[var(--button-red)]"
-                        arrowIconClassName="!text-white"
-                      >
-                        {knowMoreLabel}
-                      </GlobalArrowButton>
-                    </a>
+                    (() => {
+                      const isPdf = knowMoreHref.toLowerCase().endsWith(".pdf");
+                      const buttonEl = (
+                        <GlobalArrowButton
+                          className="w-fit !bg-white !text-white gap-2 !px-0 !py-0"
+                          textClassName="!text-[var(--button-red)] !font-semibold !px-0"
+                          arrowClassName="p-[3px] !px-1 mr-2 !py-1 !bg-[var(--button-red)]"
+                          arrowIconClassName="!text-white"
+                        >
+                          {knowMoreLabel}
+                        </GlobalArrowButton>
+                      );
+
+                      return isPdf ? (
+                        <FlipbookTrigger pdfUrl={knowMoreHref} title={knowMoreLabel}>
+                          <a
+                            href={knowMoreHref}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            onClick={onKnowMore}
+                            className="inline-block"
+                          >
+                            {buttonEl}
+                          </a>
+                        </FlipbookTrigger>
+                      ) : (
+                        <a
+                          href={knowMoreHref}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          onClick={onKnowMore}
+                          className="inline-block"
+                        >
+                          {buttonEl}
+                        </a>
+                      );
+                    })()
                   ) : (
                     <GlobalArrowButton
                       className="w-fit !bg-white !text-white gap-2 !px-0 !py-0"

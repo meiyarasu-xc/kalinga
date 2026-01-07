@@ -3,7 +3,7 @@ import { useEffect } from "react";
 import PublicationGrid from "../components/research/publication-grid";
 import UGCLogo from "../components/research/ugc_logo";
 import UpcomingConference from "../components/research/upcoming_conference";
-import ProgramsOffered from "../components/department/programs-offered"; 
+import ProgramsOffered from "../components/department/programs-offered";
 import OrganogramOfKalinga from "../components/about/organogram_of_kalinga";
 import MainIntro from "../components/about/main_intro";
 import QuickLinks from "../components/general/quick_links";
@@ -13,10 +13,11 @@ import AdmissionCareer from "../components/general/admission_cta";
 import UpcomingConferences from "../components/research/upcoming_conference";
 import MentorIntro from "../components/department/dept_head_intro";
 import CenterOfExcellence from "../components/about/center_of_excellence";
-import AwardsScrollbar from "../components/home/awards-scrollbar";  
+import AwardsScrollbar from "../components/home/awards-scrollbar";
 import MediaCardSlider from "@/app/components/general/media-card-slider";
 import Placements from "../components/home/placements";
 import Partner from "../components/ccrc/partner";
+import { useFlipbook } from "../components/general/FlipbookContext";
 
 
 // Breadcrumb configuration
@@ -32,12 +33,13 @@ const breadcrumbData = {
 
 
 export default function Research() {
+  const { openFlipbook } = useFlipbook();
   useEffect(() => {
     if (typeof window !== 'undefined') {
       window.__breadcrumbData = breadcrumbData;
     }
   }, []);
-  
+
   const blueItems = [
     {
       imageSrc: "https://kalinga-university.s3.ap-south-1.amazonaws.com/placement/infosys.webp",
@@ -219,14 +221,14 @@ export default function Research() {
       imageSrc: "https://kalinga-university.s3.ap-south-1.amazonaws.com/ccrc/mou/veterans.png",
       imageAlt: "Veterans",
     },
-  ] 
+  ]
 
   const milestones = [
     { value: "400", label: "Recruitment Partners" },
     { value: "12 L ", label: "Highest Package" },
     { value: "4 Lakh ", label: "Average Package" },
   ]
-  
+
   const links = [
     {
       id: 7,
@@ -290,7 +292,7 @@ export default function Research() {
       title: "Build Networks",
       description: "We organise industrial visits, seminars, guest lectures, and industrial talks every week, which help our young minds build new connections and clarity in launching their businesses.",
     },
-   
+
   ]
   const videoItems = [
     {
@@ -344,19 +346,19 @@ export default function Research() {
   ];
   return (
     <>
-      <MainIntro 
-        title="Placement Overview" 
+      <MainIntro
+        title="Placement Overview"
         description={[
-          "Your journey from the classroom to the corporate world begins at Kalinga University. KU offers personalised training and conducts campus drives each year so that you can begin your professional journey right after you graduate. We just don’t teach you the curriculum, but we train, guide, and connect you with industry leaders. We help students build confidence to clear any interview by securing top positions and packages in leading companies."        ]}
-        imageUrl="https://kalinga-university.s3.ap-south-1.amazonaws.com/placement/placement-intro.jpg" 
+          "Your journey from the classroom to the corporate world begins at Kalinga University. KU offers personalised training and conducts campus drives each year so that you can begin your professional journey right after you graduate. We just don’t teach you the curriculum, but we train, guide, and connect you with industry leaders. We help students build confidence to clear any interview by securing top positions and packages in leading companies."]}
+        imageUrl="https://kalinga-university.s3.ap-south-1.amazonaws.com/placement/placement-intro.jpg"
         imageAlt="Kalinga University Research"
         initialVisibleParagraphs={1}
         showKnowMore={true}
       />
-      <Partner 
-        blueTitle="Best Campus Placement University in Chhattisgarh" 
-        redTitle="MoU Partners" 
-        blueItems={blueItems} 
+      <Partner
+        blueTitle="Best Campus Placement University in Chhattisgarh"
+        redTitle="MoU Partners"
+        blueItems={blueItems}
         ccrcLogo="https://kalinga-university.s3.ap-south-1.amazonaws.com/ccrc/ccrclogo.webp"
         singleColumn={true}
         milestones={milestones}
@@ -364,15 +366,15 @@ export default function Research() {
         footerText="Trusted by 500+ Global Recruiters"
         noContainer={true}
       />
-      <QuickLinks 
-        links={links} 
-        title="Training Initiatives Of Kalinga’s TnP Cell" 
+      <QuickLinks
+        links={links}
+        title="Training Initiatives Of Kalinga’s TnP Cell"
         description="Kalinga University's placement program bridges academia and industry with 400+ recruitment partners, comprehensive training, and dedicated support to prepare students for successful careers in top companies."
-        backgroundColor="bg-white" 
-        textColorClassName="text-black" 
-        showReadMore={true} 
+        backgroundColor="bg-white"
+        textColorClassName="text-black"
+        showReadMore={true}
       />
-      <Placements hideMarquee={true} hideMilestones={true} bgColor="bg-[var(--light-gray)] mx-2 rounded-xl" marginClassName="mb-0"/>
+      <Placements hideMarquee={true} hideMilestones={true} bgColor="bg-[var(--light-gray)] mx-2 rounded-xl" marginClassName="mb-0" />
       <MediaCardSlider
         categoryTitle="Video Interviews"
         title="Hear From Our Success Stories"
@@ -382,8 +384,8 @@ export default function Research() {
         descriptionTextClass=""
         swiperClassName="ccrc-video-slider"
       />
-      <QuickLinks title="Entrepreneurship & Startup Support" titleClassName="text-white" links={links2} description="We're here to put your entrepreneurial ideas into action. Here, you will not just dream but build something real that solves people's problems." showReadMore={false}/>
-      <FAQ 
+      <QuickLinks title="Entrepreneurship & Startup Support" titleClassName="text-white" links={links2} description="We're here to put your entrepreneurial ideas into action. Here, you will not just dream but build something real that solves people's problems." showReadMore={false} />
+      <FAQ
         title="Placement Records"
         variant="button"
         subtitle=""
@@ -393,13 +395,13 @@ export default function Research() {
             title: "Placements 2022-2023",
             description: "Annual placement reports and detailed placement statistics for the academic year 2022-2023.",
             buttons: [
-              { 
-                label: "Annual Report", 
-                onClick: () => window.open("https://kalinga-university.s3.ap-south-1.amazonaws.com/placement/KALINGA+Placement+Annaul+Report_2022-23.pdf", "_blank") 
+              {
+                label: "Annual Report",
+                onClick: () => openFlipbook("https://kalinga-university.s3.ap-south-1.amazonaws.com/placement/KALINGA+Placement+Annaul+Report_2022-23.pdf", "Placements Annual Report 2022-23")
               },
-              { 
-                label: "Placement Details", 
-                onClick: () => window.open("https://kalinga-university.s3.ap-south-1.amazonaws.com/placement/placement+Details+(2022-23).pdf", "_blank") 
+              {
+                label: "Placement Details",
+                onClick: () => openFlipbook("https://kalinga-university.s3.ap-south-1.amazonaws.com/placement/placement+Details+(2022-23).pdf", "Placements Details 2022-23")
               }
             ]
           },
@@ -408,13 +410,13 @@ export default function Research() {
             title: "Placements 2021-2022",
             description: "Annual placement reports and detailed placement statistics for the academic year 2021-2022.",
             buttons: [
-              { 
-                label: "Annual Report", 
-                onClick: () => window.open("https://kalinga-university.s3.ap-south-1.amazonaws.com/placement/KALINGA+Placement+Annual+Report_2021-22.pdf", "_blank") 
+              {
+                label: "Annual Report",
+                onClick: () => openFlipbook("https://kalinga-university.s3.ap-south-1.amazonaws.com/placement/KALINGA+Placement+Annual+Report_2021-22.pdf", "Placements Annual Report 2021-22")
               },
-              { 
-                label: "Placement Details", 
-                onClick: () => window.open("https://kalinga-university.s3.ap-south-1.amazonaws.com/placement/placement+Details+(2021-22).pdf", "_blank") 
+              {
+                label: "Placement Details",
+                onClick: () => openFlipbook("https://kalinga-university.s3.ap-south-1.amazonaws.com/placement/placement+Details+(2021-22).pdf", "Placements Details 2021-22")
               }
             ]
           },
@@ -423,13 +425,13 @@ export default function Research() {
             title: "Placements 2020-2021",
             description: "Annual placement reports and detailed placement statistics for the academic year 2020-2021.",
             buttons: [
-              { 
-                label: "Annual Report", 
-                onClick: () => window.open("https://kalinga-university.s3.ap-south-1.amazonaws.com/placement/KALINGA+Placement+Annual+Report_2020-21.pdf", "_blank") 
+              {
+                label: "Annual Report",
+                onClick: () => openFlipbook("https://kalinga-university.s3.ap-south-1.amazonaws.com/placement/KALINGA+Placement+Annual+Report_2020-21.pdf", "Placements Annual Report 2020-21")
               },
-              { 
-                label: "Placement Details", 
-                onClick: () => window.open("https://kalinga-university.s3.ap-south-1.amazonaws.com/placement/placement+Details+(2020-21).pdf", "_blank") 
+              {
+                label: "Placement Details",
+                onClick: () => openFlipbook("https://kalinga-university.s3.ap-south-1.amazonaws.com/placement/placement+Details+(2020-21).pdf", "Placements Details 2020-21")
               }
             ]
           },
@@ -438,13 +440,13 @@ export default function Research() {
             title: "Placements 2019-2020",
             description: "Annual placement reports and detailed placement statistics for the academic year 2019-2020.",
             buttons: [
-              { 
-                label: "Annual Report", 
-                onClick: () => window.open("https://kalinga-university.s3.ap-south-1.amazonaws.com/placement/KALINGA+Placement+Annual+Report_2019-20.pdf", "_blank") 
+              {
+                label: "Annual Report",
+                onClick: () => openFlipbook("https://kalinga-university.s3.ap-south-1.amazonaws.com/placement/KALINGA+Placement+Annual+Report_2019-20.pdf", "Placements Annual Report 2019-20")
               },
-              { 
-                label: "Placement Details", 
-                onClick: () => window.open("https://kalinga-university.s3.ap-south-1.amazonaws.com/placement/placement+Details+(2019-20).pdf", "_blank") 
+              {
+                label: "Placement Details",
+                onClick: () => openFlipbook("https://kalinga-university.s3.ap-south-1.amazonaws.com/placement/placement+Details+(2019-20).pdf", "Placements Details 2019-20")
               }
             ]
           },
@@ -453,13 +455,13 @@ export default function Research() {
             title: "Placements 2018-2019",
             description: "Annual placement reports and detailed placement statistics for the academic year 2018-2019.",
             buttons: [
-              { 
-                label: "Annual Report", 
-                onClick: () => window.open("https://kalinga-university.s3.ap-south-1.amazonaws.com/placement/KALINGA+Placement+Annual+Report_2018-19.pdf", "_blank") 
+              {
+                label: "Annual Report",
+                onClick: () => openFlipbook("https://kalinga-university.s3.ap-south-1.amazonaws.com/placement/KALINGA+Placement+Annual+Report_2018-19.pdf", "Placements Annual Report 2018-19")
               },
-              { 
-                label: "Placement Details", 
-                onClick: () => window.open("https://kalinga-university.s3.ap-south-1.amazonaws.com/placement/placement+Details(2018-19).pdf", "_blank") 
+              {
+                label: "Placement Details",
+                onClick: () => openFlipbook("https://kalinga-university.s3.ap-south-1.amazonaws.com/placement/placement+Details(2018-19).pdf", "Placements Details 2018-19")
               }
             ]
           }
@@ -467,5 +469,5 @@ export default function Research() {
       />
       <AdmissionCareer />
     </>
-  );        
+  );
 }

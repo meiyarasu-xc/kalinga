@@ -6,6 +6,7 @@ import VisionMission from "../components/about/vision-mission";
 import ImageListItem from "../components/ccrc/imagelistitem";
 import DataTable from "@/app/components/general/data-table";
 import GlobalArrowButton from "../components/general/global-arrow_button";
+import FlipbookTrigger from "../components/general/FlipbookTrigger";
 import Gallery from "../components/campuslife/campusgallery";
 /* ---------------- BREADCRUMB CONFIG ---------------- */
 
@@ -59,65 +60,65 @@ const objectives = [
   },
 ];
 
- const annualReportButtons = [
+const annualReportButtons = [
   {
     id: 1,
     text: "Anti-Ragging UGC Policy",
     href: "https://kalinga-university.s3.ap-south-1.amazonaws.com/anti-ragging-cell/Ugc_Anti_ragging_Regulations.pdf",
   },
-   {
+  {
     id: 2,
     text: "National Ragging Prevention Programme",
     href: "https://kalinga-university.s3.ap-south-1.amazonaws.com/anti-ragging-cell/antiragging-information.pdf",
   },
 ];
 const AntiImages = [
-    {
-      id: 1,
-      image: "https://kalinga-university.s3.ap-south-1.amazonaws.com/anti-ragging-cell/anti-ragging(1).webp",
-      alt: "anti(1)",
-    },
-    {
-      id: 2,
-      image: "https://kalinga-university.s3.ap-south-1.amazonaws.com/anti-ragging-cell/anti-ragging(2).webp",
-      alt: "anti(2)",
-    },
-    {
-      id: 3,
-      image: "https://kalinga-university.s3.ap-south-1.amazonaws.com/anti-ragging-cell/anti-ragging(3).webp",
-      alt: "anti(3)",
-    },
-    {   
-        id: 4,
-        image: "https://kalinga-university.s3.ap-south-1.amazonaws.com/anti-ragging-cell/anti-ragging(4).webp",
-        alt: "anti(4)",
-    },
-    {           
-        id: 5,
-        image: "https://kalinga-university.s3.ap-south-1.amazonaws.com/anti-ragging-cell/anti-ragging(5).webp",
-        alt: "anti(5)",
-    },
-    {           
-        id: 6,
-        image: "https://kalinga-university.s3.ap-south-1.amazonaws.com/anti-ragging-cell/anti-ragging(6).webp",
-        alt: "anti(6)",
-    },
-     {           
-        id: 7,
-        image: "https://kalinga-university.s3.ap-south-1.amazonaws.com/anti-ragging-cell/anti-ragging(7).webp",
-        alt: "anti(7)",
-    },
-     {           
-        id: 8,
-        image: "https://kalinga-university.s3.ap-south-1.amazonaws.com/anti-ragging-cell/anti-ragging(8).webp",
-        alt: "anti(8)",
-    },
-     {           
-        id: 9,
-        image: "https://kalinga-university.s3.ap-south-1.amazonaws.com/anti-ragging-cell/anti-ragging(9).webp",
-        alt: "anti(9)",
-    },
-  ];
+  {
+    id: 1,
+    image: "https://kalinga-university.s3.ap-south-1.amazonaws.com/anti-ragging-cell/anti-ragging(1).webp",
+    alt: "anti(1)",
+  },
+  {
+    id: 2,
+    image: "https://kalinga-university.s3.ap-south-1.amazonaws.com/anti-ragging-cell/anti-ragging(2).webp",
+    alt: "anti(2)",
+  },
+  {
+    id: 3,
+    image: "https://kalinga-university.s3.ap-south-1.amazonaws.com/anti-ragging-cell/anti-ragging(3).webp",
+    alt: "anti(3)",
+  },
+  {
+    id: 4,
+    image: "https://kalinga-university.s3.ap-south-1.amazonaws.com/anti-ragging-cell/anti-ragging(4).webp",
+    alt: "anti(4)",
+  },
+  {
+    id: 5,
+    image: "https://kalinga-university.s3.ap-south-1.amazonaws.com/anti-ragging-cell/anti-ragging(5).webp",
+    alt: "anti(5)",
+  },
+  {
+    id: 6,
+    image: "https://kalinga-university.s3.ap-south-1.amazonaws.com/anti-ragging-cell/anti-ragging(6).webp",
+    alt: "anti(6)",
+  },
+  {
+    id: 7,
+    image: "https://kalinga-university.s3.ap-south-1.amazonaws.com/anti-ragging-cell/anti-ragging(7).webp",
+    alt: "anti(7)",
+  },
+  {
+    id: 8,
+    image: "https://kalinga-university.s3.ap-south-1.amazonaws.com/anti-ragging-cell/anti-ragging(8).webp",
+    alt: "anti(8)",
+  },
+  {
+    id: 9,
+    image: "https://kalinga-university.s3.ap-south-1.amazonaws.com/anti-ragging-cell/anti-ragging(9).webp",
+    alt: "anti(9)",
+  },
+];
 /* ---------------- PAGE COMPONENT ---------------- */
 
 export default function Page() {
@@ -157,50 +158,51 @@ export default function Page() {
       <SportsFacilitiesTabs />
 
       <section className="pt-16 pb-16 bg-white">
-              <div className="container mx-auto px-6">
-      
-                {/* ✅ BUTTON GRID */}
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                  {annualReportButtons.map((item) => (
-                    <a
-                      key={item.id}
-                      href={item.href}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="block"
-                    >
-                      <GlobalArrowButton
-                        className="!w-full h-[60px] justify-between"
-                        arrowClassName="p-[3px] !px-2 mr-2 !py-1"
-                        arrowSize={29}
-                      >
-                        {item.text}
-                      </GlobalArrowButton>
-                    </a>
-                  ))}
-                </div>
-      
-              </div>
-            </section>
-              <Gallery
-                title="Anti-Ragging Week - 2024" 
-                description="It was an interactive session organised for newcomers in which they were informed about the university's commitment to maintaining a ragging-free campus. Senior students shared their positive experiences in the University regarding this matter and even encouraged them to report any issue to the anti-ragging cell."
-                images={AntiImages.map(img => ({ id: img.id, src: img.image, alt: img.alt }))}
-                paddingClassName="py-0"
-                titleClassName="text-[var(--foreground)] text-center"
-                forceSliderOnMobile={true}
-              />
+        <div className="container mx-auto px-6">
+
+          {/* ✅ BUTTON GRID */}
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+            {annualReportButtons.map((item) => (
+              <FlipbookTrigger key={item.id} pdfUrl={item.href} title={item.text}>
+                <a
+                  href={item.href}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="block"
+                >
+                  <GlobalArrowButton
+                    className="!w-full h-[60px] justify-between"
+                    arrowClassName="p-[3px] !px-2 mr-2 !py-1"
+                    arrowSize={29}
+                  >
+                    {item.text}
+                  </GlobalArrowButton>
+                </a>
+              </FlipbookTrigger>
+            ))}
+          </div>
+
+        </div>
+      </section>
+      <Gallery
+        title="Anti-Ragging Week - 2024"
+        description="It was an interactive session organised for newcomers in which they were informed about the university's commitment to maintaining a ragging-free campus. Senior students shared their positive experiences in the University regarding this matter and even encouraged them to report any issue to the anti-ragging cell."
+        images={AntiImages.map(img => ({ id: img.id, src: img.image, alt: img.alt }))}
+        paddingClassName="py-0"
+        titleClassName="text-[var(--foreground)] text-center"
+        forceSliderOnMobile={true}
+      />
     </>
   );
 }
 
 
- function SportsFacilitiesTabs() {
+function SportsFacilitiesTabs() {
   const tabs = useMemo(
     () => [
       { id: "y2024", label: "Anti-Ragging Committee" },
       { id: "y2023", label: "Anti-Ragging Squad" },
-     
+
     ],
     []
   );
@@ -219,7 +221,7 @@ export default function Page() {
       return <EventsTable title="Anti-Ragging Squad (2023-24)
 " data={events2023} />;
 
-    
+
     return null;
   };
 
@@ -342,7 +344,7 @@ function EventsTable({ title, description, data }) {
       <h2 className="text-center mb-[20px]">
         {title}
       </h2>
-      
+
       {description && (
         <p className="text-center mb-[20px] text-gray-700 font-plus-jakarta-sans">
           {description}

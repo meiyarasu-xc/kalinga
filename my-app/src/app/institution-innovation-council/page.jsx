@@ -8,6 +8,7 @@ import ImageListItem from "../components/ccrc/imagelistitem";
 import FAQ from "../components/general/faq";
 import SectionHeading from "../components/general/SectionHeading";
 import GlobalArrowButton from "../components/general/global-arrow_button";
+import FlipbookTrigger from "../components/general/FlipbookTrigger";
 import MasterClassTab from "../components/ctcd/master_class_tab";
 import Gallery from "@/app/components/general/gallery";
 
@@ -318,21 +319,22 @@ export default function InstitutionInnovationCouncil() {
           {/* ✅ BUTTON GRID */}
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
             {annualReportButtons.map((item) => (
-              <a
-                key={item.id}
-                href={item.href}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="block"
-              >
-                <GlobalArrowButton
-                  className="!w-full h-[60px] justify-between"
-                  arrowClassName="p-[3px] !px-2 mr-2 !py-1"
-                  arrowSize={29}
+              <FlipbookTrigger key={item.id} pdfUrl={item.href} title={`Appreciation Letter ${item.text}`}>
+                <a
+                  href={item.href}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="block"
                 >
-                  {item.text}
-                </GlobalArrowButton>
-              </a>
+                  <GlobalArrowButton
+                    className="!w-full h-[60px] justify-between"
+                    arrowClassName="p-[3px] !px-2 mr-2 !py-1"
+                    arrowSize={29}
+                  >
+                    {item.text}
+                  </GlobalArrowButton>
+                </a>
+              </FlipbookTrigger>
             ))}
           </div>
 
@@ -386,21 +388,22 @@ Kalinga University hosted its first session of the Impact Lecture Series on 15th
 
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-12">
             {annualReportButtons2.map((item) => (
-              <a
-                key={item.id}
-                href={item.href}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="block"
-              >
-                <GlobalArrowButton
-                  className="!w-full h-[60px] justify-between"
-                  arrowClassName="p-[3px] !px-2 mr-2 !py-1"
-                  arrowSize={29}
+              <FlipbookTrigger key={item.id} pdfUrl={item.href} title={`IIC Annual Report ${item.text}`}>
+                <a
+                  href={item.href}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="block"
                 >
-                  {item.text}
-                </GlobalArrowButton>
-              </a>
+                  <GlobalArrowButton
+                    className="!w-full h-[60px] justify-between"
+                    arrowClassName="p-[3px] !px-2 mr-2 !py-1"
+                    arrowSize={29}
+                  >
+                    {item.text}
+                  </GlobalArrowButton>
+                </a>
+              </FlipbookTrigger>
             ))}
           </div>
 

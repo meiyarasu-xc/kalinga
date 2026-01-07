@@ -7,6 +7,7 @@ import DataTable from "@/app/components/general/data-table";
 import Link from "next/link";
 import GlobalArrowButton from "@/app/components/general/global-arrow_button";
 import AdmissionCareer from "@/app/components/general/admission_cta";
+import FlipbookTrigger from "@/app/components/general/FlipbookTrigger";
 
 const breadcrumbData = {
   heroImage:
@@ -119,17 +120,19 @@ export default function IPRCellPage() {
       </section>
       <section className="pb-12">
         <div className="container mx-auto px-4 flex justify-center">
-          <Link
-            href="https://kalinga-university.s3.ap-south-1.amazonaws.com/ipr/KU_REF_CITATION.pdf"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <GlobalArrowButton
-              variant="default"
+          <FlipbookTrigger pdfUrl="https://kalinga-university.s3.ap-south-1.amazonaws.com/ipr/KU_REF_CITATION.pdf" title="KU Ref. Citation">
+            <Link
+              href="https://kalinga-university.s3.ap-south-1.amazonaws.com/ipr/KU_REF_CITATION.pdf"
+              target="_blank"
+              rel="noopener noreferrer"
             >
-              KU Ref. Citation
-            </GlobalArrowButton>
-          </Link>
+              <GlobalArrowButton
+                variant="default"
+              >
+                KU Ref. Citation
+              </GlobalArrowButton>
+            </Link>
+          </FlipbookTrigger>
         </div>
       </section>
       <AdmissionCareer />

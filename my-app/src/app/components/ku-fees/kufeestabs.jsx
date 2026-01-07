@@ -3,6 +3,9 @@
 import { useMemo, useState, useEffect } from "react";
 import { useSearchParams } from "next/navigation";
 import HostelFeeTabs from "../hostel/hosteltabs";
+import GlobalArrowButton from "../general/global-arrow_button";
+import FlipbookTrigger from "../general/FlipbookTrigger";
+import { useFlipbook } from "../general/FlipbookContext";
 
 /** -----------------------------
  *  TABS
@@ -1256,6 +1259,7 @@ function Notes({ items = [] }) {
 export default function FeesTabSection() {
     const searchParams = useSearchParams();
     const [activeTab, setActiveTab] = useState("commerce");
+    const { openFlipbook } = useFlipbook();
 
     // Check for tab query parameter on mount and when searchParams change
     useEffect(() => {
@@ -1409,17 +1413,21 @@ export default function FeesTabSection() {
 
                                         <div className="p-4 rounded-lg border border-gray-200 bg-gray-50">
                                             <div className="font-semibold mb-2">Scholarship Details</div>
-                                            <p className="whitespace-normal break-words">
+                                            <p className="whitespace-normal break-words mb-4">
                                                 Scholarships (General, Merit &amp; Girl Student) are available on Tuition Fees.{" "}
                                                 . The above scholarships are not applicable to Pharmacy, Education, and Research Programs.
-                                                <a
-                                                    href="https://kalinga-university.s3.ap-south-1.amazonaws.com/scholarships/SCHOLARSHIP_25-26+(4)+(1).pdf"
-                                                    className="text-[var(--button-red)] underline font-semibold"
-                                                >
-                                                    View scholarship details
-                                                </a>
                                             </p>
-
+                                            <FlipbookTrigger
+                                                pdfUrl="https://kalinga-university.s3.ap-south-1.amazonaws.com/scholarships/SCHOLARSHIP_25-26+(4)+(1).pdf"
+                                                title="Scholarship Details"
+                                            >
+                                                <GlobalArrowButton
+                                                    onClick={() => openFlipbook("https://kalinga-university.s3.ap-south-1.amazonaws.com/scholarships/SCHOLARSHIP_25-26+(4)+(1).pdf", "Scholarship Details")}
+                                                    className=" !py-2"
+                                                >
+                                                    View Scholarship Details
+                                                </GlobalArrowButton>
+                                            </FlipbookTrigger>
                                         </div>
 
                                         <div className="p-4 rounded-lg border border-gray-200 bg-white">
@@ -1475,20 +1483,23 @@ export default function FeesTabSection() {
                                                     <div className="font-semibold text-[var(--foreground)]">{y}</div>
 
                                                     {yearPdfs.length > 0 ? (
-                                                        <ul className="mt-2 space-y-2">
+                                                        <div className="mt-3 grid grid-cols-1 gap-2">
                                                             {yearPdfs.map((p, idx) => (
-                                                                <li key={idx}>
-                                                                    <a
-                                                                        href={p.href}
-                                                                        target="_blank"
-                                                                        rel="noreferrer"
-                                                                        className="text-[var(--button-red)] underline break-words"
+                                                                <FlipbookTrigger
+                                                                    key={idx}
+                                                                    pdfUrl={p.href}
+                                                                    title={p.label}
+                                                                >
+                                                                    <GlobalArrowButton
+                                                                        onClick={() => openFlipbook(p.href, p.label)}
+                                                                        className="!w-full !py-2 !text-sm"
+                                                                        textClassName="!text-sm"
                                                                     >
                                                                         {p.label}
-                                                                    </a>
-                                                                </li>
+                                                                    </GlobalArrowButton>
+                                                                </FlipbookTrigger>
                                                             ))}
-                                                        </ul>
+                                                        </div>
                                                     ) : (
                                                         <div className="text-sm text-[var(--foreground)]/70 mt-2">
                                                             PDFs will be added here.
