@@ -52,6 +52,50 @@ const toTitleCase = (str, applyLowercaseRestrictions = false) => {
     .join(' ');
 };
 
+// Static page data mapping (titles and hero images for instant loading)
+const STATIC_PAGE_DATA = {
+  '/about-us': {
+    title: 'About Us',
+    image: 'https://kalinga-university.s3.ap-south-1.amazonaws.com/about/about-banner.webp'
+  },
+  '/admissions': {
+    title: 'Admissions',
+    image: 'https://kalinga-university.s3.ap-south-1.amazonaws.com/departments/student-gathered.webp'
+  },
+  '/leadership': { title: 'Administration & Leadership' },
+  '/academic-calendar': { title: 'Academic Calendar' },
+  '/campuslife': { title: 'Life @ KU' },
+  '/student-support': { title: 'Student Support' },
+  '/student-welfare': { title: 'Student Welfare' },
+  '/library': { title: 'Library' },
+  '/student-clubs': { title: 'Clubs & Societies' },
+  '/academic-facilities': { title: 'Academic Facilities' },
+  '/campus-facilities': { title: 'Campus Facilities' },
+  '/sports-and-wellness-centre': { title: 'Sports & Wellness Centre' },
+  '/students-counselling-cell': { title: 'Student Counselling' },
+  '/downloads': { title: 'Downloads' },
+  '/research': { title: 'Research Overview' },
+  '/ipr-cell': { title: 'IPR (Intellectual Property Rights Cell)' },
+  '/research-resources': { title: 'Research Resources' },
+  '/placements': { title: 'Placements' },
+  '/training-and-placement-cell': {
+    title: 'Career Development Centre',
+    image: 'https://kalinga-university.s3.ap-south-1.amazonaws.com/placement/placement-intro.jpg'
+  },
+  '/news-and-events': { title: 'News & Events' },
+  '/conferences-and-events': { title: 'Conferences & Events' },
+  '/contact-us': { title: 'Contact Us' },
+  '/careers': { title: 'Careers' },
+  '/career-and-corporate-resource-centre': {
+    title: 'Career and Corporate Resource Centre',
+    image: 'https://kalinga-university.s3.ap-south-1.amazonaws.com/kif/kif-banner.webp'
+  },
+  '/ccrc': { title: 'CCRC' },
+  '/anti-ragging-cell': { title: 'Anti Ragging Cell' },
+  '/institution-innovation-council': { title: 'IIC' },
+  '/iqac': { title: 'IQAC' },
+};
+
 const Breadcrumb = ({ customBreadcrumbs, heroImage, pageTitle }) => {
   const pathname = usePathname();
   const breadcrumbContext = useBreadcrumb();
@@ -128,10 +172,10 @@ const Breadcrumb = ({ customBreadcrumbs, heroImage, pageTitle }) => {
   // Don't show breadcrumb on kalmat page
   if (pathname === '/kalmat') return null;
 
-  // Prioritize props over context data for immediate rendering
-  // This ensures props (passed directly) take precedence and reduce flickering
-  const finalHeroImage = heroImage ?? contextData?.heroImage;
-  const finalPageTitle = pageTitle ?? contextData?.pageTitle;
+  // Prioritize props over static data over context data for immediate rendering
+  const staticData = STATIC_PAGE_DATA[pathname];
+  const finalHeroImage = heroImage ?? staticData?.image ?? contextData?.heroImage;
+  const finalPageTitle = pageTitle ?? staticData?.title ?? contextData?.pageTitle;
   const finalCustomBreadcrumbs = customBreadcrumbs ?? contextData?.customBreadcrumbs;
   const finalImagePosition = contextData?.imageposition ?? imageposition;
 
@@ -164,7 +208,7 @@ const Breadcrumb = ({ customBreadcrumbs, heroImage, pageTitle }) => {
 
   // Check if breadcrumb data is loading
   // Show loader only if we have no data at all (no props, no context) and context says it's loading
-  const isDynamicRoute = pathname.includes('/courses/') || pathname.includes('/departments/');
+  const isDynamicRoute = pathname.includes('/academics/') || pathname.includes('/courses/') || pathname.includes('/departments/');
   const hasAnyData = finalHeroImage || finalPageTitle || (finalCustomBreadcrumbs && finalCustomBreadcrumbs.length > 0);
   // Only show loading if we truly have no data and context indicates loading
   const isLoading = contextLoading && !hasAnyData;
@@ -172,7 +216,7 @@ const Breadcrumb = ({ customBreadcrumbs, heroImage, pageTitle }) => {
   // Apply lowercase restrictions only for department or course pages
   const applyLowercaseRestrictions = isDynamicRoute;
 
-  // Use pageTitle if provided, otherwise use last breadcrumb label
+  // Use finalPageTitle (which includes props, static data, or context)
   const currentPageTitle = toTitleCase(finalPageTitle || breadcrumbs[breadcrumbs.length - 1]?.label || '', applyLowercaseRestrictions);
 
   // Use pathname as key to force re-render when route changes
