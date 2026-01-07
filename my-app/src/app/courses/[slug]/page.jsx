@@ -672,7 +672,7 @@ export default function DynamicCoursePage() {
           </div>
           <div className="flex flex-col sm:flex-row gap-4 justify-center items-center">
             <a
-              href="/admissions"
+              href="/admissions#course-finder"
               className="px-6 py-3 bg-[var(--button-red)] text-white rounded-lg font-semibold hover:bg-[var(--button-red)]/90 transition-colors"
             >
               Browse All Courses
@@ -713,7 +713,7 @@ export default function DynamicCoursePage() {
           </div>
           <div className="flex flex-col sm:flex-row gap-4 justify-center items-center">
             <a
-              href="/admissions"
+              href="/admissions#course-finder"
               className="px-6 py-3 bg-[var(--button-red)] text-white rounded-lg font-semibold hover:bg-[var(--button-red)]/90 transition-colors"
             >
               Browse All Courses

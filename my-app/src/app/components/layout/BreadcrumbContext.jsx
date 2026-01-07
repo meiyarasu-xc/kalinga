@@ -11,13 +11,18 @@ export function BreadcrumbProvider({ children }) {
     const pathname = usePathname();
     const prevPathnameRef = useRef(pathname);
 
-    // Clear breadcrumb data when pathname changes
+    // Synchronously reset state when pathname changes to prevent stale data leaks
+    // React allows calling setStates during render if they are wrapped in a condition like this
+    if (prevPathnameRef.current !== pathname) {
+        prevPathnameRef.current = pathname;
+        setBreadcrumbData(null);
+        setIsLoading(true);
+    }
+
+    // Effect to sync path name changes (still useful for other side effects if any)
     useEffect(() => {
-        if (prevPathnameRef.current !== pathname) {
-            prevPathnameRef.current = pathname;
-            setBreadcrumbData(null);
-            setIsLoading(true); // Set loading when route changes
-        }
+        // Already handled synchronously above, but keeping ref in sync here too
+        prevPathnameRef.current = pathname;
     }, [pathname]);
 
     // Memoize context value to prevent unnecessary re-renders
