@@ -197,13 +197,6 @@ const Programs = () => {
       const courseId = typeof course.id === 'number' ? course.id : parseInt(course.id)
       const courseImage = courseAboutMap.get(courseId) || getPlaceholderImage(programType)
 
-      // Debug logging
-      if (courseAboutMap.has(courseId)) {
-        console.log(`Course "${courseName}" (ID: ${courseId}) using mapped image:`, courseImage.substring(0, 50) + '...')
-      } else {
-        console.log(`Course "${courseName}" (ID: ${courseId}) using placeholder for ${programType}`)
-      }
-
       return {
         id: course.id,
         title: courseName,
