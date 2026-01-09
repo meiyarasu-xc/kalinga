@@ -64,35 +64,35 @@ export default function InternationalStudents() {
   const videoItems = [
     {
       id: 1,
-      name: "David Giir Riiny",
+      title: "David Giir Riiny",
       description: "B.tech Student",
       videoUrl: "https://kalinga-university.s3.ap-south-1.amazonaws.com/international-students/REEL_AIML_TESTOMONIAL_02.mp4",
       thumbnail: "https://kalinga-university.s3.ap-south-1.amazonaws.com/international-students/REEL_AIML_TESTOMONIAL_02.mp4",
     },
     {
       id: 2,
-      name: "Salima Naguago",
+      title: "Salima Naguago",
       description: "Pharmacy Student",
       videoUrl: "https://kalinga-university.s3.ap-south-1.amazonaws.com/international-students/REEL_PHARMA_TESTIMONIALS_01.mp4",
       thumbnail: "https://kalinga-university.s3.ap-south-1.amazonaws.com/international-students/REEL_PHARMA_TESTIMONIALS_01.mp4",
     },
     {
       id: 3,
-      name: "Khazi lupiya",
+      title: "Khazi lupiya",
       description: "Pharmacy Student",
       videoUrl: "https://kalinga-university.s3.ap-south-1.amazonaws.com/international-students/REEL_PHARMA_TESTIMONIALS_04.mp4",
       thumbnail: "https://kalinga-university.s3.ap-south-1.amazonaws.com/international-students/REEL_PHARMA_TESTIMONIALS_04.mp4",
     },
     {
       id: 4,
-      name: "Palchin Upadhyay",
+      title: "Palchin Upadhyay",
       description: "BA Gen Student",
       videoUrl: "https://kalinga-university.s3.ap-south-1.amazonaws.com/international-students/REEL_TESTIMONIAL_BJMC_01.mp4",
       thumbnail: "https://kalinga-university.s3.ap-south-1.amazonaws.com/international-students/REEL_TESTIMONIAL_BJMC_01.mp4",
     },
     {
       id: 5,
-      name: "Issac",
+      title: "Issac",
       description: "BSW Student",
       videoUrl: "https://kalinga-university.s3.ap-south-1.amazonaws.com/international-students/REEL_TESTIMONIAL_BJMC_02.mp4",
       thumbnail: "https://kalinga-university.s3.ap-south-1.amazonaws.com/international-students/REEL_TESTIMONIAL_BJMC_02.mp4",
@@ -374,7 +374,7 @@ export default function InternationalStudents() {
       />
       <PublicationGrid stats={publicationStats} />
       <AccreditationRanking
-        heading="Accreditations & Rankings"
+        heading="Accreditations & Associations"
         secondHeading=""
       />
 

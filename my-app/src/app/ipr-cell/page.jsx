@@ -32,7 +32,7 @@ const MentorIntroProps = [
     subtitle: "A Message From the Dean",
     department: "Dean/HoD - IPR Cell",
     imageSrc:
-      "https://kalinga-university.s3.ap-south-1.amazonaws.com/common/placeholder-img.png",
+      "https://kalinga-university.s3.ap-south-1.amazonaws.com/ipr/ipr-sir.webp",
     imageAlt: "Dean - IPR Cell",
 
     quote:

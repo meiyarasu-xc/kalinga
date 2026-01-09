@@ -359,6 +359,7 @@ export default function Admissions() {
         title={facilityContent.title}
         subtitle={facilityContent.subtitle}
         facilities={facilityContent.facilities}
+        className="!pt-4 pb-16"
       />
       <QuickLinks
         title={quickLinksContent.title}
