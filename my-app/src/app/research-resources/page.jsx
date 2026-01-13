@@ -3,7 +3,6 @@
 import MainIntro from "@/app/components/about/main_intro";
 import ImageListItem from "@/app/components/ccrc/imagelistitem";
 import FAQ from "../components/general/faq";
-import FAQ from "../components/general/faq";
 import { useFlipbook } from "../components/general/FlipbookContext";
 
 const breadcrumbData = {
