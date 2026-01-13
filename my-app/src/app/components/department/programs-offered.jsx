@@ -54,7 +54,7 @@ const defaultPrograms = [
   },
 ];
 
-export default function ProgramsOffered({ 
+export default function ProgramsOffered({
   programs = defaultPrograms,
   title = "Programs Offered",
   description = "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incidi",
@@ -117,7 +117,7 @@ export default function ProgramsOffered({
             </div>
 
             {/* Program List */}
-            <div className="max-h-[620px] overflow-y-auto custom-scrollbar">
+            <div className="max-h-[620px] overflow-y-auto custom-scrollbar p-3">
               {filteredPrograms.map((program) => (
                 <div
                   key={program.id}
@@ -133,36 +133,36 @@ export default function ProgramsOffered({
                   {/* Content */}
                   <div className="relative z-10 flex items-center justify-between">
                     <div className="flex-1">
-                      <h3 className="text-[var(--button-red)] mb-2 text-2xl font-plus-jakarta-sans">
+                      <h3 className="text-[var(--button-red)] text-xl md:text-2xl lg:text-3xl !font-medium mb-2 font-plus-jakarta-sans normal-case  !text-base md:!text-lg lg:!text-xl">
                         {program.title}
                       </h3>
                       <div className="flex items-center gap-2 flex-wrap">
-                      <p className="text-[var(--light-text-gray)] !font-[500]">
-                        Duration: {program.duration}
-                      </p>
-                      <Link
-                      href={program.slug ? `/courses/${program.slug}` : "/admissions"}
-                      className="font-[500] flex items-center gap-1 hover:gap-2 transition-all md:ml-4 text-[var(--foreground)] hover:text-[var(--button-red)]/80"
-                    >
-                      Explore Program
-                      <svg
-                        width="16"
-                        height="16"
-                        viewBox="0 0 16 16"
-                        fill="none"
-                        xmlns="http://www.w3.org/2000/svg"
-                        className="text-[var(--button-red)]"
-                      >
-                        <path
-                          d="M4 12L12 4M12 4H6M12 4V10"
-                          stroke="currentColor"
-                          strokeWidth="1.5"
-                          strokeLinecap="round"
-                          strokeLinejoin="round"
-                        />
-                      </svg>
-                    </Link>
-                    </div>
+                        <p className="text-[var(--light-text-gray)] !font-[500]">
+                          Duration: {program.duration}
+                        </p>
+                        <Link
+                          href={program.slug ? `/courses/${program.slug}` : "/admissions"}
+                          className="font-[500] flex items-center gap-1 hover:gap-2 transition-all md:ml-4 text-[var(--foreground)] hover:text-[var(--button-red)]/80"
+                        >
+                          Explore Program
+                          <svg
+                            width="16"
+                            height="16"
+                            viewBox="0 0 16 16"
+                            fill="none"
+                            xmlns="http://www.w3.org/2000/svg"
+                            className="text-[var(--button-red)]"
+                          >
+                            <path
+                              d="M4 12L12 4M12 4H6M12 4V10"
+                              stroke="currentColor"
+                              strokeWidth="1.5"
+                              strokeLinecap="round"
+                              strokeLinejoin="round"
+                            />
+                          </svg>
+                        </Link>
+                      </div>
                     </div>
                   </div>
                 </div>
