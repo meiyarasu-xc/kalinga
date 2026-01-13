@@ -288,14 +288,6 @@ export default function KIFPage({
         type: 'component',
         component: renderCardGrid(targetGroups)
       },
-      answer: [
-        'Students',
-        'Youth',
-        'Women',
-        'Underprivileged Communities',
-        'School Students',
-        'Industry Partners'
-      ],
     },
     {
       id: 2,
@@ -304,57 +296,49 @@ export default function KIFPage({
         type: 'component',
         component: renderCardGrid(villagesAdopted)
       },
-      answer: [
-        'Kotni',
-        'Palaud',
-        'Tandul',
-        'Kotara Bhantha',
-        'Parsada',
-        'Kuhera'
-      ],
     },
-    {
-      id: 3,
-      question: "Our Programs",
-      answer: {
-        type: 'table',
-        headers: ['S.No', 'Program Name', 'CSR Initiatives'],
-        rows: [
-          { id: 1, program: 'STEM Education: STEM For Girls In India', description: 'The representation of women and girls in STEM fields (Science, Technology, Engineering, and Mathematics) is quite less in India, but we fulfil this gap by introducing STEM education to girls in rural areas.' },
-          { id: 2, program: 'Rural Infrastructure Development', description: 'Improving the lives of rural people is essential in terms of education, healthcare, sanitation, infrastructure, road development, water supply, irrigation schemes, local markets, and telecommunication. We help corporates address rural development challenges with proper resource planning and employee volunteering, which will not only develop their village but will also generate employment opportunities for both men and women.' },
-          { id: 3, program: 'Skill Development', description: 'Essential for both economic growth and social development, this program will turn youth into a future-ready workforce, as we will conduct skill-based training programs in economically weaker sections of society across India or establish centres on your behalf.' },
-          { id: 4, program: 'Training of Women/Youth', description: 'Investment in skilling women in different sectors, such as helping them establish small businesses which they can run from the comfort of their home, will help them build long-term careers and will lead to sustainable change in the economy and help corporates take ethical responsibility.' },
-          { id: 5, program: 'Road Safety', description: 'We will help you address one of the biggest issues in India, i.e, Road Safety. Under this CSR initiative, we will undertake activities like building roads, driving training, investment in R&D in road safety, road accident trauma care, and developing road safety curriculum for school children, inspection of used vehicles, driving testing, and much more.' },
-          { id: 6, program: 'Encouragement of Sports in Rural Areas', description: 'To bring out the talent of the youth of rural areas, we will establish sports centres, provide training, and even organise local tournaments in economically backward areas and create opportunities for their growth too.' },
-          { id: 7, program: 'Health Sector', description: 'Under this CSR initiative, we will establish medical institutions, organise healthcare camps and awareness programs, and vaccination drives to provide quality healthcare services to underserved communities of our nation.' },
-          { id: 8, program: 'Sanitation', description: 'We support corporates in undertaking sanitation initiatives by promoting cleanliness and hygiene. Our programs will include campaigns on personal hygiene, public health, menstrual health for women, and waste management practices. We will also organise clean-up projects for rivers and ponds.' },
-          {
-            id: 9, program: 'Environment', description: 'Environmental pollution is growing at a fast rate as more companies are emitting heavy chemicals into the atmosphere, which makes it imperative for companies to invest their CSR funds in the same. We help companies with the following CSR activities:',
-            listItems: [
-              'Recycling',
-              'Waste Reduction',
-              'Reduce Energy Use, water, and plastic consumption',
-              'Use renewable energy sources',
-              'Adopt sustainable solutions',
-              'Follow the strict guidelines and ethical practices of the government',
-            ]
-          },
-          { id: 10, program: 'Animal Welfare', description: 'We assist companies in actively contributing towards animal welfare initiatives. Our projects under this CSR will focus on building animal shelters, organising vaccination drives, running rescue operations, and other awareness campaigns.' },
-          { id: 11, program: 'Gender Equality, Women\'s Empowerment', description: 'Although several NGOs and self-help groups are working for women empowerment, corporates too can work in this area and uplift women and remove discrimination from society. We will provide livelihood opportunities to women in rural areas by organising various skill-based training programs that will uplift them in terms of communication, confidence, self-esteem, and personality development. This will help them develop an entrepreneurial mindset or take up jobs in handloom weaving, pottery designing, painting, candle making, eco-friendly product designing, product packaging and labelling, and more.' },
-          { id: 12, program: 'Old Age Home', description: 'From planning to infrastructure design, we encourage corporates in undertaking sustainable old-age home projects so that every senior citizen who doesn\'t have shelter, food, and other basic necessities of life feels cared for and valued.' },
-          {
-            id: 13, program: 'Safe Drinking Water', description: 'This is one of the major challenges, especially in rural areas, where water usually contains harmful and toxic chemicals. This leads to poor health conditions of those who cannot even afford proper healthcare facilities. Under this CSR initiative, we perform the following activities:',
-            listItems: [
-              'Plan and implement safe drinking water supply projects in rural areas',
-              'Conduct awareness campaigns on water hygiene and conservation',
-              'Promote rainwater harvesting and sustainable solutions',
-              'Focus on water accessibility in remote areas',
-              'Setting up testing labs to monitor the water quality of different areas',
-            ]
-          },
-        ]
-      }
-    },
+    // {
+    //   id: 3,
+    //   question: "Our Programs",
+    //   answer: {
+    //     type: 'table',
+    //     headers: ['S.No', 'Program Name', 'CSR Initiatives'],
+    //     rows: [
+    //       { id: 1, program: 'STEM Education: STEM For Girls In India', description: 'The representation of women and girls in STEM fields (Science, Technology, Engineering, and Mathematics) is quite less in India, but we fulfil this gap by introducing STEM education to girls in rural areas.' },
+    //       { id: 2, program: 'Rural Infrastructure Development', description: 'Improving the lives of rural people is essential in terms of education, healthcare, sanitation, infrastructure, road development, water supply, irrigation schemes, local markets, and telecommunication. We help corporates address rural development challenges with proper resource planning and employee volunteering, which will not only develop their village but will also generate employment opportunities for both men and women.' },
+    //       { id: 3, program: 'Skill Development', description: 'Essential for both economic growth and social development, this program will turn youth into a future-ready workforce, as we will conduct skill-based training programs in economically weaker sections of society across India or establish centres on your behalf.' },
+    //       { id: 4, program: 'Training of Women/Youth', description: 'Investment in skilling women in different sectors, such as helping them establish small businesses which they can run from the comfort of their home, will help them build long-term careers and will lead to sustainable change in the economy and help corporates take ethical responsibility.' },
+    //       { id: 5, program: 'Road Safety', description: 'We will help you address one of the biggest issues in India, i.e, Road Safety. Under this CSR initiative, we will undertake activities like building roads, driving training, investment in R&D in road safety, road accident trauma care, and developing road safety curriculum for school children, inspection of used vehicles, driving testing, and much more.' },
+    //       { id: 6, program: 'Encouragement of Sports in Rural Areas', description: 'To bring out the talent of the youth of rural areas, we will establish sports centres, provide training, and even organise local tournaments in economically backward areas and create opportunities for their growth too.' },
+    //       { id: 7, program: 'Health Sector', description: 'Under this CSR initiative, we will establish medical institutions, organise healthcare camps and awareness programs, and vaccination drives to provide quality healthcare services to underserved communities of our nation.' },
+    //       { id: 8, program: 'Sanitation', description: 'We support corporates in undertaking sanitation initiatives by promoting cleanliness and hygiene. Our programs will include campaigns on personal hygiene, public health, menstrual health for women, and waste management practices. We will also organise clean-up projects for rivers and ponds.' },
+    //       {
+    //         id: 9, program: 'Environment', description: 'Environmental pollution is growing at a fast rate as more companies are emitting heavy chemicals into the atmosphere, which makes it imperative for companies to invest their CSR funds in the same. We help companies with the following CSR activities:',
+    //         listItems: [
+    //           'Recycling',
+    //           'Waste Reduction',
+    //           'Reduce Energy Use, water, and plastic consumption',
+    //           'Use renewable energy sources',
+    //           'Adopt sustainable solutions',
+    //           'Follow the strict guidelines and ethical practices of the government',
+    //         ]
+    //       },
+    //       { id: 10, program: 'Animal Welfare', description: 'We assist companies in actively contributing towards animal welfare initiatives. Our projects under this CSR will focus on building animal shelters, organising vaccination drives, running rescue operations, and other awareness campaigns.' },
+    //       { id: 11, program: 'Gender Equality, Women\'s Empowerment', description: 'Although several NGOs and self-help groups are working for women empowerment, corporates too can work in this area and uplift women and remove discrimination from society. We will provide livelihood opportunities to women in rural areas by organising various skill-based training programs that will uplift them in terms of communication, confidence, self-esteem, and personality development. This will help them develop an entrepreneurial mindset or take up jobs in handloom weaving, pottery designing, painting, candle making, eco-friendly product designing, product packaging and labelling, and more.' },
+    //       { id: 12, program: 'Old Age Home', description: 'From planning to infrastructure design, we encourage corporates in undertaking sustainable old-age home projects so that every senior citizen who doesn\'t have shelter, food, and other basic necessities of life feels cared for and valued.' },
+    //       {
+    //         id: 13, program: 'Safe Drinking Water', description: 'This is one of the major challenges, especially in rural areas, where water usually contains harmful and toxic chemicals. This leads to poor health conditions of those who cannot even afford proper healthcare facilities. Under this CSR initiative, we perform the following activities:',
+    //         listItems: [
+    //           'Plan and implement safe drinking water supply projects in rural areas',
+    //           'Conduct awareness campaigns on water hygiene and conservation',
+    //           'Promote rainwater harvesting and sustainable solutions',
+    //           'Focus on water accessibility in remote areas',
+    //           'Setting up testing labs to monitor the water quality of different areas',
+    //         ]
+    //       },
+    //     ]
+    //   }
+    // },
     {
       id: 4,
       question: "CSR at Kalinga University",
