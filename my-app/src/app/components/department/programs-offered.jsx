@@ -117,7 +117,7 @@ export default function ProgramsOffered({
             </div>
 
             {/* Program List */}
-            <div className="max-h-[620px] overflow-y-auto custom-scrollbar">
+            <div className="max-h-[620px] overflow-y-auto custom-scrollbar p-3">
               {filteredPrograms.map((program) => (
                 <div
                   key={program.id}
@@ -133,7 +133,7 @@ export default function ProgramsOffered({
                   {/* Content */}
                   <div className="relative z-10 flex items-center justify-between">
                     <div className="flex-1">
-                      <h3 className="text-[var(--button-red)] mb-2 text-2xl font-plus-jakarta-sans">
+                      <h3 className="text-[var(--button-red)] text-xl md:text-2xl lg:text-3xl !font-medium mb-2 font-plus-jakarta-sans normal-case  !text-base md:!text-lg lg:!text-xl">
                         {program.title}
                       </h3>
                       <div className="flex items-center gap-2 flex-wrap">
