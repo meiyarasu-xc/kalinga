@@ -80,75 +80,76 @@ export default function Footer() {
                   <span className="text-white font-stix">Important Links</span>
                   <span className="hidden sm:block flex-1 border-t border-white/70 relative bottom-2"></span>
                 </h4>
-                <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-5 gap-x-4 sm:gap-x-6 md:gap-x-8 lg:gap-x-50 gap-y-2.5 sm:gap-y-3 md:gap-y-4 font-plus-jakarta-sans text-xs sm:text-[14px] leading-relaxed sm:leading-[25px] font-normal">
+                <div className="grid grid-cols-2 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-x-4 sm:gap-x-6 md:gap-x-8 lg:gap-x-8 gap-y-2.5 sm:gap-y-3 md:gap-y-4 font-plus-jakarta-sans text-xs sm:text-[14px] leading-relaxed sm:leading-[25px] font-normal">
                   <ul className="text-white/80 space-y-2 sm:space-y-3">
-                    <li><a className="hover:text-white transition-colors md:whitespace-nowrap break-words" href="/privacy-policy">Privacy Policy</a></li>
-                    <li><a className="hover:text-white transition-colors md:whitespace-nowrap break-words" href="/terms-conditions">Terms & Conditions</a></li>
-                    <li><a className="hover:text-white transition-colors md:whitespace-nowrap break-words" href="/refund-policy">Refund Policy</a></li>
-                    <li><a className="hover:text-white transition-colors md:whitespace-nowrap break-words" href="#">Accessibility</a></li>
-                    <li><a className="hover:text-white transition-colors md:whitespace-nowrap break-words" href="/downloads">Downloads</a></li>
-                    <li><a className="hover:text-white transition-colors md:whitespace-nowrap break-words" href="/important-links">Important Links</a></li>
+                    <li><a className="hover:text-white transition-colors lg:whitespace-nowrap break-words" href="/privacy-policy">Privacy Policy</a></li>
+                    <li><a className="hover:text-white transition-colors lg:whitespace-nowrap break-words" href="/terms-conditions">Terms & Conditions</a></li>
+                    <li><a className="hover:text-white transition-colors lg:whitespace-nowrap break-words" href="/refund-policy">Refund Policy</a></li>
+                    <li><a className="hover:text-white transition-colors lg:whitespace-nowrap break-words" href="#">Accessibility</a></li>
+                    <li><a className="hover:text-white transition-colors lg:whitespace-nowrap break-words" href="/downloads">Downloads</a></li>
+                    <li><a className="hover:text-white transition-colors lg:whitespace-nowrap break-words" href="/important-links">Important Links</a></li>
                     <li>
                       <FlipbookTrigger pdfUrl="https://kalinga-university.s3.ap-south-1.amazonaws.com/downloads/KU+NIRF+2024+DCF.pdf" title="NIRF Ranking">
-                        <a className="hover:text-white transition-colors md:whitespace-nowrap break-words cursor-pointer" onClick={() => openFlipbook("https://kalinga-university.s3.ap-south-1.amazonaws.com/downloads/KU+NIRF+2024+DCF.pdf", "NIRF Ranking")}>NIRF Ranking</a>
+                        <a className="hover:text-white transition-colors lg:whitespace-nowrap break-words cursor-pointer" onClick={() => openFlipbook("https://kalinga-university.s3.ap-south-1.amazonaws.com/downloads/KU+NIRF+2024+DCF.pdf", "NIRF Ranking")}>NIRF Ranking</a>
                       </FlipbookTrigger>
                     </li>
-                    <li><a className="hover:text-white transition-colors md:whitespace-nowrap break-words" href="/ku-fees">Proposed KU Fees</a></li>
-                    <li><a className="hover:text-white transition-colors md:whitespace-nowrap break-words" href="/academic-planner">Academic Planner</a></li>
+                    <li><a className="hover:text-white transition-colors lg:whitespace-nowrap break-words" href="/ku-fees">Proposed KU Fees</a></li>
+                    <li><a className="hover:text-white transition-colors lg:whitespace-nowrap break-words" href="/academic-planner">Academic Planner</a></li>
 
                   </ul>
                   <ul className="text-white/80 space-y-2 sm:space-y-3">
-                    <li><a className="hover:text-white transition-colors md:whitespace-nowrap break-words" href="/academic-calendar">Academic Calendar</a></li>
-                    <li><a className="hover:text-white transition-colors md:whitespace-nowrap break-words" href="/students-welfare">Student Welfare</a></li>
-                    <li><a className="hover:text-white transition-colors md:whitespace-nowrap break-words" href="#">IEEE Student Branch at KU</a></li>
-                    <li><a className="hover:text-white transition-colors md:whitespace-nowrap break-words" href="/media">Media</a></li>
-                    <li><a className="hover:text-white transition-colors md:whitespace-nowrap break-words" href="/document-verification">Document Verification</a></li>
-                    <li><a className="hover:text-white transition-colors md:whitespace-nowrap break-words" href="/chhattisgarh">Discover Chhattisgarh </a></li>
-                    <li><a className="hover:text-white transition-colors md:whitespace-nowrap break-words" href="https://wpengineering.kalingauniversity.ac.in/">Working Professionals</a></li>
-                    <li><a className="hover:text-white transition-colors md:whitespace-nowrap break-words" href="/voter-portal">Voter Portal</a></li>
-                    <li><a className="hover:text-white transition-colors md:whitespace-nowrap break-words" href="/kalinga-buzz">Kalinga Buzz</a></li>
-                    <li><a className="hover:text-white transition-colors md:whitespace-nowrap break-words" href="/csr">CSR at Kalinga University</a></li>
+                    <li><a className="hover:text-white transition-colors lg:whitespace-nowrap break-words" href="/academic-calendar">Academic Calendar</a></li>
+                    <li><a className="hover:text-white transition-colors lg:whitespace-nowrap break-words" href="/students-welfare">Student Welfare</a></li>
+                    <li><a className="hover:text-white transition-colors lg:whitespace-nowrap break-words" href="#">IEEE Student Branch at KU</a></li>
+                    <li><a className="hover:text-white transition-colors lg:whitespace-nowrap break-words" href="/media">Media</a></li>
+                    <li><a className="hover:text-white transition-colors lg:whitespace-nowrap break-words" href="/document-verification">Document Verification</a></li>
+                    <li><a className="hover:text-white transition-colors lg:whitespace-nowrap break-words" href="/chhattisgarh">Discover Chhattisgarh </a></li>
+                    <li><a className="hover:text-white transition-colors lg:whitespace-nowrap break-words" href="https://wpengineering.kalingauniversity.ac.in/">Working Professionals</a></li>
+                    <li><a className="hover:text-white transition-colors lg:whitespace-nowrap break-words" href="/voter-portal">Voter Portal</a></li>
+                    <li><a className="hover:text-white transition-colors lg:whitespace-nowrap break-words" href="/kalinga-buzz">Kalinga Buzz</a></li>
+                    <li><a className="hover:text-white transition-colors lg:whitespace-nowrap break-words" href="/csr">CSR at Kalinga University</a></li>
 
 
                   </ul>
                   <ul className="text-white/80 space-y-2 sm:space-y-3">
-                    <li><a className="hover:text-white transition-colors md:whitespace-nowrap break-words" href="/value-added-course">Value Added Courses</a></li>
-                    <li><a className="hover:text-white transition-colors md:whitespace-nowrap break-words" href="/unnat-bharat-abhiyan">Unnat Bharat Abhiyan </a></li>
+                    <li><a className="hover:text-white transition-colors lg:whitespace-nowrap break-words" href="/value-added-course">Value Added Courses</a></li>
+                    <li><a className="hover:text-white transition-colors lg:whitespace-nowrap break-words" href="/unnat-bharat-abhiyan">Unnat Bharat Abhiyan </a></li>
                     <li>
                       <FlipbookTrigger pdfUrl="https://kalinga-university.s3.ap-south-1.amazonaws.com/common/UGC+(Detailed+Info.).pdf" title="UGC Detailed Information">
-                        <a className="hover:text-white transition-colors md:whitespace-nowrap break-words cursor-pointer" onClick={() => openFlipbook("https://kalinga-university.s3.ap-south-1.amazonaws.com/common/UGC+(Detailed+Info.).pdf", "UGC Detailed Information")}>UGC Detailed Information</a>
+                        <a className="hover:text-white transition-colors lg:whitespace-nowrap break-words cursor-pointer" onClick={() => openFlipbook("https://kalinga-university.s3.ap-south-1.amazonaws.com/common/UGC+(Detailed+Info.).pdf", "UGC Detailed Information")}>UGC Detailed Information</a>
                       </FlipbookTrigger>
                     </li>
-                    <li><a className="hover:text-white transition-colors md:whitespace-nowrap break-words" href="https://studyinindia.gov.in/">Study in India</a></li>
-                    <li><a className="hover:text-white transition-colors md:whitespace-nowrap break-words" href="/pay-online">Pay Online</a></li>
-                    <li><a className="hover:text-white transition-colors md:whitespace-nowrap break-words" href="/sdg-cell">SDG Cell</a></li>
-                    <li><a className="hover:text-white transition-colors md:whitespace-nowrap break-words" href="/anti-ragging-cell">Anti-Ragging Cell</a></li>
-                    <li><a className="hover:text-white transition-colors md:whitespace-nowrap break-words" href="/book-publications">Book Publication</a></li>
-                    <li><a className="hover:text-white transition-colors md:whitespace-nowrap break-words" href="/other-committees">Other Committees</a></li>
+                    <li><a className="hover:text-white transition-colors lg:whitespace-nowrap break-words" href="https://studyinindia.gov.in/">Study in India</a></li>
+                    <li><a className="hover:text-white transition-colors lg:whitespace-nowrap break-words" href="/pay-online">Pay Online</a></li>
+                    <li><a className="hover:text-white transition-colors lg:whitespace-nowrap break-words" href="/sdg-cell">SDG Cell</a></li>
+                    <li><a className="hover:text-white transition-colors lg:whitespace-nowrap break-words" href="/anti-ragging-cell">Anti-Ragging Cell</a></li>
+                    <li><a className="hover:text-white transition-colors lg:whitespace-nowrap break-words" href="/book-publications">Book Publication</a></li>
+                    <li><a className="hover:text-white transition-colors lg:whitespace-nowrap break-words" href="/other-committees">Other Committees</a></li>
                   </ul>
                   <ul className="text-white/80 space-y-2 sm:space-y-3">
-                    <li><a className="hover:text-white transition-colors md:whitespace-nowrap break-words" href="/radio">Kalinga Radio</a></li>
-                    <li><a className="hover:text-white transition-colors md:whitespace-nowrap break-words" href="/podcast">Kalinga Podcast</a></li>
+                    <li><a className="hover:text-white transition-colors lg:whitespace-nowrap break-words" href="/radio">Kalinga Radio</a></li>
+                    <li><a className="hover:text-white transition-colors lg:whitespace-nowrap break-words" href="/podcast">Kalinga Podcast</a></li>
 
                     <li>
                       <FlipbookTrigger pdfUrl="https://kalinga-university.s3.ap-south-1.amazonaws.com/downloads/IT+Policy+-+KU.pdf" title="IT Policy">
-                        <a className="hover:text-white transition-colors md:whitespace-nowrap break-words cursor-pointer" onClick={() => openFlipbook("https://kalinga-university.s3.ap-south-1.amazonaws.com/downloads/IT+Policy+-+KU.pdf", "IT Policy")}>IT Policy</a>
+                        <a className="hover:text-white transition-colors lg:whitespace-nowrap break-words cursor-pointer" onClick={() => openFlipbook("https://kalinga-university.s3.ap-south-1.amazonaws.com/downloads/IT+Policy+-+KU.pdf", "IT Policy")}>IT Policy</a>
                       </FlipbookTrigger>
                     </li>
 
-                    <li><a className="hover:text-white transition-colors md:whitespace-nowrap break-words" href="/institution-innovation-council">Institution's Innovation Council</a></li>
-                    <li><a className="hover:text-white transition-colors md:whitespace-nowrap break-words" href="#">Code of Conduct Handbook</a></li>
-                    <li><a className="hover:text-white transition-colors md:whitespace-nowrap break-words" href="/executive-development-program">Executive Development Program</a></li>
-                    <li><a className="hover:text-white transition-colors md:whitespace-nowrap break-words" href="/national-council-teacher-education">National Council For Teacher Education</a></li>
-                    <li><a className="hover:text-white transition-colors md:whitespace-nowrap break-words" href="/academic-and-industry-collaborations">Academic and Industry Collaborations</a></li>
-                    <li><a className="hover:text-white transition-colors md:whitespace-nowrap break-words" href="/corporate-training-and-consultancy-division">Corporate Training and Consultancy Division</a></li>
+                    <li><a className="hover:text-white transition-colors lg:whitespace-nowrap break-words" href="/institution-innovation-council">Institution's Innovation Council</a></li>
+                    <li><a className="hover:text-white transition-colors lg:whitespace-nowrap break-words" href="#">Code of Conduct Handbook</a></li>
+                    <li><a className="hover:text-white transition-colors lg:whitespace-nowrap break-words" href="/executive-development-program">Executive Development Program</a></li>
+                    <li><a className="hover:text-white transition-colors lg:whitespace-nowrap break-words" href="/national-council-teacher-education">National Council For Teacher Education</a></li>
+                    <li><a className="hover:text-white transition-colors lg:whitespace-nowrap break-words" href="/academic-and-industry-collaborations">Academic and Industry Collaborations</a></li>
+                    <li><a className="hover:text-white transition-colors lg:whitespace-nowrap break-words" href="/corporate-training-and-consultancy-division">Corporate Training and Consultancy Division</a></li>
                     <li>
                       <FlipbookTrigger pdfUrl="https://kalinga-university.s3.ap-south-1.amazonaws.com/downloads/IIC_Appreciation_Letter_AY_2023_24.pdf" title="IIC Appreciation Letter AY 2023-24">
-                        <a className="hover:text-white transition-colors md:whitespace-nowrap break-words cursor-pointer" onClick={() => openFlipbook("https://kalinga-university.s3.ap-south-1.amazonaws.com/downloads/IIC_Appreciation_Letter_AY_2023_24.pdf", "IIC Appreciation Letter AY 2023-24")}>IIC Appreciation Letter AY 2023-24</a>
+                        <a className="hover:text-white transition-colors lg:whitespace-nowrap break-words cursor-pointer" onClick={() => openFlipbook("https://kalinga-university.s3.ap-south-1.amazonaws.com/downloads/IIC_Appreciation_Letter_AY_2023_24.pdf", "IIC Appreciation Letter AY 2023-24")}>IIC Appreciation Letter AY 2023-24</a>
                       </FlipbookTrigger>
                     </li>
 
                   </ul>
+
                 </div>
               </div>
 
