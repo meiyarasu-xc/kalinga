@@ -12,10 +12,7 @@ export async function fetchCourseCompleteDetail(courseIdOrSlug) {
     let url = getApiUrl(API_CONFIG.courses.completeDetail(courseIdOrSlug));
     let response = await fetch(url, {
       method: 'GET',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      cache: 'no-store',
+      next: { revalidate: 3600 },
     });
 
     // If 500 error, the endpoint might not exist or course ID is invalid
@@ -51,11 +48,8 @@ export async function fetchDepartmentCompleteDetail(departmentId) {
     const url = getApiUrl(API_CONFIG.departments.completeDetail(departmentId));
     const response = await fetch(url, {
       method: 'GET',
-      headers: {
-        'Content-Type': 'application/json',
-      },
       // Cache control for client-side fetching
-      cache: 'no-store', // Always fetch fresh data, or use 'default' for browser caching
+      next: { revalidate: 3600 },
     });
 
     if (!response.ok) {
@@ -97,10 +91,7 @@ export async function fetchAllDepartments() {
     const url = getApiUrl(API_CONFIG.departments.list());
     const response = await fetch(url, {
       method: 'GET',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      cache: 'no-store',
+      next: { revalidate: 3600 },
     });
 
     if (!response.ok) {
@@ -124,10 +115,7 @@ export async function fetchAllDepartmentCourses() {
     const url = getApiUrl(API_CONFIG.departmentCourses.list());
     const response = await fetch(url, {
       method: 'GET',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      cache: 'no-store',
+      next: { revalidate: 3600 },
     });
 
     if (!response.ok) {
@@ -151,10 +139,7 @@ export async function fetchAllCourses() {
     const url = getApiUrl(API_CONFIG.courses.list());
     const response = await fetch(url, {
       method: 'GET',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      cache: 'no-store',
+      next: { revalidate: 3600 },
     });
 
     if (!response.ok) {
@@ -179,10 +164,7 @@ export async function fetchDepartmentCourses(slugOrId) {
     const url = getApiUrl(API_CONFIG.departments.courses(slugOrId));
     const response = await fetch(url, {
       method: 'GET',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      cache: 'no-store',
+      next: { revalidate: 3600 },
     });
 
     if (!response.ok) {
@@ -355,10 +337,7 @@ export async function fetchDepartmentCourseCounts() {
     const url = getApiUrl(API_CONFIG.departments.courseCounts());
     const response = await fetch(url, {
       method: 'GET',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      cache: 'no-store',
+      next: { revalidate: 3600 },
     });
 
     if (!response.ok) {
@@ -384,10 +363,7 @@ export async function fetchAllDepartmentsCourses(programType = null, department 
     const url = getApiUrl(API_CONFIG.departments.allDepartmentsCourses(programType, department));
     const response = await fetch(url, {
       method: 'GET',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      cache: 'no-store',
+      next: { revalidate: 3600 },
     });
 
     if (!response.ok) {
@@ -411,10 +387,7 @@ export async function fetchDepartmentsCourses() {
     const url = getApiUrl(API_CONFIG.departmentCourses.departmentsCourses());
     const response = await fetch(url, {
       method: 'GET',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      cache: 'no-store',
+      next: { revalidate: 3600 },
     });
 
     if (!response.ok) {
@@ -547,10 +520,7 @@ export async function fetchNewsEvents(params = {}) {
     // Using no-store to ensure fresh data for news
     const response = await fetch(url, {
       method: 'GET',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      cache: 'no-store',
+      next: { revalidate: 3600 },
     });
 
     if (!response.ok) {
@@ -575,10 +545,7 @@ export async function fetchNewsEventDetails(slug) {
     const url = getApiUrl(API_CONFIG.newsEvents.detail(slug));
     const response = await fetch(url, {
       method: 'GET',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      cache: 'no-store',
+      next: { revalidate: 3600 },
     });
 
     if (!response.ok) {
@@ -604,10 +571,7 @@ export async function fetchNewsEventSEO(slug) {
     const url = getApiUrl(API_CONFIG.newsEvents.seo(slug));
     const response = await fetch(url, {
       method: 'GET',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      cache: 'no-store',
+      next: { revalidate: 3600 },
     });
 
     // If 404, it might mean no specific SEO data is configured, which is fine
@@ -645,10 +609,7 @@ export async function fetchTables(params = {}) {
 
     const response = await fetch(url, {
       method: 'GET',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      cache: 'no-store',
+      next: { revalidate: 3600 },
     });
 
     if (!response.ok) {
@@ -673,10 +634,7 @@ export async function fetchTableData(idOrSlug) {
     const url = getApiUrl(API_CONFIG.tables.detail(idOrSlug));
     const response = await fetch(url, {
       method: 'GET',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      cache: 'no-store',
+      next: { revalidate: 3600 },
     });
 
     if (!response.ok) {
@@ -701,10 +659,7 @@ export async function fetchTableCategories() {
     const url = getApiUrl(API_CONFIG.tableCategories.list());
     const response = await fetch(url, {
       method: 'GET',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      cache: 'no-store',
+      next: { revalidate: 3600 },
     });
 
     if (!response.ok) {

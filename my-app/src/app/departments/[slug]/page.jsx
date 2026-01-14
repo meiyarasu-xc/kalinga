@@ -50,10 +50,30 @@ export default function DynamicDepartmentPage() {
   const [departmentId, setDepartmentId] = useState(null);
   const [departmentCourses, setDepartmentCourses] = useState([]);
 
-  // Find department ID from slug
+  // Find department data from slug
   useEffect(() => {
     const findDepartment = async () => {
       try {
+        setLoading(true);
+        setError(null);
+
+        console.log(`[Dept Page] Looking for department: "${slug}"`);
+
+        // Strategy 1: Try direct fetch by slug first (faster)
+        try {
+          const directData = await fetchDepartmentCompleteDetail(slug);
+          if (directData && directData.id) {
+            console.log(`[Dept Page] Successfully fetched department by slug:`, directData.name);
+            setDepartmentData(directData);
+            setDepartmentId(directData.id);
+            setLoading(false);
+            return;
+          }
+        } catch (slugErr) {
+          console.warn(`[Dept Page] Direct slug fetch for "${slug}" failed, falling back to search.`, slugErr);
+        }
+
+        // Strategy 2: Fallback to list search if direct slug fetch fails
         const departments = await fetchAllDepartments();
         const dept = departments.find(d =>
           (d.slug && d.slug === slug) ||
@@ -61,13 +81,14 @@ export default function DynamicDepartmentPage() {
         );
 
         if (dept) {
+          console.log(`[Dept Page] Found department in list: ${dept.name}`);
           setDepartmentId(dept.id);
         } else {
           setError('Department not found');
           setLoading(false);
         }
       } catch (err) {
-        console.error('Failed to find department:', err);
+        console.error('[Dept Page] Failed to resolve department:', err);
         setError(err.message);
         setLoading(false);
       }
@@ -78,9 +99,9 @@ export default function DynamicDepartmentPage() {
     }
   }, [slug]);
 
-  // Fetch department data from API
+  // Fetch complete details if only ID was found (fallback strategy)
   useEffect(() => {
-    if (!departmentId) return;
+    if (!departmentId || departmentData?.id === departmentId) return;
 
     const loadDepartmentData = async () => {
       try {
@@ -89,7 +110,7 @@ export default function DynamicDepartmentPage() {
         setDepartmentData(data);
         setError(null);
       } catch (err) {
-        console.error('Failed to load department data:', err);
+        console.error('[Dept Page] Failed to fetch dept details by ID:', err);
         setError(err.message);
       } finally {
         setLoading(false);
@@ -97,9 +118,9 @@ export default function DynamicDepartmentPage() {
     };
 
     loadDepartmentData();
-  }, [departmentId]);
+  }, [departmentId, departmentData?.id]);
 
-  // Fetch department courses from the optimized endpoint
+  // Fetch department courses (optimized endpoint)
   useEffect(() => {
     if (!slug) return;
 
@@ -110,8 +131,7 @@ export default function DynamicDepartmentPage() {
           setDepartmentCourses(data.courses);
         }
       } catch (err) {
-        console.error('Failed to load department courses:', err);
-        // Silently fail - will fallback to department_courses from complete detail
+        console.warn('[Dept Page] Optimization: department courses fetch failed, ignoring.', err);
       }
     };
 

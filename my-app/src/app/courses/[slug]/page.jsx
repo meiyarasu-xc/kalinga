@@ -66,214 +66,72 @@ export default function DynamicCoursePage() {
   const [departmentData, setDepartmentData] = useState(null);
   const [metadataLoaded, setMetadataLoaded] = useState(false);
 
-  // Find course ID from slug
+  // Find course data from slug
   useEffect(() => {
     const findCourse = async () => {
       try {
         setLoading(true);
         setError(null);
-        const courses = await fetchAllCourses();
+        setMetadataLoaded(false);
 
-        const normalizedSlug = normalizeSlug(slug);
-        console.log(`[Course Page] Looking for course with slug: "${slug}" (normalized: "${normalizedSlug}")`);
-        console.log(`[Course Page] Total courses fetched: ${courses.length}`);
+        console.log(`[Course Page] Fetching course by slug: "${slug}"`);
 
-        // Log first few courses for debugging
-        console.log(`[Course Page] Sample courses:`, courses.slice(0, 5).map(c => ({
-          id: c.id,
-          name: c.name,
-          slug: c.slug,
-          generatedSlug: generateSlug(c.name || ''),
-          normalizedSlug: normalizeSlug(c.slug || generateSlug(c.name || '')),
-          normalizedName: normalizeSlug(c.name || '')
-        })));
+        // Strategy 1: Direct fetch by slug - much faster than fetching all courses
+        const directCourseData = await fetchCourseCompleteDetail(slug);
 
-        // Try multiple matching strategies
-        let course = null;
-        let matchStrategy = '';
-
-        // Strategy 1: Exact slug match (case-insensitive)
-        course = courses.find(c => {
-          if (!c.slug) return false;
-          const cNormalized = normalizeSlug(c.slug);
-          return cNormalized === normalizedSlug;
-        });
-        if (course) matchStrategy = 'exact-slug';
-
-        // Strategy 2: Generated slug from name
-        if (!course) {
-          course = courses.find(c => {
-            if (!c.name) return false;
-            const generated = generateSlug(c.name);
-            const cNormalized = normalizeSlug(generated);
-            return cNormalized === normalizedSlug;
-          });
-          if (course) matchStrategy = 'generated-slug-from-name';
-        }
-
-        // Strategy 3: Normalized name match (direct name normalization)
-        if (!course) {
-          course = courses.find(c => {
-            if (!c.name) return false;
-            const cNormalized = normalizeSlug(c.name);
-            return cNormalized === normalizedSlug;
-          });
-          if (course) matchStrategy = 'normalized-name';
-        }
-
-        // Strategy 4: Partial match on slug (contains)
-        if (!course) {
-          course = courses.find(c => {
-            if (!c.slug) return false;
-            const cNormalized = normalizeSlug(c.slug);
-            return cNormalized.includes(normalizedSlug) || normalizedSlug.includes(cNormalized);
-          });
-          if (course) matchStrategy = 'partial-slug-match';
-        }
-
-        // Strategy 5: Partial match on generated slug
-        if (!course) {
-          course = courses.find(c => {
-            if (!c.name) return false;
-            const generated = generateSlug(c.name);
-            const cNormalized = normalizeSlug(generated);
-            return cNormalized.includes(normalizedSlug) || normalizedSlug.includes(cNormalized);
-          });
-          if (course) matchStrategy = 'partial-generated-slug';
-        }
-
-        // Strategy 6: Match on name words (all key terms match)
-        if (!course) {
-          const searchTerms = normalizedSlug.split('-').filter(t => t.length > 2);
-          course = courses.find(c => {
-            if (!c.name) return false;
-            const normalizedName = normalizeSlug(c.name);
-            // Check if all search terms are present in the course name
-            return searchTerms.length > 0 && searchTerms.every(term => normalizedName.includes(term));
-          });
-          if (course) matchStrategy = 'name-words-match';
-        }
-
-        // Strategy 7: Case-insensitive name match (remove special chars)
-        if (!course) {
-          const searchName = slug.replace(/-/g, ' ').toLowerCase().trim();
-          course = courses.find(c => {
-            if (!c.name) return false;
-            const cName = c.name.toLowerCase().replace(/[^a-z0-9\s]/g, '').trim();
-            return cName === searchName || cName.includes(searchName) || searchName.includes(cName);
-          });
-          if (course) matchStrategy = 'case-insensitive-name';
-        }
-
-        // Strategy 8: Try matching by ID if slug is numeric
-        if (!course && /^\d+$/.test(slug)) {
-          const courseId = parseInt(slug, 10);
-          course = courses.find(c => c.id === courseId);
-          if (course) matchStrategy = 'id-match';
-        }
-
-        // Log potential matches for debugging
-        if (!course) {
-          const potentialMatches = courses.filter(c => {
-            const cSlug = normalizeSlug(c.slug || generateSlug(c.name || ''));
-            const cName = (c.name || '').toLowerCase();
-            const searchName = slug.replace(/-/g, ' ').toLowerCase();
-
-            return cSlug.includes(normalizedSlug) ||
-              normalizedSlug.includes(cSlug) ||
-              cName.includes(searchName) ||
-              searchName.includes(cName);
+        if (directCourseData && directCourseData.id) {
+          console.log(`[Course Page] Successfully fetched course directly by slug:`, {
+            id: directCourseData.id,
+            name: directCourseData.name
           });
 
-          console.log(`[Course Page] No match found. Potential matches (${potentialMatches.length}):`,
-            potentialMatches.slice(0, 10).map(c => ({
-              id: c.id,
-              name: c.name,
-              slug: c.slug,
-              generatedSlug: generateSlug(c.name || ''),
-              normalizedSlug: normalizeSlug(c.slug || generateSlug(c.name || '')),
-              normalizedName: normalizeSlug(c.name || '')
-            }))
-          );
+          setCourseData(directCourseData);
+          setCourseId(directCourseData.id);
 
-          // Also log courses with similar slugs
-          console.log(`[Course Page] Courses containing "master" or "mba":`,
-            courses.filter(c => {
-              const name = (c.name || '').toLowerCase();
-              const cSlug = (c.slug || '').toLowerCase();
-              return name.includes('master') || name.includes('mba') || cSlug.includes('master') || cSlug.includes('mba');
-            }).slice(0, 10).map(c => ({
-              id: c.id,
-              name: c.name,
-              slug: c.slug,
-              generatedSlug: generateSlug(c.name || '')
-            }))
-          );
-        }
-
-        if (course) {
-          console.log(`[Course Page] Found course via ${matchStrategy}:`, {
-            id: course.id,
-            name: course.name,
-            slug: course.slug,
-            generatedSlug: generateSlug(course.name || ''),
-            normalizedSlug: normalizeSlug(course.slug || generateSlug(course.name || '')),
-            matchStrategy
-          });
-          setCourseId(course.id);
-        } else {
-          // Fallback: Try to fetch course directly by slug from complete-detail endpoint
-          console.warn(`[Course Page] Course not found in list. Trying direct fetch by slug: "${slug}"`);
-          try {
-            const directCourseData = await fetchCourseCompleteDetail(slug);
-            if (directCourseData && directCourseData.id) {
-              console.log(`[Course Page] Successfully fetched course directly by slug:`, {
-                id: directCourseData.id,
-                name: directCourseData.name,
-                slug: directCourseData.slug
-              });
-              // Set course data directly and skip the second useEffect
-              setCourseData(directCourseData);
-              setCourseId(directCourseData.id);
-              setError(null);
-              setMetadataLoaded(false); // Reset metadata loaded state
-
-              // Also fetch department data for fallbacks
-              if (directCourseData.department) {
-                try {
-                  const deptId = typeof directCourseData.department === 'object' ? directCourseData.department.id : directCourseData.department;
-                  if (deptId) {
-                    console.log(`[Course Page] Fetching department data for ID: ${deptId}`);
-                    const deptData = await fetchDepartmentCompleteDetail(deptId);
-                    setDepartmentData(deptData);
-                  }
-                } catch (deptErr) {
-                  console.error('[Course Page] Failed to load department data for fallbacks:', deptErr);
-                  // Silently fail - will just not show milestones or use fallback images
-                }
+          // Fetch department data for milestones/fallbacks if needed
+          if (directCourseData.department) {
+            try {
+              const deptId = typeof directCourseData.department === 'object' ? directCourseData.department.id : directCourseData.department;
+              if (deptId) {
+                fetchDepartmentCompleteDetail(deptId).then(setDepartmentData).catch(err => {
+                  console.warn('[Course Page] Non-critical error fetching department:', err);
+                });
               }
-
-              setLoading(false);
-            } else {
-              throw new Error('Course data structure invalid');
+            } catch (deptErr) {
+              console.error('[Course Page] Failed to trigger department search:', deptErr);
             }
-          } catch (directFetchError) {
-            console.error(`[Course Page] Direct fetch by slug also failed:`, directFetchError);
-            console.error(`[Course Page] First 20 courses:`, courses.slice(0, 20).map(c => ({
-              id: c.id,
-              name: c.name,
-              slug: c.slug,
-              normalized: normalizeSlug(c.slug || generateSlug(c.name || '')),
-              normalizedName: normalizeSlug(c.name || '')
-            })));
-            setError(`Course not found: ${slug}. The course might not exist or the API endpoint might be paginated.`);
-            setLoading(false);
           }
+
+          setLoading(false);
+          return;
         }
       } catch (err) {
-        console.error('[Course Page] Failed to find course:', err);
-        setError(`Failed to load courses: ${err.message}`);
-        setLoading(false);
+        console.warn(`[Course Page] Direct fetch by slug "${slug}" failed. Falling back to search.`, err);
+
+        // Strategy 2: Fallback to list search if direct slug fetch fails
+        try {
+          const courses = await fetchAllCourses();
+          const normalizedSlug = normalizeSlug(slug);
+
+          // Try to find match in the list
+          const course = courses.find(c =>
+            normalizeSlug(c.slug) === normalizedSlug ||
+            normalizeSlug(c.name) === normalizedSlug
+          );
+
+          if (course) {
+            console.log(`[Course Page] Found course in list after direct match failed: ${course.name}`);
+            setCourseId(course.id);
+            // The second useEffect will handle fetching complete details for this ID
+          } else {
+            setError(`Course not found: ${slug}`);
+            setLoading(false);
+          }
+        } catch (listErr) {
+          console.error('[Course Page] Fallback search also failed:', listErr);
+          setError(`Failed to load course details: ${listErr.message}`);
+          setLoading(false);
+        }
       }
     };
 

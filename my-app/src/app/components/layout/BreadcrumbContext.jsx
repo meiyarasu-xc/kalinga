@@ -88,33 +88,28 @@ export function useBreadcrumbData(data) {
     useEffect(() => {
         if (!setBreadcrumbData || !isMountedRef.current) return;
 
-        // Compare data by serializing to JSON to avoid reference comparison issues
-        // Use try-catch in case data contains non-serializable values
-        let currentDataStr, prevDataStr;
-        try {
-            currentDataStr = JSON.stringify(data);
-            prevDataStr = JSON.stringify(prevDataRef.current);
-        } catch (e) {
-            // If serialization fails, fall back to reference comparison
-            if (data !== prevDataRef.current) {
-                setBreadcrumbData(data || null);
-                prevDataRef.current = data;
-                // Update loading state
-                if (setIsLoading) {
-                    setIsLoading(data === null || data === undefined);
+        // Use a simple reference check first for performance
+        if (data === prevDataRef.current) return;
+
+        // Only do the expensive serialization check if references are different
+        // and data is an object (to catch deep changes)
+        if (typeof data === 'object' && data !== null && typeof prevDataRef.current === 'object' && prevDataRef.current !== null) {
+            try {
+                const currentDataStr = JSON.stringify(data);
+                const prevDataStr = JSON.stringify(prevDataRef.current);
+                if (currentDataStr === prevDataStr) {
+                    return;
                 }
+            } catch (e) {
+                // Ignore serialization errors and proceed with update
             }
-            return;
         }
 
-        // Only update if data actually changed
-        if (currentDataStr !== prevDataStr) {
-            setBreadcrumbData(data || null);
-            prevDataRef.current = data;
-            // Update loading state
-            if (setIsLoading) {
-                setIsLoading(data === null || data === undefined);
-            }
+        setBreadcrumbData(data || null);
+        prevDataRef.current = data;
+
+        if (setIsLoading) {
+            setIsLoading(data === null || data === undefined);
         }
     }, [data, setBreadcrumbData, setIsLoading]);
 
